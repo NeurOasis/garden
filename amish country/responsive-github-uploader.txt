@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Template Uploader</title>
+    <style>
+        /* Base styles */
+        :root {
+            --primary-color: #5436DA;
+            --secondary-color: #11A37F;
+            --background-color: #f8f9fa;
+            --card-color: #ffffff;
+            --text-color: #333333;
+            --border-color: #e1e4e8;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding: 16px;
+            max-width: 100%;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 24px;
+            font-size: 24px;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        
+        .logo img {
+            height: 60px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+        
+        textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            display: block;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+        
+        button:hover {
+            background-color: #4527c9;
+        }
+        
+        .status {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .success {
+            background-color: rgba(40, 167, 69, 0.1);
+            border: 1px solid var(--success-color);
+            color: var(--success-color);
+            display: block;
+        }
+        
+        .error {
+            background-color: rgba(220, 53, 69, 0.1);
+            border: 1px solid var(--error-color);
+            color: var(--error-color);
+            display: block;
+        }
+        
+        .helper-text {
+            font-size: 14px;
+            color: #6c757d;
+            margin-top: -12px;
+            margin-bottom: 16px;
+        }
+
+        /* Loading spinner */
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 16px;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary-color);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 600px) {
+            .container {
+                padding: 16px;
+                margin-bottom: 16px;
+            }
+            
+            h1 {
+                font-size: 20px;
+                margin-bottom: 16px;
+            }
+            
+            input[type="text"], textarea, button {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            textarea {
+                min-height: 150px;
+            }
+        }
+        
+        /* Install button/prompt */
+        .install-prompt {
+            text-align: center;
+            margin-bottom: 16px;
+            padding: 12px;
+            background-color: #e9f7fe;
+            border: 1px solid #b3e0ff;
+            border-radius: 6px;
+            display: none;
+        }
+        
+        #installButton {
+            background-color: var(--secondary-color);
+            margin-top: 8px;
+            width: auto;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="install-prompt" id="installPrompt">
+        <p>Add this app to your home screen for quick access</p>
+        <button id="installButton">Install</button>
+    </div>
+    
+    <div class="container">
+        <div class="logo">
+            <img src="https://storage.googleapis.com/anthropic-public-assets/images/claude-wordmark.svg" alt="Claude Logo">
+        </div>
+        <h1>Template Uploader</h1>
+        
+        <div>
+            <label for="template">Paste your template from Claude:</label>
+            <textarea id="template" placeholder="Copy and paste the template content from Claude here..."></textarea>
+        </div>
+        
+        <div>
+            <label for="filename">Template name:</label>
+            <input type="text" id="filename" placeholder="Give your template a name (e.g., 'data-analysis')">
+            <p class="helper-text">.md will be added automatically if not included</p>
+        </div>
+        
+        <button id="uploadButton">Save Template</button>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Uploading template...</p>
+        </div>
+        
+        <div class="status" id="status"></div>
+    </div>
+
+    <script>
+        // Configuration - These would be set by your server
+        const CONFIG = {
+            GITHUB_TOKEN: "SERVER_WILL_INJECT_TOKEN_HERE",
+            OWNER: "SERVER_WILL_INJECT_OWNER_HERE",
+            REPO: "SERVER_WILL_INJECT_REPO_HERE",
+            BRANCH: "main",
+            FOLDER_PATH: "context initialization templates"
+        };
+        
+        // Setup event listeners when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle upload button click
+            document.getElementById('uploadButton').addEventListener('click', uploadTemplate);
+            
+            // Check if the app can be installed (PWA)
+            setupPWA();
+            
+            // Check if we can access clipboard for paste
+            setupClipboardAccess();
+        });
+        
+        // Handle PWA installation
+        let deferredPrompt;
+        function setupPWA() {
+            window.addEventListener('beforeinstallprompt', (e) => {
+                // Prevent Chrome 67+ from automatically showing the prompt
+                e.preventDefault();
+                // Stash the event so it can be triggered later
+                deferredPrompt = e;
+                // Show the install button
+                document.getElementById('installPrompt').style.display = 'block';
+                
+                document.getElementById('installButton').addEventListener('click', async () => {
+                    // Show the installation prompt
+                    deferredPrompt.prompt();
+                    // Wait for the user to respond to the prompt
+                    const { outcome } = await deferredPrompt.userChoice;
+                    // We no longer need the prompt regardless of outcome
+                    deferredPrompt = null;
+                    // Hide the install button
+                    document.getElementById('installPrompt').style.display = 'none';
+                });
+            });
+        }
+        
+        // Try to access clipboard permission
+        function setupClipboardAccess() {
+            // Check if we're on a mobile device
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // For mobile, we'll focus the textarea to trigger the keyboard + paste button
+                const templateField = document.getElementById('template');
+                templateField.addEventListener('focus', async () => {
+                    // On mobile, just show a helper message
+                    if (!templateField.value) {
+                        templateField.placeholder = "Tap here and use the paste button on your keyboard...";
+                    }
+                });
+            } else {
+                // For desktop, we can try to use the Clipboard API
+                document.getElementById('template').addEventListener('focus', async () => {
+                    try {
+                        // Request permission to read clipboard
+                        const permission = await navigator.permissions.query({ name: 'clipboard-read' });
+                        if (permission.state === 'granted' || permission.state === 'prompt') {
+                            // We have permission, offer to paste from clipboard
+                            const templateField = document.getElementById('template');
+                            if (!templateField.value) {
+                                const text = await navigator.clipboard.readText();
+                                if (text) {
+                                    templateField.value = text;
+                                }
+                            }
+                        }
+                    } catch (err) {
+                        // Clipboard API not supported or permission denied
+                        console.log('Clipboard API not available:', err);
+                    }
+                });
+            }
+        }
+        
+        // Main upload function
+        async function uploadTemplate() {
+            // Get template content and filename
+            const templateContent = document.getElementById('template').value.trim();
+            let filename = document.getElementById('filename').value.trim();
+            
+            // Validate inputs
+            if (!templateContent) {
+                showStatus('Please paste your template content', false);
+                return;
+            }
+            
+            if (!filename) {
+                showStatus('Please enter a name for your template', false);
+                return;
+            }
+            
+            // Add .md extension if not present
+            if (!filename.toLowerCase().endsWith('.md')) {
+                filename += '.md';
+            }
+            
+            // Show loading spinner
+            document.getElementById('loading').style.display = 'block';
+            // Hide any previous status
+            document.getElementById('status').style.display = 'none';
+            
+            try {
+                // In a real implementation, this would make an API call to your server
+                // The server would handle the GitHub authentication and upload
+                const result = await simulateUploadToGitHub(templateContent, filename);
+                
+                if (result.success) {
+                    showStatus(`Successfully saved "${filename}" to GitHub!`, true);
+                    // Clear form on success
+                    document.getElementById('template').value = '';
+                    document.getElementById('filename').value = '';
+                } else {
+                    showStatus(`Error: ${result.message}`, false);
+                }
+            } catch (error) {
+                showStatus(`An unexpected error occurred: ${error.message}`, false);
+            } finally {
+                // Hide loading spinner
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        // Function to display status messages
+        function showStatus(message, isSuccess) {
+            const statusElement = document.getElementById('status');
+            statusElement.textContent = message;
+            statusElement.className = 'status ' + (isSuccess ? 'success' : 'error');
+            statusElement.style.display = 'block';
+        }
+        
+        // This is a placeholder for the actual GitHub API call
+        // In a real implementation, this would be handled by your server
+        async function simulateUploadToGitHub(content, filename) {
+            // Simulate network latency
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // This is where your server would make the actual GitHub API call
+            // For demo purposes, we'll just return success
+            return {
+                success: true,
+                message: "Template uploaded successfully"
+            };
+        }
+    </script>
+    
+    <!-- This would be your actual server-side implementation -->
+    <!-- The client-side code above would call this endpoint -->
+    <!-- 
+    Server pseudo-code:
+    
+    app.post('/api/upload-template', async (req, res) => {
+        const { content, filename } = req.body;
+        
+        try {
+            // GitHub API authentication
+            const octokit = new Octokit({
+                auth: process.env.GITHUB_TOKEN
+            });
+            
+            // Full path in the repository
+            const path = `${process.env.FOLDER_PATH}/${filename}`;
+            
+            // Check if file exists
+            let sha;
+            try {
+                const { data } = await octokit.repos.getContent({
+                    owner: process.env.OWNER,
+                    repo: process.env.REPO,
+                    path,
+                    ref: process.env.BRANCH
+                });
+                sha = data.sha;
+            } catch (error) {
+                // File doesn't exist yet, which is fine
+            }
+            
+            // Create or update file
+            await octokit.repos.createOrUpdateFileContents({
+                owner: process.env.OWNER,
+                repo: process.env.REPO,
+                path,
+                message: `Add/update template: ${filename}`,
+                content: Buffer.from(content).toString('base64'),
+                branch: process.env.BRANCH,
+                sha
+            });
+            
+            res.json({ success: true });
+        } catch (error) {
+            console.error('Error uploading to GitHub:', error);
+            res.status(500).json({ 
+                success: false, 
+                message: error.message 
+            });
+        }
+    });
+    -->
+</body>
+</html>
