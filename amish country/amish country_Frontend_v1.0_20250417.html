@@ -332,9 +332,19 @@
             document.getElementById('status').style.display = 'none';
             
             try {
-                // In a real implementation, this would make an API call to your server
-                // The server would handle the GitHub authentication and upload
-                const result = await simulateUploadToGitHub(templateContent, filename);
+                // Make an API call to your server
+                const response = await fetch('/api/upload-template', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        content: templateContent,
+                        filename: filename
+                    })
+                });
+                
+                const result = await response.json();
                 
                 if (result.success) {
                     showStatus(`Successfully saved "${filename}" to GitHub!`, true);
@@ -352,6 +362,7 @@
             }
         }
         
+        
         // Function to display status messages
         function showStatus(message, isSuccess) {
             const statusElement = document.getElementById('status');
@@ -362,7 +373,8 @@
         
         // This is a placeholder for the actual GitHub API call
         // In a real implementation, this would be handled by your server
-        async function simulateUploadToGitHub(content, filename) {
+        
+        /* async function simulateUploadToGitHub(content, filename) {
             // Simulate network latency
             await new Promise(resolve => setTimeout(resolve, 1500));
             
@@ -372,7 +384,8 @@
                 success: true,
                 message: "Template uploaded successfully"
             };
-        }
+        } */
+        
     </script>
     
     <!-- This would be your actual server-side implementation -->
