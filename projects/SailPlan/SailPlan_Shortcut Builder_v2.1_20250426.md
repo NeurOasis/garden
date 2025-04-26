@@ -1,4 +1,4 @@
-# SailTime Calendar and Reminder Automation_v1.1_20250425
+# SailPlan_Shortcut Builder_v2.1_20250426
 
 This guide provides detailed, step-by-step instructions for creating an iOS Shortcut 
 that processes SailTime emails and manages calendar events and reminders.
@@ -340,5 +340,7 @@ After creating the shortcut, set up the automation:
 
 ## Version History
 
-- v1.0 (April 24, 2025): Initial documentation
-- v1.1 (April 25, 2025): Updated with more detailed, step-by-step instructions
+- v2.1 (20250426): Updated file naming convention
+- v2.0 (20250425): Complete revision with detailed step-by-step instructions
+- v1.1 (20250425): Updated with more detailed instructions
+- v1.0 (20250424): Initial documentation

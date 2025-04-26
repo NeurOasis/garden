@@ -1,4 +1,4 @@
-# SailTime Shortcut Structure Diagram
+# SailPlan_Shortcut Structure Ref_v2.1_20250426
 
 ```
 ┌─ Shortcut Start
@@ -63,3 +63,8 @@ The structure is basically:
 2. Then process the email based on its type
 
 These are two separate logical sections that follow each other sequentially, not nested within each other.
+
+## Version History:
+- v2.1 (20250426): Updated file naming convention
+- v2.0 (20250425): Added detailed annotations and processing structure
+- v1.0 (20250425): Initial structure diagram
