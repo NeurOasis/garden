@@ -1,63 +1,78 @@
 # CIT_SailPlan_20250426
 
-## User Information 🧑‍💻
+## 👤 User Information
 ```
 Name: [User's Name]
 Email: [User's Email Address]
-Boat Name: [Boat Name, default "Time Out"]
-Marina: [Marina Location, default "Horn Point Marina, Annapolis, MD"]
-SailTime Base: [Location Name, e.g., "Annapolis"]
+Boat Name: Time Out
+Marina: Horn Point Marina, 105 Eastern Ave, Annapolis, MD
+SailTime Base: Annapolis
 ```
 
-## Technical Environment 🔧
+## 🔧 Technical Environment
 ```
-Device: [iOS/Android]
-Email Provider: [Gmail/Outlook/Other]
-Task Manager: [iOS Reminders/Bonobo Actions/Other]
-Calendar: [iOS Calendar/Google Calendar/Other]
-Automation Tools: [iOS Shortcuts/Tasker/IFTTT/None]
+Device: iPhone 16 Pro (latest iOS non-beta release)
+Email Provider: Gmail
+Task Manager: Bonobo Actions App
+Calendar: Apple Calendar
+Automation Tools: iOS Shortcuts
 ```
 
-## SailTime Email Configuration 📨
+## 📨 SailTime Email Configuration
 ```
-Email Domain: [The domain emails come from, default "embark.sailtime.com"]
-From Address: [Full email address, default "embark@embark.sailtime.com"]
+Email Domain: embark.sailtime.com
+From Address: embark@embark.sailtime.com
 Key Subject Lines:
-- New Reservation: [Format or keywords]
+- New Reservation: "You have an Embark reservation scheduled for"
 - Cancellation: "Reservation Canceled"
 - Time Change: "Boat Reservation Time Change"
 - Confirmation: "Your Embark Reservation Confirmation Has Opened"
 ```
 
-## Automation Requirements ⚙️
+## ⚙️ Automation Requirements
 ```
 Calendar Management:
-- Create events: [Yes/No]
-- Delete canceled events: [Yes/No]
-- Update on time changes: [Yes/No]
-- Preferred alerts: [List times, e.g. "7 days, 3 days, 2 days, 18 hours before"]
+- Create events: Yes
+- Delete canceled events: Yes
+- Update on time changes: Yes
+- Preferred alerts: 7 days, 3 days, 2 days, 18 hours before
 
-Reminder System:
-- Create preparation tasks: [Yes/No]
-- Create confirmation reminders: [Yes/No]
-- Preferred list: [List name]
-- Priority level: [Normal/High]
+Task Management:
+- Create preparation tasks: Yes (in Bonobo Actions)
+- Create confirmation reminders: Yes
+- Priority level: Medium for prep tasks, High for confirmations
+
+Sail Types:
+- Day Sail: 10:30am start, 7.5 hour duration
+- Overnight Sail: 6:30pm start, 16.5 hour duration
 
 Duplicate Prevention:
-- Check before creating: [Yes/No]
-- Strategy: [Title match/Date match/Both]
+- Check before creating: Yes
+- Strategy: Title and date match
 ```
 
-## Special Instructions 📝
+## 📝 Special Instructions
 ```
-Confirmation Window: [How many days before sailing the confirmation opens]
-Packing List Preferences: [Any specific items to include]
-Notification Preferences: [Silent/Sound/Banner]
-Time Change Handling: [Update all future events/Ask first]
-Timezone: [Local timezone for calendar events]
+Bonobo Actions Integration:
+- Use URL scheme: bonoboapp://x-callback-url/[command]?[parameters]
+- Date format required: yyyy-MM-dd (ISO format)
+- Key commands: create, search, complete
+- Parameters for tasks:
+  - title: Task title
+  - note: Task details
+  - dueDate: Due date in ISO format
+  - priority: low/medium/high
+
+Confirmation Window:
+- Confirmation needed several days before sailing
+- Critical to confirm or reservation is released
+
+Time Change Handling:
+- Update all future events automatically
+- Handle both morning and evening sail times
 ```
 
-## Reference Email Formats 📄
+## 📄 Reference Email Formats
 ```
 New Reservation Format:
 "You have an Embark reservation scheduled for [Month Day, Year] at [Time]"
@@ -72,34 +87,50 @@ Time Change Format:
 "Boat '[Boat Name]' reservation time has been changed to morning sailtime from [Time] - [Time] to [Time] - [Time] and for the evening sail time from [Time] - [Time] to [Time] to [Time]"
 ```
 
-## Implementation Status 🕒
+## 🚢 Shortcut Components
+The SailPlan shortcut has four main sections:
+1. **Email Type Detection**: Identifies what kind of email was received
+2. **Cancellation Processing**: Removes calendar events and tasks
+3. **Confirmation Processing**: Creates reminders to confirm reservation
+4. **Time Change Processing**: Updates calendar event durations
+5. **New Reservation Processing**: Creates calendar events and preparation tasks
+
+## 📱 Implementation Details
+```
+Shortcut Name: SailTime Processing
+Trigger: Email from embark.sailtime.com
+Structure: See SailPlan_Shortcut Structure Ref_v2.2_20250426.md
+Implementation: See SailPlan_Shortcut Builder_v2.2_20250426.md
+```
+
+## 🕒 Implementation Status
 ```
 Date Created: April 24, 2025
 Last Updated: April 26, 2025
-Current Status: Implementation
+Current Status: Implementation testing
 Linked Documents:
-- SailPlan_Shortcut Builder_v2.1_20250426.md
-- SailPlan_Shortcut Structure Ref_v2.1_20250426.txt
-Known Issues: [List any problems]
-Desired Improvements: [Future enhancements]
+- SailPlan_Shortcut Builder_v2.2_20250426.md
+- SailPlan_Shortcut Structure Ref_v2.2_20250426.md
+
+Known Issues:
+- Regex patterns need testing with actual emails
+- Bonobo Actions task ID extraction needs refinement
+
+Desired Improvements:
+- Add support for reservation changes (not just time changes)
+- Improve error handling and notifications
 ```
 
-## Update History 📋
+## 📋 Update History
 ```
-20250426: Updated naming convention to comply with VC standards
+20250426: Updated to use Bonobo Actions instead of iOS Reminders
+20250426: Updated documentation to use markdown format
 20250425: Added implementation details and step-by-step instructions
 20250424: Initial template creation
 ```
 
-## Quick Reference Emoji Key 🔑
-- 📱 Device/Technical details
-- ⛵ SailTime-specific information
-- 📨 Email configuration
-- ⚙️ Automation settings
-- 📝 Special instructions
-- 📄 Reference materials
-- 🕒 Timeline/history
-- 🧑‍💻 User details
-- 📋 Version tracking
-
-This template can be referenced in future conversations about SailTime automation systems or when troubleshooting existing implementations. Just mention "SailPlan CIT" and I'll reference this context.
+## 🤖 Note for Claude
+- This template provides essential context for the SailPlan project
+- Use extremely specific and granular instructions when describing iOS Shortcuts steps
+- Always format reference materials and documentation in markdown
+- Refer to this CIT when continuing work on the SailPlan project in new conversations
