@@ -1,4 +1,4 @@
-# CIT_Personal_20250426
+# CIT_Personal_20250501
 
 ## 👤 Personal Background
 - 🧠 Neurodivergent, most closely associated with autism (with elements of PDA)
@@ -13,7 +13,7 @@
 - 👨‍👦 Currently dealing with challenging co-parenting situation with ex-wife
 
 ## 📝 Current Organization System
-- **🗂️ Primary Task Manager**: Moleskin Actions App → Bonobo Actions App
+- **🗂️ Primary Task Manager**: iOS Reminders app
   - ✅ Created organization system: QuickRef_Actions_20250318_v1.0
   - 📚 Using Lists: 
     - 📥 Inbox (capture all new thoughts)
@@ -33,7 +33,7 @@
 - **💻 Other Digital Systems**:
   - 📧 Email: Working toward Inbox Zero (300+ emails backlog)
   - 📔 Notes App: 400+ disorganized notes needing consolidation
-  - 🎯 Goal: Consolidate all tasks into Bonobo Actions App
+  - 🎯 Goal: Consolidate all tasks into iOS Reminders App
 
 ## 🎯 Current Goals
 - 🔕 Reduce inbound distractions (notifications, emails, reminders)
@@ -59,7 +59,7 @@
 - 📱 iPhone 16 Pro (always running latest iOS non-beta release)
 - 💻 MacBook Pro M2 (2023)
 - 🗓️ Apple Calendar (primary)
-- 📝 Bonobo Actions (for task management)
+- 📝 iOS Reminders (for task management)
 - 📧 Gmail (primary email)
 - 🔄 iOS Shortcuts (for automation)
 
@@ -71,6 +71,7 @@
   - JSON/YAML configuration
   - Markdown formatting
 - 🔄 Prefers automation that works with existing thinking patterns rather than forcing new behaviors
+- 🔒 Prefers solutions that work within iOS privacy constraints using native apps when possible
 
 ## 📝 Note to Claude
 - 🤖 Use emojis liberally in all CITs for visual categorization
@@ -81,5 +82,6 @@
 - 🎯 Focus on quick wins first when suggesting approaches
 - 📄 Always use markdown format for documentation and reference materials
 - 📊 Create visual hierarchies with markdown formatting for better readability
+- 🔐 Prioritize solutions using native iOS apps over third-party apps requiring special permissions
 
-This template was last updated: April 26, 2025
+This template was last updated: May 01, 2025
