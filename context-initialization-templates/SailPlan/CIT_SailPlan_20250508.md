@@ -1,4 +1,4 @@
-# CIT_SailPlan_20250507
+# CIT_SailPlan_20250508
 
 ## 👤 User Information
 ```
@@ -33,7 +33,7 @@ Key Subject Lines:
 ## ⚙️ Automation Solution
 ```
 Primary Automation: Google Apps Script
-Script Name: SailPlan_Processor_v2.1_20250507
+Script Name: SailPlan_Processor_v4.0_20250508.js
 Trigger Schedule: 3 times daily (9 AM, 3 PM, 9 PM)
 Processing Flow:
 - Monitors Gmail for labeled SailTime emails 
@@ -51,6 +51,37 @@ Task Creation:
 - Tasks include comprehensive packing lists
 - Separate tasks for packing and confirmation
 ```
+
+## 🔄 Script Architecture
+
+Version 4.0 uses a streamlined approach with these key components:
+
+1. **Configuration Section**
+   - All settings consolidated in one CONFIG object
+   - Easily customizable patterns and messages
+   - Complete packing lists included
+
+2. **Email Processing**
+   - Targeted regex patterns for date extraction
+   - Each email type has dedicated processing function
+   - Automated email labeling and marking as read
+
+3. **Calendar Integration**
+   - Smart event creation with multiple alerts
+   - Duration based on sail type (day/overnight)
+   - Duplicate prevention system
+   - Includes marina access codes
+
+4. **Task Management**
+   - Hybrid approach using email + direct links
+   - Modern HTML email templates with clear instructions
+   - One-click links to Bonobo Actions
+   - Copy-pastable packing lists
+
+5. **Trigger System**
+   - Scheduled execution 3x daily
+   - Maintains processing history
+   - Error logging for troubleshooting
 
 ## 📋 Packing Lists
 
@@ -151,13 +182,38 @@ Time Change Email:
 "Boat '[Boat Name]' reservation time has been changed to morning sailtime from [Time] - [Time] to [Time] - [Time] and for the evening sail time from [Time] - [Time] to [Time] to [Time]"
 ```
 
+## 🔍 Key Regex Patterns
+```javascript
+// Reservation pattern
+scheduled for\\s+([A-Za-z]+\\s+\\d{1,2}(?:,|)\\s+\\d{4})\\s+at\\s+(\\d{1,2}:\\d{2}\\s*(?:am|pm))
+
+// Cancellation pattern
+reservation on\\s+([A-Za-z]+\\s+\\d{1,2}(?:,|)\\s+\\d{4})\\s+at\\s+(\\d{1,2}:\\d{2}\\s*(?:am|pm))
+
+// Confirmation pattern
+confirm your reservation on\\s+([A-Za-z]+(?:,|)\\s+[A-Za-z]+\\s+\\d{1,2}(?:,|)\\s+\\d{4})\\s+at\\s+(\\d{1,2}:\\d{2}\\s*(?:am|pm))
+```
+
+## 📱 Bonobo Actions Integration
+```
+URL Scheme: mskactions://create
+Task Types:
+- Packing task (Medium priority)
+- Confirmation task (High priority)
+
+Integration Method:
+- HTML emails with one-click buttons
+- Copy-pastable task details
+- Pre-populated titles and content
+```
+
 ## 🕒 Implementation Status
 ```
 Date Created: April 24, 2025
-Last Updated: May 07, 2025
-Current Status: Fully Implemented (v2.1)
+Last Updated: May 08, 2025
+Current Status: Fully Implemented (v4.0)
 Linked Documents:
-- SailPlan_Processor_v2.1_20250507.js (Combined Google Apps Script)
+- SailPlan_Processor_v4.0_20250508.js (Consolidated Google Apps Script)
 
 Features Implemented:
 - Automated email processing with Gmail labels
@@ -167,10 +223,12 @@ Features Implemented:
 - Duplicate detection
 - Cancellation handling
 - Confirmation reminders
+- Streamlined architecture to prevent CONFIG reference errors
 ```
 
 ## 📋 Update History
 ```
+20250508: v4.0 Released - Streamlined architecture with modern HTML emails and better error handling
 20250507: v2.1 Released - Combined script into single file to fix CONFIG reference error
 20250507: v2.0 Released - Completed Google Apps Script with email-based task creation
 20250505: Added comprehensive packing lists and access codes
@@ -187,4 +245,4 @@ Features Implemented:
 - Tasks are created via email links to Bonobo Actions
 - Packing lists are organized by bag type with specific items
 - Marina access codes are included in calendar events
-- The automation runs on a schedule (3x daily)
+- Version 4.0 has streamlined architecture and modern HTML emails
