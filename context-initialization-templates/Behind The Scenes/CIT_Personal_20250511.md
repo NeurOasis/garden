@@ -1,4 +1,4 @@
-# CIT_Personal_20250501
+# CIT_Personal_20250511
 
 ## 👤 Personal Background
 - 🧠 Neurodivergent, most closely associated with autism (with elements of PDA)
@@ -14,7 +14,7 @@
 
 ## 📝 Current Organization System
 - **🗂️ Primary Task Manager**: iOS Reminders app
-  - ✅ Created organization system: QuickRef_Actions_20250318_v1.0
+  - ✅ Created organization system: QuickRef_Actions_Concise_20250510_v1.3
   - 📚 Using Lists: 
     - 📥 Inbox (capture all new thoughts)
     - ⚡ Quick Wins (simple, doable tasks)
@@ -73,6 +73,41 @@
 - 🔄 Prefers automation that works with existing thinking patterns rather than forcing new behaviors
 - 🔒 Prefers solutions that work within iOS privacy constraints using native apps when possible
 
+## 📦 Reference Material Specifications
+- 📇 Quick Reference Cards: Use 4x6 index cards (landscape orientation)
+- 📄 Standard Documents: Use 8.5x11 letter size with 1" margins
+- 🔤 Minimum 12pt font size for printed body text
+
+## 🔔 Conversation Reminders
+Claude should use the following techniques to provide reminders throughout conversations:
+
+### 1. Visual Reminder Header
+Include this reminder at the top of every third response:
+```
+📝 REMINDER: Consider updating CITs and artifacts or starting a new chat if we've been talking for a while.
+```
+
+### 2. Message Counter
+Include a message counter at the beginning of each response:
+```
+[Message #X] 
+```
+
+### 3. Natural Checkpoints
+At natural completion points in the conversation (after completing a major request or finishing a set of related tasks), explicitly ask if I would like to:
+- Create a new CIT as an artifact
+- Update existing CITs
+- Start a fresh chat
+
+### 4. Twenty-Minute Reminder
+After approximately 20 minutes of conversation (or roughly every 5-6 exchanges), proactively remind me about creating artifacts and starting new chats:
+```
+💡 We've been chatting for a while now. Would you like to:
+- Create/update a CIT for this project?
+- Save any key information as artifacts?
+- Start a fresh chat for better performance?
+```
+
 ## 📝 Note to Claude
 - 🤖 Use emojis liberally in all CITs for visual categorization
 - 🔍 Be extremely specific when providing technical instructions (exact button names, menu locations)
@@ -83,5 +118,6 @@
 - 📄 Always use markdown format for documentation and reference materials
 - 📊 Create visual hierarchies with markdown formatting for better readability
 - 🔐 Prioritize solutions using native iOS apps over third-party apps requiring special permissions
+- ⏰ Implement the reminder strategies above consistently throughout our conversations
 
-This template was last updated: May 01, 2025
+This template was last updated: May 11, 2025

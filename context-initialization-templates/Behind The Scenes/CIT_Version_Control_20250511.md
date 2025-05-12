@@ -1,11 +1,11 @@
-# CIT_VC_20250426
+# CIT_Version_Control_20250511
 
 ## Project Information
 
 ```
 Project: Version Control (VC)
-Current Version: vX.Y
-Date: YYYYMMDD (today's date)
+Current Version: v1.1
+Date: 20250511
 Goal: Standardize naming and version control across all projects
 ```
 
@@ -15,8 +15,8 @@ Goal: Standardize naming and version control across all projects
 All Context Initialization Templates (CITs) will follow this naming convention:
 - Format: "CIT_ProjectName_YYYYMMDD.md"
 - Examples:
-  - `CIT_VC_20250426.md`
-  - `CIT_SailPlan_20250426.md`
+  - `CIT_VC_20250511.md`
+  - `CIT_SailPlan_20250511.md`
   - `CIT_GARDEN_20250410.md`
 
 CITs should not include version numbers as they represent the current state of context as of a specific date.
@@ -27,7 +27,7 @@ All project files will follow this naming convention:
 - Examples:
   - `SailPlan_Project Guide_v1.0_20250426.md`
   - `GARDEN_Technical Specification_v1.2_20250405.md`
-  - `Amish_Implementation Plan_v2.0_20250415.md`
+  - `Actions_QuickRef_Concise_v1.3_20250510.md`
 
 Version numbering:
 - X.0 (like v1.0, v2.0): Complete releases or major revisions
@@ -65,6 +65,21 @@ For documents from external sources:
 - Use blockquotes (>) for important notes or callouts
 - Include a table of contents for longer documents
 
+## Document & Print Standards
+
+### Digital Documents
+- Use responsive design that adapts to different screen sizes
+- Minimum font size of 16px for body text on screens
+- Maintain proper line length (50-75 characters per line)
+- Use semantic structure (headings, lists, emphasis)
+
+### Printed Materials
+- **Quick Reference Cards**: Use 4x6 index cards (landscape orientation)
+- **Standard Documents**: Use 8.5x11 letter size with 1" margins
+- Minimum 12pt font size for printed body text
+- Maintain minimum 4.5:1 contrast ratio for all text
+- Use sans-serif fonts for better readability
+
 ## Version Retention Policy
 - During work on a major version (e.g., v1.0):
   - Retain all interim versions (v0.1, v0.2, etc.)
@@ -85,9 +100,9 @@ Document Name: [Will follow project naming convention]
 Current Status: [Draft/Review/Final]
 Next Version Due: [Date]
 Change Log:
-- v2.1 (20250426): Updated to emphasize markdown as preferred format
-- v2.0 (20250426): Updated naming conventions for CITs and project files
-- v1.0 (20250401): Initial creation
+- v1.1 (20250511): Added document and print standards with 4x6 index card specifications
+- v1.0 (20250426): Updated naming conventions for CITs and project files
+- v0.2 (20250401): Initial creation
 ```
 
 ## Collaboration Instructions
@@ -98,18 +113,7 @@ Change Log:
 - Context Initialization Templates (CITs) should be updated with new dates rather than versions
 - Always use markdown for documentation unless specific features require another format
 
-## Example Applied to SailPlan Project
-```
-CIT File: CIT_SailPlan_20250426.md
-Project File: SailPlan_Shortcut Builder_v2.2_20250426.md
-Purpose: Provide step-by-step instructions for iOS Shortcuts automation
-Next Steps: 
-1. Test implementation on various email types
-2. Update with additional automation patterns as needed
-3. Document any issues encountered during implementation
-```
-
 ## Update History
-- 20250426: Updated to emphasize markdown as the default format for documentation
+- 20250511: Added document and print standards with 4x6 index card specifications
 - 20250426: Updated naming convention for CITs to remove version numbers
 - 20250401: Initial version of the template

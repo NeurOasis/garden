@@ -1,12 +1,12 @@
-# CIT_Brand_Style_Guide_20250505
+# CIT_Brand_Style_Guide_20250511
 
 ## 🎨 Project Overview
 
 ```
 Project: Brand Style Guide Development
-Current Version: v1.0
-Date: May 05, 2025
-Status: Initial design
+Current Version: v1.1
+Date: May 11, 2025
+Status: Updated with print specifications
 ```
 
 ## 👤 Personal Background
@@ -50,6 +50,21 @@ Status: Initial design
 - Consistent use of whitespace for reduced cognitive load
 - Accessibility as a core design principle
 
+## 📄 Document & Print Standards
+
+### 📱 Digital Documents
+- 📊 Use responsive design that adapts to different screen sizes
+- 🔤 Minimum font size of 16px for body text on screens
+- ↔️ Maintain proper line length (50-75 characters per line)
+- 🧩 Use semantic HTML elements (headings, lists, emphasis)
+
+### 🖨️ Printed Materials
+- 📇 **Quick Reference Cards**: Use 4x6 index cards (landscape orientation)
+- 📄 **Standard Documents**: Use 8.5x11 letter size with 1" margins
+- 🔤 Minimum 12pt font size for printed body text
+- 🎨 Maintain minimum 4.5:1 contrast ratio for all text
+- 🖌️ Use sans-serif fonts for better readability
+
 ## 💻 Technical Implementation
 
 - HTML/CSS/JavaScript as the foundation
@@ -73,6 +88,12 @@ Status: Initial design
 - Build image style guidelines
 - Extend to document templates and social media applications
 
+## 📋 Update History
+```
+20250511: Added document and print standards with 4x6 index card specifications
+20250505: Initial creation of brand style guide CIT
+```
+
 ## 🤖 Note for Claude
 
 - Use emojis for visual categorization and quick reference
@@ -81,3 +102,4 @@ Status: Initial design
 - Provide specific, implementable design advice rather than generalities
 - Reference this palette and style guide when discussing future brand applications
 - Consider both digital and print applications when giving recommendations
+- Remember that quick reference materials should be designed for 4x6 index cards

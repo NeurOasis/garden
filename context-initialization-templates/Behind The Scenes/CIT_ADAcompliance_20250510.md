@@ -1,13 +1,13 @@
-# CIT_ADAcompliance_20250428
+# CIT_ADAcompliance_20250510
 
 ## 🎯 Purpose
 
 ```
 Project: Accessibility Compliance Verification
-Current Version: v1.0
-Date: 20250428
+Current Version: v1.1
+Date: 20250510
 Goal: Ensure all designs and documents meet ADA compliance standards
-Last Verified: April 28, 2025
+Last Verified: May 10, 2025
 Next Auto-Update: June 1, 2025
 ```
 
@@ -75,6 +75,29 @@ Next Auto-Update: June 1, 2025
   - VoiceOver (macOS/iOS built-in screen reader)
   - JAWS (Windows screen reader, commercial)
 
+## 📄 Document & Print Standards
+
+### 📱 Digital Documents
+- 📊 Use responsive design that adapts to different screen sizes
+- 🔤 Minimum font size of 16px for body text on screens
+- ↔️ Maintain proper line length (50-75 characters per line)
+- 🧩 Use semantic HTML elements (headings, lists, emphasis)
+- 📃 Ensure content can be navigated with keyboard alone
+
+### 🖨️ Printed Materials
+- 📇 **Quick Reference Cards**: Use 4x6 index cards (landscape orientation)
+- 📄 **Standard Documents**: Use 8.5x11 letter size with 1" margins
+- 🔤 Minimum 12pt font size for printed body text
+- 🎨 Maintain minimum 4.5:1 contrast ratio for all text
+- 🖌️ Use sans-serif fonts for better readability
+- 🌈 Use textures/patterns in addition to colors for differentiation
+
+### 📱 Mobile-Optimized Content
+- 👆 Touch targets minimum 44x44 pixels
+- 🔍 Scalable text that supports system font size changes
+- 🚫 No horizontal scrolling required
+- 🖼️ Responsive images that scale with viewport
+
 ## 📚 Reference Resources
 
 - 🌐 [Web Content Accessibility Guidelines (WCAG) 2.1](https://www.w3.org/TR/WCAG21/)
@@ -95,16 +118,29 @@ This CIT will automatically check for guideline updates on the first day of each
 
 When implementing accessibility features:
 - ⏱️ Break tasks into 5-minute increments to make progress manageable
-- 📥 Capture accessibility issues in Bonobo Actions app with "?" marker for unclear items
+- 📥 Capture accessibility issues in Actions app with "?" marker for unclear items
 - ⚡ Focus on quick wins first (alt text, contrast, headings)
 - 🧩 Use this CIT when breaking down complex accessibility tasks
 
 ## 📝 Version History
 
 ```
+20250510: Added document/print standards with 4x6 index card specification
 20250428: Initial creation of ADA compliance template
 ```
 
----
+## 🌉 Cross-Project Integration
 
-*Note: This template will auto-update monthly with the latest ADA compliance guidance. Last verified against official guidelines on April 28, 2025.*
+This CIT's guidelines should be referenced and applied to other projects:
+- 📊 **Action Organizer**: Ensure that 4x6 index card quick reference meets contrast requirements
+- 📱 **SailPlan**: Verify shortcuts are accessible with clear visual indicators
+- 🖥️ **GARDEN**: Implement accessible navigation patterns for graph exploration
+
+## 🤖 Note for Claude
+
+This template provides essential accessibility guidelines. When working on any project:
+- Remind the user that quick reference materials should be designed for 4x6 index cards
+- Check color contrast in any visual design recommendations
+- Suggest alternative text for visual elements
+- Break complex accessibility tasks into manageable steps
+- Reference this CIT when discussing any design implementation

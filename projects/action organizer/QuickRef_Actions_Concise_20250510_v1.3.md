@@ -1,4 +1,10 @@
-# QuickRef_Actions_Concise_20250318_v1.0
+# QuickRef_Actions_Concise_20250510_v1.3
+
+## ORGANIZATION LEVELS
+- **PROJECT**: Collection of related actions with a clear outcome
+- **ACTION CARD**: Single task that can be completed in one sitting
+- **CHECKLIST**: Step-by-step instructions within an action
+- **NOTES**: Context, details, and reference information
 
 ## LISTS STRUCTURE
 ```
@@ -27,7 +33,14 @@ INBOX
 - Add "big" to title = Complex project
 - Add [Location] or (Person) in title for context
 - Use Notes field for brain dumps
-- Only use Temperature/Deadlines when truly needed
+- **Temperature** = Importance level
+- **Due Date** = Firm deadline
+- **Task Date** = Scheduled completion
+
+## WEEKLY PROCESS
+- Review backlog (Inbox/Quick Wins)
+- Assign Task Dates by priority
+- Prioritize by Temperature/Due Dates
 
 ## QUICK DECISION GUIDE
 ```
@@ -45,3 +58,6 @@ Dependent on someone → Move to WAITING
 ## REMEMBER
 Perfect organization ≠ getting things done
 Capture everything, organize minimally
+
+## PRINT FORMAT
+Designed for 4x6 index cards (landscape orientation)
