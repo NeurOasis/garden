@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="#e6ffe6" stroke="#333" stroke-width="2"/>
+  
+  <!-- Mountains -->
+  <polygon points="10,75 30,40 50,65 75,30 90,75" fill="#6a8e7f" stroke="#333" stroke-width="1.5"/>
+  <polygon points="75,30 85,45 90,75" fill="#5d7d72" stroke="#333" stroke-width="0"/>
+  <polygon points="30,40 40,50 50,65" fill="#5d7d72" stroke="#333" stroke-width="0"/>
+  
+  <!-- Snow peaks -->
+  <polygon points="28,43 30,40 32,43" fill="white"/>
+  <polygon points="73,33 75,30 77,33" fill="white"/>
+  
+  <!-- Sun -->
+  <circle cx="80" cy="20" r="8" fill="#ffcc00"/>
+  
+  <!-- Father figure (taller) -->
+  <circle cx="35" cy="55" r="5" fill="#3f51b5" stroke="#333" stroke-width="1"/> <!-- Head -->
+  <line x1="35" y1="60" x2="35" y2="70" stroke="#3f51b5" stroke-width="3"/> <!-- Body -->
+  <line x1="35" y1="70" x2="30" y2="80" stroke="#3f51b5" stroke-width="3"/> <!-- Left leg -->
+  <line x1="35" y1="70" x2="40" y2="80" stroke="#3f51b5" stroke-width="3"/> <!-- Right leg -->
+  <line x1="35" y1="64" x2="30" y2="70" stroke="#3f51b5" stroke-width="3"/> <!-- Left arm -->
+  <line x1="35" y1="64" x2="42" y2="67" stroke="#3f51b5" stroke-width="3"/> <!-- Right arm -->
+  <line x1="42" y1="67" x2="45" y2="80" stroke="#a1887f" stroke-width="1.5"/> <!-- Walking stick -->
+  
+  <!-- Backpack on Father -->
+  <rect x="32" y="60" width="6" height="7" rx="1" fill="#ff5722" stroke="#333" stroke-width="0.5"/>
+  
+  <!-- Son figure (smaller) -->
+  <circle cx="50" cy="60" r="4" fill="#2196f3" stroke="#333" stroke-width="1"/> <!-- Head -->
+  <line x1="50" y1="64" x2="50" y2="72" stroke="#2196f3" stroke-width="2.5"/> <!-- Body -->
+  <line x1="50" y1="72" x2="46" y2="80" stroke="#2196f3" stroke-width="2.5"/> <!-- Left leg -->
+  <line x1="50" y1="72" x2="54" y2="80" stroke="#2196f3" stroke-width="2.5"/> <!-- Right leg -->
+  <line x1="50" y1="67" x2="46" y2="72" stroke="#2196f3" stroke-width="2.5"/> <!-- Left arm -->
+  <line x1="50" y1="67" x2="55" y2="69" stroke="#2196f3" stroke-width="2.5"/> <!-- Right arm -->
+  <line x1="55" y1="69" x2="57" y2="80" stroke="#a1887f" stroke-width="1.5"/> <!-- Walking stick -->
+  
+  <!-- Small backpack on son -->
+  <rect x="48" y="64" width="4" height="5" rx="1" fill="#4caf50" stroke="#333" stroke-width="0.5"/>
+  
+  <!-- Father-son connection (suggested hand holding) -->
+  <line x1="40" y1="68" x2="46" y2="72" stroke="#333" stroke-width="0.5" stroke-dasharray="1,1"/>
+  
+  <!-- Trail path -->
+  <path d="M10,80 Q30,75,50,80 T90,77" fill="none" stroke="#a1887f" stroke-width="1.5" stroke-dasharray="2,1.5"/>
+  
+  <!-- Text label -->
+  <text x="50" y="95" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">Go for a Hike</text>
+</svg>

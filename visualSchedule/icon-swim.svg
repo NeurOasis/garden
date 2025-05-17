@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="#e1f5fe" stroke="#333" stroke-width="2"/>
+  
+  <!-- Water -->
+  <path d="M10,50 Q25,45,40,50 T70,45 T95,50 L95,85 L10,85 Z" fill="#29b6f6"/>
+  
+  <!-- Water wave details -->
+  <path d="M15,55 Q25,53,35,55 T55,53 T75,55 T95,53" fill="none" stroke="#81d4fa" stroke-width="1.5"/>
+  <path d="M15,62 Q25,60,35,62 T55,60 T75,62 T95,60" fill="none" stroke="#81d4fa" stroke-width="1.5"/>
+  <path d="M15,69 Q25,67,35,69 T55,67 T75,69 T95,67" fill="none" stroke="#81d4fa" stroke-width="1.5"/>
+  <path d="M15,76 Q25,74,35,76 T55,74 T75,76 T95,74" fill="none" stroke="#81d4fa" stroke-width="1.5"/>
+  
+  <!-- Swimmer -->
+  <circle cx="40" cy="55" r="4" fill="#3f51b5" stroke="#333" stroke-width="1"/> <!-- Head -->
+  <path d="M40,59 L55,59" stroke="#3f51b5" stroke-width="3"/> <!-- Body -->
+  
+  <!-- Arms in swimming motion -->
+  <path d="M42,57 C45,50,50,47,55,54" fill="none" stroke="#3f51b5" stroke-width="2"/> <!-- Left arm -->
+  <path d="M50,59 C55,65,60,65,60,60" fill="none" stroke="#3f51b5" stroke-width="2"/> <!-- Right arm -->
+  
+  <!-- Legs/feet -->
+  <path d="M55,59 L65,62" stroke="#3f51b5" stroke-width="2.5"/> <!-- Upper leg -->
+  <path d="M65,62 C68,63,70,65,67,67" fill="none" stroke="#3f51b5" stroke-width="2"/> <!-- Bent leg/foot -->
+  
+  <!-- Splash/movement in water -->
+  <path d="M35,55 L32,52 M38,52 L35,50 M42,52 L45,49" stroke="#81d4fa" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Sun -->
+  <circle cx="80" cy="25" r="7" fill="#ffcc00"/>
+  
+  <!-- Beach ball floating -->
+  <circle cx="75" cy="65" r="5" fill="#ffffff" stroke="#333" stroke-width="0.5"/>
+  <path d="M70,65 L80,65 M75,60 L75,70" stroke="#f44336" stroke-width="1.5"/>
+  <path d="M72,62 L78,68 M72,68 L78,62" stroke="#2196f3" stroke-width="1.5"/>
+  
+  <!-- Beach/shore hint -->
+  <path d="M10,50 L20,50 L25,45 L30,50 L35,45 L40,50" fill="none" stroke="#ffd54f" stroke-width="1.5"/>
+  
+  <!-- Text label -->
+  <text x="50" y="95" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">Go for a Swim</text>
+</svg>

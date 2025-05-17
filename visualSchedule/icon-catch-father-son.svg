@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="#e8f5e9" stroke="#333" stroke-width="2"/>
+  
+  <!-- Ground/grass -->
+  <rect x="10" y="75" width="80" height="10" fill="#7cb342"/>
+  
+  <!-- Father figure (left) -->
+  <circle cx="25" cy="45" r="5" fill="#3f51b5" stroke="#333" stroke-width="1"/> <!-- Head -->
+  <line x1="25" y1="50" x2="25" y2="65" stroke="#3f51b5" stroke-width="3"/> <!-- Body -->
+  <line x1="25" y1="53" x2="15" y2="60" stroke="#3f51b5" stroke-width="2.5"/> <!-- Left arm down -->
+  <line x1="25" y1="53" x2="35" y2="45" stroke="#3f51b5" stroke-width="2.5"/> <!-- Right arm up throwing -->
+  <line x1="25" y1="65" x2="20" y2="75" stroke="#3f51b5" stroke-width="2.5"/> <!-- Left leg -->
+  <line x1="25" y1="65" x2="30" y2="75" stroke="#3f51b5" stroke-width="2.5"/> <!-- Right leg -->
+  
+  <!-- Son figure (right) - smaller -->
+  <circle cx="75" cy="48" r="4" fill="#2196f3" stroke="#333" stroke-width="1"/> <!-- Head -->
+  <line x1="75" y1="52" x2="75" y2="64" stroke="#2196f3" stroke-width="2.5"/> <!-- Body -->
+  <line x1="75" y1="54" x2="65" y2="48" stroke="#2196f3" stroke-width="2"/> <!-- Left arm up catching -->
+  <line x1="75" y1="54" x2="83" y2="55" stroke="#2196f3" stroke-width="2"/> <!-- Right arm down -->
+  <line x1="75" y1="64" x2="70" y2="74" stroke="#2196f3" stroke-width="2"/> <!-- Left leg -->
+  <line x1="75" y1="64" x2="80" y2="74" stroke="#2196f3" stroke-width="2"/> <!-- Right leg -->
+  
+  <!-- Baseball cap on son -->
+  <path d="M71,46 L79,46 L77,44 L73,44 Z" fill="#f44336" stroke="#333" stroke-width="0.5"/>
+  
+  <!-- Ball in air -->
+  <circle cx="50" cy="35" r="4" fill="#ff9800" stroke="#e65100" stroke-width="1"/>
+  
+  <!-- Motion path of ball -->
+  <path d="M35,45 Q50,30,65,48" fill="none" stroke="#bdbdbd" stroke-width="1" stroke-dasharray="2,2"/>
+  
+  <!-- Father's hat -->
+  <path d="M20,44 L30,44 L28,41 L22,41 Z" fill="#607d8b" stroke="#333" stroke-width="0.5"/>
+  
+  <!-- Sun -->
+  <circle cx="85" cy="20" r="6" fill="#ffcc00"/>
+  
+  <!-- Cloud -->
+  <ellipse cx="20" cy="20" rx="8" ry="5" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+  <ellipse cx="26" cy="18" rx="6" ry="4" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+  <ellipse cx="14" cy="18" rx="5" ry="3" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+  
+  <!-- Text label -->
+  <text x="50" y="95" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">Play Catch</text>
+</svg>

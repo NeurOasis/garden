@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- This is a template SVG that shows the style of icon I can create -->
+  
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="45" fill="#f2f2f2" stroke="#333" stroke-width="2"/>
+  
+  <!-- Example icon (book) -->
+  <rect x="30" y="30" width="40" height="35" rx="2" fill="#4a7aff" stroke="#333" stroke-width="1.5"/>
+  <rect x="35" y="35" width="30" height="5" rx="1" fill="#ffffff" stroke="#333" stroke-width="0.75"/>
+  <rect x="35" y="45" width="30" height="5" rx="1" fill="#ffffff" stroke="#333" stroke-width="0.75"/>
+  <rect x="35" y="55" width="30" height="5" rx="1" fill="#ffffff" stroke="#333" stroke-width="0.75"/>
+  
+  <!-- Text label below -->
+  <text x="50" y="85" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#333">Reading</text>
+</svg>
