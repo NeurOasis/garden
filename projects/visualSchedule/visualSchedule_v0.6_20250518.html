@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Schedule Template</title>
+    <style>
+        /* Define the activity width as a CSS variable */
+        :root {
+            --activity-width: 80px;
+        }
+        
+        /* Screen styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2A6FDB;
+        }
+        .schedule-controls {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .schedule-controls button {
+            background-color: #2A6FDB;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 0 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .schedule-controls button:hover {
+            background-color: #1A5ABD;
+        }
+        .schedule-notes {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #D9930D;
+            border-radius: 4px;
+        }
+        .print-instructions {
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        th, td {
+            border: 2px solid #333;
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        th {
+            background-color: #e6f7ff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .block-column {
+            width: auto;
+            max-width: calc(2 * var(--activity-width));
+            white-space: nowrap;
+        }
+        .activity-column {
+            width: var(--activity-width);
+            height: var(--activity-width);
+        }
+        .options-column {
+            width: calc(5 * var(--activity-width));
+        }
+        
+        /* Ensure activity cells are square */
+        .activity-cell {
+            height: var(--activity-width);
+            width: var(--activity-width);
+        }
+        
+        /* Time block styles */
+        .time-block {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        /* Hide schedules by default */
+        #generic-schedule, #zachs-schedule {
+            display: none;
+        }
+        
+        /* Show the active schedule */
+        .schedule-active {
+            display: table-row-group !important;
+        }
+        
+        /* Print styles */
+        @media print {
+            @page {
+                size: letter landscape;
+                margin: 0.5in;
+            }
+            
+            /* Hide screen-only elements */
+            .schedule-controls, .schedule-notes {
+                display: none !important;
+            }
+            
+            /* Show print instructions */
+            .print-instructions {
+                display: block;
+                text-align: center;
+                margin-bottom: 15px;
+                font-size: 12pt;
+                font-style: italic;
+            }
+            
+            /* Adjust body for printing */
+            body {
+                margin: 0;
+                padding: 0;
+                font-size: 12pt;
+                background-color: white !important;
+                color: black !important;
+            }
+            
+            h1 {
+                color: black !important;
+                margin-top: 0;
+            }
+            
+            /* Table print optimizations */
+            table {
+                width: 100%;
+                page-break-inside: avoid;
+                border-collapse: collapse;
+            }
+            
+            th {
+                background-color: #f2f2f2 !important;
+                /* Use patterns instead of colors for black and white printing */
+                border-bottom: 3px double #000;
+            }
+            
+            th, td {
+                border: 1px solid black;
+            }
+            
+            /* Fix text cutting off */
+            .time-block {
+                font-size: 12pt;
+                white-space: normal;
+            }
+            
+            /* Ensure the activity cells print at consistent size */
+            .activity-cell {
+                height: var(--activity-width);
+                width: var(--activity-width);
+                border: 2px solid black;
+            }
+            
+            /* Force showing active schedule */
+            .schedule-active {
+                display: table-row-group !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Visual Schedule</h1>
+    
+    <div class="schedule-controls">
+        <button onclick="switchSchedule('generic')">Generic Time Blocks</button>
+        <button onclick="switchSchedule('zachs')">Zach's Schedule</button>
+    </div>
+    
+    <div class="print-instructions">
+        <p>Visual Schedule for Zach - Print in landscape orientation</p>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th class="block-column">Time Block</th>
+                <th class="activity-column">Activity</th>
+                <th class="options-column">Options</th>
+            </tr>
+        </thead>
+        
+        <!-- Generic Schedule with 2-hour blocks -->
+        <tbody id="generic-schedule">
+            <tr>
+                <td class="time-block">8:00am - 10:00am</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">10:00am - 12:00pm</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">12:00pm - 2:00pm</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">2:00pm - 4:00pm</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">4:00pm - 6:00pm</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">6:00pm - 8:00pm</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+        </tbody>
+        
+        <!-- Zach's specific schedule -->
+        <tbody id="zachs-schedule">
+            <tr>
+                <td class="time-block">Before breakfast</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">8:30-9:30: breakfast</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">9am: medicines</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">1 hour: joint activity</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">1 hour: solo activity</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">30 minutes: screen break with Brandy</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">12pm-12:30pm: lunch</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">12:30-1pm: solo non-screen rest</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">1-2: solo screens</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">2-3: joint activity</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">3-4: screens, joint or solo</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">4-5: dad's choice</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">5-6: Brandy playtime</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">5 minutes: decide on dinner</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">6:30-7: dinner</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">7-8: Zach's choice</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">8pm: interactive screens off</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">8:30pm: all screens off, bedtime must dos</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">9pm: books and sleep</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <script>
+        // Function to switch between schedule types
+        function switchSchedule(type) {
+            // Hide all schedules
+            document.getElementById('generic-schedule').classList.remove('schedule-active');
+            document.getElementById('zachs-schedule').classList.remove('schedule-active');
+            
+            // Show the selected schedule
+            document.getElementById(type + '-schedule').classList.add('schedule-active');
+        }
+        
+        // Initialize with the generic schedule
+        window.onload = function() {
+            switchSchedule('generic');
+        };
+    </script>
+</body>
+</html>
