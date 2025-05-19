@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        th, td {
+            border: 2px solid #333;
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .block-column {
+            width: auto;
+            max-width: calc(2 * var(--activity-width));
+            white-space: nowrap;
+        }
+        .activity-column {
+            width: var(--activity-width);
+            height: var(--activity-width);
+        }
+        .options-column {
+            width: calc(5 * var(--activity-width));
+        }
+        
+        /* Define the activity width as a CSS variable */
+        :root {
+            --activity-width: 80px;
+        }
+        
+        /* Ensure activity cells are square */
+        .activity-cell {
+            height: var(--activity-width);
+            width: var(--activity-width);
+        }
+        
+        /* Add some sample time blocks - these can be edited */
+        .time-block {
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Visual Schedule</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th class="block-column">Block</th>
+                <th class="activity-column">Activity</th>
+                <th class="options-column">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="time-block">8:00am - 10:00am</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">10:00am - 12:00pm</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">12:00pm - 2:00pm</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">2:00pm - 4:00pm</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">4:00pm - 6:00pm</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="time-block">6:00pm - 8:00pm</td>
+                <td class="activity-cell"></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

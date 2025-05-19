@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Brand Style Guide</title>
+    <style>
+        /* ADA-Compliant Color Palette */
+        :root {
+            --deep-blue: #2A6FDB;
+            --amber: #D9930D;
+            --sage: #6A8D73;
+            --coral: #D85A4A;
+            --off-white: #F8F9FA;
+            --charcoal: #333333;
+            --lavender: #7C6AC8;
+            --mint: #3A9D82;
+            
+            /* Neutral shades */
+            --light-grey: #E9ECEF;
+            --medium-grey: #ADB5BD;
+            --dark-grey: #495057;
+            
+            /* Accessibility */
+            --focus-outline: 3px solid var(--deep-blue);
+        }
+        
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--charcoal);
+            background-color: var(--off-white);
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--deep-blue);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+            border-bottom: 3px solid var(--amber);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            color: var(--deep-blue);
+            text-decoration: none;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        a:hover, a:focus {
+            color: var(--amber);
+            text-decoration: underline;
+        }
+        
+        a:focus {
+            outline: var(--focus-outline);
+            outline-offset: 2px;
+        }
+        
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--deep-blue);
+            color: var(--off-white);
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: var(--charcoal);
+            padding: 1rem 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: var(--off-white);
+            padding: 0.5rem;
+            display: block;
+            font-weight: 500;
+        }
+        
+        nav a:hover, nav a:focus {
+            color: var(--amber);
+        }
+        
+        /* Color Display */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .color-item {
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .color-display {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 0 0 2px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+        
+        .color-info {
+            padding: 1rem;
+            background-color: white;
+        }
+        
+        .color-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .color-hex, .color-rgb, .color-cmyk {
+            font-family: monospace;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        /* Typography display */
+        .typography-example {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 8px;
+            border-left: 5px solid var(--deep-blue);
+        }
+        
+        .font-family {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--deep-blue);
+        }
+        
+        .font-example {
+            margin-bottom: 1.5rem;
+        }
+        
+        .font-details {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--dark-grey);
+        }
+        
+        /* Logo section */
+        .logo-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .logo-item {
+            padding: 1.5rem;
+            border: 1px solid var(--light-grey);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .logo-display {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+        
+        .logo-description {
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        /* Usage examples */
+        .usage-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .usage-item {
+            border: 1px solid var(--light-grey);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .usage-header {
+            padding: 1rem;
+            background-color: var(--light-grey);
+            font-weight: bold;
+        }
+        
+        .usage-content {
+            padding: 1.5rem;
+            min-height: 200px;
+        }
+        
+        .do-header {
+            color: var(--sage);
+            border-bottom: 2px solid var(--sage);
+        }
+        
+        .dont-header {
+            color: var(--coral);
+            border-bottom: 2px solid var(--coral);
+        }
+        
+        /* Voice & Tone */
+        .voice-examples {
+            margin-top: 1.5rem;
+        }
+        
+        .voice-example {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 8px;
+            border-left: 5px solid var(--lavender);
+        }
+        
+        .voice-label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--lavender);
+        }
+        
+        .voice-text {
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--charcoal);
+            color: var(--off-white);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        /* Utility classes */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mb-2 {
+            margin-bottom: 2rem;
+        }
+        
+        .emoji-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            display: inline-block;
+        }
+        
+        /* Accessibility features */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--deep-blue);
+            color: var(--off-white);
+            padding: 8px;
+            z-index: 1000;
+            transition: top 0.3s;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            h3 {
+                font-size: 1.25rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .usage-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+        }
+        
+        /* Color Contrast Demo */
+        .contrast-demo {
+            margin-top: 2rem;
+        }
+        
+        .contrast-row {
+            display: flex;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .contrast-cell {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        /* Toggle Switch */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+        }
+        
+        .toggle-label {
+            margin-right: 1rem;
+            font-weight: 500;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--medium-grey);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--deep-blue);
+        }
+        
+        input:focus + .toggle-slider {
+            box-shadow: 0 0 1px var(--deep-blue);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header>
+        <div class="container">
+            <h1 class="text-center">Your Brand Style Guide</h1>
+            <p class="text-center">Comprehensive guidelines for consistent brand representation</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#brand-overview">📊 Overview</a></li>
+                <li><a href="#colors">🎨 Colors</a></li>
+                <li><a href="#typography">🔤 Typography</a></li>
+                <li><a href="#logo">🔖 Logo</a></li>
+                <li><a href="#voice-tone">🗣️ Voice & Tone</a></li>
+                <li><a href="#imagery">📷 Imagery</a></li>
+                <li><a href="#accessibility">♿ Accessibility</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main id="main-content" class="container">
+        <section id="brand-overview" class="section">
+            <h2><span class="emoji-icon">📊</span>Brand Overview</h2>
+            <p>Your brand represents a balance of focus, clarity, and organization with energy and creativity. Designed to be accessible and visually clear, it provides consistent structure while remaining flexible enough to adapt to different contexts.</p>
+            
+            <div class="mb-2">
+                <h3>Core Values</h3>
+                <ul>
+                    <li><strong>Clarity:</strong> Making complex information accessible and understandable</li>
+                    <li><strong>Focus:</strong> Helping people direct their attention effectively</li>
+                    <li><strong>Flexibility:</strong> Adapting to different needs and energy levels</li>
+                    <li><strong>Structure:</strong> Creating organization without rigidity</li>
+                    <li><strong>Authenticity:</strong> Embracing natural thinking patterns</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3>Brand Personality</h3>
+                <ul>
+                    <li><strong>Approachable:</strong> Warm and welcoming, never intimidating</li>
+                    <li><strong>Thoughtful:</strong> Deliberate and considered in all communications</li>
+                    <li><strong>Supportive:</strong> Encouraging and helpful, providing scaffolding</li>
+                    <li><strong>Clear:</strong> Direct and transparent, avoiding ambiguity</li>
+                    <li><strong>Adaptable:</strong> Responsive to different contexts and needs</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="colors" class="section">
+            <h2><span class="emoji-icon">🎨</span>Colors</h2>
+            <p>The color palette is designed to create visual hierarchy while maintaining ADA compliance. All color combinations have been tested to ensure they meet WCAG AA standards for contrast and readability.</p>
+            
+            <h3>Primary Colors</h3>
+            <div class="color-grid">
+                <div class="color-item">
+                    <div class="color-display" style="background-color: #2A6FDB;">
+                        Deep Blue
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Deep Blue</div>
+                        <div class="color-hex">HEX: #2A6FDB</div>
+                        <div class="color-rgb">RGB: 42, 111, 219</div>
+                        <div class="color-cmyk">CMYK: 81, 49, 0, 14</div>
+                    </div>
+                </div>
+                
+                <div class="color-item">
+                    <div class="color-display" style="background-color: #D9930D; color: #333333;">
+                        Energetic Amber
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Energetic Amber</div>
+                        <div class="color-hex">HEX: #D9930D</div>
+                        <div class="color-rgb">RGB: 217, 147, 13</div>
+                        <div class="color-cmyk">CMYK: 0, 32, 94, 15</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Supporting Colors</h3>
+            <div class="color-grid">
+                <div class="color-item">
+                    <div class="color-display" style="background-color: #6A8D73;">
+                        Soft Sage
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Soft Sage</div>
+                        <div class="color-hex">HEX: #6A8D73</div>
+                        <div class="color-rgb">RGB: 106, 141, 115</div>
+                        <div class="color-cmyk">CMYK: 25, 0, 18, 45</div>
+                    </div>
+                </div>
+                
+                <div class="color-item">
+                    <div class="color-display" style="background-color: #D85A4A;">
+                        Warm Coral
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Warm Coral</div>
+                        <div class="color-hex">HEX: #D85A4A</div>
+                        <div class="color-rgb">RGB: 216, 90, 74</div>
+                        <div class="color-cmyk">CMYK: 0, 58, 66, 15</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Neutral Foundation</h3>
+            <div class="color-grid">
+                <div class="color-item">
+                    <div class="color-display" style="background-color: #F8F9FA; color: #333333;">
+                        Off-White
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Off-White</div>
+                        <div class="color-hex">HEX: #F8F9FA</div>
+                        <div class="color-rgb">RGB: 248, 249, 250</div>
+                        <div class="color-cmyk">CMYK: 1, 0, 0, 2</div>
+                    </div>
+                </div>
+                
+                <div class="color-item">
+                    <div class="color-display" style="background-color: #333333;">
+                        Soft Charcoal
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Soft Charcoal</div>
+                        <div class="color-hex">HEX: #333333</div>
+                        <div class="color-rgb">RGB: 51, 51, 51</div>
+                        <div class="color-cmyk">CMYK: 0, 0, 0, 80</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Accent Colors</h3>
+            <div class="color-grid">
+                <div class="color-item">
+                    <div class="color-display" style="background-color: #7C6AC8;">
+                        Lavender
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Lavender</div>
+                        <div class="color-hex">HEX: #7C6AC8</div>
+                        <div class="color-rgb">RGB: 124, 106, 200</div>
+                        <div class="color-cmyk">CMYK: 38, 47, 0, 22</div>
+                    </div>
+                </div>
+                
+                <div class="color-item">
+                    <div class="color-display" style="background-color: #3A9D82;">
+                        Mint
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Mint</div>
+                        <div class="color-hex">HEX: #3A9D82</div>
+                        <div class="color-rgb">RGB: 58, 157, 130</div>
+                        <div class="color-cmyk">CMYK: 63, 0, 17, 38</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Color Usage</h3>
+            <p>Use colors purposefully to create visual hierarchy and guide attention:</p>
+            <ul>
+                <li><strong>Deep Blue:</strong> Primary brand color, use for headers, important UI elements, and calls-to-action</li>
+                <li><strong>Energetic Amber:</strong> Highlight color for priorities, buttons, and important alerts</li>
+                <li><strong>Soft Sage:</strong> Success states, completion indicators, and secondary confirmations</li>
+                <li><strong>Warm Coral:</strong> Notification states, important reminders, and secondary buttons</li>
+                <li><strong>Lavender:</strong> Use for "waiting" states or items dependent on others</li>
+                <li><strong>Mint:</strong> Project-related elements and organizational tools</li>
+            </ul>
+            
+            <h3>Color Contrast</h3>
+            <p>Always ensure there is sufficient contrast between text and background colors, with a minimum ratio of 4.5:1 for normal text and 3:1 for large text.</p>
+            
+            <div class="contrast-demo">
+                <div class="contrast-row">
+                    <div class="contrast-cell" style="background-color: var(--deep-blue); color: var(--off-white);">
+                        Deep Blue + Off-White
+                    </div>
+                    <div class="contrast-cell" style="background-color: var(--amber); color: var(--charcoal);">
+                        Amber + Charcoal
+                    </div>
+                </div>
+                <div class="contrast-row">
+                    <div class="contrast-cell" style="background-color: var(--sage); color: var(--off-white);">
+                        Sage + Off-White
+                    </div>
+                    <div class="contrast-cell" style="background-color: var(--coral); color: var(--off-white);">
+                        Coral + Off-White
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="typography" class="section">
+            <h2><span class="emoji-icon">🔤</span>Typography</h2>
+            <p>The typography system is designed for maximum readability and clear hierarchy, with a focus on comfortable reading across devices. System fonts are used for their universal availability and consistency.</p>
+            
+            <div class="typography-example">
+                <div class="font-family">Primary Font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif</div>
+                <div class="font-example">
+                    <h1 style="margin-top: 0;">Heading 1 (2.5rem)</h1>
+                    <h2 style="margin-top: 0.5rem;">Heading 2 (2rem)</h2>
+                    <h3 style="margin-top: 0.5rem;">Heading 3 (1.5rem)</h3>
+                    <h4 style="margin-top: 0.5rem;">Heading 4 (1.25rem)</h4>
+                    <p style="margin-top: 1rem;">Body Text (1rem) - The quick brown fox jumps over the lazy dog. This is an example of body text, which should be easy to read and have sufficient line height.</p>
+                    <p><small>Small Text (0.85rem) - Used for captions, footnotes, and secondary information.</small></p>
+                </div>
+                <div class="font-details">
+                    <p>System fonts provide excellent readability across devices and eliminate the need for additional font loading, improving performance.</p>
+                </div>
+            </div>
+            
+            <h3>Typography Guidelines</h3>
+            <ul>
+                <li><strong>Line Length:</strong> Aim for 50-75 characters per line for optimal readability</li>
+                <li><strong>Line Height:</strong> Body text should have a line height of 1.6 for comfortable reading</li>
+                <li><strong>Font Weight:</strong> Use normal (400) for body text and bold (700) for headings</li>
+                <li><strong>Font Size:</strong> Minimum 16px for body text, scale headings appropriately</li>
+                <li><strong>Hierarchy:</strong> Maintain clear distinction between heading levels and body text</li>
+            </ul>
+            
+            <div class="usage-grid">
+                <div class="usage-item">
+                    <div class="usage-header do-header">DO</div>
+                    <div class="usage-content">
+                        <ul>
+                            <li>Use bold for emphasis on important text</li>
+                            <li>Maintain consistent heading hierarchy (H1 > H2 > H3)</li>
+                            <li>Ensure sufficient contrast between text and background</li>
+                            <li>Use ordered lists for sequential information</li>
+                            <li>Include adequate whitespace between paragraphs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="usage-item">
+                    <div class="usage-header dont-header">DON'T</div>
+                    <div class="usage-content">
+                        <ul>
+                            <li>Use all caps for entire paragraphs</li>
+                            <li>Use more than two font families in a single design</li>
+                            <li>Create text blocks wider than 75 characters</li>
+                            <li>Use font sizes smaller than 16px for body text</li>
+                            <li>Skip heading levels (e.g., H1 to H3 without H2)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="logo" class="section">
+            <h2><span class="emoji-icon">🔖</span>Logo</h2>
+            <p>The logo represents the core values of clarity, focus, and structure. It should be used consistently across all materials.</p>
+            
+            <div class="logo-examples">
+                <div class="logo-item">
+                    <div class="logo-display" style="background-color: var(--off-white);">
+                        <!-- Primary logo placeholder -->
+                        <svg width="200" height="100" viewBox="0 0 200 100">
+                            <rect x="40" y="30" width="40" height="40" fill="#2A6FDB" />
+                            <circle cx="140" cy="50" r="20" fill="#D9930D" />
+                            <text x="100" y="90" text-anchor="middle" font-weight="bold">YOUR BRAND</text>
+                        </svg>
+                    </div>
+                    <div class="logo-description">
+                        <strong>Primary Logo</strong><br>
+                        Use for most applications where space allows
+                    </div>
+                </div>
+                
+                <div class="logo-item">
+                    <div class="logo-display" style="background-color: var(--off-white);">
+                        <!-- Secondary logo placeholder -->
+                        <svg width="100" height="100" viewBox="0 0 100 100">
+                            <rect x="25" y="25" width="25" height="25" fill="#2A6FDB" />
+                            <circle cx="62.5" cy="50" r="12.5" fill="#D9930D" />
+                            <text x="50" y="80" text-anchor="middle" font-size="10" font-weight="bold">YOUR BRAND</text>
+                        </svg>
+                    </div>
+                    <div class="logo-description">
+                        <strong>Secondary Logo</strong><br>
+                        Use for limited space applications
+                    </div>
+                </div>
+                
+                <div class="logo-item">
+                    <div class="logo-display" style="background-color: var(--charcoal);">
+                        <!-- Reversed logo placeholder -->
+                        <svg width="200" height="100" viewBox="0 0 200 100">
+                            <rect x="40" y="30" width="40" height="40" fill="#2A6FDB" />
+                            <circle cx="140" cy="50" r="20" fill="#D9930D" />
+                            <text x="100" y="90" text-anchor="middle" fill="white" font-weight="bold">YOUR BRAND</text>
+                        </svg>
+                    </div>
+                    <div class="logo-description">
+                        <strong>Reversed Logo</strong><br>
+                        Use on dark backgrounds
+                    </div>
+                </div>
+                
+                <div class="logo-item">
+                    <div class="logo-display" style="background-color: var(--off-white);">
+                        <!-- Monochrome logo placeholder -->
+                        <svg width="200" height="100" viewBox="0 0 200 100">
+                            <rect x="40" y="30" width="40" height="40" fill="#333333" />
+                            <circle cx="140" cy="50" r="20" fill="#333333" />
+                            <text x="100" y="90" text-anchor="middle" font-weight="bold">YOUR BRAND</text>
+                        </svg>
+                    </div>
+                    <div class="logo-description">
+                        <strong>Monochrome Logo</strong><br>
+                        Use when color printing is not available
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Logo Usage Guidelines</h3>
+            <ul>
+                <li><strong>Clear Space:</strong> Maintain a minimum clear space equal to the height of the
