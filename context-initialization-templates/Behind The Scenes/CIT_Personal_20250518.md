@@ -1,4 +1,4 @@
-# CIT_Personal_20250517
+# CIT_Personal_20250518
 
 ## 👤 Personal Background
 - 🧠 Neurodivergent, most closely associated with autism (with elements of PDA)
@@ -24,23 +24,13 @@
   - 🏷️ Task markers: "?" for unclear tasks, "big" for complex projects
   - 🔄 Focus on capturing first, organizing minimally
 
-- **📄 Physical Document System**: Four folders in priority order
-  1. 📬 Unread: Unopened or unprocessed documents
-  2. 👁️ For Review: Documents needing deeper assessment
-  3. 🎯 For Action: Documents with clear next steps
-  4. 🗄️ File/Save: Documents to retain physically
-
-- **💻 Other Digital Systems**:
-  - 📧 Email: Working toward Inbox Zero (300+ emails backlog)
-  - 📔 Notes App: 400+ disorganized notes needing consolidation
-  - 🎯 Goal: Consolidate all tasks into iOS Reminders App
-
 ## 🎯 Current Goals
 - 🔕 Reduce inbound distractions (notifications, emails, reminders)
 - 🔄 Consolidate task management into a single system
 - 🧠 Develop sustainable organization processes that work with natural thinking style
 - 🧩 Create manageable approaches to overwhelming tasks
 - ⚡ Find ways to work effectively with fluctuating energy levels
+- ⛵ Optimize Apple Watch complications for sailing (accurate data, focused taps, single-handed use)
 
 ## 💼 Working Style Preferences
 - 💭 Prefers capturing thoughts exactly as they occur
@@ -48,15 +38,41 @@
 - 😖 Struggles with rigid categorization systems
 - 📊 Needs flexibility to accommodate energy fluctuations
 - 📑 Values quick-reference guides for consistency
+- 🖼️ Strongly prefers visual representations over text-based explanations
+- 🧮 Appreciates simple, clean visuals that don't require constant refinement
 
 ## ✅ Successful Approaches
 - ⏱️ Working in small, 5-minute increments to overcome task initiation barriers
 - 🏷️ Using simple markers to indicate task complexity ("?", "big")
 - 🏢 Creating dedicated spaces for different types of tasks based on clarity and complexity
 - 📥 Focusing on capturing everything rather than organizing perfectly
+- 🔍 Using cognitive frameworks (Grassroots, Grasshopper, Sunflower) to ensure MECE coverage
+
+## 📊 Preferred Visual Formats
+- 🌲 Tree diagrams for hierarchical information (Grassroots approach)
+```
+Category
+├── Subcategory 1
+└── Subcategory 2
+```
+- 🕸️ Network diagrams for connected concepts (Grasshopper approach)
+```
+[Concept A] ――→ [Concept B]
+     ↑             ↓
+     └―――――――――――――┘
+```
+- 📋 Tables for comparing patterns (Sunflower approach)
+```
+Pattern 1 | Pattern 2
+----------|----------
+Example A | Example D
+Example B | Example E
+Example C | Example F
+```
 
 ## 📱 Technical Environment
 - 📱 iPhone 16 Pro (always running latest iOS non-beta release)
+- ⌚ Apple Watch (latest non-Ultra model)
 - 💻 MacBook Pro M2 (2023)
 - 🗓️ Apple Calendar (primary)
 - 📝 iOS Reminders (for task management)
@@ -88,7 +104,8 @@
 - 📄 Always use markdown format for documentation and reference materials
 - 📊 Create visual hierarchies with markdown formatting for better readability
 - 🔐 Prioritize solutions using native iOS apps over third-party apps requiring special permissions
+- 🖼️ Use simple ASCII diagrams for visual representations
+- 🧮 Keep visuals clean, minimal, and reusable without needing constant refinements
+- 🔄 Update CITs as artifacts every few messages to track conceptual development
 
-*Note: Conversation reminders have been moved to META-CIT-FRAMEWORK as of May 17, 2025*
-
-This template was last updated: May 17, 2025
+This template was last updated: May 18, 2025

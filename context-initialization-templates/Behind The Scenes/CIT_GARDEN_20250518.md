@@ -1,12 +1,12 @@
-# CIT_GARDEN_20250511
+# CIT_GARDEN_20250518
 
 ## 🌱 Project Overview
 
 ```
 Project: G.A.R.D.E.N. (Graph Algorithms, Research, Development, Enhancement, and Novelties)
-Current Version: v1.1
-Date: 20250511
-Status: Documentation update
+Current Version: v1.2
+Date: 20250518
+Status: Updated with cognitive framework applications
 ```
 
 ## 📊 Project Description
@@ -23,28 +23,49 @@ We believe powerful data exploration should be available to everyone, not just t
 4. **Progressive Discovery**: Enable users to start simply and gradually access more sophisticated capabilities
 5. **Multiple Perspectives**: Support different cognitive approaches to exploring the same data
 
-## 🧩 Core Applications
+## 🧩 Core Applications as Cognitive Frameworks
 
-### Grassroots 🌱
-- **Approach**: Metadata-first exploration 
-- **Starting Point**: Schema and structure
-- **Use Case**: Business domain experts without specific data knowledge
-- **Navigation**: Hyperlink-based UI without complex visualizations
-- **Key Feature**: Automated schema-based navigation
+The three core applications represent distinct cognitive approaches that can be applied to any problem or exploration:
 
-### Grasshopper 🦗
-- **Approach**: Data-first exploration
-- **Starting Point**: Curated list of high-value entities
-- **Use Case**: Contextual understanding of relationships
-- **Navigation**: Entity profile pages with connected nodes
-- **Key Feature**: Wikipedia-like browsing experience
+### Grassroots 🌱 (Structure-First)
+- **Cognitive Pattern**: Begin with categories, taxonomies, and structures
+- **Starting Point**: Define the conceptual territory before exploring specifics
+- **Use Case**: Creating comprehensive frameworks before examining examples
+- **MECE Strategy**: Validate category completeness, test with edge cases
+- **Visual Representation**:
+```
+Domain
+├── Category A
+│   ├── Subcategory A1
+│   └── Subcategory A2
+└── Category B
+    ├── Subcategory B1
+    └── Subcategory B2
+```
 
-### Sunflower 🌻
-- **Approach**: Pattern-first exploration
-- **Starting Point**: Common relationship patterns
-- **Use Case**: Discovering structural insights
-- **Navigation**: Pattern categorization and instances
-- **Key Feature**: Automatic pattern identification
+### Grasshopper 🦗 (Example-First)
+- **Cognitive Pattern**: Begin with specific examples or instances
+- **Starting Point**: Start with concrete cases and navigate between connections
+- **Use Case**: Exploring through connected examples to build understanding
+- **MECE Strategy**: Map relationships between examples, seek diverse cases
+- **Visual Representation**:
+```
+[Example A] ――― connects to ――→ [Example B]
+      ↑                               ↓
+      └――― relates to ←――― [Example C]
+```
+
+### Sunflower 🌻 (Pattern-First)
+- **Cognitive Pattern**: Focus on identifying recurring patterns across cases
+- **Starting Point**: Look for underlying patterns that organize examples
+- **Use Case**: Recognizing meaningful patterns across seemingly different areas
+- **MECE Strategy**: Validate patterns account for all observations, test boundaries
+- **Visual Representation**:
+```
+Pattern Alpha              Pattern Beta
+[Example 1] [Example 2]    [Example 4] [Example 5]
+[Example 3]                [Example 6]
+```
 
 ## 💻 Technical Implementation
 
@@ -94,6 +115,7 @@ We believe powerful data exploration should be available to everyone, not just t
 ## 📝 Version History
 
 ```
+20250518: Updated with cognitive framework applications and visual representations
 20250511: Added document and print standards with 4x6 index card specifications
 20250410: Initial creation of GARDEN project CIT
 ```
@@ -107,4 +129,6 @@ When working on the GARDEN project:
 - Remember that quick reference materials should be designed for 4x6 index cards
 - Create code examples that demonstrate key concepts
 - Follow the MIT license philosophy ("Seeds to the Wind")
-- Reference this CIT for consistent development approaches
+- Suggest appropriate cognitive frameworks when users don't initialize one
+- Use simple, clean visual representations using ASCII diagrams
+- Apply MECE verification questions appropriate to the cognitive framework
