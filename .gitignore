@@ -1,2 +1,64 @@
 .venv
 lib
+
+# .gitignore for macOS and Google Drive
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Mac Finder folder config
+*.DS_Store
+.DS_Store?
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Xcode - User settings
+xcuserdata/
+
+# Xcode - Compatibility with Xcode
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+*.xcuserstate
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/WorkspaceSettings.xcsettings
+
+# SwiftPM
+.build/
+.swiftpm/
+
+# Google Drive files
+.tmp.driveupload
+.tmp.drivedownload
+desktop.ini
+*.gdoc
+*.gsheet
+*.gslides
+._.*.gdoc
+._.*.gsheet
+._.*.gslides
+Icon*
+
+# Temporary Google Drive files during sync
+.drive.tmp.*
+
+# Google Drive folder config
+*.icloud
+.drivesync
