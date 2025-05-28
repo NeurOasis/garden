@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GARDEN Smart Uploader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #fafafa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #2A6FDB;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .auth-status {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .user-info img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 14px;
+            background: #6A8D73;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-small:hover {
+            background: #5a7862;
+        }
+
+        .error-message {
+            background: rgba(216, 90, 74, 0.1);
+            border: 1px solid #D85A4A;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #D85A4A;
+            display: none;
+        }
+
+        .error-message.visible {
+            display: block;
+        }
+
+        .success-message {
+            background: rgba(106, 141, 115, 0.1);
+            border: 1px solid #6A8D73;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #6A8D73;
+            display: none;
+        }
+
+        .success-message.visible {
+            display: block;
+        }
+
+        .upload-progress {
+            background: white;
+            border: 1px solid #2A6FDB;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .upload-progress.visible {
+            display: block;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2A6FDB, #6A8D73);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .upload-zone {
+            border: 3px dashed #2A6FDB;
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            background: white;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-zone:hover {
+            border-color: #D9930D;
+            background: rgba(42, 111, 219, 0.02);
+        }
+
+        .upload-zone.dragover {
+            border-color: #D9930D;
+            background: rgba(217, 147, 13, 0.1);
+            transform: scale(1.02);
+        }
+
+        .upload-zone .icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: #2A6FDB;
+        }
+
+        .upload-zone h2 {
+            color: #2A6FDB;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .upload-zone p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .status-bar {
+            background: rgba(42, 111, 219, 0.1);
+            border: 1px solid rgba(42, 111, 219, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #2A6FDB;
+            font-weight: 500;
+        }
+
+        .status-bar .emoji {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .file-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .file-info.visible {
+            display: block;
+        }
+
+        .file-info h4 {
+            color: #2A6FDB;
+            margin-bottom: 10px;
+        }
+
+        .file-preview {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 0.9em;
+            max-height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .analysis-results {
+            background: #f0f8ff;
+            border: 1px solid #2A6FDB;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .analysis-results.visible {
+            display: block;
+        }
+
+        .analysis-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(42, 111, 219, 0.1);
+        }
+
+        .analysis-item:last-child {
+            border-bottom: none;
+        }
+
+        .confidence-bar {
+            width: 100px;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #D85A4A 0%, #D9930D 50%, #6A8D73 100%);
+            transition: width 0.3s ease;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #2A6FDB;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1f5bb7;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #6A8D73;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a7862;
+            transform: translateY(-1px);
+        }
+
+        .mobile-notice {
+            background: rgba(217, 147, 13, 0.1);
+            border: 1px solid #D9930D;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .mobile-notice.visible {
+            display: block;
+        }
+
+        .mobile-notice .emoji {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .upload-zone {
+                padding: 40px 15px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌱 GARDEN Smart Uploader</h1>
+            <p>Intelligent file placement for seamless collaboration</p>
+            
+            <!-- GitHub Auth Status -->
+            <div id="auth-status" class="auth-status">
+                <button id="auth-btn" class="btn btn-secondary">🔑 Connect to GitHub</button>
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span id="user-avatar"></span>
+                    <span id="user-name"></span>
+                    <button id="logout-btn" class="btn-small">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Detection Notice -->
+        <div id="mobile-notice" class="mobile-notice">
+            <span class="emoji">📱</span>
+            <strong>Mobile Device Detected:</strong> Files will be staged for desktop processing due to iOS filename handling.
+        </div>
+
+        <!-- Status Bar -->
+        <div id="status-bar" class="status-bar">
+            <span class="emoji">🤖</span>
+            <span id="status-text">Connect to GitHub to start uploading files</span>
+        </div>
+
+        <!-- Error/Success Messages -->
+        <div id="error-message" class="error-message"></div>
+        <div id="success-message" class="success-message"></div>
+
+        <!-- Upload Progress -->
+        <div id="upload-progress" class="upload-progress">
+            <h4>📤 Uploading Files...</h4>
+            <div id="progress-details"></div>
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- Upload Zone -->
+        <div class="upload-zone" id="upload-zone">
+            <div class="icon">📁</div>
+            <h2>Drop files here or click to browse</h2>
+            <p>Smart placement • Zero configuration • Just upload</p>
+            <input type="file" id="file-input" style="display: none;" multiple accept=".md,.html,.txt,.json">
+        </div>
+
+        <!-- File Information -->
+        <div id="file-info" class="file-info">
+            <h4>📄 File Information</h4>
+            <div id="file-details"></div>
+            <div id="file-preview" class="file-preview"></div>
+        </div>
+
+        <!-- Analysis Results -->
+        <div id="analysis-results" class="analysis-results">
+            <h4>🔍 Smart Analysis Results</h4>
+            <div id="analysis-details"></div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button id="upload-btn" class="btn btn-primary">🚀 Smart Upload</button>
+        </div>
+    </div>
+
+    <script>
+        // GitHub Configuration
+        const GITHUB_CONFIG = {
+            clientId: 'Iv23liR8xy1CGvWPkcVa', // NeuroOasis GARDEN Smart Uploader
+            redirectUri: window.location.origin + window.location.pathname,
+            scope: 'repo',
+            owner: 'scottloeb', // Will change to NeuroOasis when garden repo is transferred
+            repo: 'garden'
+        };
+
+        // GitHub API Class
+        class GitHubAPI {
+            constructor() {
+                this.token = localStorage.getItem('github_token');
+                this.user = null;
+            }
+
+            // OAuth Flow
+            initiateAuth() {
+                const params = new URLSearchParams({
+                    client_id: GITHUB_CONFIG.clientId,
+                    redirect_uri: GITHUB_CONFIG.redirectUri,
+                    scope: GITHUB_CONFIG.scope,
+                    state: this.generateState()
+                });
+                
+                localStorage.setItem('oauth_state', params.get('state'));
+                window.location.href = `https://github.com/login/oauth/authorize?${params}`;
+            }
+
+            generateState() {
+                return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            }
+
+            // Handle OAuth callback
+            async handleCallback() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const code = urlParams.get('code');
+                const state = urlParams.get('state');
+                const storedState = localStorage.getItem('oauth_state');
+
+                if (!code || state !== storedState) {
+                    throw new Error('Invalid OAuth callback');
+                }
+
+                // Exchange code for token (this would normally go through your backend)
+                const token = await this.exchangeCodeForToken(code);
+                this.token = token;
+                localStorage.setItem('github_token', token);
+                
+                // Clean up URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+                
+                return token;
+            }
+
+            async exchangeCodeForToken(code) {
+                // This would normally be handled by your backend to keep client secret secure
+                try {
+                    const response = await fetch('/api/github/oauth', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ code })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Token exchange failed');
+                    }
+                    
+                    const data = await response.json();
+                    return data.access_token;
+                } catch (error) {
+                    // Fallback for development - prompt user to enter token manually
+                    return prompt('GitHub OAuth backend not configured. Please enter your personal access token:');
+                }
+            }
+
+            // User operations
+            async getUser() {
+                if (!this.token) throw new Error('Not authenticated');
+                
+                const response = await fetch('https://api.github.com/user', {
+                    headers: { 'Authorization': `Bearer ${this.token}` }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user info');
+                }
+                
+                this.user = await response.json();
+                return this.user;
+            }
+
+            // Repository operations
+            async createFile(path, content, message) {
+                if (!this.token) throw new Error('Not authenticated');
+
+                const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${path}`;
+                
+                const response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${this.token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        content: btoa(unescape(encodeURIComponent(content))), // Base64 encode UTF-8
+                        committer: {
+                            name: this.user?.name || 'GARDEN Uploader',
+                            email: this.user?.email || 'uploader@garden.dev'
+                        }
+                    })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.message || 'Failed to create file');
+                }
+
+                return await response.json();
+            }
+
+            async updateFile(path, content, message, sha) {
+                if (!this.token) throw new Error('Not authenticated');
+
+                const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${path}`;
+                
+                const response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${this.token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        content: btoa(unescape(encodeURIComponent(content))),
+                        sha: sha,
+                        committer: {
+                            name: this.user?.name || 'GARDEN Uploader',
+                            email: this.user?.email || 'uploader@garden.dev'
+                        }
+                    })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.message || 'Failed to update file');
+                }
+
+                return await response.json();
+            }
+
+            async getFile(path) {
+                if (!this.token) throw new Error('Not authenticated');
+
+                const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${path}`;
+                
+                const response = await fetch(url, {
+                    headers: { 'Authorization': `Bearer ${this.token}` }
+                });
+
+                if (response.status === 404) {
+                    return null; // File doesn't exist
+                }
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch file');
+                }
+
+                return await response.json();
+            }
+
+            logout() {
+                this.token = null;
+                this.user = null;
+                localStorage.removeItem('github_token');
+                localStorage.removeItem('oauth_state');
+            }
+
+            isAuthenticated() {
+                return !!this.token;
+            }
+        }
+
+        // Initialize GitHub API
+        const github = new GitHubAPI();
+
+        // UI State Management
+        let selectedFiles = [];
+        let analysisResults = [];
+
+        // Mobile detection
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        if (isMobile) {
+            document.getElementById('mobile-notice').classList.add('visible');
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Handle OAuth callback if present
+            if (window.location.search.includes('code=')) {
+                try {
+                    await github.handleCallback();
+                    showSuccess('Successfully connected to GitHub!');
+                } catch (error) {
+                    showError('GitHub authentication failed: ' + error.message);
+                }
+            }
+
+            await updateAuthUI();
+            setupEventListeners();
+        });
+
+        // Authentication UI
+        async function updateAuthUI() {
+            const authBtn = document.getElementById('auth-btn');
+            const userInfo = document.getElementById('user-info');
+            const uploadBtn = document.getElementById('upload-btn');
+
+            if (github.isAuthenticated()) {
+                try {
+                    const user = await github.getUser();
+                    
+                    // Show user info
+                    authBtn.style.display = 'none';
+                    userInfo.style.display = 'flex';
+                    document.getElementById('user-avatar').innerHTML = `<img src="${user.avatar_url}" alt="${user.login}">`;
+                    document.getElementById('user-name').textContent = user.login;
+                    
+                    // Enable upload
+                    uploadBtn.disabled = false;
+                    updateStatus('🚀 Ready to upload files to GARDEN repository');
+                    
+                } catch (error) {
+                    showError('Failed to fetch user info: ' + error.message);
+                    github.logout();
+                    updateAuthUI();
+                }
+            } else {
+                // Show auth button
+                authBtn.style.display = 'inline-block';
+                userInfo.style.display = 'none';
+                
+                // Disable upload
+                uploadBtn.disabled = true;
+                updateStatus('🔑 Connect to GitHub to start uploading files');
+            }
+        }
+
+        function setupEventListeners() {
+            // Authentication
+            document.getElementById('auth-btn').addEventListener('click', () => {
+                github.initiateAuth();
+            });
+
+            document.getElementById('logout-btn').addEventListener('click', () => {
+                github.logout();
+                updateAuthUI();
+            });
+
+            // File handling
+            setupFileHandling();
+        }
+
+        function setupFileHandling() {
+            const uploadZone = document.getElementById('upload-zone');
+            const fileInput = document.getElementById('file-input');
+            const fileInfo = document.getElementById('file-info');
+            const analysisResultsDiv = document.getElementById('analysis-results');
+
+            // Upload zone interactions
+            uploadZone.addEventListener('click', () => fileInput.click());
+
+            uploadZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadZone.classList.add('dragover');
+            });
+
+            uploadZone.addEventListener('dragleave', () => {
+                uploadZone.classList.remove('dragover');
+            });
+
+            uploadZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadZone.classList.remove('dragover');
+                handleFiles(e.dataTransfer.files);
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+
+            // Upload button
+            document.getElementById('upload-btn').addEventListener('click', uploadFiles);
+        }
+
+        function handleFiles(files) {
+            selectedFiles = Array.from(files);
+            
+            if (!github.isAuthenticated()) {
+                showError('Please connect to GitHub first');
+                return;
+            }
+            
+            // Auto-analyze immediately
+            updateStatus('🔍 Analyzing files...');
+            setTimeout(() => {
+                analyzeFiles();
+                updateStatus('✅ Ready to upload - files analyzed and placement determined');
+            }, 1000);
+        }
+
+        function updateStatus(message) {
+            document.getElementById('status-text').textContent = message;
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('visible');
+            setTimeout(() => errorDiv.classList.remove('visible'), 5000);
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('success-message');
+            successDiv.textContent = message;
+            successDiv.classList.add('visible');
+            setTimeout(() => successDiv.classList.remove('visible'), 5000);
+        }
+
+        // File analysis (auto-triggered)
+        function analyzeFiles() {
+            if (selectedFiles.length === 0) return;
+
+            displayFileInfo(selectedFiles);
+            const analysisDetails = document.getElementById('analysis-details');
+            const analysisResultsDiv = document.getElementById('analysis-results');
+            analysisResultsDiv.classList.add('visible');
+
+            // Smart analysis with request matching
+            analysisResults = [];
+            let analysisHTML = '';
+            
+            selectedFiles.forEach((file, index) => {
+                const analysis = performIntelligentAnalysis(file);
+                analysisResults.push(analysis);
+                
+                analysisHTML += `
+                    <div class="analysis-item">
+                        <div>
+                            <strong>${analysis.suggestedName}</strong>
+                            <br><small>Type: ${analysis.type} | Location: ${analysis.path}</small>
+                            ${analysis.matchedRequest ? `<br><small style="color: #6A8D73;">✓ Matched request: ${analysis.matchedRequest}</small>` : ''}
+                        </div>
+                        <div>
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" style="width: ${analysis.confidence}%"></div>
+                            </div>
+                            <small>${analysis.confidence}% confident</small>
+                        </div>
+                    </div>
+                `;
+            });
+
+            analysisDetails.innerHTML = analysisHTML;
+        }
+
+        function displayFileInfo(files) {
+            const details = document.getElementById('file-details');
+            const preview = document.getElementById('file-preview');
+            const fileInfo = document.getElementById('file-info');
+            
+            if (files.length === 0) {
+                fileInfo.classList.remove('visible');
+                return;
+            }
+
+            fileInfo.classList.add('visible');
+
+            let detailsHTML = '';
+            files.forEach((file, index) => {
+                detailsHTML += `
+                    <div class="analysis-item">
+                        <div>
+                            <strong>${file.name}</strong> (${(file.size / 1024).toFixed(1)}KB)
+                            <br><small>Type: ${file.type || 'unknown'}</small>
+                        </div>
+                    </div>
+                `;
+            });
+            details.innerHTML = detailsHTML;
+
+            // Preview first file if it's text-based
+            const firstFile = files[0];
+            if (firstFile && (firstFile.type.startsWith('text/') || firstFile.name.endsWith('.md') || firstFile.name.endsWith('.html'))) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const content = e.target.result;
+                    preview.textContent = content.substring(0, 500) + (content.length > 500 ? '...' : '');
+                };
+                reader.readAsText(firstFile);
+            } else {
+                preview.textContent = 'Binary file - no preview available';
+            }
+        }
+
+        function performIntelligentAnalysis(file) {
+            const filename = file.name.toLowerCase();
+            
+            let type, path, suggestedName, confidence, matchedRequest = null;
+
+            // Smart CIT detection
+            if (filename.includes('cit_') || filename.includes('personal') || filename.includes('context')) {
+                type = 'Context CIT';
+                path = 'contexts/';
+                
+                // Extract user name if present
+                if (filename.includes('dan')) {
+                    suggestedName = `CIT_Personal_Dan_${getTodayDate()}.md`;
+                    matchedRequest = 'Dan personal context';
+                } else if (filename.includes('scott')) {
+                    suggestedName = `CIT_Personal_Scott_${getTodayDate()}.md`;
+                } else if (filename.includes('personal')) {
+                    suggestedName = `CIT_Personal_User_${getTodayDate()}.md`;
+                } else {
+                    suggestedName = `CIT_${extractProjectName(filename)}_${getTodayDate()}.md`;
+                }
+                confidence = 95;
+            }
+            // NodePad tool detection
+            else if (filename.endsWith('.html') || filename.includes('nodepad') || filename.includes('tool')) {
+                type = 'NodePad Tool';
+                path = 'toolshed/';
+                suggestedName = filename.endsWith('.html') ? file.name : `${file.name}.html`;
+                confidence = 90;
+            }
+            // Documentation
+            else if (filename.endsWith('.md') && !filename.includes('cit_')) {
+                type = 'Documentation';
+                path = 'findings/';
+                suggestedName = file.name;
+                confidence = 75;
+            }
+            // JSON data/export
+            else if (filename.endsWith('.json')) {
+                type = 'Data Export';
+                path = 'findings/';
+                suggestedName = file.name;
+                confidence = 80;
+            }
+            // Default
+            else {
+                type = 'General File';
+                path = 'findings/';
+                suggestedName = file.name;
+                confidence = 60;
+            }
+
+            return { type, path, suggestedName, confidence, matchedRequest, originalFile: file };
+        }
+
+        function getTodayDate() {
+            return new Date().toISOString().split('T')[0].replace(/-/g, '');
+        }
+
+        function extractProjectName(filename) {
+            const name = filename.replace(/[._-]/g, ' ').replace(/\.[^/.]+$/, '');
+            const words = name.split(' ').filter(w => w.length > 2);
+            return words.length > 0 ? words[0].charAt(0).toUpperCase() + words[0].slice(1) : 'Project';
+        }
+
+        // Upload functionality with GitHub integration
+        async function uploadFiles() {
+            if (selectedFiles.length === 0) {
+                showError('Please select files first');
+                return;
+            }
+
+            if (!github.isAuthenticated()) {
+                showError('Please connect to GitHub first');
+                return;
+            }
+
+            const progressDiv = document.getElementById('upload-progress');
+            const progressFill = document.getElementById('progress-fill');
+            const progressDetails = document.getElementById('progress-details');
+            
+            progressDiv.classList.add('visible');
+            updateStatus('🚀 Uploading to GitHub...');
+
+            try {
+                const total = analysisResults.length;
+                let completed = 0;
+
+                for (let i = 0; i < analysisResults.length; i++) {
+                    const analysis = analysisResults[i];
+                    const file = analysis.originalFile;
+                    
+                    progressDetails.textContent = `Uploading ${analysis.suggestedName}...`;
+                    
+                    // Read file content
+                    const content = await readFileContent(file);
+                    
+                    // Check if file already exists
+                    const existingFile = await github.getFile(`${analysis.path}${analysis.suggestedName}`);
+                    
+                    // Create commit message
+                    const commitMessage = `🤖 GARDEN Uploader: Add ${analysis.type} - ${analysis.suggestedName}
+
+Uploaded via GARDEN Smart Uploader
+Type: ${analysis.type}
+Original filename: ${file.name}
+${analysis.matchedRequest ? `Matched request: ${analysis.matchedRequest}` : ''}
+
+Auto-placed using intelligent analysis (${analysis.confidence}% confidence)`;
+
+                    // Upload or update file
+                    if (existingFile) {
+                        await github.updateFile(
+                            `${analysis.path}${analysis.suggestedName}`,
+                            content,
+                            commitMessage,
+                            existingFile.sha
+                        );
+                    } else {
+                        await github.createFile(
+                            `${analysis.path}${analysis.suggestedName}`,
+                            content,
+                            commitMessage
+                        );
+                    }
+
+                    completed++;
+                    const progress = (completed / total) * 100;
+                    progressFill.style.width = `${progress}%`;
+                    
+                    // Small delay to show progress
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                }
+
+                // Success!
+                progressDiv.classList.remove('visible');
+                updateStatus('✅ Files uploaded successfully to GARDEN!');
+                showSuccess(`🎉 ${total} file${total > 1 ? 's' : ''} uploaded and placed intelligently!`);
+                
+                // Reset for next upload
+                resetUploadState();
+
+            } catch (error) {
+                progressDiv.classList.remove('visible');
+                updateStatus('❌ Upload failed');
+                showError('Upload failed: ' + error.message);
+                console.error('Upload error:', error);
+            }
+        }
+
+        function readFileContent(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.onerror = (e) => reject(new Error('Failed to read file'));
+                reader.readAsText(file);
+            });
+        }
+
+        function resetUploadState() {
+            selectedFiles = [];
+            analysisResults = [];
+            document.getElementById('file-info').classList.remove('visible');
+            document.getElementById('analysis-results').classList.remove('visible');
+            
+            setTimeout(() => {
+                updateStatus('🚀 Ready to upload more files to GARDEN repository');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
