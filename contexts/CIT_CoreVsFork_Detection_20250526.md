@@ -1,13 +1,13 @@
 # CIT_CoreVsFork_Detection_20250526.md
 
 ## 🎯 Core vs Fork Decision Framework
-
+c
 ```
 Project: GARDEN Core Development Routing System
-Current Version: v1.1 (Enhanced Personal Project Detection)
+Current Version: v1.2 (Enhanced Personal Project Detection)
 Date: 20250526
 Status: Active framework for core vs fork routing decisions
-Audience: Core developers only (Scott, Dan)
+dAudience: Core developers only (Scott, Dan)
 ```
 
 ## 🧭 **CORE DEVELOPMENT CRITERIA**
