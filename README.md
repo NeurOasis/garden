@@ -1,79 +1,152 @@
-# G.A.R.D.E.N. Philosophy of Accessible Development
+# G.A.R.D.E.N. Core Repository
 
-The G.A.R.D.E.N. philosophy centers on democratizing access to complex data systems through thoughtful design and automation. Rather than requiring users to master specialized query languages or understand database internals, we create intuitive interfaces that align with natural cognitive patterns. This approach makes powerful data exploration accessible to everyone, regardless of technical background.
+**Graph Algorithms, Research, Development, Enhancement, and Novelties**
 
-## Updated G.A.R.D.E.N. README
+Making complex data systems accessible through thoughtful design and automation.
 
-# G.A.R.D.E.N. (Graph Algorithms, Research, Development, Enhancement, and Novelties)
+## 🎯 **CURRENT STATE: May 26, 2025**
 
-G.A.R.D.E.N. is an open-source initiative focused on creating accessible, Python-based graph data applications for everyone. This project leverages the Module Generator to rapidly develop intuitive interfaces to graph databases, transforming complex network data into approachable, usable tools.
+**Core Focus:** Lean framework repository supporting focused project development through forked repositories
+**Active Development:** User identification system, project routing, and organic context enhancement
+**Organization:** NeuroOasis with Scott + Dan collaboration, focused project forks
 
-## Our Philosophy: Accessible Development
+## 🗺️ **WHAT'S IN THE CORE TODAY**
 
-We believe powerful data exploration should be available to everyone, not just those with specialized technical knowledge. The G.A.R.D.E.N. philosophy embraces these core principles:
+### **📋 Active Management Tools**
+- **Backlog Manager:** `toolshed/garden-backlog-manager.html` - Live project management
+- **Version History:** `toolshed/garden-version-history.html` - Release tracking and decisions
+- **Current Status:** 12 backlog items (4 completed, 8 pending), 4 major releases documented
 
-1. **Cognitive Alignment**: Design interfaces that match how people naturally think about and explore information
-2. **Technical Abstraction**: Hide complex implementation details behind intuitive interfaces
-3. **Rapid Development**: Use automation to accelerate building and deploying data exploration tools
-4. **Progressive Discovery**: Enable users to start simply and gradually access more sophisticated capabilities
-5. **Multiple Perspectives**: Support different cognitive approaches to exploring the same data
+### **🧠 Context & Documentation**
+- **Personal Contexts:** `contexts/CIT_Personal_Scott_20250525.md` + space for Dan's context
+- **Core Standards:** `contexts/behindTheScenes/CIT_CoreStandards_20250526.md` (consolidated)
+- **Project Management:** `contexts/CIT_GARDEN_ProjectManagement.md` (strategic overview)
+- **Development CITs:** ActionOrganizer, BudgetNodePad, Deployment Manager contexts
 
-Our approach centers on making graph data accessible without requiring extensive knowledge of graph databases or query languages. Each application in the G.A.R.D.E.N. ecosystem is designed to expose different interaction patterns with graph data while maintaining simplicity and usability.
+### **🏗️ Infrastructure & Framework**
+- **Module Generators:** `generated/` and `module-generators/` - Neo4j interface automation
+- **Sunflower Application:** `sunflower/` - Pattern detection for graph databases
+- **Core Applications:** Grassroots, Grasshopper, Sunflower (graph exploration patterns)
 
-## Core Applications
+### **🧰 Toolshed (Utilities)**
+- **NodePad 4.0.0:** `toolshed/nodepad-4.0.0.html` - Single-file application framework
+- **Management Tools:** Backlog manager, version history, deployment utilities
+- **Development Tools:** Templates, generators, and automation utilities
 
-### 🌱 Grassroots
+## 🚀 **ACTIVE DEVELOPMENT (What We're Building Now)**
 
-Grassroots implements a "metadata-first" approach to graph exploration. It begins with the schema and works its way to the data, making it ideal for users who understand their business domain but may not know specific data points.
+### **🔥 Priority 0 - User System Foundation**
+1. **Personal Context Setup** - Enable Dan + Scott identification by Claude
+2. **Core vs Fork Routing** - Automatic detection of what belongs where
+3. **Documentation Workflow** - Real-time documentation alongside development
 
-This Flask API exposes schema information through simple endpoints. By following schema information, users discover data that matches specific patterns. The interface features a clean, hyperlink-based UI without complex visualizations.
+### **⚡ Priority 1 - Smart Routing & Enhancement**
+4. **User Recognition Logic** - Claude knows who's developing and adapts
+5. **Missing Context Handler** - Onboard new developers seamlessly
+6. **Iterative Context Building** - Organic enhancement through conversations
 
-The Module Generator accelerates development by creating intuitive connections between URLs (containing labels) and the underlying Python functions. Users explore entities by examining schema information, sorting by properties, and browsing ordered lists – offering an alternative to property-based search.
+### **🎯 Current Session Goals**
+- Rename Scott's personal CIT for multi-user support
+- Create Core vs Fork detection framework
+- Onboard Dan with minimal cognitive overhead
+- Update all documentation to reflect current state
 
-### 🦗 Grasshopper
+## 🌿 **FORKED PROJECTS (Focused Development)**
 
-Grasshopper takes a "data-first" approach to graph exploration. Users begin with a curated list of high-value entities and navigate through the graph by "hopping" between connected nodes.
+**Live in NeuroOasis Organization:**
+- **sailing-tools** - Maritime project management and tools
+- **coffee-recipes** - Coffee brewing optimization and tracking
+- **family-tools** - Personal family management applications
+- **budget-nodepad** - Personal finance visualization
+- **action-organizer** - Task management for neurodivergent workflows
 
-Each entity has a simplified profile page showing all properties and connected nodes. Navigation happens through hyperlinks rather than visualizations. This approach creates an intuitive browsing experience similar to exploring Wikipedia, where each click reveals new connections.
+**Philosophy:** Each fork gets complete GARDEN DNA but focuses on specific domain
 
-Grasshopper excels at providing contextual understanding of relationships and allowing serendipitous discovery through graph traversal.
+## 📊 **HOW TO NAVIGATE (5-Minute Dan Orientation)**
 
-### 🌻 Sunflower
+### **🎯 If You're Here to Add Your Personal CIT:**
+1. **Quick Add:** Drop your existing personal CIT in `contexts/CIT_Personal_Dan_20250526.md`
+2. **Commit:** `git add` → `git commit "➕ ADD: Dan's personal context"` → `git push`
+3. **Done:** Claude will enhance organically through development conversations
 
-Sunflower offers a "pattern-first" approach to graph exploration, focusing on revealing common relationship patterns within your data. This application automatically identifies and categorizes recurring structural patterns (like cycles, stars, or chains) that may have business significance.
+### **🔍 If You Want to Explore First:**
+1. **Check Current Work:** `toolshed/garden-backlog-manager.html` (what's active)
+2. **See Evolution:** `toolshed/garden-version-history.html` (how we got here)
+3. **Understand Structure:** This README + `contexts/behindTheScenes/` folder
+4. **Core Framework:** `contexts/CIT_GARDEN_ProjectManagement.md` (strategic overview)
 
-Users begin by selecting a pattern type from a categorized list. Sunflower then displays all instances of that pattern in the database, allowing users to browse examples and understand how entities commonly relate to one another. Each pattern instance can be explored in detail through hyperlinked entity profiles.
+### **🛠️ If You Want to Develop:**
+1. **Check Routing:** `contexts/CIT_CoreVsFork_Detection_20250526.md` (core vs fork criteria)
+2. **Your Context:** Add personal CIT first for Claude to recognize you
+3. **Start Work:** Claude will adapt to your style and enhance context organically
 
-This approach excels at revealing hidden structural patterns that might indicate important business rules, constraints, or opportunities – all without requiring complex queries or visualizations.
+## 🎯 **GARDEN PHILOSOPHY IN ACTION**
 
-## Getting Started
+### **Five Core Principles:**
+1. **Cognitive Alignment** - Interfaces match how people think
+2. **Technical Abstraction** - Hide complexity behind intuitive design
+3. **Rapid Development** - Automation accelerates building and deployment
+4. **Progressive Discovery** - Start simple, add sophistication gradually
+5. **Multiple Perspectives** - Different cognitive approaches to same data
 
-To begin exploring the G.A.R.D.E.N. ecosystem, start with our [Prerequisites notebook](https://github.com/danhales/garden/blob/main/generated/modulegenerator_v1/notebook-0-prerequisites.md). This introduction covers the fundamental concepts needed to understand and extend the applications in this repository.
+### **Current Implementations:**
+- **NodePad 4.0.0** - Single-file, zero-dependency applications
+- **Repository Forking** - Focused development without core bloat
+- **User Context System** - Personalized development experiences
+- **Organic Documentation** - Real-time capture alongside development
 
-## How G.A.R.D.E.N. Applications Accelerate Data Exposure
+## 📋 **DOCUMENTATION WORKFLOW**
 
-All G.A.R.D.E.N. applications are built using the Module Generator, which automatically creates type-safe Python interfaces for Neo4j databases. This approach offers several advantages:
+### **"Document as We Go" Ethos:**
+- **Every structural change** updates this README immediately
+- **Every feature addition** updates relevant CITs in same commit
+- **Every decision** gets captured in version history
+- **Every conversation** gets key insights extracted to persistent files
 
-1. **Rapid Development**: Applications can be developed in days rather than weeks by leveraging auto-generated database interfaces.
+### **Why This Matters:**
+- **Cognitive Switching Efficiency** - Clear roadmap reduces orientation time
+- **Context Preservation** - Nothing exists only in conversation history
+- **Collaboration Ready** - Anyone can jump in and contribute effectively
+- **Evolution Tracking** - Decisions and rationale preserved for future
 
-2. **Consistent Patterns**: All applications share consistent interaction patterns, reducing the learning curve for users and developers.
+## 🤝 **COLLABORATION MODEL**
 
-3. **Extensibility**: The modular architecture makes it easy to enhance applications with new features while maintaining a solid foundation.
+### **Current Team:**
+- **Scott (Owner)** - Core development, strategic direction, infrastructure
+- **Dan (Collaborator)** - Architecture, UI/UX, development patterns, philosophy
 
-## Use Cases
+### **GitHub Organization:**
+- **Core Repository:** `scottloeb/garden` (this repository)
+- **NeuroOasis Organization:** Focused project forks with proper permissions
+- **Cost:** $4/user/month GitHub Teams, scales with team growth
 
-G.A.R.D.E.N. applications can be adapted for numerous domains:
+### **Development Workflow:**
+- **Personal Contexts** enable Claude to recognize and adapt to each developer
+- **Core vs Fork Routing** keeps core lean while enabling focused development
+- **Real-time Documentation** preserves decisions and evolution
+- **Organic Enhancement** builds better context through actual conversations
 
-- **Government Data Transparency**: Create public-facing portals for exploring relationships between policies, programs, and outcomes.
+## 🚀 **GETTING STARTED**
 
-- **Research Data Exploration**: Help researchers discover unexpected connections between entities in scientific datasets.
+### **For Dan (First Visit):**
+1. Add your personal CIT to enable Claude recognition
+2. Browse backlog manager to see active work
+3. Check version history to understand evolution
+4. Start developing - Claude will adapt and enhance organically
 
-- **Enterprise Knowledge Management**: Build internal tools for navigating organizational knowledge and relationships.
+### **For New Developers:**
+1. Review this README for current state
+2. Check `contexts/CIT_CoreVsFork_Detection_20250526.md` for routing rules
+3. Add personal CIT or Claude will guide you through setup
+4. Fork for project-specific work, contribute to core for framework improvements
 
-- **Educational Tools**: Create interactive environments for students to explore complex domains through their relationship structures.
+### **For Core Development:**
+- Focus on framework, infrastructure, and cross-project benefits
+- Document decisions in real-time with development
+- Update README and relevant CITs with structural changes
+- Preserve "document as we go" ethos for all collaborators
 
-## Contributing
+---
 
-We welcome contributions of all kinds, from bug fixes to entirely new "garden" applications. If you're interested in contributing, please review our contribution guidelines and code of conduct.
-
-The G.A.R.D.E.N. project aims to make graph data accessible to everyone through simple, intuitive interfaces. Join us in growing this ecosystem of tools for graph exploration and discovery!
+**Last Updated:** May 26, 2025 | **Next Review:** After Dan onboarding complete  
+**Quick Links:** [Backlog](toolshed/garden-backlog-manager.html) | [Version History](toolshed/garden-version-history.html) | [Core Standards](contexts/behindTheScenes/CIT_CoreStandards_20250526.md)
