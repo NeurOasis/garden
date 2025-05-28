@@ -1,0 +1,2474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NodePad 5.1.1</title>
+</head>
+<body>
+    <div id="app"></div>
+    
+    <script>
+    /**
+     * NodePad 5.1.1 - Path Highlighting System with Resize Support
+     * Multi-path narrative extraction through text highlighting
+     * Responsive connection updates on canvas resize
+     */
+    
+    // Simple console logger
+    const Logger = {
+        log: (action, data = {}) => {
+            console.log(`%c NodePad %c ${action}`, 
+                'background:#4a6fa5;color:white;padding:2px 4px;border-radius:2px', 
+                'color:#333', data);
+        },
+        
+        setupResizeObserver: function() {
+            const canvas = document.getElementById('nodepad-canvas');
+            let resizeTimeout;
+            
+            const resizeObserver = new ResizeObserver(entries => {
+                // Debounce resize updates
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    Logger.log('Canvas resized, updating connections');
+                    
+                    // Update all regular connections
+                    document.querySelectorAll('.nodepad-connection').forEach(conn => {
+                        NodePadAPI.updateConnection(conn.id);
+                    });
+                    
+                    // Update all path connections if highlight module is loaded
+                    if (this.modules.highlight) {
+                        document.querySelectorAll('.path-connection').forEach(svg => {
+                            this.modules.highlight.updatePathConnection(svg);
+                        });
+                    }
+                }, 100);
+            });
+            
+            resizeObserver.observe(canvas);
+        },
+        
+        init: () => {
+            console.log(`%c NodePad 5.1.1 %c Ready`, 
+                'background:#4a6fa5;color:white;padding:4px 8px;border-radius:4px;font-size:14px', 
+                'color:#333;font-size:14px');
+            console.log(`%c Keyboard Shortcuts:
+- Tab: Navigate to buttons
+- Enter: Create child (when on button)
+- Cmd/Ctrl+Enter: Execute special blocks
+- Cmd/Ctrl+Enter on canvas: Export graph as markdown
+- Cmd/Ctrl+Click on color: Toggle category for selected node
+- Select text + Cmd/Ctrl+[1-8]: Add text to path
+- Drop .md files into editor to import
+
+Special Blocks:
+\`\`\`markdown
+Your content here - converts to/from rendered markdown
+\`\`\`
+
+\`\`\`expand
+# 📋 Project Planning
+## 🎯 Goals
+## 🛠️ Implementation
+### Phase 1
+### Phase 2
+\`\`\`
+
+Headers in expand blocks become child nodes with optional emoji prefixes.`, 
+                'color:#666;font-size:12px');
+        }
+    };
+    
+    // Color system configuration
+    const ColorSystem = {
+        colors: [
+            { name: 'red', value: '#ff0000', position: 0 },
+            { name: 'blue', value: '#0066ff', position: 45 },
+            { name: 'green', value: '#00aa00', position: 90 },
+            { name: 'pink', value: '#ff66cc', position: 135 },
+            { name: 'black', value: '#000000', position: 180 },
+            { name: 'gold', value: '#ffaa00', position: 225 },
+            { name: 'gray', value: '#666666', position: 270 },
+            { name: 'white', value: '#ffffff', position: 315 }
+        ]
+    };
+    
+    // Geometry utilities - pure functions for spatial calculations
+    const Geometry = {
+        // Convert node percentage position to pixels
+        nodePositionToPixels: function(node, canvasRect) {
+            return {
+                x: (parseFloat(node.style.left) / 100) * canvasRect.width,
+                y: (parseFloat(node.style.top) / 100) * canvasRect.height
+            };
+        },
+        
+        // Calculate bounding box for a line between two points
+        calculateLineBounds: function(from, to) {
+            return {
+                x: Math.min(from.x, to.x),
+                y: Math.min(from.y, to.y),
+                width: Math.abs(to.x - from.x) || 1,
+                height: Math.abs(to.y - from.y) || 1
+            };
+        },
+        
+        // Convert absolute coordinates to relative within bounds
+        getRelativeLineCoords: function(from, to, bounds) {
+            return {
+                x1: from.x - bounds.x,
+                y1: from.y - bounds.y,
+                x2: to.x - bounds.x,
+                y2: to.y - bounds.y
+            };
+        },
+        
+        // Calculate position for child node in radial pattern
+        calculateChildPosition: function(parent, childIndex, totalChildren = 8) {
+            const angleStep = (Math.PI * 2) / Math.max(8, totalChildren);
+            const angle = childIndex * angleStep;
+            const distance = 20; // percentage distance
+            
+            return {
+                x: Math.max(5, Math.min(95, parent.x + Math.cos(angle) * distance)),
+                y: Math.max(5, Math.min(95, parent.y + Math.sin(angle) * distance))
+            };
+        },
+        
+        // Convert screen coordinates to canvas percentage
+        screenToCanvasPercent: function(screenX, screenY, canvasRect) {
+            return {
+                x: ((screenX - canvasRect.left) / canvasRect.width) * 100,
+                y: ((screenY - canvasRect.top) / canvasRect.height) * 100
+            };
+        },
+        
+        // Constrain position to valid canvas bounds
+        constrainToCanvas: function(x, y, margin = 5) {
+            return {
+                x: Math.max(margin, Math.min(100 - margin, x)),
+                y: Math.max(margin, Math.min(100 - margin, y))
+            };
+        }
+    };
+    
+    // DOM utilities - helpers for common DOM operations
+    const DOMUtils = {
+        // Set multiple attributes on an element
+        setAttributes: function(element, attributes) {
+            Object.entries(attributes).forEach(([key, value]) => {
+                element.setAttribute(key, value);
+            });
+        },
+        
+        // Create element from HTML string and return it
+        createFromHTML: function(htmlString) {
+            const div = document.createElement('div');
+            div.innerHTML = htmlString.trim();
+            return div.firstChild;
+        },
+        
+        // Safe HTML escape
+        escapeHtml: function(text) {
+            const div = document.createElement('div');
+            div.textContent = text || '';
+            return div.innerHTML;
+        },
+        
+        // Extract data attributes as object
+        getDataAttributes: function(element) {
+            const data = {};
+            Array.from(element.attributes).forEach(attr => {
+                if (attr.name.startsWith('data-')) {
+                    data[attr.name.substring(5)] = attr.value;
+                }
+            });
+            return data;
+        }
+    };
+    
+    // Core API - minimal node operations
+    const NodePadAPI = {
+        // Create a node element with color segments
+        createNode: function(options = {}) {
+            const { id, x = 50, y = 50, emoji = '✏️', content = '', parentId = null, metadata = {} } = options;
+            const nodeId = id || `node-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+            
+            // Store any additional metadata as data attributes
+            const metadataAttrs = Object.entries(metadata)
+                .map(([key, value]) => `data-${key}="${DOMUtils.escapeHtml(String(value))}"`)
+                .join(' ');
+            
+            // Build the color segments
+            const segments = this.createColorSegments();
+            
+            return `
+                <div id="${nodeId}" 
+                     class="nodepad-node"
+                     data-emoji="${emoji}"
+                     data-content="${DOMUtils.escapeHtml(content)}"
+                     ${parentId ? `data-parent-id="${parentId}"` : ''}
+                     ${metadataAttrs}
+                     style="position: absolute;
+                            left: ${x}%;
+                            top: ${y}%;
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            transform: translate(-50%, -50%);
+                            z-index: 20;">
+                    ${segments}
+                    <div class="node-background" 
+                         style="position: absolute;
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 50%;
+                                background: white;
+                                border: 1px solid #e0e0e0;
+                                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                                z-index: 1;"></div>
+                    <div class="node-emoji" style="font-size: 24px; user-select: none; pointer-events: none; position: relative; z-index: 2;">${emoji}</div>
+                </div>
+            `;
+        },
+        
+        // Create color segments for a node
+        createColorSegments: function() {
+            return ColorSystem.colors.map(color => {
+                // Calculate wedge for this position
+                const angleRad = (color.position * Math.PI) / 180;
+                const startAngleRad = angleRad - (Math.PI / 8); // -22.5°
+                const endAngleRad = angleRad + (Math.PI / 8);   // +22.5°
+                
+                // Convert to clip-path points (r=100 extends beyond bounds)
+                // Note: CSS y-axis is inverted
+                const r = 100;
+                const startX = 50 + r * Math.cos(startAngleRad);
+                const startY = 50 - r * Math.sin(startAngleRad);
+                const endX = 50 + r * Math.cos(endAngleRad);
+                const endY = 50 - r * Math.sin(endAngleRad);
+                
+                const clipPath = `polygon(50% 50%, ${startX}% ${startY}%, ${endX}% ${endY}%)`;
+                
+                return `<div class="segment cat-${color.name}"
+                             style="position: absolute;
+                                    width: 60px;
+                                    height: 60px;
+                                    border-radius: 50%;
+                                    background: transparent;
+                                    top: 50%;
+                                    left: 50%;
+                                    transform: translate(-50%, -50%);
+                                    clip-path: ${clipPath};
+                                    transition: background 0.2s ease;
+                                    pointer-events: none;
+                                    z-index: 0;"></div>`;
+            }).join('');
+        },
+        
+        // Create a connection between two nodes
+        createConnection: function(fromId, toId) {
+            const connId = `conn-${fromId}-${toId}`;
+            return `
+                <svg id="${connId}"
+                     class="nodepad-connection" 
+                     data-from="${fromId}" 
+                     data-to="${toId}"
+                     style="position: absolute;
+                            pointer-events: none;
+                            z-index: 10;
+                            overflow: visible;">
+                    <line x1="0" y1="0" x2="100" y2="100" 
+                          stroke="#cccccc" 
+                          stroke-width="2"/>
+                </svg>
+            `;
+        },
+        
+        // Create the color palette
+        createColorPalette: function() {
+            return `
+                <div id="color-palette"
+                     style="position: absolute;
+                            right: 100%;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            width: 40px;
+                            padding: 8px 8px 8px 0;
+                            display: flex;
+                            flex-direction: column;
+                            gap: 6px;">
+                    ${ColorSystem.colors.map((color, index) => `
+                        <div class="color-swatch"
+                             data-color="${color.name}"
+                             data-shortcut="${index + 1}"
+                             title="${color.name}"
+                             style="width: 32px;
+                                    height: 32px;
+                                    background: ${color.value};
+                                    ${color.name === 'white' ? 'border: 1px solid #e0e0e0;' : ''}
+                                    border-radius: 4px;
+                                    cursor: pointer;
+                                    opacity: 0.6;
+                                    transition: opacity 0.2s ease;
+                                    position: relative;">
+                            <span class="shortcut-number"
+                                  style="position: absolute;
+                                         top: 50%;
+                                         left: 50%;
+                                         transform: translate(-50%, -50%);
+                                         color: ${color.name === 'white' || color.name === 'gold' ? '#333' : 'white'};
+                                         font-size: 14px;
+                                         font-weight: bold;
+                                         opacity: 0;
+                                         transition: opacity 0.2s ease;">${index + 1}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        },
+        
+        // Create the editor panel
+        createEditor: function() {
+            return `
+                <div id="nodepad-editor"
+                     style="flex: 1;
+                            display: flex;
+                            flex-direction: column;
+                            background: white;
+                            border-left: 1px solid #e0e0e0;
+                            position: relative;">
+                    ${this.createColorPalette()}
+                    <div id="editor-header"
+                         style="display: flex;
+                                align-items: center;
+                                padding: 16px;
+                                border-bottom: 1px solid #e0e0e0;">
+                        <div id="editor-emoji"
+                             contenteditable="true"
+                             tabindex="0"
+                             style="font-size: 24px;
+                                    padding: 4px;
+                                    border-radius: 4px;
+                                    cursor: pointer;
+                                    outline: none;
+                                    margin-right: 8px;">✏️</div>
+                        <div id="emoji-picker"
+                             style="display: none;
+                                    position: absolute;
+                                    top: 60px;
+                                    left: 16px;
+                                    background: white;
+                                    border: 1px solid #e0e0e0;
+                                    border-radius: 4px;
+                                    padding: 8px;
+                                    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                                    z-index: 1000;">
+                            ${this.createEmojiPicker()}
+                        </div>
+                        <div id="editor-indicators" style="margin-left: auto; display: flex; gap: 8px;">
+                            <!-- Modules can inject indicators here -->
+                        </div>
+                        <div id="save-status"
+                             style="font-size: 14px;
+                                    color: #666;
+                                    margin-left: 8px;
+                                    opacity: 0;
+                                    transition: opacity 0.3s;">Saved</div>
+                    </div>
+                    <div id="editor-content"
+                         contenteditable="true"
+                         tabindex="0"
+                         style="flex: 1;
+                                padding: 16px;
+                                outline: none;
+                                font-size: 16px;
+                                line-height: 1.6;
+                                font-family: inherit;
+                                border-left: 3px solid transparent;
+                                transition: border-color 0.2s;
+                                overflow-y: auto;"
+                         data-placeholder="Start typing..."></div>
+                    <div id="editor-navigation"
+                         style="padding: 16px;
+                                border-top: 1px solid #e0e0e0;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;">
+                        <div id="parent-nav" style="flex: 1;"></div>
+                        <div id="children-nav" style="flex: 2; display: flex; justify-content: center; gap: 8px;"></div>
+                        <div style="flex: 1; display: flex; justify-content: flex-end; gap: 10px;">
+                            <div id="add-node-btn"
+                                 tabindex="0"
+                                 style="width: 36px;
+                                        height: 36px;
+                                        background: #4a6fa5;
+                                        color: white;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        border-radius: 4px;
+                                        cursor: pointer;
+                                        font-size: 22px;">+</div>
+                            <div id="delete-node-btn"
+                                 tabindex="0"
+                                 style="width: 36px;
+                                        height: 36px;
+                                        background: rgba(255,59,48,0.1);
+                                        color: #ff3b30;
+                                        border: 1px solid #ff3b30;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        border-radius: 4px;
+                                        cursor: pointer;
+                                        font-size: 22px;">−</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        },
+        
+        // Create emoji picker content
+        createEmojiPicker: function() {
+            const categories = {
+                'Growth': ['🌱', '🪴', '🌿', '🌳', '🍃', '🍂'],
+                'Project': ['✏️', '📋', '📝', '🛠️', '✅'],
+                'Learning': ['🔍', '📚', '🧠', '🎓'],
+                'Creative': ['💡', '🎨', '🖼️']
+            };
+            
+            let html = '';
+            for (const [category, emojis] of Object.entries(categories)) {
+                html += `<div style="margin-bottom: 8px;">
+                    <div style="font-size: 12px; color: #666; margin-bottom: 4px;">${category}</div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 4px;">`;
+                for (const emoji of emojis) {
+                    html += `<span class="emoji-option" 
+                                   style="padding: 4px; 
+                                          cursor: pointer; 
+                                          font-size: 18px;
+                                          border-radius: 4px;
+                                          transition: background 0.2s;"
+                                   data-emoji="${emoji}">${emoji}</span>`;
+                }
+                html += `</div></div>`;
+            }
+            return html;
+        },
+        
+        // Create canvas area
+        createCanvas: function() {
+            return `
+                <div id="nodepad-canvas"
+                     style="flex: 2;
+                            position: relative;
+                            background: #fafafa;
+                            overflow: hidden;">
+                    <div id="path-layer"
+                         style="position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                pointer-events: none;"></div>
+                    <div id="connections-layer"
+                         style="position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                pointer-events: none;"></div>
+                    <div id="nodes-layer"
+                         style="position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;"></div>
+                    <div id="export-toast"
+                         style="position: absolute;
+                                top: 20px;
+                                left: 50%;
+                                transform: translateX(-50%);
+                                background: #4a6fa5;
+                                color: white;
+                                padding: 12px 24px;
+                                border-radius: 4px;
+                                font-size: 14px;
+                                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                                z-index: 100;
+                                opacity: 0;
+                                transition: opacity 0.3s;
+                                pointer-events: none;">
+                        Markdown copied to clipboard!
+                    </div>
+                </div>
+            `;
+        },
+        
+        // Create main layout
+        createLayout: function() {
+            return `
+                <div id="nodepad-app"
+                     style="display: flex;
+                            width: 100%;
+                            height: 100vh;
+                            font-family: system-ui, -apple-system, sans-serif;
+                            color: #333;">
+                    ${this.createCanvas()}
+                    ${this.createEditor()}
+                </div>
+                <style id="nodepad-core-styles">
+                    * { box-sizing: border-box; margin: 0; padding: 0; }
+                    
+                    .nodepad-node:hover {
+                        transform: translate(-50%, -50%) scale(1.05) !important;
+                    }
+                    
+                    .nodepad-node.selected .node-background {
+                        border: 2px solid #4a6fa5 !important;
+                        box-shadow: 0 0 0 3px rgba(74,111,165,0.2) !important;
+                    }
+                    
+                    .nodepad-node.dragging {
+                        opacity: 0.8;
+                        cursor: grabbing !important;
+                        transform: translate(-50%, -50%) scale(1.1) !important;
+                        z-index: 30 !important;
+                    }
+                    
+                    /* Color category styles */
+                    .nodepad-node.cat-red .segment.cat-red { background: #ff0000 !important; }
+                    .nodepad-node.cat-blue .segment.cat-blue { background: #0066ff !important; }
+                    .nodepad-node.cat-green .segment.cat-green { background: #00aa00 !important; }
+                    .nodepad-node.cat-pink .segment.cat-pink { background: #ff66cc !important; }
+                    .nodepad-node.cat-black .segment.cat-black { background: #000000 !important; }
+                    .nodepad-node.cat-gold .segment.cat-gold { background: #ffaa00 !important; }
+                    .nodepad-node.cat-gray .segment.cat-gray { background: #666666 !important; }
+                    .nodepad-node.cat-white .segment.cat-white { background: #ffffff !important; box-shadow: inset 0 0 0 1px #ddd; }
+                    
+                    /* Hover highlighting */
+                    .color-swatch:hover { opacity: 1 !important; }
+                    
+                    .color-swatch.active { opacity: 1 !important; }
+                    
+                    /* Cmd held state */
+                    .cmd-held .shortcut-number { opacity: 1 !important; }
+                    
+                    /* Highlight all nodes in category on swatch hover */
+                    .highlight-red .nodepad-node.cat-red .node-background,
+                    .highlight-blue .nodepad-node.cat-blue .node-background,
+                    .highlight-green .nodepad-node.cat-green .node-background,
+                    .highlight-pink .nodepad-node.cat-pink .node-background,
+                    .highlight-black .nodepad-node.cat-black .node-background,
+                    .highlight-gold .nodepad-node.cat-gold .node-background,
+                    .highlight-gray .nodepad-node.cat-gray .node-background,
+                    .highlight-white .nodepad-node.cat-white .node-background {
+                        box-shadow: 0 0 0 3px currentColor !important;
+                    }
+                    
+                    .highlight-red .nodepad-node.cat-red,
+                    .highlight-blue .nodepad-node.cat-blue,
+                    .highlight-green .nodepad-node.cat-green,
+                    .highlight-pink .nodepad-node.cat-pink,
+                    .highlight-black .nodepad-node.cat-black,
+                    .highlight-gold .nodepad-node.cat-gold,
+                    .highlight-gray .nodepad-node.cat-gray,
+                    .highlight-white .nodepad-node.cat-white {
+                        transform: translate(-50%, -50%) scale(1.1) !important;
+                    }
+                    
+                    #editor-content:focus {
+                        border-left-color: #4a6fa5 !important;
+                    }
+                    
+                    #editor-content:empty:before {
+                        content: attr(data-placeholder);
+                        color: #999;
+                        position: absolute;
+                        pointer-events: none;
+                    }
+                    
+                    #editor-emoji:hover {
+                        background: rgba(74,111,165,0.1);
+                    }
+                    
+                    .emoji-option:hover {
+                        background: rgba(74,111,165,0.1) !important;
+                    }
+                    
+                    .nav-btn {
+                        padding: 4px;
+                        margin: 0 4px;
+                        font-size: 20px;
+                        background: none;
+                        border: 1px solid #e0e0e0;
+                        border-radius: 4px;
+                        cursor: pointer;
+                        transition: all 0.2s;
+                    }
+                    
+                    .nav-btn:hover, .nav-btn:focus {
+                        background: rgba(74,111,165,0.1);
+                        outline: 2px solid #4a6fa5;
+                    }
+                    
+                    #add-node-btn:focus, #delete-node-btn:focus {
+                        outline: 2px solid #4a6fa5;
+                        outline-offset: 2px;
+                    }
+                    
+                    #save-status.visible {
+                        opacity: 1 !important;
+                    }
+                    
+                    #save-status.saved {
+                        color: #4CAF50 !important;
+                    }
+                    
+                    #export-toast.visible {
+                        opacity: 1 !important;
+                    }
+                    
+                    /* Path connections */
+                    .path-connection {
+                        opacity: 0.15;
+                        transition: opacity 0.3s ease;
+                    }
+                    
+                    .path-connection.active {
+                        opacity: 0.4;
+                    }
+                    
+                    /* Highlighted path on hover */
+                    .highlight-red .path-connection.cat-red,
+                    .highlight-blue .path-connection.cat-blue,
+                    .highlight-green .path-connection.cat-green,
+                    .highlight-pink .path-connection.cat-pink,
+                    .highlight-black .path-connection.cat-black,
+                    .highlight-gold .path-connection.cat-gold,
+                    .highlight-gray .path-connection.cat-gray,
+                    .highlight-white .path-connection.cat-white {
+                        opacity: 0.6 !important;
+                    }
+                </style>
+                <style id="nodepad-module-styles">
+                    /* Modules can inject styles here */
+                </style>
+            `;
+        },
+        
+        // Update connection position
+        updateConnection: function(connId) {
+            const svg = document.getElementById(connId);
+            if (!svg) return;
+            
+            const fromNode = document.getElementById(svg.dataset.from);
+            const toNode = document.getElementById(svg.dataset.to);
+            if (!fromNode || !toNode) return;
+            
+            const canvas = document.getElementById('nodepad-canvas');
+            const canvasRect = canvas.getBoundingClientRect();
+            
+            // Use geometry utilities
+            const fromPos = Geometry.nodePositionToPixels(fromNode, canvasRect);
+            const toPos = Geometry.nodePositionToPixels(toNode, canvasRect);
+            const bounds = Geometry.calculateLineBounds(fromPos, toPos);
+            const lineCoords = Geometry.getRelativeLineCoords(fromPos, toPos, bounds);
+            
+            // Apply calculated values to SVG
+            svg.style.left = `${bounds.x}px`;
+            svg.style.top = `${bounds.y}px`;
+            svg.style.width = `${bounds.width}px`;
+            svg.style.height = `${bounds.height}px`;
+            
+            const line = svg.querySelector('line');
+            DOMUtils.setAttributes(line, lineCoords);
+        },
+        
+        // Update all connections for a node
+        updateNodeConnections: function(nodeId) {
+            const connections = document.querySelectorAll(
+                `.nodepad-connection[data-from="${nodeId}"], .nodepad-connection[data-to="${nodeId}"]`
+            );
+            connections.forEach(conn => this.updateConnection(conn.id));
+        }
+    };
+    
+    // Highlight Module - path highlighting functionality
+    const HighlightModule = {
+        name: 'highlight',
+        version: '1.0',
+        
+        // Initialize the module
+        init: function(NodePad, context) {
+            this.NodePad = NodePad;
+            this.context = context;
+            
+            // Add styles
+            this.injectStyles();
+            
+            // Register keyboard handlers
+            this.registerHighlightShortcuts();
+            
+            // Track Cmd key state
+            this.setupCmdTracking();
+            
+            Logger.log('Highlight module initialized');
+        },
+        
+        // Inject module styles
+        injectStyles: function() {
+            const styles = `
+                /* Marked passages */
+                .marked-passage {
+                    background: rgba(0, 0, 0, 0.08);
+                    padding: 2px 4px;
+                    position: relative;
+                    display: inline;
+                    border-radius: 3px;
+                }
+                
+                .path-dots {
+                    display: inline-flex;
+                    gap: 3px;
+                    margin-right: 4px;
+                    vertical-align: middle;
+                    user-select: none;
+                    pointer-events: none;
+                    contenteditable: false;
+                }
+                
+                .dot {
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    display: inline-block;
+                }
+                
+                .dot.cat-red { background: #ff0000; }
+                .dot.cat-blue { background: #0066ff; }
+                .dot.cat-green { background: #00aa00; }
+                .dot.cat-pink { background: #ff66cc; }
+                .dot.cat-black { background: #000000; }
+                .dot.cat-gold { background: #ffaa00; }
+                .dot.cat-gray { background: #666666; }
+                .dot.cat-white { background: #ffffff; border: 1px solid #e0e0e0; }
+            `;
+            
+            document.getElementById('nodepad-module-styles').innerHTML += styles;
+        },
+        
+        // Setup Cmd key tracking
+        setupCmdTracking: function() {
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey || e.metaKey) {
+                    document.body.classList.add('cmd-held');
+                }
+            });
+            
+            document.addEventListener('keyup', (e) => {
+                if (!e.ctrlKey && !e.metaKey) {
+                    document.body.classList.remove('cmd-held');
+                }
+            });
+            
+            // Also remove on blur
+            window.addEventListener('blur', () => {
+                document.body.classList.remove('cmd-held');
+            });
+        },
+        
+        // Register highlight keyboard shortcuts
+        registerHighlightShortcuts: function() {
+            document.addEventListener('keydown', (e) => {
+                // Check for Cmd+1 through Cmd+8
+                if ((e.ctrlKey || e.metaKey) && e.key >= '1' && e.key <= '8') {
+                    const selection = window.getSelection();
+                    const editor = document.getElementById('editor-content');
+                    
+                    // Only process if selection is within editor
+                    if (selection.rangeCount > 0 && editor.contains(selection.anchorNode)) {
+                        e.preventDefault();
+                        const colorIndex = parseInt(e.key) - 1;
+                        const color = ColorSystem.colors[colorIndex];
+                        if (color) {
+                            this.toggleHighlight(selection, color.name);
+                        }
+                    }
+                }
+            });
+        },
+        
+        // Toggle highlight on selection
+        toggleHighlight: function(selection, colorName) {
+            const range = selection.getRangeAt(0);
+            const selectedText = range.toString();
+            
+            if (!selectedText.trim()) return;
+            
+            // Check if we're inside an existing marked passage
+            const existingMark = this.getContainingMark(range);
+            
+            if (existingMark) {
+                // Toggle the color on existing mark
+                this.toggleColorOnMark(existingMark, colorName);
+            } else {
+                // Create new mark
+                this.createNewMark(range, colorName);
+            }
+            
+            // Update node data
+            this.updateNodeHighlights();
+            
+            // Update path visualizations
+            this.updatePathConnections();
+            
+            // Show save status
+            this.NodePad.showSaveStatus();
+            
+            Logger.log('Highlight toggled', { color: colorName, text: selectedText });
+        },
+        
+        // Get containing marked passage if exists
+        getContainingMark: function(range) {
+            let node = range.commonAncestorContainer;
+            while (node && node !== document.getElementById('editor-content')) {
+                if (node.classList && node.classList.contains('marked-passage')) {
+                    return node;
+                }
+                node = node.parentNode;
+            }
+            return null;
+        },
+        
+        // Toggle color on existing mark
+        toggleColorOnMark: function(mark, colorName) {
+            const dotsContainer = mark.querySelector('.path-dots');
+            const existingDot = dotsContainer.querySelector(`.dot.cat-${colorName}`);
+            
+            if (existingDot) {
+                // Remove the dot
+                existingDot.remove();
+                
+                // If no dots left, remove the entire mark
+                if (dotsContainer.children.length === 0) {
+                    // Get the text content (now the second child after dots container)
+                    const textContent = mark.textContent;
+                    
+                    // Create a text node
+                    const textNode = document.createTextNode(textContent);
+                    
+                    // Replace mark with text node
+                    mark.parentNode.replaceChild(textNode, mark);
+                    
+                    // Position cursor at end of the text
+                    const selection = window.getSelection();
+                    const newRange = document.createRange();
+                    newRange.setStart(textNode, textContent.length);
+                    newRange.collapse(true);
+                    selection.removeAllRanges();
+                    selection.addRange(newRange);
+                }
+            } else {
+                // Add new dot
+                const newDot = document.createElement('i');
+                newDot.className = `dot cat-${colorName}`;
+                dotsContainer.appendChild(newDot);
+            }
+        },
+        
+        // Create new marked passage
+        createNewMark: function(range, colorName) {
+            const mark = document.createElement('span');
+            mark.className = 'marked-passage';
+            
+            const dotsContainer = document.createElement('span');
+            dotsContainer.className = 'path-dots';
+            
+            const dot = document.createElement('i');
+            dot.className = `dot cat-${colorName}`;
+            dotsContainer.appendChild(dot);
+            
+            // Extract and wrap the range content
+            const contents = range.extractContents();
+            
+            // Add dots first, then content
+            mark.appendChild(dotsContainer);
+            mark.appendChild(contents);
+            
+            range.insertNode(mark);
+            
+            // CRITICAL: Move cursor after the mark to prevent trapping
+            const selection = window.getSelection();
+            const newRange = document.createRange();
+            
+            // Insert a zero-width space after the mark to ensure we can position cursor
+            const space = document.createTextNode('\u200B');
+            mark.parentNode.insertBefore(space, mark.nextSibling);
+            
+            // Position cursor after the mark
+            newRange.setStartAfter(mark);
+            newRange.collapse(true);
+            selection.removeAllRanges();
+            selection.addRange(newRange);
+            
+            // Clean up the zero-width space after a moment
+            setTimeout(() => {
+                if (space.textContent === '\u200B' && space.parentNode) {
+                    space.remove();
+                }
+            }, 10);
+        },
+        
+        // Update node's highlight data
+        updateNodeHighlights: function() {
+            const selected = document.querySelector('.nodepad-node.selected');
+            if (!selected) return;
+            
+            const editor = document.getElementById('editor-content');
+            const highlights = [];
+            
+            // Extract all highlights
+            editor.querySelectorAll('.marked-passage').forEach((mark, index) => {
+                const paths = [];
+                mark.querySelectorAll('.dot').forEach(dot => {
+                    const colorClass = Array.from(dot.classList).find(c => c.startsWith('cat-'));
+                    if (colorClass) {
+                        paths.push(colorClass.replace('cat-', ''));
+                    }
+                });
+                
+                highlights.push({
+                    text: mark.textContent,
+                    paths: paths,
+                    index: index
+                });
+            });
+            
+            // Store in node data
+            selected.dataset.highlights = JSON.stringify(highlights);
+        },
+        
+        // Update path connections visualization
+        updatePathConnections: function() {
+            const pathLayer = document.getElementById('path-layer');
+            pathLayer.innerHTML = '';
+            
+            // Collect nodes by path
+            const pathNodes = {};
+            ColorSystem.colors.forEach(color => {
+                pathNodes[color.name] = [];
+            });
+            
+            // Find all nodes with highlights in each path
+            document.querySelectorAll('.nodepad-node').forEach(node => {
+                if (node.dataset.highlights) {
+                    try {
+                        const highlights = JSON.parse(node.dataset.highlights);
+                        const nodePaths = new Set();
+                        
+                        highlights.forEach(h => {
+                            h.paths.forEach(path => nodePaths.add(path));
+                        });
+                        
+                        nodePaths.forEach(path => {
+                            if (pathNodes[path]) {
+                                pathNodes[path].push({
+                                    id: node.id,
+                                    timestamp: node.dataset[`path-${path}-timestamp`] || Date.now()
+                                });
+                            }
+                        });
+                    } catch (e) {
+                        console.error('Error parsing highlights:', e);
+                    }
+                }
+            });
+            
+            // Create path connections for each color
+            Object.entries(pathNodes).forEach(([colorName, nodes]) => {
+                if (nodes.length < 2) return;
+                
+                // Sort by timestamp
+                nodes.sort((a, b) => a.timestamp - b.timestamp);
+                
+                // Create connections between consecutive nodes
+                for (let i = 0; i < nodes.length - 1; i++) {
+                    const fromNode = document.getElementById(nodes[i].id);
+                    const toNode = document.getElementById(nodes[i + 1].id);
+                    
+                    if (fromNode && toNode) {
+                        const pathId = `path-${nodes[i].id}-${nodes[i + 1].id}-${colorName}`;
+                        const pathHtml = `
+                            <svg id="${pathId}"
+                                 class="path-connection cat-${colorName}" 
+                                 data-from="${nodes[i].id}" 
+                                 data-to="${nodes[i + 1].id}"
+                                 data-color="${colorName}"
+                                 style="position: absolute;
+                                        pointer-events: none;
+                                        z-index: 5;
+                                        overflow: visible;">
+                                <line x1="0" y1="0" x2="100" y2="100" 
+                                      stroke="${ColorSystem.colors.find(c => c.name === colorName).value}" 
+                                      stroke-width="4"/>
+                            </svg>
+                        `;
+                        pathLayer.insertAdjacentHTML('beforeend', pathHtml);
+                        
+                        // Update position
+                        const svg = document.getElementById(pathId);
+                        this.updatePathConnection(svg);
+                    }
+                }
+            });
+        },
+        
+        // Update path connection position (similar to regular connections)
+        updatePathConnection: function(svg) {
+            const fromNode = document.getElementById(svg.dataset.from);
+            const toNode = document.getElementById(svg.dataset.to);
+            if (!fromNode || !toNode) return;
+            
+            const canvas = document.getElementById('nodepad-canvas');
+            const canvasRect = canvas.getBoundingClientRect();
+            
+            const fromPos = Geometry.nodePositionToPixels(fromNode, canvasRect);
+            const toPos = Geometry.nodePositionToPixels(toNode, canvasRect);
+            const bounds = Geometry.calculateLineBounds(fromPos, toPos);
+            const lineCoords = Geometry.getRelativeLineCoords(fromPos, toPos, bounds);
+            
+            svg.style.left = `${bounds.x}px`;
+            svg.style.top = `${bounds.y}px`;
+            svg.style.width = `${bounds.width}px`;
+            svg.style.height = `${bounds.height}px`;
+            
+            const line = svg.querySelector('line');
+            DOMUtils.setAttributes(line, lineCoords);
+        },
+        
+        // Restore highlights when loading node content
+        restoreHighlights: function(node) {
+            const editor = document.getElementById('editor-content');
+            if (!node.dataset.highlights) return;
+            
+            try {
+                const highlights = JSON.parse(node.dataset.highlights);
+                // This would need more sophisticated restoration logic
+                // For now, highlights are preserved in the content itself
+            } catch (e) {
+                console.error('Error restoring highlights:', e);
+            }
+        }
+    };
+    
+    // Markdown Module - all markdown functionality extracted
+    const MarkdownModule = {
+        name: 'markdown',
+        version: '1.0',
+        
+        // Initialize the module
+        init: function(NodePad, context) {
+            this.NodePad = NodePad;
+            this.context = context;
+            
+            // Register block handlers
+            context.registerBlockHandler('markdown', this.handleMarkdownBlock.bind(this));
+            context.registerBlockHandler('expand', this.handleExpandBlock.bind(this));
+            
+            // Add styles
+            this.injectStyles();
+            
+            // Add mode indicator
+            this.addModeIndicator();
+            
+            // Register export handler
+            context.registerKeyHandler('canvas-cmd-enter', this.exportGraphAsMarkdown.bind(this));
+            
+            Logger.log('Markdown module initialized');
+        },
+        
+        // Handle markdown block
+        handleMarkdownBlock: function(content, node) {
+            const isMarkdown = node.dataset.isMarkdown === 'true';
+            node.dataset.isMarkdown = !isMarkdown;
+            
+            // Update display
+            this.context.updateEditorDisplay(node);
+            
+            return content; // Return the content without the block wrapper
+        },
+        
+        // Handle expand block
+        handleExpandBlock: function(content, node) {
+            const nodes = this.parseExpandHeaders(content);
+            this.expandNodesToChildren(node.id, nodes);
+            return ''; // Clear the expand block
+        },
+        
+        // Add mode indicator to editor
+        addModeIndicator: function() {
+            const indicators = document.getElementById('editor-indicators');
+            indicators.insertAdjacentHTML('beforeend', `
+                <div id="mode-indicator"
+                     style="font-size: 12px;
+                            color: #4a6fa5;
+                            font-weight: 500;
+                            padding: 4px 8px;
+                            background: rgba(74,111,165,0.1);
+                            border-radius: 4px;
+                            display: none;">MARKDOWN</div>
+            `);
+        },
+        
+        // Inject module styles
+        injectStyles: function() {
+            const styles = `
+                #editor-content[data-mode="markdown"] {
+                    background: #f8f8f8;
+                }
+                
+                #editor-content h1, #editor-content h2, #editor-content h3, 
+                #editor-content h4, #editor-content h5, #editor-content h6 {
+                    margin: 0.5em 0 0.3em 0;
+                    font-weight: 600;
+                    line-height: 1.2;
+                }
+                
+                #editor-content h1 { font-size: 1.8em; }
+                #editor-content h2 { font-size: 1.5em; }
+                #editor-content h3 { font-size: 1.3em; }
+                #editor-content h4 { font-size: 1.1em; }
+                #editor-content h5 { font-size: 1.0em; }
+                #editor-content h6 { font-size: 0.9em; }
+                
+                #editor-content p {
+                    margin: 0.5em 0;
+                }
+                
+                #editor-content code {
+                    background: rgba(74,111,165,0.1);
+                    padding: 2px 4px;
+                    border-radius: 3px;
+                    font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+                    font-size: 0.9em;
+                }
+                
+                #editor-content pre {
+                    background: #f0f0f0;
+                    padding: 12px;
+                    border-radius: 4px;
+                    overflow-x: auto;
+                    margin: 0.5em 0;
+                }
+                
+                #editor-content pre code {
+                    background: none;
+                    padding: 0;
+                }
+                
+                #editor-content blockquote {
+                    border-left: 3px solid #4a6fa5;
+                    padding-left: 1em;
+                    margin: 0.5em 0;
+                    color: #666;
+                }
+                
+                #editor-content ul, #editor-content ol {
+                    margin: 0.5em 0;
+                    padding-left: 2em;
+                }
+                
+                #editor-content li {
+                    margin: 0.2em 0;
+                }
+                
+                #editor-content hr {
+                    border: none;
+                    border-top: 1px solid #e0e0e0;
+                    margin: 1em 0;
+                }
+                
+                #editor-content strong { font-weight: 600; }
+                #editor-content em { font-style: italic; }
+                
+                #editor-content a {
+                    color: #4a6fa5;
+                    text-decoration: none;
+                    border-bottom: 1px solid rgba(74,111,165,0.3);
+                }
+                
+                #mode-indicator.visible {
+                    display: block !important;
+                }
+            `;
+            
+            document.getElementById('nodepad-module-styles').innerHTML += styles;
+        },
+        
+        // Parse markdown to HTML
+        toHtml: function(text) {
+            if (!text) return '';
+            
+            // Store code blocks to protect them
+            const codeBlocks = [];
+            let html = text.replace(/```([\s\S]*?)```/g, (match, code) => {
+                codeBlocks.push(`<pre><code>${DOMUtils.escapeHtml(code.trim())}</code></pre>`);
+                return `___CODEBLOCK_${codeBlocks.length - 1}___`;
+            });
+            
+            // Store inline code to protect it
+            const inlineCode = [];
+            html = html.replace(/`([^`\n]+)`/g, (match, code) => {
+                inlineCode.push(`<code>${DOMUtils.escapeHtml(code)}</code>`);
+                return `___INLINE_${inlineCode.length - 1}___`;
+            });
+            
+            // Split into paragraphs
+            const paragraphs = html.split(/\n\n+/);
+            
+            html = paragraphs.map(para => {
+                // Headers
+                if (para.match(/^#{1,6}\s/)) {
+                    return para.replace(/^(#{1,6})\s+(.*)$/, (match, hashes, content) => {
+                        const level = hashes.length;
+                        return `<h${level}>${this.processInline(content)}</h${level}>`;
+                    });
+                }
+                
+                // Blockquotes
+                if (para.match(/^>/)) {
+                    const lines = para.split('\n').map(line => line.replace(/^>\s?/, '')).join('\n');
+                    return `<blockquote>${this.processInline(lines)}</blockquote>`;
+                }
+                
+                // Lists
+                if (para.match(/^[\-\*]\s/)) {
+                    const items = para.split('\n').map(line => {
+                        return line.replace(/^[\-\*]\s+(.*)$/, '<li>$1</li>');
+                    }).join('');
+                    return `<ul>${items}</ul>`;
+                }
+                
+                if (para.match(/^\d+\.\s/)) {
+                    const items = para.split('\n').map(line => {
+                        return line.replace(/^\d+\.\s+(.*)$/, '<li>$1</li>');
+                    }).join('');
+                    return `<ol>${items}</ol>`;
+                }
+                
+                // Horizontal rule
+                if (para.match(/^---+$/)) {
+                    return '<hr>';
+                }
+                
+                // Regular paragraph
+                return `<p>${this.processInline(para)}</p>`;
+            }).join('');
+            
+            // Restore code blocks
+            codeBlocks.forEach((block, i) => {
+                html = html.replace(`___CODEBLOCK_${i}___`, block);
+            });
+            
+            // Restore inline code
+            inlineCode.forEach((code, i) => {
+                html = html.replace(`___INLINE_${i}___`, code);
+            });
+            
+            return html;
+        },
+        
+        // Process inline markdown
+        processInline: function(text) {
+            // Bold italic
+            text = text.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+            // Bold
+            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // Italic
+            text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            // Links
+            text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+            // Line breaks within paragraphs
+            text = text.replace(/\n/g, '<br>');
+            
+            return text;
+        },
+        
+        // Parse headers from expand block
+        parseExpandHeaders: function(text) {
+            const lines = text.split('\n');
+            const nodes = [];
+            
+            lines.forEach(line => {
+                const headerMatch = line.match(/^(#{1,6})\s+(.+)$/);
+                if (headerMatch) {
+                    const level = headerMatch[1].length;
+                    const title = headerMatch[2].trim();
+                    
+                    // Emoji detection
+                    const emojiMatch = title.match(/^(\p{Emoji})\s*(.*)$/u);
+                    const emoji = emojiMatch ? emojiMatch[1] : '📋';
+                    const content = emojiMatch ? emojiMatch[2] : title;
+                    
+                    nodes.push({
+                        level,
+                        emoji,
+                        content,
+                        children: []
+                    });
+                } else if (line.trim() && nodes.length > 0) {
+                    // Add non-header content to last node
+                    nodes[nodes.length - 1].content += '\n' + line;
+                }
+            });
+            
+            // Build hierarchy
+            const root = { level: 0, children: [] };
+            const stack = [root];
+            
+            nodes.forEach(node => {
+                while (stack.length > 1 && stack[stack.length - 1].level >= node.level) {
+                    stack.pop();
+                }
+                stack[stack.length - 1].children.push(node);
+                stack.push(node);
+            });
+            
+            return root.children;
+        },
+        
+        // Expand nodes to children
+        expandNodesToChildren: function(parentId, nodeStructures, baseX = null, baseY = null) {
+            const parent = document.getElementById(parentId);
+            if (!parent || !nodeStructures || nodeStructures.length === 0) return;
+            
+            // Get parent position
+            if (baseX === null) baseX = parseFloat(parent.style.left);
+            if (baseY === null) baseY = parseFloat(parent.style.top);
+            
+            nodeStructures.forEach((nodeData, index) => {
+                // Use geometry utility for positioning
+                const position = Geometry.calculateChildPosition(
+                    { x: baseX, y: baseY }, 
+                    index, 
+                    nodeStructures.length
+                );
+                
+                // Create child node
+                const nodeHtml = NodePadAPI.createNode({
+                    x: position.x,
+                    y: position.y,
+                    emoji: nodeData.emoji,
+                    content: nodeData.content.trim(),
+                    parentId: parentId,
+                    metadata: { 'is-markdown': true }
+                });
+                
+                document.getElementById('nodes-layer').insertAdjacentHTML('beforeend', nodeHtml);
+                const newNode = document.getElementById('nodes-layer').lastElementChild;
+                
+                // Create connection
+                const connHtml = NodePadAPI.createConnection(parentId, newNode.id);
+                document.getElementById('connections-layer').insertAdjacentHTML('beforeend', connHtml);
+                NodePadAPI.updateConnection(document.getElementById('connections-layer').lastElementChild.id);
+                
+                // Recursively create children
+                if (nodeData.children && nodeData.children.length > 0) {
+                    this.expandNodesToChildren(newNode.id, nodeData.children, position.x, position.y);
+                }
+            });
+            
+            // Update navigation
+            this.NodePad.updateNavigation(parentId);
+        },
+        
+        // Export graph as markdown
+        exportGraphAsMarkdown: function() {
+            const nodes = [];
+            const connections = [];
+            
+            // Gather all nodes and connections
+            document.querySelectorAll('.nodepad-node').forEach(node => {
+                const categories = ColorSystem.colors
+                    .filter(color => node.classList.contains(`cat-${color.name}`))
+                    .map(color => color.name);
+                    
+                nodes.push({
+                    id: node.id,
+                    emoji: node.dataset.emoji,
+                    content: node.dataset.content || '',
+                    parent: node.dataset.parentId || null,
+                    categories: categories,
+                    highlights: node.dataset.highlights ? JSON.parse(node.dataset.highlights) : []
+                });
+            });
+            
+            document.querySelectorAll('.nodepad-connection').forEach(conn => {
+                connections.push({
+                    source: conn.dataset.from,
+                    target: conn.dataset.to
+                });
+            });
+            
+            // Generate markdown
+            const markdown = this.graphToMarkdown(nodes, connections);
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(markdown).then(() => {
+                // Show toast
+                const toast = document.getElementById('export-toast');
+                toast.classList.add('visible');
+                setTimeout(() => {
+                    toast.classList.remove('visible');
+                }, 3000);
+                
+                Logger.log('Graph exported as markdown', { 
+                    nodeCount: nodes.length,
+                    connectionCount: connections.length 
+                });
+            }).catch(err => {
+                console.error('Failed to copy to clipboard:', err);
+                alert('Failed to copy markdown to clipboard. Check console for details.');
+            });
+        },
+        
+        // Convert graph to markdown
+        graphToMarkdown: function(nodes, connections) {
+            // Build adjacency list
+            const children = {};
+            connections.forEach(conn => {
+                if (!children[conn.source]) children[conn.source] = [];
+                children[conn.source].push(conn.target);
+            });
+            
+            // Find root nodes
+            const roots = nodes.filter(n => !n.parent);
+            
+            // Recursive markdown builder
+            const nodeToMarkdown = (node, level = 1) => {
+                const hashes = '#'.repeat(Math.min(level, 6));
+                const categories = node.categories.length > 0 ? ` [${node.categories.join(', ')}]` : '';
+                let markdown = `${hashes} ${node.emoji} ${node.content || 'Untitled'}${categories}\n\n`;
+                
+                // Add highlights if present
+                if (node.highlights && node.highlights.length > 0) {
+                    node.highlights.forEach(h => {
+                        const paths = h.paths.join(', ');
+                        markdown += `> **[${paths}]** ${h.text}\n\n`;
+                    });
+                }
+                
+                // Add children
+                const nodeChildren = children[node.id] || [];
+                nodeChildren.forEach(childId => {
+                    const child = nodes.find(n => n.id === childId);
+                    if (child) {
+                        markdown += nodeToMarkdown(child, level + 1);
+                    }
+                });
+                
+                return markdown;
+            };
+            
+            // Build markdown from all roots
+            let markdown = '# NodePad Export\n\n';
+            roots.forEach(root => {
+                markdown += nodeToMarkdown(root);
+            });
+            
+            return markdown.trim();
+        },
+        
+        // Update editor display for markdown
+        updateDisplay: function(node) {
+            const editor = document.getElementById('editor-content');
+            const modeIndicator = document.getElementById('mode-indicator');
+            const isMarkdown = node.dataset.isMarkdown === 'true';
+            
+            if (isMarkdown) {
+                editor.dataset.mode = 'markdown';
+                editor.innerHTML = this.toHtml(node.dataset.content || '');
+                modeIndicator.classList.add('visible');
+            } else {
+                delete editor.dataset.mode;
+                editor.innerText = node.dataset.content || '';
+                modeIndicator.classList.remove('visible');
+            }
+        }
+    };
+    
+    // Main controller with module support
+    const NodePad = {
+        modules: {},
+        blockHandlers: {},
+        keyHandlers: {},
+        
+        init: function(containerId) {
+            Logger.init();
+            
+            const container = document.getElementById(containerId);
+            container.innerHTML = NodePadAPI.createLayout();
+            
+            // Create initial node
+            const nodesLayer = document.getElementById('nodes-layer');
+            nodesLayer.innerHTML = NodePadAPI.createNode({
+                x: 50,
+                y: 50,
+                content: ''
+            });
+            
+            // Select initial node
+            const firstNode = nodesLayer.firstElementChild;
+            this.selectNode(firstNode.id);
+            
+            // Create module context
+            const moduleContext = {
+                registerBlockHandler: (type, handler) => {
+                    this.blockHandlers[type] = handler;
+                },
+                registerKeyHandler: (id, handler) => {
+                    this.keyHandlers[id] = handler;
+                },
+                updateEditorDisplay: (node) => {
+                    this.updateEditorDisplay(node);
+                }
+            };
+            
+            // Initialize modules
+            this.loadModule(MarkdownModule, moduleContext);
+            this.loadModule(HighlightModule, moduleContext);
+            
+            this.attachEventListeners();
+            
+            // Setup resize observer for responsive connections
+            this.setupResizeObserver();
+            
+            // Focus editor
+            document.getElementById('editor-content').focus();
+            
+            Logger.log('Initialized with modules', { modules: Object.keys(this.modules) });
+            
+            return this;
+        },
+        
+        loadModule: function(module, context) {
+            if (module.init) {
+                module.init(this, context);
+                this.modules[module.name] = module;
+                Logger.log('Module loaded', { name: module.name, version: module.version });
+            }
+        },
+        
+        attachEventListeners: function() {
+            // Node clicks
+            document.addEventListener('click', (e) => {
+                // Node selection
+                if (e.target.closest('.nodepad-node')) {
+                    this.selectNode(e.target.closest('.nodepad-node').id);
+                }
+                
+                // Add button
+                if (e.target.id === 'add-node-btn') {
+                    this.createChildNode();
+                }
+                
+                // Delete button
+                if (e.target.id === 'delete-node-btn') {
+                    this.deleteSelectedNode();
+                }
+                
+                // Emoji picker toggle
+                if (e.target.id === 'editor-emoji') {
+                    this.toggleEmojiPicker();
+                }
+                
+                // Emoji selection
+                if (e.target.classList.contains('emoji-option')) {
+                    this.selectEmoji(e.target.dataset.emoji);
+                }
+                
+                // Navigation buttons
+                if (e.target.classList.contains('nav-btn')) {
+                    this.selectNode(e.target.dataset.nodeId);
+                    setTimeout(() => {
+                        document.getElementById('editor-content').focus();
+                    }, 0);
+                }
+                
+                // Color swatch clicks
+                if (e.target.classList.contains('color-swatch')) {
+                    // With Cmd/Ctrl, toggle category
+                    if (e.ctrlKey || e.metaKey) {
+                        this.toggleNodeCategory(e.target.dataset.color);
+                    }
+                    // Or if text is selected, highlight it
+                    else {
+                        const selection = window.getSelection();
+                        if (selection.rangeCount > 0 && selection.toString().trim()) {
+                            this.modules.highlight.toggleHighlight(selection, e.target.dataset.color);
+                        }
+                    }
+                }
+            });
+            
+            // Click outside emoji picker
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('#emoji-picker') && e.target.id !== 'editor-emoji') {
+                    document.getElementById('emoji-picker').style.display = 'none';
+                }
+            });
+            
+            // Color swatch hover
+            document.querySelectorAll('.color-swatch').forEach(swatch => {
+                swatch.addEventListener('mouseenter', () => {
+                    document.getElementById('nodepad-canvas').classList.add(`highlight-${swatch.dataset.color}`);
+                });
+                swatch.addEventListener('mouseleave', () => {
+                    document.getElementById('nodepad-canvas').classList.remove(`highlight-${swatch.dataset.color}`);
+                });
+            });
+            
+            // Content editing
+            document.getElementById('editor-content').addEventListener('input', (e) => {
+                const selected = document.querySelector('.nodepad-node.selected');
+                if (selected) {
+                    // For non-markdown mode, store plain text
+                    if (selected.dataset.isMarkdown !== 'true') {
+                        selected.dataset.content = e.target.innerText || '';
+                    }
+                    // Update highlights data
+                    if (this.modules.highlight) {
+                        this.modules.highlight.updateNodeHighlights();
+                    }
+                    this.showSaveStatus();
+                    Logger.log('Content updated', { nodeId: selected.id });
+                }
+            });
+            
+            // Focus styling
+            document.getElementById('editor-content').addEventListener('focus', () => {
+                document.getElementById('nodepad-editor').style.borderLeftColor = '#4a6fa5';
+            });
+            
+            document.getElementById('editor-content').addEventListener('blur', () => {
+                document.getElementById('nodepad-editor').style.borderLeftColor = '#e0e0e0';
+            });
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                // Tab navigation
+                if (e.key === 'Tab' && e.target.id === 'editor-content') {
+                    e.preventDefault();
+                    const firstNav = document.querySelector('.nav-btn');
+                    const target = firstNav || document.getElementById('add-node-btn');
+                    if (target) {
+                        target.focus();
+                        Logger.log('Tab navigation from editor');
+                    }
+                }
+                
+                // Enter on buttons
+                if (e.key === 'Enter') {
+                    if (e.target.classList.contains('nav-btn') || e.target.id === 'add-node-btn') {
+                        e.preventDefault();
+                        this.createChildNode();
+                    }
+                    if (e.target.id === 'delete-node-btn') {
+                        e.preventDefault();
+                        this.deleteSelectedNode();
+                    }
+                }
+                
+                // Cmd/Ctrl+Enter for special handling
+                if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                    e.preventDefault();
+                    
+                    // Canvas export
+                    if (e.target.id === 'nodepad-canvas' || e.target.closest('#nodepad-canvas')) {
+                        if (this.keyHandlers['canvas-cmd-enter']) {
+                            this.keyHandlers['canvas-cmd-enter']();
+                        }
+                    }
+                    // Editor special blocks
+                    else if (e.target.id === 'editor-content') {
+                        this.handleSpecialBlocks();
+                    }
+                }
+            });
+            
+            // Canvas focus
+            document.getElementById('nodepad-canvas').addEventListener('click', (e) => {
+                if (e.target.id === 'nodepad-canvas' || e.target.id === 'nodes-layer') {
+                    e.target.focus();
+                }
+            });
+            
+            // Make canvas focusable
+            document.getElementById('nodepad-canvas').setAttribute('tabindex', '0');
+            
+            // Drag handling
+            this.setupDragHandling();
+            
+            // File drop handling
+            this.setupFileDropHandling();
+            
+            // Keep editor focused
+            document.getElementById('emoji-picker').addEventListener('click', (e) => {
+                if (e.target.classList.contains('emoji-option')) {
+                    setTimeout(() => {
+                        document.getElementById('editor-content').focus();
+                    }, 0);
+                }
+            });
+        },
+        
+        setupDragHandling: function() {
+            let dragData = null;
+            let isDragging = false;
+            const dragThreshold = 3;
+            
+            document.addEventListener('mousedown', (e) => {
+                const node = e.target.closest('.nodepad-node');
+                if (!node || e.button !== 0) return;
+                
+                e.preventDefault();
+                
+                dragData = {
+                    nodeId: node.id,
+                    startX: e.clientX,
+                    startY: e.clientY,
+                    nodeStartX: parseFloat(node.style.left),
+                    nodeStartY: parseFloat(node.style.top)
+                };
+                
+                Logger.log('Drag started', { nodeId: node.id });
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!dragData) return;
+                
+                const deltaX = Math.abs(e.clientX - dragData.startX);
+                const deltaY = Math.abs(e.clientY - dragData.startY);
+                
+                if (!isDragging && (deltaX > dragThreshold || deltaY > dragThreshold)) {
+                    isDragging = true;
+                    const node = document.getElementById(dragData.nodeId);
+                    node.classList.add('dragging');
+                }
+                
+                if (isDragging) {
+                    const canvas = document.getElementById('nodepad-canvas');
+                    const canvasRect = canvas.getBoundingClientRect();
+                    
+                    // Use geometry utilities
+                    const deltaPos = Geometry.screenToCanvasPercent(
+                        e.clientX,
+                        e.clientY,
+                        canvasRect
+                    );
+                    const startPos = Geometry.screenToCanvasPercent(
+                        dragData.startX,
+                        dragData.startY,
+                        canvasRect
+                    );
+                    
+                    const newPos = {
+                        x: dragData.nodeStartX + (deltaPos.x - startPos.x),
+                        y: dragData.nodeStartY + (deltaPos.y - startPos.y)
+                    };
+                    
+                    const constrained = Geometry.constrainToCanvas(newPos.x, newPos.y);
+                    
+                    const node = document.getElementById(dragData.nodeId);
+                    node.style.left = `${constrained.x}%`;
+                    node.style.top = `${constrained.y}%`;
+                    
+                    // Update connections
+                    NodePadAPI.updateNodeConnections(dragData.nodeId);
+                    
+                    // Update path connections
+                    if (this.modules.highlight) {
+                        document.querySelectorAll(`.path-connection[data-from="${dragData.nodeId}"], .path-connection[data-to="${dragData.nodeId}"]`).forEach(svg => {
+                            this.modules.highlight.updatePathConnection(svg);
+                        });
+                    }
+                }
+            });
+            
+            document.addEventListener('mouseup', () => {
+                if (dragData && isDragging) {
+                    const node = document.getElementById(dragData.nodeId);
+                    node.classList.remove('dragging');
+                    Logger.log('Drag ended', { 
+                        nodeId: dragData.nodeId,
+                        finalPosition: { 
+                            x: parseFloat(node.style.left), 
+                            y: parseFloat(node.style.top) 
+                        }
+                    });
+                    
+                    setTimeout(() => {
+                        document.getElementById('editor-content').focus();
+                    }, 0);
+                }
+                
+                dragData = null;
+                isDragging = false;
+            });
+        },
+        
+        setupFileDropHandling: function() {
+            const editor = document.getElementById('editor-content');
+            
+            // Prevent default drag behaviors
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                editor.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            });
+            
+            // Visual feedback
+            ['dragenter', 'dragover'].forEach(eventName => {
+                editor.addEventListener(eventName, () => {
+                    editor.style.background = 'rgba(74,111,165,0.05)';
+                    editor.style.borderLeftColor = '#4a6fa5';
+                });
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                editor.addEventListener(eventName, () => {
+                    editor.style.background = '';
+                });
+            });
+            
+            // Handle file drop
+            editor.addEventListener('drop', (e) => {
+                const files = e.dataTransfer.files;
+                
+                if (files.length > 0 && files[0].name.endsWith('.md')) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = (event) => {
+                        const content = event.target.result;
+                        editor.innerText = content;
+                        
+                        // Update node data
+                        const selected = document.querySelector('.nodepad-node.selected');
+                        if (selected) {
+                            selected.dataset.content = content;
+                            selected.dataset.isMarkdown = 'true';
+                            
+                            // Show as markdown
+                            this.updateEditorDisplay(selected);
+                            this.showSaveStatus();
+                            
+                            Logger.log('Markdown file imported', { 
+                                filename: files[0].name,
+                                size: files[0].size 
+                            });
+                        }
+                    };
+                    
+                    reader.readAsText(files[0]);
+                }
+            });
+        },
+        
+        setupResizeObserver: function() {
+            const canvas = document.getElementById('nodepad-canvas');
+            let resizeTimeout;
+            
+            const resizeObserver = new ResizeObserver(entries => {
+                // Debounce resize updates
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    Logger.log('Canvas resized, updating connections');
+                    
+                    // Update all regular connections
+                    document.querySelectorAll('.nodepad-connection').forEach(conn => {
+                        NodePadAPI.updateConnection(conn.id);
+                    });
+                    
+                    // Update all path connections if highlight module is loaded
+                    if (this.modules.highlight) {
+                        document.querySelectorAll('.path-connection').forEach(svg => {
+                            this.modules.highlight.updatePathConnection(svg);
+                        });
+                    }
+                }, 100);
+            });
+            
+            resizeObserver.observe(canvas);
+        },
+        
+        toggleNodeCategory: function(color) {
+            const selected = document.querySelector('.nodepad-node.selected');
+            if (!selected) return;
+            
+            const className = `cat-${color}`;
+            const wasActive = selected.classList.contains(className);
+            selected.classList.toggle(className);
+            
+            // Update timestamp for path ordering
+            if (!wasActive) {
+                selected.dataset[`path-${color}-timestamp`] = Date.now();
+            } else {
+                delete selected.dataset[`path-${color}-timestamp`];
+            }
+            
+            // Update palette to show active categories
+            this.updateColorPalette();
+            
+            // Update path connections if highlight module is loaded
+            if (this.modules.highlight) {
+                this.modules.highlight.updatePathConnections();
+            }
+            
+            Logger.log('Category toggled', { 
+                nodeId: selected.id, 
+                category: color,
+                active: !wasActive
+            });
+            
+            this.showSaveStatus();
+        },
+        
+        updateColorPalette: function() {
+            const selected = document.querySelector('.nodepad-node.selected');
+            if (!selected) return;
+            
+            // Update swatch active states
+            document.querySelectorAll('.color-swatch').forEach(swatch => {
+                const isActive = selected.classList.contains(`cat-${swatch.dataset.color}`);
+                swatch.classList.toggle('active', isActive);
+            });
+        },
+        
+        handleSpecialBlocks: function() {
+            const selected = document.querySelector('.nodepad-node.selected');
+            if (!selected) return;
+            
+            const editor = document.getElementById('editor-content');
+            const content = editor.innerText || '';
+            
+            // Check for special blocks
+            const specialBlocks = this.extractSpecialBlocks(content);
+            
+            if (specialBlocks.length > 0) {
+                // Handle special syntax
+                specialBlocks.forEach(block => {
+                    if (this.blockHandlers[block.type]) {
+                        const newContent = content.replace(
+                            block.fullMatch, 
+                            this.blockHandlers[block.type](block.content, selected)
+                        );
+                        selected.dataset.content = newContent;
+                        editor.innerText = newContent;
+                    }
+                });
+            } else {
+                // Toggle markdown if no special blocks
+                if (this.modules.markdown) {
+                    const isMarkdown = selected.dataset.isMarkdown === 'true';
+                    selected.dataset.isMarkdown = !isMarkdown;
+                    
+                    if (isMarkdown) {
+                        selected.dataset.content = editor.innerText || '';
+                    }
+                    
+                    this.updateEditorDisplay(selected);
+                    Logger.log('Markdown mode toggled', { nodeId: selected.id, isMarkdown: !isMarkdown });
+                }
+            }
+            
+            this.showSaveStatus();
+        },
+        
+        extractSpecialBlocks: function(text) {
+            const blocks = [];
+            
+            // Look for registered block types
+            const blockTypes = Object.keys(this.blockHandlers).join('|');
+            if (!blockTypes) return blocks;
+            
+            const regex = new RegExp(`\`\`\`(${blockTypes})\\s*\\n([\\s\\S]*?)\`\`\``, 'g');
+            let match;
+            
+            while ((match = regex.exec(text)) !== null) {
+                blocks.push({
+                    type: match[1],
+                    content: match[2].trim(),
+                    fullMatch: match[0]
+                });
+            }
+            
+            return blocks;
+        },
+        
+        updateEditorDisplay: function(node) {
+            // Let modules handle display updates
+            if (this.modules.markdown && this.modules.markdown.updateDisplay) {
+                this.modules.markdown.updateDisplay(node);
+            } else {
+                // Basic display update
+                const editor = document.getElementById('editor-content');
+                editor.innerText = node.dataset.content || '';
+            }
+            
+            // Restore highlights if present
+            if (this.modules.highlight) {
+                this.modules.highlight.restoreHighlights(node);
+            }
+        },
+        
+        selectNode: function(nodeId) {
+            // Clear previous selection
+            document.querySelectorAll('.nodepad-node').forEach(n => {
+                n.classList.remove('selected');
+            });
+            
+            // Select new node
+            const node = document.getElementById(nodeId);
+            if (!node) return;
+            
+            node.classList.add('selected');
+            
+            // Load into editor
+            document.getElementById('editor-emoji').textContent = node.dataset.emoji;
+            this.updateEditorDisplay(node);
+            
+            // Update navigation
+            this.updateNavigation(nodeId);
+            
+            // Update color palette
+            this.updateColorPalette();
+            
+            // Focus editor
+            document.getElementById('editor-content').focus();
+            
+            Logger.log('Node selected', { nodeId });
+        },
+        
+        updateNavigation: function(nodeId) {
+            const node = document.getElementById(nodeId);
+            
+            // Parent navigation
+            const parentNav = document.getElementById('parent-nav');
+            parentNav.innerHTML = '';
+            
+            if (node && node.dataset.parentId) {
+                const parent = document.getElementById(node.dataset.parentId);
+                if (parent) {
+                    parentNav.innerHTML = `
+                        <div class="nav-btn" 
+                             data-node-id="${parent.id}"
+                             title="Go to parent"
+                             tabindex="0">${parent.dataset.emoji}</div>
+                    `;
+                }
+            }
+            
+            // Children navigation
+            const childrenNav = document.getElementById('children-nav');
+            childrenNav.innerHTML = '';
+            
+            if (node) {
+                const children = document.querySelectorAll(`[data-parent-id="${nodeId}"]`);
+                children.forEach(child => {
+                    childrenNav.innerHTML += `
+                        <div class="nav-btn" 
+                             data-node-id="${child.id}"
+                             title="${child.dataset.content || 'Child node'}"
+                             tabindex="0">${child.dataset.emoji}</div>
+                    `;
+                });
+            }
+        },
+        
+        createChildNode: function() {
+            const selected = document.querySelector('.nodepad-node.selected');
+            if (!selected) return;
+            
+            const parentPos = {
+                x: parseFloat(selected.style.left),
+                y: parseFloat(selected.style.top)
+            };
+            
+            // Use geometry for positioning
+            const childCount = document.querySelectorAll(`[data-parent-id="${selected.id}"]`).length;
+            const childPos = Geometry.calculateChildPosition(parentPos, childCount);
+            
+            // Get next emoji
+            const emojiProgression = {
+                '✏️': '📋',
+                '📋': '📝',
+                '📝': '🛠️',
+                '🛠️': '✅',
+                '🌱': '🪴',
+                '🪴': '🌿',
+                '🌿': '🌳'
+            };
+            const nextEmoji = emojiProgression[selected.dataset.emoji] || '📋';
+            
+            // Create node
+            const nodeHtml = NodePadAPI.createNode({
+                x: childPos.x,
+                y: childPos.y,
+                emoji: nextEmoji,
+                content: '',
+                parentId: selected.id
+            });
+            
+            document.getElementById('nodes-layer').insertAdjacentHTML('beforeend', nodeHtml);
+            const newNode = document.getElementById('nodes-layer').lastElementChild;
+            
+            // Create connection
+            const connHtml = NodePadAPI.createConnection(selected.id, newNode.id);
+            document.getElementById('connections-layer').insertAdjacentHTML('beforeend', connHtml);
+            
+            // Update connection position
+            const newConn = document.getElementById('connections-layer').lastElementChild;
+            NodePadAPI.updateConnection(newConn.id);
+            
+            // Select new node
+            this.selectNode(newNode.id);
+            
+            // Focus editor
+            setTimeout(() => {
+                document.getElementById('editor-content').focus();
+            }, 0);
+            
+            Logger.log('Child node created', { 
+                parentId: selected.id, 
+                childId: newNode.id 
+            });
+        },
+        
+        deleteSelectedNode: function() {
+            const selected = document.querySelector('.nodepad-node.selected');
+            if (!selected) return;
+            
+            const nodeId = selected.id;
+            const childCount = document.querySelectorAll(`[data-parent-id="${nodeId}"]`).length;
+            
+            // Confirm if has children
+            if (childCount > 0) {
+                if (!confirm(`Delete this node and its ${childCount} child node${childCount > 1 ? 's' : ''}?`)) {
+                    return;
+                }
+            }
+            
+            // Delete recursively
+            this.deleteNodeRecursive(nodeId);
+            
+            // Select parent if exists
+            if (selected.dataset.parentId) {
+                this.selectNode(selected.dataset.parentId);
+            } else {
+                // Clear editor if no parent
+                document.getElementById('editor-emoji').textContent = '✏️';
+                document.getElementById('editor-content').textContent = '';
+                this.updateNavigation(null);
+            }
+            
+            // Update path connections
+            if (this.modules.highlight) {
+                this.modules.highlight.updatePathConnections();
+            }
+            
+            // Return focus to editor
+            setTimeout(() => {
+                document.getElementById('editor-content').focus();
+            }, 0);
+            
+            Logger.log('Node deleted', { nodeId });
+        },
+        
+        deleteNodeRecursive: function(nodeId) {
+            // Delete children first
+            const children = document.querySelectorAll(`[data-parent-id="${nodeId}"]`);
+            children.forEach(child => this.deleteNodeRecursive(child.id));
+            
+            // Delete connections
+            const connections = document.querySelectorAll(
+                `.nodepad-connection[data-from="${nodeId}"], .nodepad-connection[data-to="${nodeId}"]`
+            );
+            connections.forEach(conn => conn.remove());
+            
+            // Delete path connections
+            const pathConnections = document.querySelectorAll(
+                `.path-connection[data-from="${nodeId}"], .path-connection[data-to="${nodeId}"]`
+            );
+            pathConnections.forEach(conn => conn.remove());
+            
+            // Delete node
+            document.getElementById(nodeId)?.remove();
+        },
+        
+        toggleEmojiPicker: function() {
+            const picker = document.getElementById('emoji-picker');
+            picker.style.display = picker.style.display === 'none' ? 'block' : 'none';
+        },
+        
+        selectEmoji: function(emoji) {
+            const selected = document.querySelector('.nodepad-node.selected');
+            if (!selected) return;
+            
+            selected.dataset.emoji = emoji;
+            selected.querySelector('.node-emoji').textContent = emoji;
+            document.getElementById('editor-emoji').textContent = emoji;
+            document.getElementById('emoji-picker').style.display = 'none';
+            
+            this.showSaveStatus();
+            Logger.log('Emoji updated', { nodeId: selected.id, emoji });
+        },
+        
+        showSaveStatus: function() {
+            const status = document.getElementById('save-status');
+            status.textContent = 'Saved';
+            status.classList.add('visible', 'saved');
+            
+            setTimeout(() => {
+                status.classList.remove('visible');
+            }, 2000);
+        },
+        
+        // Public API methods
+        exportGraph: function() {
+            const nodes = [];
+            const connections = [];
+            
+            document.querySelectorAll('.nodepad-node').forEach(node => {
+                const data = DOMUtils.getDataAttributes(node);
+                
+                // Extract categories from classes
+                const categories = ColorSystem.colors
+                    .filter(color => node.classList.contains(`cat-${color.name}`))
+                    .map(color => color.name);
+                
+                nodes.push({
+                    id: node.id,
+                    emoji: data.emoji,
+                    content: data.content,
+                    metadata: this.extractMetadata(data),
+                    categories: categories,
+                    position: {
+                        x: parseFloat(node.style.left),
+                        y: parseFloat(node.style.top)
+                    },
+                    parent: data['parent-id'] || null,
+                    highlights: data.highlights ? JSON.parse(data.highlights) : []
+                });
+            });
+            
+            document.querySelectorAll('.nodepad-connection').forEach(conn => {
+                connections.push({
+                    source: conn.dataset.from,
+                    target: conn.dataset.to
+                });
+            });
+            
+            return { nodes, connections };
+        },
+        
+        extractMetadata: function(data) {
+            const metadata = {};
+            const reserved = ['emoji', 'content', 'parent-id', 'highlights'];
+            
+            Object.entries(data).forEach(([key, value]) => {
+                if (!reserved.includes(key) && !key.startsWith('path-')) {
+                    metadata[key] = value;
+                }
+            });
+            
+            return metadata;
+        },
+        
+        importGraph: function(data) {
+            if (!data || !data.nodes) return false;
+            
+            // Clear existing
+            document.getElementById('nodes-layer').innerHTML = '';
+            document.getElementById('connections-layer').innerHTML = '';
+            document.getElementById('path-layer').innerHTML = '';
+            
+            // Create nodes
+            data.nodes.forEach(nodeData => {
+                const nodeHtml = NodePadAPI.createNode({
+                    id: nodeData.id,
+                    x: nodeData.position.x,
+                    y: nodeData.position.y,
+                    emoji: nodeData.emoji,
+                    content: nodeData.content,
+                    parentId: nodeData.parent,
+                    metadata: nodeData.metadata || {}
+                });
+                document.getElementById('nodes-layer').insertAdjacentHTML('beforeend', nodeHtml);
+                
+                const node = document.getElementById(nodeData.id);
+                
+                // Apply categories with timestamps
+                if (nodeData.categories) {
+                    nodeData.categories.forEach(cat => {
+                        node.classList.add(`cat-${cat}`);
+                        node.dataset[`path-${cat}-timestamp`] = Date.now();
+                    });
+                }
+                
+                // Apply highlights
+                if (nodeData.highlights && nodeData.highlights.length > 0) {
+                    node.dataset.highlights = JSON.stringify(nodeData.highlights);
+                }
+            });
+            
+            // Create connections
+            if (data.connections) {
+                data.connections.forEach(conn => {
+                    const connHtml = NodePadAPI.createConnection(conn.source, conn.target);
+                    document.getElementById('connections-layer').insertAdjacentHTML('beforeend', connHtml);
+                });
+                
+                // Update all connection positions
+                document.querySelectorAll('.nodepad-connection').forEach(conn => {
+                    NodePadAPI.updateConnection(conn.id);
+                });
+            }
+            
+            // Update path connections if highlight module is loaded
+            if (this.modules.highlight) {
+                this.modules.highlight.updatePathConnections();
+            }
+            
+            // Select first node
+            const firstNode = document.querySelector('.nodepad-node');
+            if (firstNode) {
+                this.selectNode(firstNode.id);
+            }
+            
+            Logger.log('Graph imported', { nodeCount: data.nodes.length });
+            return true;
+        },
+        
+        // Extract path narratives
+        extractPath: function(colorName) {
+            const nodes = [];
+            
+            // Find all nodes with highlights in this path
+            document.querySelectorAll('.nodepad-node').forEach(node => {
+                if (node.dataset.highlights) {
+                    try {
+                        const highlights = JSON.parse(node.dataset.highlights);
+                        const pathHighlights = highlights.filter(h => h.paths.includes(colorName));
+                        
+                        if (pathHighlights.length > 0) {
+                            nodes.push({
+                                id: node.id,
+                                emoji: node.dataset.emoji,
+                                content: node.dataset.content,
+                                highlights: pathHighlights,
+                                timestamp: parseInt(node.dataset[`path-${colorName}-timestamp`]) || Date.now()
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Error parsing highlights:', e);
+                    }
+                }
+            });
+            
+            // Sort by timestamp
+            nodes.sort((a, b) => a.timestamp - b.timestamp);
+            
+            // Build narrative
+            let narrative = `# ${colorName.charAt(0).toUpperCase() + colorName.slice(1)} Path\n\n`;
+            
+            nodes.forEach(node => {
+                narrative += `## ${node.emoji} ${node.content || 'Untitled'}\n\n`;
+                node.highlights.forEach(h => {
+                    narrative += `${h.text}\n\n`;
+                });
+            });
+            
+            return narrative.trim();
+        }
+    };
+    
+    // Public API
+    window.NodePad = {
+        init: (containerId) => NodePad.init(containerId),
+        createNode: (options) => {
+            const nodeHtml = NodePadAPI.createNode(options);
+            document.getElementById('nodes-layer').insertAdjacentHTML('beforeend', nodeHtml);
+            const newNode = document.getElementById('nodes-layer').lastElementChild;
+            setTimeout(() => {
+                document.getElementById('editor-content').focus();
+            }, 0);
+            return newNode.id;
+        },
+        selectNode: (nodeId) => NodePad.selectNode(nodeId),
+        deleteNode: (nodeId) => NodePad.deleteNodeRecursive(nodeId),
+        exportGraph: () => NodePad.exportGraph(),
+        importGraph: (data) => NodePad.importGraph(data),
+        extractPath: (colorName) => NodePad.extractPath(colorName),
+        getSelectedNode: () => document.querySelector('.nodepad-node.selected')?.id || null,
+        updateNode: (nodeId, updates) => {
+            const node = document.getElementById(nodeId);
+            if (!node) return false;
+            
+            if (updates.emoji) {
+                node.dataset.emoji = updates.emoji;
+                node.querySelector('.node-emoji').textContent = updates.emoji;
+            }
+            if (updates.content !== undefined) {
+                node.dataset.content = updates.content;
+            }
+            if (updates.metadata) {
+                Object.entries(updates.metadata).forEach(([key, value]) => {
+                    node.dataset[key] = value;
+                });
+            }
+            if (updates.categories) {
+                // Clear existing categories
+                ColorSystem.colors.forEach(color => {
+                    node.classList.remove(`cat-${color.name}`);
+                });
+                // Add new categories
+                updates.categories.forEach(cat => {
+                    node.classList.add(`cat-${cat}`);
+                    node.dataset[`path-${cat}-timestamp`] = Date.now();
+                });
+            }
+            if (updates.x !== undefined) {
+                node.style.left = `${updates.x}%`;
+                NodePadAPI.updateNodeConnections(nodeId);
+            }
+            if (updates.y !== undefined) {
+                node.style.top = `${updates.y}%`;
+                NodePadAPI.updateNodeConnections(nodeId);
+            }
+            
+            return true;
+        },
+        modules: NodePad.modules,
+        // Expose utilities for modules
+        utils: {
+            geometry: Geometry,
+            dom: DOMUtils,
+            colors: ColorSystem
+        }
+    };
+    
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+        NodePad.init('app');
+    });
+    </script>
+</body>
+</html>
