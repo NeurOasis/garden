@@ -4,7 +4,7 @@
 
 ```
 Project: GARDEN Core Development Routing System
-Current Version: v1.0 (Core Developer Decision Framework)
+Current Version: v1.1 (Enhanced Personal Project Detection)
 Date: 20250526
 Status: Active framework for core vs fork routing decisions
 Audience: Core developers only (Scott, Dan)
@@ -36,11 +36,12 @@ Audience: Core developers only (Scott, Dan)
 - **Experimental Concepts:** Unproven ideas, personal explorations
 
 ### **🔀 FORK DEVELOPMENT INDICATORS:**
-- Serves specific user group or domain
-- Personal or family-specific functionality
-- Business or client-specific requirements
-- Experimental or proof-of-concept stage
-- Would add >20% to core repository size
+- **FAILS CORE ANALYSIS:** Doesn't benefit multiple GARDEN applications
+- **DOMAIN-SPECIFIC:** Serves particular user group, hobby, or interest
+- **PERSONAL/INDIVIDUAL:** User-specific workflows or contexts
+- **BUSINESS-SPECIFIC:** Client work or consulting deliverables
+- **EXPERIMENTAL:** Proof-of-concept or unproven ideas
+- **SIZE IMPACT:** Would add >20% to core repository size
 
 ## 🤖 **CLAUDE ROUTING LOGIC**
 
@@ -57,13 +58,24 @@ THEN: Proceed with core development
 
 ### **AUTOMATIC FORK ROUTING:**
 ```
-IF request involves:
-- Specific domain applications (recipes, sailing, family)
-- Personal contexts or individual user tools
-- Business-specific implementations
+ANALYSIS FRAMEWORK: Does this request relate to core GARDEN framework?
+
+CHECK AGAINST CORE CHARACTERISTICS:
+- Does it benefit multiple GARDEN applications?
+- Is it a reusable pattern for other developers?
+- Is it infrastructure or meta-tooling?
+- Does it establish abstract concepts across domains?
+- Is it documentation/CIT system enhancement?
+
+IF NONE OF THE ABOVE APPLY:
+- This is likely domain-specific or personal development
+- Requires fork creation before proceeding
+
+ADDITIONAL FORK TRIGGERS:
 - >3 CITs for single non-framework project
 - Project knowledge >20% of conversation
-THEN: Require fork creation before proceeding
+- Personal contexts or individual user workflows
+- Business-specific implementations
 ```
 
 ## 📋 **FORK CREATION INSTRUCTIONS TEMPLATE**
@@ -119,10 +131,12 @@ All overrides must include:
 - **Template System:** Pattern for creating new GARDEN applications
 
 ### **🔀 FORK EXAMPLES:**
-- **Recipe Rolodx Enhancement:** Domain-specific application development
-- **Family Schedule Tools:** Personal/family-specific functionality
-- **Coffee Recipe Project:** Single-domain application
-- **Client Business Tools:** Business-specific implementations
+- **Recipe Development:** Personal hobby, doesn't benefit multiple GARDEN apps
+- **Family Schedule Tools:** Individual workflow, not reusable pattern
+- **Coffee Project:** Personal interest, not abstract framework concept
+- **Client Business Tools:** Business-specific, not cross-project infrastructure
+- **Sailing Tools:** Domain-specific, not meta-tooling or documentation system
+- **Personal Workflow Apps:** Individual optimization, not framework enhancement
 
 ### **🤔 BORDERLINE CASES:**
 - **Spoon Theory NodePad:** Educational tool → Fork (domain-specific)
@@ -144,6 +158,8 @@ All overrides must include:
 ## 📝 **Version History**
 
 ```
+20250526: v1.2 - Changed to core analysis framework instead of hardcoded domain lists
+20250526: v1.1 - Enhanced personal project detection with recipe/hobby indicators
 20250526: v1.0 - Initial core vs fork decision framework for core developers
 ```
 
