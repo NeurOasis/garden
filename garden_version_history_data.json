@@ -1,6 +1,42 @@
 [
   {
     "id": "1",
+    "version": "v4.0",
+    "title": "GARDEN Smart Uploader MVP & Production Deployment",
+    "type": "major",
+    "project": "core",
+    "date": "2025-05-28",
+    "description": "Zero-friction file upload system solving critical workflow gaps with GitHub OAuth integration and production deployment",
+    "changes": [
+      {
+        "type": "new",
+        "description": "GARDEN Smart Uploader MVP with intelligent file placement and zero-configuration workflow"
+      },
+      {
+        "type": "new",
+        "description": "NeuroOasis GitHub App with OAuth integration (Client ID: Iv23liR8xy1CGvWPkcVa)"
+      },
+      {
+        "type": "new", 
+        "description": "Production Vercel deployment at garden-smart-uploader-7emsd86fb-scott-loebs-projects.vercel.app"
+      },
+      {
+        "type": "new",
+        "description": "Smart file analysis engine auto-detecting CITs, tools, and documentation"
+      },
+      {
+        "type": "new",
+        "description": "Mobile workflow support with staging area for iOS share sheet compatibility"
+      },
+      {
+        "type": "improved",
+        "description": "Solves critical workflow interruption patterns: delayed deliveries, new user confusion, mid-conversation artifact loss"
+      }
+    ],
+    "created": "2025-05-28T19:00:00.000Z"
+  },
+  {
+    "id": "2",
     "version": "v3.0",
     "title": "NeurOasis Organization & Complete Project Migration",
     "type": "major",
@@ -28,7 +64,7 @@
     "created": "2025-05-26T19:35:00.000Z"
   },
   {
-    "id": "2",
+    "id": "3",
     "version": "v2.5",
     "title": "Complete Repository Audit & Cleanup",
     "type": "minor",
@@ -56,7 +92,7 @@
     "created": "2025-05-26T19:35:00.000Z"
   },
   {
-    "id": "3",
+    "id": "4",
     "version": "v2.2",
     "title": "Repository Forking Strategy & Template",
     "type": "minor",
@@ -84,7 +120,7 @@
     "created": "2025-05-26T19:35:00.000Z"
   },
   {
-    "id": "4",
+    "id": "5",
     "version": "v4.0.0",
     "title": "NodePad Framework Foundation",
     "type": "major",

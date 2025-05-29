@@ -240,5 +240,62 @@
     "priority": "P0",
     "status": "backlog",
     "created": "2025-05-28T13:22:19.456Z"
+  },
+  {
+    "id": "25",
+    "title": "GARDEN Smart Uploader MVP COMPLETED",
+    "description": "Zero-friction file upload system with GitHub OAuth integration. Deployed to production at https://garden-smart-uploader-7emsd86fb-scott-loebs-projects.vercel.app/toolshed/garden-uploader-mvp.html",
+    "project": "core",
+    "priority": "P0",
+    "status": "done",
+    "created": "2025-05-28T19:00:00.000Z",
+    "implementation": "toolshed/garden-uploader-mvp.html + NeuroOasis GitHub App (Client ID: Iv23liR8xy1CGvWPkcVa)",
+    "dependencies": [],
+    "deliverables": [
+      "Smart file analysis and placement",
+      "GitHub OAuth integration",
+      "Zero-configuration upload workflow",
+      "Mobile file staging support",
+      "Production Vercel deployment"
+    ]
+  },
+  {
+    "id": "26",
+    "title": "Determine Uploader Placement Strategy",
+    "description": "Decide if Smart Uploader should remain in core GARDEN or be moved to dedicated extension/service. Consider: cross-project utility, maintenance overhead, core philosophy alignment",
+    "project": "core",
+    "priority": "P2",
+    "status": "backlog",
+    "created": "2025-05-28T19:05:00.000Z",
+    "dependencies": [
+      "Uploader MVP completion"
+    ],
+    "implementation": "Strategic review: core vs fork routing, usage patterns analysis"
+  },
+  {
+    "id": "27",
+    "title": "OAuth Backend Security Implementation",
+    "description": "Add secure OAuth backend endpoint to replace frontend client secret exposure. Implement proper token exchange with GitHub API for production security",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-05-28T19:05:00.000Z",
+    "dependencies": [
+      "Uploader MVP completion"
+    ],
+    "implementation": "/api/github/oauth endpoint with secure client secret handling"
+  },
+  {
+    "id": "28",
+    "title": "Uploader Testing & Validation",
+    "description": "Comprehensive testing of Smart Uploader with real files: CITs, tools, documentation. Validate Dan file delivery workflow, new user onboarding, mid-conversation artifact rescue",
+    "project": "core",
+    "priority": "P0",
+    "status": "todo",
+    "created": "2025-05-28T19:05:00.000Z",
+    "dependencies": [
+      "Uploader MVP completion"
+    ],
+    "implementation": "Test all three critical workflows with actual team usage"
   }
 ]

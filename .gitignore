@@ -92,3 +92,4 @@ Icon*
 # Google Drive folder config
 *.icloud
 .drivesync
+.vercel
