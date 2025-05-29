@@ -90,15 +90,6 @@
     "created": "2025-05-26T20:40:00.000Z"
   },
   {
-    "id": "11",
-    "title": "Star Trek UI for Idea Capture",
-    "description": "LCARS-style interface, Captain's Log theme, grayscale accessibility toggle",
-    "project": "nodepad",
-    "priority": "P1",
-    "status": "todo",
-    "created": "2025-05-26T20:40:00.000Z"
-  },
-  {
     "id": "12",
     "title": "Chat Archaeology Methodology",
     "description": "Systematic conversation review process for extracting backlog items and strategic decisions",
@@ -310,5 +301,135 @@
       "Uploader testing completion"
     ],
     "implementation": "External user simulation, new user onboarding flow, context creation workflow"
+  },
+  {
+    "id": "30",
+    "title": "Dynamic Core vs Fork Detection System",
+    "description": "Replace hardcoded domain lists with dynamic analysis of what's actually in core. System should check current core contents and route based on actual framework components, not predefined categories.",
+    "project": "core",
+    "priority": "P0",
+    "status": "backlog",
+    "created": "2025-05-29T16:30:00.000Z",
+    "dependencies": [
+      "Core vs Fork Detection CIT completion"
+    ],
+    "implementation": "Claude logic that analyzes current repository structure and makes routing decisions based on actual content patterns rather than static rules",
+    "notes": "Instead of hardcoded rules, analyze what's actually in scottloeb/garden and make intelligent routing decisions"
+  },
+  {
+    "id": "31",
+    "title": "Interim Core Development Strategy for Dan",
+    "description": "Create branching/forking strategy specifically for Dan's core development work. Full project knowledge should be 'just add the GitHub' without complex repository management.",
+    "project": "core",
+    "priority": "P0",
+    "status": "backlog",
+    "created": "2025-05-29T16:30:00.000Z",
+    "dependencies": [
+      "Dan personal context onboarding"
+    ],
+    "implementation": "Simplified workflow: clone scottloeb/garden, feature branches, Scott handles merges",
+    "notes": "Enable Dan core development without Git complexity - branch-based workflow with clear handoff process"
+  },
+  {
+    "id": "32",
+    "title": "Real-Time Collaborative Backlog Platform",
+    "description": "Deploy backlog manager as shared platform where Scott and Dan can both access with real-time sync. Every UI change reflects for both users, backend updates propagate automatically.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-05-29T16:30:00.000Z",
+    "dependencies": [
+      "Current backlog manager exists"
+    ],
+    "implementation": "Firebase + Vercel: Real-time database, deploy to backlog.neuroasis.space, GitHub OAuth, PWA features",
+    "options": [
+      "Firebase + Vercel (RECOMMENDED): Real-time sync, $0-25/month, medium complexity",
+      "neuroasis.space + Database: Full control, $10-20/month, medium complexity", 
+      "Native iOS App: Best experience, $99/year, high complexity"
+    ],
+    "notes": "Scott wants shared access where every drag & drop, addition & change reflects for both users instantly"
+  },
+  {
+    "id": "33",
+    "title": "Conversational Context-Sensitive Uploader",
+    "description": "Enhance Smart Uploader with conversation context awareness. Every artifact Claude creates includes metadata about intended destination (user, repo, location) so uploader can automatically route without user input.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-05-29T16:30:00.000Z",
+    "dependencies": [
+      "Smart Uploader MVP completion",
+      "User identification system"
+    ],
+    "implementation": "Hidden metadata in artifacts: <!-- META: user=scott, repo=core, path=contexts/, type=CIT -->",
+    "features": [
+      "User recognition from communication patterns",
+      "Repository routing based on content analysis", 
+      "Path suggestions based on file type detection",
+      "Conversation context linking to backlog items"
+    ],
+    "notes": "Scott wants artifacts to reference where they need to go so uploader can smartly identify user, repo, and location"
+  },
+  {
+    "id": "34",
+    "title": "GitHub Workflow Integration Links",
+    "description": "When backlog items move to 'working' status, automatically generate 'Begin Work in GitHub' links that open the appropriate repository, create branch, or navigate to relevant files for development.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-05-29T17:00:00.000Z",
+    "dependencies": [
+      "Real-time collaborative backlog platform"
+    ],
+    "implementation": "Dynamic link generation based on item metadata: core vs fork routing, automatic branch creation, file navigation shortcuts",
+    "features": [
+      "Smart repository detection (core vs fork)",
+      "Automatic branch creation for new features",
+      "Direct navigation to relevant files/directories",
+      "Integration with GitHub CLI commands"
+    ],
+    "notes": "Scott wants seamless transition from planning to development - click 'working' → get direct GitHub links"
+  },
+  {
+    "id": "35",
+    "title": "Claude App Integration Links",
+    "description": "Add 'Open in Claude' links throughout GARDEN tools that launch Claude desktop/mobile app with relevant context pre-loaded and project knowledge configured.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-05-29T17:00:00.000Z",
+    "dependencies": [
+      "User identification system"
+    ],
+    "implementation": "Claude deep links: claude://chat/new?context=[encoded_context]&project=[project_id] with URL scheme registration",
+    "features": [
+      "Desktop app launching from web interfaces",
+      "Mobile app launching with context",
+      "Project knowledge pre-population",
+      "Context pre-filling for specific tasks"
+    ],
+    "notes": "Scott wants 'Open in Claude' buttons throughout GARDEN tools for seamless development workflow"
+  },
+  {
+    "id": "36",
+    "title": "Claude Environment Auto-Instantiation",
+    "description": "Explore deep linking to Claude that opens chat with context filled in and project knowledge pre-populated, OR single link that automatically sets up development environment based on GARDEN forking rules.",
+    "project": "core",
+    "priority": "P2",
+    "status": "backlog",
+    "created": "2025-05-29T17:00:00.000Z",
+    "dependencies": [
+      "Dynamic core vs fork detection",
+      "Claude app integration links"
+    ],
+    "implementation": "Advanced deep linking: automatic environment detection, project knowledge loading, context initialization, forking rule application",
+    "features": [
+      "Automatic core vs fork environment detection",
+      "Project knowledge auto-loading based on context",
+      "Context pre-population with relevant CITs",
+      "Development environment ready-to-go",
+      "Integration with GitHub repository state"
+    ],
+    "notes": "Scott's vision: single link that creates perfect Claude environment for any GARDEN development task"
   }
 ]

@@ -1,6 +1,59 @@
 [
   {
     "id": "1",
+    "version": "v5.0",
+    "title": "🎂 BIRTHDAY SPRINT: Collaborative Workflow Revolution + Star Trek Stealth Mode",
+    "type": "major",
+    "project": "core",
+    "date": "2025-05-30",
+    "description": "Revolutionary workflow system triggered by wanting to surprise Dan with Star Trek UI - created entire collaborative infrastructure from one secret feature request!",
+    "changes": [
+      {
+        "type": "breakthrough",
+        "description": "🤯 INSIGHT: Wanting to hide Star Trek UI from Dan revealed need for collaborative backlog platform - entire workflow revolution started from keeping ONE feature secret!"
+      },
+      {
+        "type": "new",
+        "description": "Real-time collaborative backlog platform architecture (Firebase + Vercel) with instant sync between Scott and Dan"
+      },
+      {
+        "type": "new",
+        "description": "GitHub workflow integration links - 'working' status auto-generates 'Begin Work in GitHub' buttons with smart routing"
+      },
+      {
+        "type": "new",
+        "description": "Claude app integration links - 'Open in Claude' buttons throughout GARDEN tools with context pre-loading"
+      },
+      {
+        "type": "new",
+        "description": "Dynamic core vs fork detection system - replaces hardcoded rules with actual repository analysis"
+      },
+      {
+        "type": "new",
+        "description": "Conversational context-sensitive uploader - artifacts include hidden metadata for automatic routing"
+      },
+      {
+        "type": "new",
+        "description": "Dan's simplified core development strategy - 'just add the GitHub' workflow without Git complexity"
+      },
+      {
+        "type": "stealth",
+        "description": "🤫 Star Trek UI project extracted from public documentation and saved locally for surprise development"
+      },
+      {
+        "type": "improved",
+        "description": "Backlog enhanced from 29 → 36 items with complete workflow automation vision"
+      },
+      {
+        "type": "architectural", 
+        "description": "Claude environment auto-instantiation design - single link creates perfect development environment"
+      }
+    ],
+    "story": "Scott's birthday morning insight: 'I want Dan to be completely surprised by the Star Trek UI feature but realized I couldn't delete/hide it from the backlog on my own' → led to designing entire collaborative platform infrastructure, real-time sync, GitHub integration, Claude deep linking, and automated development workflows. All from wanting to keep one UI feature secret! 🚀",
+    "created": "2025-05-30T08:00:00.000Z"
+  },
+  {
+    "id": "2",
     "version": "v4.0",
     "title": "GARDEN Smart Uploader MVP & Production Deployment",
     "type": "major",
@@ -36,7 +89,7 @@
     "created": "2025-05-28T19:00:00.000Z"
   },
   {
-    "id": "2",
+    "id": "3",
     "version": "v3.0",
     "title": "NeurOasis Organization & Complete Project Migration",
     "type": "major",
@@ -64,7 +117,7 @@
     "created": "2025-05-26T19:35:00.000Z"
   },
   {
-    "id": "3",
+    "id": "4",
     "version": "v2.5",
     "title": "Complete Repository Audit & Cleanup",
     "type": "minor",
@@ -92,7 +145,7 @@
     "created": "2025-05-26T19:35:00.000Z"
   },
   {
-    "id": "4",
+    "id": "5",
     "version": "v2.2",
     "title": "Repository Forking Strategy & Template",
     "type": "minor",
@@ -120,7 +173,7 @@
     "created": "2025-05-26T19:35:00.000Z"
   },
   {
-    "id": "5",
+    "id": "6",
     "version": "v4.0.0",
     "title": "NodePad Framework Foundation",
     "type": "major",
