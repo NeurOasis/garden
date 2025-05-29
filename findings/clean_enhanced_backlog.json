@@ -1,0 +1,105 @@
+[
+  {
+    "id": "1",
+    "title": "NeurOasis Organization Setup",
+    "description": "GitHub Teams organization with Scott + Andrew, proper permissions, $16/month",
+    "project": "core",
+    "priority": "P0",
+    "status": "done",
+    "created": "2025-05-26T19:30:00.000Z",
+    "dependencies": [],
+    "blockers": [],
+    "implementation": "Complete - GitHub Teams active with proper permissions"
+  },
+  {
+    "id": "2",
+    "title": "Repository Forking Strategy Proven",
+    "description": "Template validated 100% across 5 different project types with surgical cleanup",
+    "project": "deploy",
+    "priority": "P0",
+    "status": "done",
+    "created": "2025-05-26T19:30:00.000Z",
+    "dependencies": [],
+    "blockers": [],
+    "implementation": "CIT_NeuroOasis_Forking_Workflow_20250526.md with proven template"
+  },
+  {
+    "id": "3",
+    "title": "All 5 Project Forks Deployed",
+    "description": "sailing-tools, coffee-recipes, family-tools, budget-nodepad, action-organizer all live",
+    "project": "deploy",
+    "priority": "P0",
+    "status": "done",
+    "created": "2025-05-26T19:30:00.000Z",
+    "dependencies": ["2"],
+    "blockers": [],
+    "implementation": "NeurOasis organization with 5 active project repositories"
+  },
+  {
+    "id": "4",
+    "title": "Core Repository Cleanup",
+    "description": "Achieved <30% project knowledge, removed all personal contexts staging",
+    "project": "core",
+    "priority": "P0",
+    "status": "done",
+    "created": "2025-05-26T19:30:00.000Z",
+    "dependencies": ["2", "3"],
+    "blockers": [],
+    "implementation": "Systematic cleanup with project knowledge optimization"
+  },
+  {
+    "id": "25",
+    "title": "GARDEN Smart Uploader MVP COMPLETED",
+    "description": "Zero-friction file upload system with GitHub OAuth integration. Deployed to production at https://garden-smart-uploader-7emsd86fb-scott-loebs-projects.vercel.app/toolshed/garden-uploader-mvp.html",
+    "project": "core",
+    "priority": "P0",
+    "status": "done",
+    "created": "2025-05-28T19:00:00.000Z",
+    "dependencies": ["4"],
+    "blockers": [],
+    "implementation": "toolshed/garden-uploader-mvp.html + NeuroOasis GitHub App",
+    "deliverables": [
+      "Smart file analysis and placement",
+      "GitHub OAuth integration", 
+      "Zero-configuration upload workflow",
+      "Mobile file staging support",
+      "Production Vercel deployment"
+    ]
+  },
+  {
+    "id": "28", 
+    "title": "Uploader Testing & Validation",
+    "description": "Comprehensive testing of Smart Uploader with real files: CITs, tools, documentation. Validate Dan file delivery workflow, new user onboarding, mid-conversation artifact rescue",
+    "project": "core",
+    "priority": "P0",
+    "status": "in-progress",
+    "created": "2025-05-28T19:05:00.000Z",
+    "dependencies": ["25"],
+    "blockers": [],
+    "implementation": "Test all three critical workflows with actual team usage",
+    "testing_status": {
+      "security_validation": "✅ PASSED - Correctly blocked GitHub PAT",
+      "mobile_filename_chaos": "✅ DOCUMENTED - iOS renaming confirmed",
+      "smart_analysis": "🔄 PARTIAL - 80% confidence, detected 'Data Export'",
+      "remaining_tests": [
+        "Clean file upload (no secrets)",
+        "CIT detection and placement",
+        "Tool detection and placement", 
+        "New user workflow guidance"
+      ]
+    }
+  },
+  {
+    "id": "29",
+    "title": "OAuth Backend Security Implementation",
+    "description": "Add secure OAuth backend endpoint to replace frontend client secret exposure. Implement proper token exchange with GitHub API for production security",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-05-28T19:05:00.000Z",
+    "dependencies": ["25"],
+    "blockers": [],
+    "implementation": "/api/github/oauth endpoint with secure client secret handling",
+    "security_priority": "High - current MVP exposes client secret in frontend"
+  }
+]
