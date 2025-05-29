@@ -489,5 +489,23 @@
     ],
     "breakthrough": "Scott's discovery: Hit refresh → mobile files instantly available → Claude can auto-process anything uploaded from anywhere!",
     "notes": "This eliminates mobile upload friction entirely - no manual processing needed, just refresh project knowledge!"
+  },
+  {
+    "id": "40",
+    "title": "Project Knowledge Attention Dilution Bug",
+    "description": "CRITICAL BUG IDENTIFIED: Claude doesn't consistently follow CIT rules when project knowledge contains too much competing context. Even with CITs loaded, attention gets scattered instead of focused on guidelines.",
+    "project": "core",
+    "priority": "P0",
+    "status": "backlog",
+    "created": "2025-05-30T17:00:00.000Z",
+    "dependencies": [
+      "Lean core repository strategy"
+    ],
+    "implementation": "Research optimal project knowledge size for CIT compliance, establish attention ratio guidelines, test CIT following performance vs repository size",
+    "evidence": "Scott's Brandy Schedule chat - had CITs in project knowledge but Claude didn't follow rules properly due to context overload",
+    "root_cause": "Too much information in project knowledge = attention gets scattered instead of focused on CITs and guidelines",
+    "solution_path": "Clean, lean core repository + focused CIT hierarchy = better Claude CIT compliance",
+    "urgency": "This explains why 'lean core' strategy is critical - not just for performance, but for Claude behavioral compliance!",
+    "notes": "This bug validates our entire lean repository strategy - it's not just about efficiency, it's about Claude actually following the frameworks we've built!"
   }
 ]
