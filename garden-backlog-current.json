@@ -297,5 +297,18 @@
       "Uploader MVP completion"
     ],
     "implementation": "Test all three critical workflows with actual team usage"
+  },
+  {
+    "id": "29",
+    "title": "Multi-User Collaboration Testing",
+    "description": "Test uploader workflow with different user contexts, permissions, and onboarding scenarios for external collaborators",
+    "project": "core",
+    "priority": "P2",
+    "status": "backlog",
+    "created": "2025-05-29T05:30:00.000Z",
+    "dependencies": [
+      "Uploader testing completion"
+    ],
+    "implementation": "External user simulation, new user onboarding flow, context creation workflow"
   }
 ]
