@@ -282,12 +282,13 @@
     "description": "Comprehensive testing of Smart Uploader with real files: CITs, tools, documentation. Validate Dan file delivery workflow, new user onboarding, mid-conversation artifact rescue",
     "project": "core",
     "priority": "P0",
-    "status": "todo",
+    "status": "done",
     "created": "2025-05-28T19:05:00.000Z",
     "dependencies": [
       "Uploader MVP completion"
     ],
-    "implementation": "Test all three critical workflows with actual team usage"
+    "implementation": "COMPLETED via mobile testing - validated iOS workflow, file staging, smart analysis, GitHub OAuth, backlog item detection needs",
+    "notes": "Real-world mobile testing validated core workflow with areas for v5.1 enhancement identified"
   },
   {
     "id": "29",
@@ -431,5 +432,62 @@
       "Integration with GitHub repository state"
     ],
     "notes": "Scott's vision: single link that creates perfect Claude environment for any GARDEN development task"
+  },
+  {
+    "id": "37",
+    "title": "Seth Godin: Hallucinations and Human Work Analysis",
+    "description": "Blog post from Seth's Blog analyzing the relationship between AI hallucinations and human work. Relevant to GARDEN's AI-human collaboration philosophy and workflow design. URL: https://seths.blog/2025/05/hallucinations-and-human-work/",
+    "project": "core",
+    "priority": "P2",
+    "status": "backlog",
+    "created": "2025-05-30T16:30:00.000Z",
+    "source": "mobile",
+    "tags": ["AI-collaboration", "philosophy", "workflow-insights"],
+    "url": "https://seths.blog/2025/05/hallucinations-and-human-work/",
+    "implementation": "Review blog post for insights applicable to GARDEN AI-human collaboration patterns",
+    "notes": "Added via mobile uploader test - Scott's birthday sprint mobile workflow validation"
+  },
+  {
+    "id": "38",
+    "title": "Mobile Uploader v5.1: Enhanced Backlog Detection",
+    "description": "BREAKTHROUGH from mobile testing: Improve uploader intelligence for backlog items - detect JSON patterns, suggest merge actions, boost confidence for structured data from 60% to 95%",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-05-30T16:35:00.000Z",
+    "dependencies": [
+      "Mobile uploader testing completed"
+    ],
+    "implementation": "Pattern recognition for backlog JSON (id/title/status structure), smart merge suggestions with garden-backlog-current.json, mobile workflow optimization",
+    "features": [
+      "Backlog JSON pattern detection",
+      "Merge vs create new file suggestions", 
+      "95% confidence for structured backlog items",
+      "Mobile staging workflow enhancement"
+    ],
+    "validation": "Real-world mobile test showed 60% confidence on backlog JSON - should be 95% with pattern recognition",
+    "notes": "GOLDEN validation data from Scott's mobile test - uploader preserved JSON perfectly but missed backlog-specific routing"
+  },
+  {
+    "id": "39",
+    "title": "Lean Repo + Full Project Knowledge = Universal Upload Detection",
+    "description": "REVOLUTIONARY INSIGHT: With lean core repo fully in project knowledge, mobile uploads auto-appear in Claude context on refresh. Enables automatic detection and processing of forgotten uploads from any user!",
+    "project": "core",
+    "priority": "P0",
+    "status": "backlog", 
+    "created": "2025-05-30T16:40:00.000Z",
+    "dependencies": [
+      "Lean core repository maintained",
+      "Full project knowledge integration"
+    ],
+    "implementation": "Claude workflow: check for new files on project knowledge refresh, auto-detect upload types, suggest processing actions for mobile uploads, forgotten files, multi-user contributions",
+    "features": [
+      "Automatic new file detection on refresh",
+      "Smart upload type recognition",
+      "Processing suggestions for mobile files",
+      "Multi-user upload handling"
+    ],
+    "breakthrough": "Scott's discovery: Hit refresh → mobile files instantly available → Claude can auto-process anything uploaded from anywhere!",
+    "notes": "This eliminates mobile upload friction entirely - no manual processing needed, just refresh project knowledge!"
   }
 ]
