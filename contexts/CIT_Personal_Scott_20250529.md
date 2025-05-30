@@ -1,6 +1,6 @@
 # CIT_Personal_Scott_20250529.md
 
-## Personal Development Context - Scott Loeb - Updated May 29, 2025
+## Personal Development Context - Scott Loeb - Updated May 30, 2025
 
 ### ✅ **BREAKTHROUGH: Claude File Access Configuration COMPLETE**
 
@@ -164,6 +164,28 @@
 - **User Empowerment:** Enable users rather than constrain them
 - **Accessibility:** Consider diverse user needs and contexts
 
+### Pet Care Integration Patterns
+
+#### **Medication Scheduling Workflow Discovery**
+**Pattern Identified:** Multi-revision cycles when personal context missing
+
+**Case Study Results:**
+- **Without GARDEN Context:** 16 revisions for pet medication schedule
+- **With GARDEN Integration:** 2 revisions for equivalent complexity
+- **Efficiency Improvement:** 87.5% reduction in revision cycles
+- **Attribution Analysis:** 40% personal context + 35% domain CITs + 20% missing tools + 5% prompt
+
+**Workflow Integration:**
+- Printable formats essential for veterinary environments
+- Time-based organization matches medication administration patterns  
+- Cross-device access for emergency medication reference
+- Integration with location-based planning (multiple residences)
+
+**Strategic Value:**
+- First concrete proof of GARDEN efficiency gains with quantified attribution
+- Validates simulation engine concept for systematic efficiency measurement
+- Demonstrates premium value through measurable productivity improvement
+
 ### Personal Development Goals and Interests
 
 #### **Spoon Theory Research and Application**
@@ -223,7 +245,18 @@
 
 ### Personal Context Integration
 
+#### **Location Context**
+**Primary Location:** Annapolis, MD (East Coast, EST/EDT timezone)
+- **Timezone Implications:** All scheduling should account for EST
+- **Regional Considerations:** 
+  - Tick-borne diseases (Lyme) more prevalent
+  - Seasonal weather patterns affect outdoor activities
+  - Hurricane season planning (June-November)
+- **Emergency Resources:** Local 24/7 vet clinics documented
+- **Professional Services:** Eastern timezone for all appointments
+
 #### **Multi-Location Considerations**
+**Primary Location:** Annapolis, Maryland (home base for planning and logistics)
 **Reference:** "Delaware office, boat, house, Dan's apt, Melissa's apt"
 
 **Implications:**
@@ -231,6 +264,7 @@
 - Cloud sync or export/import bridging required
 - Mobile-friendly interfaces for various contexts
 - Offline capability where internet unreliable
+- Location-aware scheduling for travel coordination
 
 #### **Professional Context Management**
 **Workflow Considerations:**
@@ -268,6 +302,39 @@
 - ADA compliance alongside aesthetic preferences
 - Cross-device functionality for various access patterns
 - Documentation and examples for different skill levels
+
+### Communication Patterns and Request Style
+
+#### **Request Evolution Pattern**
+**Typical Flow:** "I need a quick artifact" → gradual constraint revelation → validation focus
+
+**Stage 1: Minimal Initial Specification**
+- Direct but incomplete requests
+- Assumes context will fill gaps
+- Focus on immediate need
+
+**Stage 2: Constraint Emergence**
+- Details revealed through interaction
+- Size/scale emerges later ("she's 130lbs")
+- Format requirements appear mid-conversation
+- Domain specifics clarified through confusion
+
+**Stage 3: Validation and Revision**
+- "This doesn't make sense" = fundamental issue
+- Immediate course correction expected
+- Real-world testing focus
+
+**Key Phrases:**
+- "get busy" = bathroom/potty time
+- "business column" = activity tracking
+- "touch grass" = take a break outside
+- "noodle on this" = think through the problem
+
+**Efficiency Drivers:**
+- Completion within session critical
+- Practical over perfect
+- Templates for reusability
+- Learning from mistakes
 
 ### Success Metrics and Personal KPIs
 

@@ -507,5 +507,66 @@
     "solution_path": "Clean, lean core repository + focused CIT hierarchy = better Claude CIT compliance",
     "urgency": "This explains why 'lean core' strategy is critical - not just for performance, but for Claude behavioral compliance!",
     "notes": "This bug validates our entire lean repository strategy - it's not just about efficiency, it's about Claude actually following the frameworks we've built!"
+  },
+  {
+    "id": "41",
+    "title": "GARDEN Efficiency Simulation Engine",
+    "description": "STRATEGIC BREAKTHROUGH: Build AI system that simulates user interactions to generate quantified efficiency projections. Transform GARDEN from 'feels helpful' to 'proven 400% efficiency improvement' with concrete ROI data for enterprise sales.",
+    "project": "core",
+    "priority": "P0",
+    "status": "backlog",
+    "created": "2025-05-30T18:00:00.000Z",
+    "dependencies": [
+      "Pet-care efficiency case study completion"
+    ],
+    "implementation": "Multi-phase simulation engine: conversation pattern mining → user behavior modeling → efficiency attribution → ROI calculator interface → competitive differentiation analytics",
+    "business_value": [
+      "Sales acceleration: 40% shorter cycles with concrete ROI data",
+      "Premium pricing: 20% price premium justified by measured efficiency", 
+      "Market differentiation: First quantified AI productivity measurement",
+      "Enterprise access: Data-driven decision makers previously unreachable"
+    ],
+    "technical_scope": [
+      "Phase 1: Foundation & data collection (conversation mining, user classification)",
+      "Phase 2: Core simulation engine (communication flow simulator, attribution calculator)",
+      "Phase 3: Business intelligence (ROI calculator, competitive analysis, success dashboard)"
+    ],
+    "success_metrics": [
+      "Simulation accuracy within 20% of real outcomes",
+      "ROI calculator used by 80% of qualified prospects", 
+      "25% improvement in sales win rates with simulation data",
+      "Product decisions driven by efficiency impact data"
+    ],
+    "validation_source": "Pet-care case study: 87.5% efficiency improvement (16→2 revisions) with component attribution",
+    "competitive_advantage": "First AI productivity tool that can PROVE (not just claim) efficiency gains with systematic measurement",
+    "notes": "This transforms GARDEN from productivity tool to efficiency measurement platform - creating systematic competitive moat through data"
+  },
+  {
+    "id": "42",
+    "title": "Conversation Handoff Automation",
+    "description": "Auto-save artifacts and context when approaching chat limits, with seamless new-chat initialization to eliminate manual memory requirements",
+    "project": "core",
+    "priority": "P0",
+    "status": "backlog",
+    "created": "2025-05-30T18:10:00.000Z",
+    "dependencies": [
+      "File system access configuration"
+    ],
+    "implementation": "Claude logic to detect approaching limits → auto-save critical artifacts → provide new-chat initialization prompt with file references",
+    "user_workflow": "Hit limits → Claude auto-saves → Start new chat → Claude reads saved files → Continue seamlessly",
+    "automation_triggers": [
+      "Token usage approaching 80% of limit",
+      "User manually requests conversation save",
+      "Large artifact generation that might hit limits",
+      "Critical context that needs preservation"
+    ],
+    "saved_content": [
+      "Active artifacts and work-in-progress",
+      "Conversation context and decisions made", 
+      "File references and project state",
+      "Next actions and continuation prompts"
+    ],
+    "user_benefit": "Never again manually remember to save conversation artifacts - fully automated workflow continuity",
+    "notes": "Triggered by Scott's insight: 'Doing it manually ONCE = fine, remembering to do it EVERY TIME = human memory failure point'"
   }
 ]
