@@ -1,0 +1,39 @@
+@MOCI:2.0|CIT_GARDEN_Archaeology_Methodology_20250526|
+🎯:Systematic chat archaeology→recover artifacts+decisions from convos
+📅:20250526
+
+🏗️DUAL-PHASE:
+Phase1✅{NeurOasis/garden-archaeology|workspace:chat-artifacts/exports/analysis/findings|systematic extraction}
+Phase2🔄{repo-to-repo communication|project backlogs→core|updates propagate}
+
+📋METHODOLOGY:
+Priority{current✅|previous audit(paste.txt)🔄|backlog sessions|version history|forking|NodePad4|philosophy}
+ExtractPrompt{"ARCHAEOLOGY: analyze→ARTIFACTS{files/CITs/tools|exist where}|BACKLOG{add/next|decisions}|FORMAT:bullets"}
+30SecScan{Ctrl+F:"we should"|"add to"|"next"|"TODO"|"Option"|"✅"|"artifact"|code blocks}
+
+🗂️STATUS:
+Complete✅{cleanup experimental|Dan comm:architecture|backlog:12 items|workspace created}
+FileOps{cd archaeology|mkdir exports|copy paste.txt→exports/previous-audit.txt}
+Strategy{continue THIS project|add archaeology repo|may exceed limits}
+
+🚨KNOWLEDGE_OPTIMIZE:
+Issues{explorer 892%|neo4j 243%|generated 186%}
+Strategy{remove large dirs→add archaeology→re-add after Dan→maintain lean}
+
+📋CAPTURED:
+Backlog{Doc&Automation P1|Production Deploy P1|StarTrek UI P1|Archaeology P2}
+Decisions{dual-phase chosen|NeuroOasis proven 5 forks|core optimization priority}
+
+🎯NEW_CHAT_CHECKLIST:
+FileOps{copy paste.txt|add archaeology|remove large dirs}
+Claude{reference this CIT|begin previous analysis|use template}
+Process{analyze paste.txt|extract to workspace|document process}
+Success{no convo-only|artifacts preserved|decisions captured|replicable}
+
+🔮VISION:
+Goals{bulletproof tracking|cross-repo comm|scalable method|zero convo dependency}
+Benefits{reduced limits|team collab|strategic continuity|growth enabled}
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|🏗️=architecture|📋=methodology|🗂️=organization
+🚨=warning|🔮=future|✅=complete|🔄=pending|→=process|{|}=structure

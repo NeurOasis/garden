@@ -1,0 +1,59 @@
+@MOCI:2.0|CIT_Personal_Scott_20250529|
+🎯:Personal workflow preferences+technical environment for GARDEN collaboration
+📅:20250529
+
+✅BREAKTHROUGH:FILE_ACCESS:
+Achieved:20250529→repos moved Desktop/GitHub/→full Claude read/write
+Benefits{direct write|complete access|unlimited context|stale revival|zero friction}
+Structure{ClaudeDocs/{chat-exports|artifacts|staging}}
+
+🧠WORKFLOW:
+▸Completion-driven{no overnight undone|single session cycles|completable chunks|closure}
+▸Ideas{mile-a-minute→IdeaCapture 35+|cross-device|export→backlog|auto-cat}
+
+🖥️TECH:
+▸Setup{macOS|Desktop/GitHub/|iCloud sync|GitHub CLI|Vercel CLI}
+▸Cross-device{Mac:dev|iPhone:capture+test|export/import bridge}
+▸Philosophy{single-file|no deps|progressive|localStorage+export}
+
+🎨UI/UX:
+▸StarTrek/LCARS{curves|grids|typography|indicators|color-coded}
+▸Function>Form{reliability|mental models|progressive|accessibility}
+
+👥COLLAB:
+▸Cross-user{credential overhead|context loss|manual handoff→need URLs+permissions}
+▸Async{CIT docs|export/import|milestones|systematic}
+
+📋PHILOSOPHY:
+▸Systematic{audit→backup→test→validate→document}
+▸Value{immediate utility|progressive|empowerment|accessibility}
+
+🐾PET_CARE:
+Study{16 revisions→2 with GARDEN=87.5% improvement}
+Attribution{40% personal+35% CITs+20% tools+5% prompt}
+
+🎯GOALS:
+▸SpoonTheory{visual|research-backed|universal|evidence-based}
+▸Voice2Podcast{async voices→auto-stitch→edit-ready}
+▸HomeAssist{NodePad extensions|smart control|automation}
+
+📍CONTEXT:
+▸Location{Annapolis MD EST|Lyme risk|hurricanes|24/7 vet}
+▸Multi-location{DE office|boat|house|Dan apt|Melissa apt}
+▸Professional{lawyer|Brandy meetings|Michigan planning}
+▸Relations{Andrea|Jess|multi-stakeholder}
+
+💬COMMUNICATION:
+Pattern{minimal spec→constraints emerge→validation}
+Phrases{get busy=bathroom|business column=tracking|touch grass=break}
+Drivers{completion critical|practical|templates|learning}
+
+📊METRICS:
+Achieved{2 apps/day|cross-device✓|35+ ideas|collab framework|file access✓}
+Ongoing{cross-user|persistence|UI design|research}
+Satisfaction{completion|value|learning|docs|efficiency}
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|✅=achievement|🧠=cognitive|🖥️=technical
+🎨=design|👥=collaboration|📋=philosophy|🐾=domain|📍=location
+💬=communication|📊=metrics|▸=component|→=results|{|}=items

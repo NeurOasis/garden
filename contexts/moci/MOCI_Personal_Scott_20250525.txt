@@ -1,0 +1,49 @@
+@MOCI:2.0|CIT_Personal_Scott_20250525|
+🎯:Personal workflow preferences→completion-driven+rapid ideas+systematic
+📅:20250525
+
+🧠WORKFLOW:
+▸Completion{no overnight undone|single session|completable chunks|closure}
+▸Ideas{mile-a-minute→Capture 35+|cross-device|export→backlog|auto-cat}
+
+🖥️TECH:
+▸Setup{macOS|iCloud path|GitHub CLI|Vercel CLI}
+▸Cross-device{Mac:dev|iPhone:capture|export/import}
+▸Philosophy{single-file|no deps|progressive|localStorage}
+
+🎨UI/UX:
+▸StarTrek/LCARS{curves|grids|typography|indicators|color-coded}
+▸Functional{reliability>looks|mental models|progressive|accessibility}
+
+👥COLLAB:
+▸Cross-user{credential overhead|context loss|manual→need seamless}
+▸Async{CIT docs|export/import|milestones|systematic}
+
+📋PHILOSOPHY:
+▸Systematic{audit→backup→test→validate→document}
+▸Value{immediate utility|progressive|empowerment|accessibility}
+
+🎯GOALS:
+▸SpoonTheory{visual|research-backed|universal|evidence}
+▸Voice2Podcast{async voices→stitch→edit-ready}
+▸HomeAssist{NodePad extensions|smart control|automation}
+
+📍CONTEXT:
+▸Multi-location{DE office|boat|house|Dan apt|Melissa apt}
+▸Professional{lawyer|Brandy meetings|Michigan planning}
+▸Relations{Andrea|Jess|multi-stakeholder}
+
+💡TECH_PHILOSOPHY:
+▸Simplicity>complexity{single HTML|localStorage|progressive|CLI}
+▸Ownership{local data|open source|minimal deps|user control}
+▸Accessibility{multiple UI|ADA|cross-device|documentation}
+
+📊METRICS:
+Achieved{2 apps/day|cross-device✓|35+ ideas|collab framework|GitHub CLI}
+Ongoing{cross-user|persistence|UI design|research}
+Satisfaction{completion|value|learning|documentation}
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|🧠=cognitive|🖥️=technical|🎨=design
+👥=collaboration|📋=philosophy|📍=location|💡=principles|📊=metrics
+▸=component|→=results|✓=validated

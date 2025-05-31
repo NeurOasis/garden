@@ -1,0 +1,42 @@
+@MOCI:2.0|CIT_CoreVsFork_Detection_20250526|
+🎯:Core vs fork routing→keep GARDEN lean, projects focused
+📅:20250526
+
+🧭CORE_CRITERIA:
+Belongs{philosophy|infrastructure|cross-project|foundation|documentation}
+Indicators{benefits multiple|establishes patterns|framework|abstract|meta-tools}
+
+🌿FORK_CRITERIA:
+Requires{domain-specific|personal|single-purpose|business|experimental}
+Indicators{fails core analysis|domain/personal/business|experimental|>20% size}
+
+🤖ROUTING:
+AutoCore{IF philosophy|infrastructure|CIT system|generators|user ID→PROCEED}
+AutoFork{ANALYZE:benefits multiple?|reusable pattern?|infrastructure?|abstract?|docs?
+→IF NONE:domain/personal→FORK
+→TRIGGERS:>3 CITs non-framework|>20% knowledge|personal contexts|business}
+
+📋FORK_INSTRUCTIONS:
+Template{"🚨 FORK REQUIRED:[domain]-specific detected
+→OptionA:Andrew fork→transfer NeuroOasis→Scott clean→upload
+→OptionB:Upload existing
+→Why:lean core|longer convos|focused context|collab
+→Exact commands or wait?"}
+
+🎯OVERRIDE:
+Scott/Dan{state "core because [framework]"|"add for [cross-project]"|"justified by [reuse]"}
+→Document{justification|benefit|framework designation}
+
+🔍EXAMPLES:
+Core✅{StarTrek UI|cross-device|collab tools|templates}
+Fork🔀{recipes|family|coffee|client|sailing|personal}
+Borderline🤔{SpoonTheory→fork|HomeAssist→evaluate|Analytics→abstract:core,specific:fork}
+
+🛡️SAFETY:
+Pre-fork{decisions documented|CITs preserved|no work lost}
+Handoff{CITs copied|history preserved|refs updated}
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|🧭=core|🌿=fork|🤖=automation
+📋=instructions|🔍=examples|🛡️=safety|✅=yes|🔀=redirect|🤔=evaluate
+→=process|IF/THEN=logic|{|}=options

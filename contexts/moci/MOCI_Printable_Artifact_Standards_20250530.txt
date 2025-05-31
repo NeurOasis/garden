@@ -1,0 +1,41 @@
+@MOCI:2.0|CIT_Printable_Artifact_Standards_20250530|
+🎯:Standard templates for printable artifacts→prevent format iterations
+📅:20250530
+
+📋FORMATS:
+▸8.5x11{letter|0.5"margin|Arial 12pt|1.4 line|black on white}
+▸Requirements{12pt min|0.5"margin|1.4 line|B&W|checkbox 20x20}
+
+✅CHECKBOX:
+HTML{<span class="checkbox">|20x20px|1px border|5px margin|vertical-align}
+Guidelines{before text|5px space|group indent|pen width}
+
+📊TABLES:
+Structure{100% width|collapse borders|8px padding}
+Columns{time:15%|content:60%|notes:25%}
+
+🎨LAMINATION:
+Design{0.25"border|high contrast|no bleed|rounded corners}
+Surface{dry-erase|bold lines|avoid fine detail|erasure patterns}
+
+📐LAYOUT:
+SinglePage{max 9.5in height|overflow hidden|compact mode:1.2 line}
+Print{@media print|.no-print:none|.page-break:always}
+
+🔄MULTI-VERSION:
+Transition{Page1:"TODAY ONLY"+date|Page2:"ONGOING"|visual distinction|clear dating}
+
+📱RESPONSIVE:
+Screen{max 8.5in|center|box-shadow}
+Print{no shadow|margin:0}
+
+✅VALIDATION:
+☐Single 8.5x11☐12pt min☐20x20 checkbox☐0.5"margins
+☐B&W text☐Lamination safe☐Orientation set☐Print tested
+
+🎯USE_CASES:
+Medical schedules|Daily trackers|Checklists|Reference cards|Form templates
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|📋=standards|✅=checkbox|📊=tables
+🎨=design|📐=layout|🔄=versions|📱=responsive|☐=checklist

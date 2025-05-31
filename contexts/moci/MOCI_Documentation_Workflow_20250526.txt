@@ -1,0 +1,43 @@
+@MOCI:2.0|CIT_Documentation_Workflow_20250526|
+🎯:Document-as-we-go framework→real-time docs during dev
+📅:20250526
+
+🧠PHILOSOPHY:
+Docs=development not separate|simultaneous not after
+Why{cognitive efficiency|context preserved|evolution tracked|real collab}
+
+📋MANDATORY:
+Every commit{structure→update README+CITs+version|features→CIT+examples+README|decisions→rationale+version+cross-ref}
+
+🤖CLAUDE_ENFORCE:
+Before{check needs}|During{suggest alongside}|After{verify complete}|Every{include in response}
+Prompt{"🚨 DOCS REQUIRED: [area] needs [updates]→provide/artifacts/include?"}
+
+📊TYPES:
+▸README{tools|structure|workflows|navigation|state}
+▸CITs{features|process|decisions|contexts|integration}
+▸Version{workflow changes|architecture|fixes|features|structure}
+
+🔧TEMPLATES:
+Commit{"🎯[ACTION]:[desc]→✅CHANGES|✅DOCS|✅IMPACT|🎯PURPOSE"}
+Checklist{update needed→README[section]|CIT[what]|version[decision]|other[refs]}
+
+🌿FORK_INHERIT:
+Maintain{updated README|doc workflow|version history|real-time}
+Adapt{domain context|user orient|decision track|collab model}
+
+⚠️ANTI-PATTERNS:
+Never{structure no docs|features no CIT|decisions no rationale|code no docs|later}
+RedFlags{small change|next session|self-doc|obvious}
+
+✅SUCCESS:
+Orient<5min|README current|decisions documented|version coherent|no convo-only
+
+🔄CONTINUOUS:
+Audits{weekly:README|monthly:CITs|quarterly:version|as-needed:adapt}
+Evolution{track what works|cognitive costs|productivity|adapt patterns}
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|🧠=philosophy|📋=mandatory|🤖=enforcement
+📊=types|🔧=templates|🌿=fork|⚠️=avoid|✅=success|🔄=continuous
+▸=component|→=process|{|}=items

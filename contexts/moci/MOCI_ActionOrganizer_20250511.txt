@@ -1,0 +1,32 @@
+@MOCI:2.0|CIT_ActionOrganizer_20250511|
+🎯:Clear reference system for neurodivergent task organization
+📅:20250511
+
+👤PERSONAL:
+🧠Neurodivergent(autism+PDA)|💭capture exact|👁️minimal+visual|😖no rigid|📊energy flex|📑quick-ref
+
+📝SYSTEM:
+Core{📥INBOX|⚡QUICK_WINS|🧩NEEDS_BREAKDOWN|⏳WAITING|📋PROJECT_LISTS}
+Levels{📂PROJECT→outcome|📃ACTION→one-sitting|✅CHECKLIST→steps|📌NOTES→context}
+Markers{❓unclear|🔷big|📍location|(person)|🌡️temp|📅due|📆task}
+
+📄STANDARDS:
+Digital{markdown|16px+|H1→H2→H3|lists+tables}
+Physical{4x6 landscape|navy headings|sans-serif|hierarchy|4.5:1 contrast|cardstock}
+
+📋CURRENT:
+Doc{QuickRef_Actions_v1.3.md|Final|4x6 physical}
+Platform{iOS Reminders|4x6 card|weekly review|monthly archive}
+
+🛠️PRINCIPLES:
+📥Capture first|🧠Organize later|⚡Quick wins|🧩Break down|🔄Flexible
+
+📋WEEKLY:
+🔍Review backlog→📆Assign dates→🏅Prioritize temp/due→📤Move to lists
+
+💡METRICS:
+⏱️Less organizing|📉Lower cognitive|🔄Weekly process|⚡Match energy|📦Fewer forgotten
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|👤=personal|📝=system|📄=standards
+📋=process|🛠️=principles|💡=metrics|→=flow|{|}=options

@@ -1,0 +1,43 @@
+@MOCI:2.0|CIT_GARDEN_ProjectManagement|
+🎯:Strategic project management→single-purpose focus+clear roadmap
+📅:20250525
+
+🎯FOCUS:
+Infrastructure✅{Deploy v2.2|Recipe template|Fork architecture|Vercel pipeline}
+Strategy{5 single-purpose projects→Deploy|Core Apps|Templates|Collab|Version}
+
+📊STATUS:
+Production✅{Deploy infra complete|Recipe live|Idea live|35+ captured}
+Infrastructure🚧{Sunflower complete|ModGen complete|Uploader complete→pending integration}
+
+🧬BACKLOG:
+Immediate🔥{test Recipe fork|audit structure|production deploy test}
+HighValue⚡{template expansion|cross-user collab|StarTrek UI}
+Strategic🔮{advanced templates|enterprise platform|ecosystem integration}
+
+📋CROSS-PROJECT:
+ToOthers{version control|personal context|core apps|collab framework}
+Central{voice2podcast|HomeAssist|spoon theory|cleanup folders|auto-CITs}
+
+✅METRICS:
+Infrastructure{100% deploy|complete template|GitHub fork|single-command}
+UX_pending{<2min setup|zero config|production ready|shareable}
+Philosophy✅{cognitive align|tech abstract|rapid dev|progressive|multi-perspective}
+
+🛡️RISKS:
+Tech{API limits→zip|complexity→single-file|reliability→rollback|persistence→export}
+Project{scope→boundaries|context→CIT|quality→testing|adoption→utility}
+
+🔄WORKFLOW:
+Established✅{GitHub CLI|Vercel|cross-device|export/import}
+QA{safe audit|branch dev|multi-device test|user feedback}
+
+📈ROADMAP:
+P1:Validate{test fork|deploy pipeline|document|audit}
+P2:Expand{templates|StarTrek|collab|community}
+P3:Enterprise{advanced collab|integration|analytics|scalable}
+P4:Ecosystem{unified platform|AI-assist|marketplace|consulting}
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=focus|📊=status|🧬=integration|✅=success|🛡️=risk
+🔄=workflow|📈=roadmap|🔥=urgent|⚡=high|🔮=future|🚧=pending
