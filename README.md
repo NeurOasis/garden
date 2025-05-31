@@ -1,3 +1,14 @@
+## 🌱 New Home: NeurOasis/greenhouse
+
+Along with MOCI 2.0, we're excited to announce GARDEN's new organizational home:
+**NeurOasis/greenhouse** - where tools grow and flourish!
+
+- **greenhouse** - Stable, production-ready tools
+- **greenhouse-nursery** - Experimental features (coming soon)
+- **Community forks** - Your gardens built on our foundation
+
+
+
 # G.A.R.D.E.N. Core Repository
 
 **Graph Algorithms, Research, Development, Enhancement, and Novelties**
@@ -6,9 +17,9 @@ Making complex data systems accessible through thoughtful design and automation.
 
 ## 🎯 **CURRENT STATE: May 31, 2025 (MOCI 2.0 Revolution!)**
 
-**BREAKTHROUGH:** MOCI 2.0 (Machine-Optimized Context Instructions) - 87% context compression! 🤯  
-**Core Focus:** Revolutionary AI context management that makes token limits nearly irrelevant  
-**Active Development:** MOCI tools deployed, ready for production merge  
+
+**Core Focus:** Collaborative workflow revolution triggered... wait for the how!
+**Active Development:** Real-time collaborative backlog, GitHub integration, Claude deep linking  
 **Organization:** NeuroOasis with Scott + Dan collaboration, proven forking workflow
 
 ## 🚀 **MOCI 2.0: Revolutionary AI Context Compression**
@@ -150,7 +161,7 @@ See README_MOCI.md for complete guide
 
 ### **Current Team (Birthday Edition):**
 - **Scott (Owner)** - Architecture, infrastructure, birthday insights! 🎂
-- **Dan (Collaborator)** - UI/UX, patterns, (soon-to-be surprised by Star Trek theme)
+- **Dan (Collaborator)** - UI/UX, patterns
 
 ### **Revolutionary Infrastructure:**
 - **Real-Time Backlog:** Firebase + Vercel deployment
@@ -180,7 +191,9 @@ See README_MOCI.md for complete guide
 
 ---
 
-**Last Updated:** May 31, 2025 (MOCI 2.0 Launch!) | **Next Review:** After community adoption  
-**Quick Links:** [Backlog](toolshed/garden-backlog-manager.html) | [Version History](toolshed/garden-version-history.html) | [Secret Project](../STAR_TREK_UI_SECRET_PROJECT.md) 🤫
+
+**Last Updated:** May 30, 2025 (Scott's Birthday!) | **Next Review:** After collaborative platform deployment  
+**Quick Links:** [Backlog](toolshed/garden-backlog-manager.html) | [Version History](toolshed/garden-version-history.html) | 
+
 
 **🎉 Happy Birthday Scott - The workflow revolution starts today!** 🚀
