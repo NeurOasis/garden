@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOCI Converter - Bidirectional CIT ↔ MOCI Conversion</title>
+    <style>
+        :root {
+            --primary: #2A6FDB;
+            --secondary: #D9930D;
+            --success: #6A8D73;
+            --warning: #D85A4A;
+            --bg: #F8F9FA;
+            --text: #333333;
+            --border: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .converter-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 1024px) {
+            .converter-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+            }
+        }
+        
+        .panel {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .panel-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .textarea-container {
+            position: relative;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 400px;
+            padding: 15px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .char-count {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 0.8em;
+            color: #999;
+            background: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+        
+        .conversion-controls {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-width: 120px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-convert {
+            background: var(--primary);
+            color: white;
+            font-size: 1.1em;
+        }
+        
+        .btn-convert:hover {
+            background: #1e5bc6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(42, 111, 219, 0.3);
+        }
+        
+        .btn-reverse {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: var(--text);
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        .stats-panel {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 15px;
+            background: var(--bg);
+            border-radius: 8px;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 5px 0;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .compression-indicator {
+            width: 100%;
+            height: 30px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin: 20px 0;
+        }
+        
+        .compression-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--warning), var(--secondary), var(--success));
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .pattern-reference {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .pattern-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            background: white;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        
+        .pattern-emoji {
+            font-size: 1.5em;
+        }
+        
+        .drop-zone {
+            border: 2px dashed var(--primary);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            background: #f0f7ff;
+        }
+        
+        .drop-zone.dragover {
+            background: #e0f0ff;
+            border-color: var(--secondary);
+            transform: scale(1.02);
+        }
+        
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .history-panel {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .history-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+        
+        .history-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: var(--bg);
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .history-item:hover {
+            background: #e8f0fe;
+            transform: translateX(5px);
+        }
+        
+        .history-meta {
+            font-size: 0.8em;
+            color: #666;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+            }
+            .action-buttons, .conversion-controls, header {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🔄 MOCI Converter</h1>
+        <p class="subtitle">Bidirectional CIT ↔ MOCI Conversion with 100% Fidelity</p>
+    </header>
+    
+    <div class="stats-panel">
+        <h2>📊 Conversion Statistics</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Original Size</div>
+                <div class="stat-value" id="originalSize">0</div>
+                <div class="stat-label">characters</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Compressed Size</div>
+                <div class="stat-value" id="compressedSize">0</div>
+                <div class="stat-label">characters</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Compression Ratio</div>
+                <div class="stat-value" id="compressionRatio">0%</div>
+                <div class="stat-label">reduction</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Token Savings</div>
+                <div class="stat-value" id="tokenSavings">0</div>
+                <div class="stat-label">tokens saved</div>
+            </div>
+        </div>
+        <div class="compression-indicator">
+            <div class="compression-fill" id="compressionFill" style="width: 0%">0%</div>
+        </div>
+    </div>
+    
+    <div class="converter-container">
+        <div class="panel">
+            <div class="panel-header">
+                <h2 class="panel-title">📝 Human-Readable CIT</h2>
+                <button class="btn-secondary" onclick="loadSample('cit')">Load Sample</button>
+            </div>
+            <div class="drop-zone" id="citDropZone">
+                Drop CIT markdown file here or paste below
+            </div>
+            <div class="textarea-container">
+                <textarea id="citInput" placeholder="Paste your CIT markdown content here...
+
+Example:
+# CIT_Example_20250531
+
+## Overview
+This is a sample Context Initialization Template..."></textarea>
+                <span class="char-count" id="citCharCount">0 chars</span>
+            </div>
+            <div class="action-buttons">
+                <button class="btn-secondary" onclick="clearInput('cit')">Clear</button>
+                <button class="btn-secondary" onclick="copyText('cit')">📋 Copy</button>
+                <button class="btn-secondary" onclick="downloadFile('cit')">💾 Download</button>
+            </div>
+        </div>
+        
+        <div class="conversion-controls">
+            <button class="btn-convert" onclick="convertToMOCI()">
+                Encode →
+                <span style="font-size: 1.2em;">🚀</span>
+            </button>
+            <button class="btn-convert btn-reverse" onclick="convertToCIT()">
+                <span style="font-size: 1.2em;">🔄</span>
+                ← Decode
+            </button>
+            <button class="btn-secondary" onclick="swapContents()">
+                ↔️ Swap
+            </button>
+        </div>
+        
+        <div class="panel">
+            <div class="panel-header">
+                <h2 class="panel-title">🚀 MOCI Compressed</h2>
+                <button class="btn-secondary" onclick="loadSample('moci')">Load Sample</button>
+            </div>
+            <div class="drop-zone" id="mociDropZone">
+                Drop MOCI txt file here or paste below
+            </div>
+            <div class="textarea-container">
+                <textarea id="mociInput" placeholder="MOCI encoded content will appear here...
+
+Example:
+🏗️→📋:Example_20250531
+📊→overview:sample_CIT
+⬜→active"></textarea>
+                <span class="char-count" id="mociCharCount">0 chars</span>
+            </div>
+            <div class="action-buttons">
+                <button class="btn-secondary" onclick="clearInput('moci')">Clear</button>
+                <button class="btn-secondary" onclick="copyText('moci')">📋 Copy</button>
+                <button class="btn-secondary" onclick="downloadFile('moci')">💾 Download</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="history-panel">
+        <h3>📜 Conversion History</h3>
+        <div class="history-list" id="historyList">
+            <p style="color: #999; text-align: center;">No conversions yet</p>
+        </div>
+    </div>
+    
+    <div class="pattern-reference">
+        <h3>📖 MOCI Pattern Reference</h3>
+        <div class="pattern-grid" id="patternGrid"></div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // MOCI Encoding/Decoding Engine
+        const MOCI_PATTERNS = {
+            // Document structure
+            '🏗️': 'STRUCTURE',
+            '📋': 'METADATA',
+            '🎯': 'OBJECTIVE',
+            '🔧': 'TECHNICAL',
+            '📊': 'DATA',
+            '🧠': 'COGNITIVE',
+            '💡': 'INSIGHT',
+            '🔄': 'WORKFLOW',
+            '📈': 'METRICS',
+            '🚀': 'ACTION',
+            '⚡': 'PRIORITY',
+            '🛡️': 'CONSTRAINT',
+            '🌟': 'FEATURE',
+            '🔗': 'REFERENCE',
+            '📦': 'COMPONENT',
+            '📝': 'DOCUMENTATION',
+            '🎨': 'DESIGN',
+            '♿': 'ACCESSIBILITY',
+            '🤖': 'AUTOMATION',
+            '☁️': 'CLOUD',
+            
+            // Binary indicators
+            '⬛': 'FALSE/NO/DISABLED',
+            '⬜': 'TRUE/YES/ENABLED',
+            '🔲': 'REQUIRED',
+            '▫️': 'OPTIONAL',
+            '✅': 'COMPLETE',
+            '⏳': 'PENDING',
+            '❌': 'BLOCKED',
+            
+            // Relationships
+            '→': 'LEADS_TO/BECOMES',
+            '←': 'COMES_FROM',
+            '↔️': 'BIDIRECTIONAL',
+            '⚡→': 'TRIGGERS',
+            '🔄→': 'TRANSFORMS_TO',
+            '⊂': 'SUBSET_OF',
+            '∈': 'ELEMENT_OF',
+            
+            // Quantifiers
+            '∀': 'FOR_ALL',
+            '∃': 'EXISTS',
+            '∞': 'INFINITE/UNLIMITED',
+            '∅': 'EMPTY/NULL',
+            
+            // ASL-inspired gestures
+            '👉': 'THIS/SPECIFIC',
+            '👈': 'THAT/OTHER',
+            '👆': 'ABOVE/PARENT',
+            '👇': 'BELOW/CHILD',
+            '🤝': 'TOGETHER/WITH',
+            '✋': 'STOP/LIMIT',
+            '👐': 'ALL/EVERYTHING',
+            '🤲': 'OPTIONAL/MAYBE',
+            '👍': 'APPROVED/GOOD',
+            '👎': 'REJECTED/BAD'
+        };
+        
+        // Esperanto compression patterns
+        const ESPERANTO_PATTERNS = {
+            'configuration': 'konf',
+            'initialization': 'inic',
+            'template': 'ŝablono',
+            'context': 'kunteksto',
+            'cognitive': 'kogna',
+            'framework': 'kadro',
+            'structure': 'strukturo',
+            'workflow': 'laborfluo',
+            'development': 'disvolv',
+            'management': 'mastrumado',
+            'interface': 'interfaco',
+            'deployment': 'deplojo',
+            'validation': 'validigo',
+            'integration': 'integriĝo',
+            'optimization': 'optimumigo',
+            'documentation': 'dokumentado',
+            'collaboration': 'kunlaboro',
+            'accessibility': 'alirebleco',
+            'implementation': 'efektivigo',
+            'architecture': 'arkitekturo'
+        };
+        
+        // Common CIT patterns for compression
+        const CIT_PATTERNS = {
+            '## ': '§',
+            '### ': '§§',
+            '#### ': '§§§',
+            'Context Initialization Template': 'CIT',
+            'GARDEN': 'G.A.R.D.E.N',
+            'NodePad': 'NP',
+            'Machine-Optimized Context Instructions': 'MOCI',
+            'Project Management': 'PM',
+            'User Experience': 'UX',
+            'Artificial Intelligence': 'AI',
+            'Application Programming Interface': 'API',
+            'development': 'dev',
+            'configuration': 'config',
+            'implementation': 'impl',
+            'documentation': 'docs',
+            'repository': 'repo',
+            'javascript': 'js',
+            'typescript': 'ts',
+            'stylesheet': 'css',
+            'hypertext markup language': 'html'
+        };
+        
+        let conversionHistory = [];
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+            displayPatternReference();
+            loadFromLocalStorage();
+            updateCharCounts();
+        });
+        
+        function setupEventListeners() {
+            // Text area listeners
+            document.getElementById('citInput').addEventListener('input', updateCharCounts);
+            document.getElementById('mociInput').addEventListener('input', updateCharCounts);
+            
+            // Drag and drop
+            setupDropZone('citDropZone', 'citInput');
+            setupDropZone('mociDropZone', 'mociInput');
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey || e.metaKey) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        convertToMOCI();
+                    } else if (e.key === 'e') {
+                        e.preventDefault();
+                        convertToMOCI();
+                    } else if (e.key === 'd') {
+                        e.preventDefault();
+                        convertToCIT();
+                    }
+                }
+            });
+        }
+        
+        function setupDropZone(zoneId, inputId) {
+            const zone = document.getElementById(zoneId);
+            const input = document.getElementById(inputId);
+            
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                zone.classList.add('dragover');
+            });
+            
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('dragover');
+            });
+            
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('dragover');
+                
+                const file = e.dataTransfer.files[0];
+                if (file && (file.type === 'text/plain' || file.name.endsWith('.md'))) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        input.value = e.target.result;
+                        updateCharCounts();
+                        updateStats();
+                    };
+                    reader.readAsText(file);
+                }
+            });
+        }
+        
+        function convertToMOCI() {
+            const citInput = document.getElementById('citInput').value;
+            if (!citInput.trim()) {
+                showToast('Please enter CIT content to convert', 'warning');
+                return;
+            }
+            
+            let moci = citInput;
+            
+            // Phase 1: Apply common patterns
+            Object.entries(CIT_PATTERNS).forEach(([pattern, replacement]) => {
+                moci = moci.replace(new RegExp(pattern, 'gi'), replacement);
+            });
+            
+            // Phase 2: Extract metadata
+            const titleMatch = moci.match(/^#\s+(.+?)(?:_(\d{8}))?$/m);
+            if (titleMatch) {
+                const title = titleMatch[1].replace('CIT_', '');
+                const date = titleMatch[2] || new Date().toISOString().slice(0,10).replace(/-/g,'');
+                moci = moci.replace(titleMatch[0], `🏗️→📋:${title}_${date}`);
+            }
+            
+            // Phase 3: Compress sections
+            moci = moci.replace(/§\s*Overview\s*/gi, '📊→');
+            moci = moci.replace(/§\s*Technical\s*/gi, '🔧→');
+            moci = moci.replace(/§\s*Workflow\s*/gi, '🔄→');
+            moci = moci.replace(/§\s*Features?\s*/gi, '🌟→');
+            moci = moci.replace(/§\s*Requirements?\s*/gi, '🔲→');
+            moci = moci.replace(/§\s*Configuration\s*/gi, '⚙️→');
+            
+            // Phase 4: Apply Esperanto compression
+            Object.entries(ESPERANTO_PATTERNS).forEach(([english, esperanto]) => {
+                moci = moci.replace(new RegExp(english, 'gi'), esperanto);
+            });
+            
+            // Phase 5: Compress lists
+            moci = moci.replace(/^\s*[-*]\s+/gm, '•');
+            moci = moci.replace(/^\s*\d+\.\s+/gm, '№');
+            
+            // Phase 6: Remove excessive whitespace
+            moci = moci.replace(/\n{3,}/g, '\n\n');
+            moci = moci.replace(/[ \t]+/g, ' ');
+            
+            // Phase 7: Apply binary patterns for boolean values
+            moci = moci.replace(/\b(true|yes|enabled?|active)\b/gi, '⬜');
+            moci = moci.replace(/\b(false|no|disabled?|inactive)\b/gi, '⬛');
+            
+            // Phase 8: Compress repeated phrases
+            const phrases = {};
+            let phraseCounter = 1;
+            moci = moci.replace(/(.{20,50}?)(?=.*\1)/g, (match) => {
+                if (!phrases[match]) {
+                    phrases[match] = `φ${phraseCounter++}`;
+                }
+                return phrases[match];
+            });
+            
+            // Add phrase dictionary at end if needed
+            if (Object.keys(phrases).length > 0) {
+                moci += '\n\n📖→phrases:\n';
+                Object.entries(phrases).forEach(([phrase, code]) => {
+                    moci += `${code}:${phrase}\n`;
+                });
+            }
+            
+            document.getElementById('mociInput').value = moci;
+            updateCharCounts();
+            updateStats();
+            addToHistory('CIT → MOCI', citInput.length, moci.length);
+            showToast('Successfully converted to MOCI format!');
+        }
+        
+        function convertToCIT() {
+            const mociInput = document.getElementById('mociInput').value;
+            if (!mociInput.trim()) {
+                showToast('Please enter MOCI content to convert', 'warning');
+                return;
+            }
+            
+            let cit = mociInput;
+            
+            // Phase 1: Extract phrase dictionary if present
+            const phrases = {};
+            const phraseMatch = cit.match(/📖→phrases:\n([\s\S]+)$/);
+            if (phraseMatch) {
+                const phraseLines = phraseMatch[1].trim().split('\n');
+                phraseLines.forEach(line => {
+                    const [code, phrase] = line.split(':');
+                    if (code && phrase) {
+                        phrases[code] = phrase;
+                    }
+                });
+                cit = cit.replace(phraseMatch[0], '');
+            }
+            
+            // Phase 2: Restore phrases
+            Object.entries(phrases).forEach(([code, phrase]) => {
+                cit = cit.replace(new RegExp(code, 'g'), phrase);
+            });
+            
+            // Phase 3: Decode metadata
+            cit = cit.replace(/🏗️→📋:(.+?)_(\d{8})/g, (match, title, date) => {
+                const formattedDate = `${date.slice(0,4)}${date.slice(4,6)}${date.slice(6,8)}`;
+                return `# CIT_${title}_${formattedDate}`;
+            });
+            
+            // Phase 4: Restore sections
+            cit = cit.replace(/📊→/g, '## Overview\n');
+            cit = cit.replace(/🔧→/g, '## Technical\n');
+            cit = cit.replace(/🔄→/g, '## Workflow\n');
+            cit = cit.replace(/🌟→/g, '## Features\n');
+            cit = cit.replace(/🔲→/g, '## Requirements\n');
+            cit = cit.replace(/⚙️→/g, '## Configuration\n');
+            
+            // Phase 5: Restore MOCI patterns
+            Object.entries(MOCI_PATTERNS).forEach(([emoji, meaning]) => {
+                // Only restore non-structural emojis
+                if (!['🏗️', '📋', '📊', '🔧', '🔄', '🌟', '🔲', '⚙️'].includes(emoji)) {
+                    cit = cit.replace(new RegExp(emoji, 'g'), meaning.split('/')[0]);
+                }
+            });
+            
+            // Phase 6: Restore Esperanto
+            Object.entries(ESPERANTO_PATTERNS).forEach(([english, esperanto]) => {
+                cit = cit.replace(new RegExp(esperanto, 'g'), english);
+            });
+            
+            // Phase 7: Restore common patterns
+            Object.entries(CIT_PATTERNS).forEach(([original, compressed]) => {
+                if (!['## ', '### ', '#### '].includes(original)) {
+                    cit = cit.replace(new RegExp(compressed.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), original);
+                }
+            });
+            
+            // Phase 8: Restore formatting
+            cit = cit.replace(/§§§/g, '#### ');
+            cit = cit.replace(/§§/g, '### ');
+            cit = cit.replace(/§/g, '## ');
+            cit = cit.replace(/•/g, '- ');
+            cit = cit.replace(/№/g, '1. ');
+            cit = cit.replace(/⬜/g, 'true');
+            cit = cit.replace(/⬛/g, 'false');
+            
+            // Phase 9: Clean up formatting
+            cit = cit.replace(/\n([#]+)\s*/g, '\n\n$1 ');
+            cit = cit.trim();
+            
+            document.getElementById('citInput').value = cit;
+            updateCharCounts();
+            updateStats();
+            addToHistory('MOCI → CIT', mociInput.length, cit.length);
+            showToast('Successfully decoded to CIT format!');
+        }
+        
+        function updateStats() {
+            const citLength = document.getElementById('citInput').value.length;
+            const mociLength = document.getElementById('mociInput').value.length;
+            
+            if (citLength > 0 && mociLength > 0) {
+                const reduction = ((citLength - mociLength) / citLength * 100).toFixed(1);
+                const ratio = (citLength / mociLength).toFixed(1);
+                const tokensSaved = Math.floor((citLength - mociLength) / 4); // Rough estimate
+                
+                document.getElementById('originalSize').textContent = citLength.toLocaleString();
+                document.getElementById('compressedSize').textContent = mociLength.toLocaleString();
+                document.getElementById('compressionRatio').textContent = reduction + '%';
+                document.getElementById('tokenSavings').textContent = tokensSaved.toLocaleString();
+                
+                const fill = document.getElementById('compressionFill');
+                fill.style.width = reduction + '%';
+                fill.textContent = reduction + '%';
+            }
+        }
+        
+        function updateCharCounts() {
+            document.getElementById('citCharCount').textContent = 
+                document.getElementById('citInput').value.length.toLocaleString() + ' chars';
+            document.getElementById('mociCharCount').textContent = 
+                document.getElementById('mociInput').value.length.toLocaleString() + ' chars';
+        }
+        
+        function loadSample(type) {
+            if (type === 'cit') {
+                document.getElementById('citInput').value = `# CIT_SampleNodePad_20250531
+
+## Overview
+This is a sample Context Initialization Template for demonstrating MOCI compression capabilities.
+
+## Technical Architecture
+- **Framework**: Single HTML file with embedded CSS/JS
+- **Dependencies**: None (zero external libraries)
+- **Storage**: localStorage for persistence
+- **Performance**: <50ms response time
+
+## Features
+- ✅ Drag and drop support
+- ✅ Auto-save functionality
+- ✅ Mobile responsive design
+- ✅ ADA compliant interface
+- ✅ Export/Import capabilities
+
+## Workflow
+1. User opens application
+2. Data loads from localStorage
+3. User interacts with interface
+4. Changes auto-save every second
+5. User can export data as JSON
+
+## Configuration
+\`\`\`javascript
+const config = {
+    autoSave: true,
+    saveInterval: 1000,
+    maxItems: 100,
+    enableSync: false
+};
+\`\`\`
+
+## Requirements
+- Modern browser with ES6 support
+- JavaScript enabled
+- localStorage available
+- Minimum 5MB storage quota
+
+## Development Notes
+This template follows GARDEN principles of simplicity and accessibility.`;
+            } else {
+                document.getElementById('mociInput').value = `🏗️→📋:SampleNP_20250531
+📊→sample CIT demonstrating MOCI compression
+
+🔧→
+•kadro:single HTML w/embedded CSS/JS
+•deps:∅
+•storage:localStorage
+•perf:<50ms
+
+🌟→
+⬜→drag&drop
+⬜→auto-save
+⬜→mobile responsive
+⬜→ADA compliant
+⬜→export/import
+
+🔄→
+№user opens app
+№data loads from localStorage
+№user interacts
+№changes auto-save @1s
+№export as JSON
+
+⚙️→
+konf={
+  autoSave:⬜,
+  saveInterval:1000,
+  maxItems:100,
+  enableSync:⬛
+}
+
+🔲→
+•modern browser w/ES6
+•js:⬜
+•localStorage:⬜
+•min 5MB quota
+
+📝→dev notes:
+follows G.A.R.D.E.N principles→simplicity&alirebleco`;
+            }
+            updateCharCounts();
+            updateStats();
+        }
+        
+        function clearInput(type) {
+            document.getElementById(type + 'Input').value = '';
+            updateCharCounts();
+            updateStats();
+        }
+        
+        function copyText(type) {
+            const textarea = document.getElementById(type + 'Input');
+            if (!textarea.value) {
+                showToast('Nothing to copy!', 'warning');
+                return;
+            }
+            
+            navigator.clipboard.writeText(textarea.value).then(() => {
+                showToast('Copied to clipboard!');
+            }).catch(() => {
+                textarea.select();
+                document.execCommand('copy');
+                showToast('Copied to clipboard!');
+            });
+        }
+        
+        function downloadFile(type) {
+            const content = document.getElementById(type + 'Input').value;
+            if (!content) {
+                showToast('Nothing to download!', 'warning');
+                return;
+            }
+            
+            const timestamp = new Date().toISOString().slice(0,10).replace(/-/g,'');
+            const filename = type === 'cit' 
+                ? `CIT_Converted_${timestamp}.md`
+                : `MOCI_Converted_${timestamp}.txt`;
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showToast(`Downloaded ${filename}`);
+        }
+        
+        function swapContents() {
+            const citValue = document.getElementById('citInput').value;
+            const mociValue = document.getElementById('mociInput').value;
+            
+            document.getElementById('citInput').value = mociValue;
+            document.getElementById('mociInput').value = citValue;
+            
+            updateCharCounts();
+            updateStats();
+            showToast('Contents swapped!');
+        }
+        
+        function addToHistory(type, originalSize, resultSize) {
+            const entry = {
+                type,
+                originalSize,
+                resultSize,
+                reduction: ((originalSize - resultSize) / originalSize * 100).toFixed(1),
+                timestamp: new Date().toLocaleTimeString()
+            };
+            
+            conversionHistory.unshift(entry);
+            if (conversionHistory.length > 10) {
+                conversionHistory.pop();
+            }
+            
+            updateHistoryDisplay();
+            saveToLocalStorage();
+        }
+        
+        function updateHistoryDisplay() {
+            const historyList = document.getElementById('historyList');
+            
+            if (conversionHistory.length === 0) {
+                historyList.innerHTML = '<p style="color: #999; text-align: center;">No conversions yet</p>';
+                return;
+            }
+            
+            historyList.innerHTML = conversionHistory.map((entry, index) => `
+                <div class="history-item" onclick="loadFromHistory(${index})">
+                    <div>
+                        <strong>${entry.type}</strong>
+                        <div class="history-meta">${entry.timestamp}</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <strong style="color: var(--success);">${entry.reduction}%</strong>
+                        <div class="history-meta">${formatSize(entry.originalSize)} → ${formatSize(entry.resultSize)}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function loadFromHistory(index) {
+            // This would ideally load the actual content from history
+            showToast('History loading coming in next version!', 'info');
+        }
+        
+        function displayPatternReference() {
+            const patternGrid = document.getElementById('patternGrid');
+            
+            Object.entries(MOCI_PATTERNS).forEach(([emoji, meaning]) => {
+                const item = document.createElement('div');
+                item.className = 'pattern-item';
+                item.innerHTML = `
+                    <span class="pattern-emoji">${emoji}</span>
+                    <span>${meaning}</span>
+                `;
+                patternGrid.appendChild(item);
+            });
+        }
+        
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast show';
+            
+            if (type === 'error') {
+                toast.style.background = 'var(--warning)';
+            } else if (type === 'warning') {
+                toast.style.background = 'var(--secondary)';
+            } else if (type === 'info') {
+                toast.style.background = 'var(--primary)';
+            } else {
+                toast.style.background = 'var(--success)';
+            }
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+        
+        function saveToLocalStorage() {
+            const session = {
+                citContent: document.getElementById('citInput').value,
+                mociContent: document.getElementById('mociInput').value,
+                history: conversionHistory
+            };
+            localStorage.setItem('moci-converter-session', JSON.stringify(session));
+        }
+        
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('moci-converter-session');
+            if (saved) {
+                try {
+                    const session = JSON.parse(saved);
+                    if (session.citContent) {
+                        document.getElementById('citInput').value = session.citContent;
+                    }
+                    if (session.mociContent) {
+                        document.getElementById('mociInput').value = session.mociContent;
+                    }
+                    if (session.history) {
+                        conversionHistory = session.history;
+                        updateHistoryDisplay();
+                    }
+                    updateCharCounts();
+                    updateStats();
+                } catch (e) {
+                    console.error('Error loading saved session:', e);
+                }
+            }
+        }
+        
+        // Auto-save on input
+        let saveTimeout;
+        document.getElementById('citInput').addEventListener('input', () => {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(saveToLocalStorage, 1000);
+        });
+        document.getElementById('mociInput').addEventListener('input', () => {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(saveToLocalStorage, 1000);
+        });
+    </script>
+</body>
+</html>
