@@ -1,0 +1,51 @@
+@MOCI:2.0|CIT_Comprehensive_Audit_Plan_20250526|
+🎯:Bulletproof GARDEN→systematic archaeology+infrastructure review
+📅:20250526
+
+📊PHASE1:BACKLOG+VERSION:
+Current{backlog:8items|version:4releases|⚠️gaps:chat items+ideas}
+Expand{archaeology ALL chats|extract "add this"|categorize|prioritize|cross-ref ideas|v1.1}
+
+🗂️PHASE2:CHAT_ARCHAEOLOGY:
+Process{newest→oldest}→Extract{artifacts|insights|backlog|architecture|implementation}
+→Compare{vs core|vs backlog|gaps|conflicts}→Integrate{add|update|resolve|document}
+→Archive{mark mined|note contributions|remove active}
+Targets{audit|backlog|version|forking|NodePad4|philosophy|ideas}
+
+🗃️PHASE3:LOCAL_AUDIT:
+Dirs{~/Library/.../github/garden/+garden-tools/}
+Analysis{stragglers|categorize|duplicates}
+Infrastructure{toolshed|module-gen|generated|explorer|neo4j|sunflower}
+→Decisions{keep+enhance|CIT|Dan pattern|fork|archive}
+
+📋PHASE4:INFRASTRUCTURE:
+▸Toolshed{active vs abandoned|single-file convert|fork specialized|CITs}
+▸ModGen{v1 vs v2|differences|usage|future|docs}
+▸Generated{current vs deprecated|archive|document|update}
+▸Sunflower{core vs project|integration|standalone|fork decision}
+
+🎯PHASE5:IDEA_INTEGRATION:
+Export all→cross-ref transcripts→missing items
+→Compare backlog→flag missing→categorize
+→Archive exports→process ongoing→version control
+
+🖥️PHASE6:STARTREK_UI:
+Target:IdeaCapture→LCARS{curves|grid|typography|grayscale|indicators}
+Deploy{enhance|cross-device|collab test|performance}
+
+📚OPTIONS_B&C_PRESERVED:
+B:Automation{split detection|criteria|templates|strategy docs}
+C:Production{active dev|test collab|deploy apps|communication}
+
+✅SUCCESS:
+Backlog complete|Version documented|Repo optimized|Infrastructure rationalized
+Ideas integrated|Production ready|New chats effective|Context persistent
+
+🔄SEQUENCE:
+①Chat archaeology→②Local audit→③Infrastructure→④Backlog integration
+→⑤Version 1.1→⑥StarTrek UI→⑦Options B&C
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|📊=phase|🗂️=archaeology|🗃️=audit
+📋=assessment|🖥️=UI|📚=preserve|✅=success|🔄=sequence|▸=component
+→=process|{|}=items|⚠️=warning

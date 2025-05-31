@@ -1,0 +1,44 @@
+@MOCI:2.0|CIT_BudgetNodePad_20250523|
+🎯:Budget NodePad v2.1→single-file zero-deps Dan pattern
+📅:20250523
+
+📊ARCHITECTURE:
+▸v2.1{single HTML|zero deps|instant deploy|browser direct}
+▸DanPattern{DOM-as-Truth|vanilla JS|API+Controller|events}
+▸Grassroots{structure-first|Income→Fixed→Variable→Goals|progressive|emoji nodes}
+
+🧠FRAMEWORK:
+Structure{categories→specifics}|Visual{emoji+color}|Auto-save{1sec localStorage}|CSV{smart categorization}
+
+🔧TECH:
+Core{BudgetAPI|BudgetNodePad|Events|Persistence}
+Features{responsive|drag&drop|CSV import|auto-save|export JSON|ADA}
+
+📄STANDARDS:
+Deploy{single HTML}|Backup{JSON timestamps}|Docs{README}
+4x6Card{structure|zero-deps|workflow|shortcuts|deploy anywhere}
+
+🚀DEPLOY:
+Structure{budget-nodepad.html|README|vercel.json|netlify.toml}
+Options{direct browser|GitHub Pages|Vercel|Netlify|any static host}
+
+🎯WORKFLOW:
+Setup{open→pre-populated→enter amounts→auto-save}
+Daily{quick updates|drag organize|CSV import|JSON export}
+Advanced{smart cat|real-time calc|visual feedback|mobile touch}
+
+📊SPECS:
+Performance{instant load|<50ms interact|5-10MB storage|ES6+}
+Data{nodes|edges|transactions|patterns|lastSaved}
+
+✅LEARNINGS:
+Architecture{simplicity|portability|maintainability|performance}
+GARDEN{cognitive align|tech abstract|progressive|accessible}
+
+🔄VERSIONS:
+v2.1:single-file|v2.0:abandoned multi|v1.3:CSV|v1.2:patterns|v1.1:drag|v1.0:initial
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|📊=technical|🧠=cognitive|🔧=implementation
+📄=documentation|🚀=deployment|✅=validation|🔄=history|▸=component
+→=hierarchy|{|}=items

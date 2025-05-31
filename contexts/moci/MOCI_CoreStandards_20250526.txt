@@ -1,0 +1,37 @@
+@MOCI:2.0|CIT_CoreStandards_20250526|
+🎯:Essential GARDEN design+accessibility standards
+📅:20250526
+
+🎨COLORS_ADA:
+▸Primary{DeepBlue#2A6FDB=focus|Amber#D9930D=action}
+▸Support{Sage#6A8D73=success|Coral#D85A4A=alerts}
+▸Neutral{OffWhite#F8F9FA|Charcoal#333}
+▸Accent{Lavender#7C6AC8=waiting|Mint#3A9D82=category}
+
+📄DOCS:
+▸4x6Cards{landscape|12pt+|4.5:1|sans-serif|hierarchy|textures+color}
+▸Digital{responsive|16px+|50-75char|semantic|keyboard}
+▸Standard{8.5x11|1"margin|12pt+|screen reader}
+
+♿ADA:
+▸Visual{4.5:1(3:1large)|no color-only|200% zoom|alt text}
+▸Interact{keyboard all|focus visible|44px touch|time extensions}
+▸Forms{labels|clear errors|screen announce|instructions}
+
+🧰VERIFY:
+▸Auto{WAVE|Lighthouse|WebAIM contrast}
+▸Manual{keyboard nav|screen reader|200% zoom}
+
+🎯PRINCIPLES:
+Clarity|Focus|Flexibility|Structure|Accessibility
+
+📋CHECKLIST:
+☐4.5:1 contrast☐keyboard☐alt text☐H1→H2→H3
+☐4x6:12pt+☐digital:16px+☐touch:44px+☐clear errors
+
+🔄v2.0:Consolidated brand+ADA CITs
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|🎨=colors|📄=documents|♿=accessibility
+🧰=tools|📋=checklist|🔄=version|▸=category|{|}=items|#=hex
+☐=checkbox|→=hierarchy

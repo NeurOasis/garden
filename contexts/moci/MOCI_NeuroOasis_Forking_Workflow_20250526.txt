@@ -1,0 +1,36 @@
+@MOCI:2.0|CIT_NeuroOasis_Forking_Workflow_20250526|
+🎯:Validated forking strategy→focused project repos via NeuroOasis org
+📅:20250526
+
+✅VALIDATED:sailing-tools{fork✓|transfer✓|cleanup 742→focused|63% reduction|live|collab working}
+
+🚀WORKFLOW:
+①Andrew fork{github.com/scottloeb/garden→Fork→name+desc→scottloebdev/project}
+②Org transfer{Settings→General→Transfer→NeuroOasis→NeurOasis/project}
+③Scott cleanup{clone|mv project CITs|rm non-project|rm infrastructure|update README|commit|push}
+
+🏢NEUROASIS:
+▸Teams $4/user{Scott owner|Andrew member|future:Dan+Melissa}
+▸Permissions{Scott:admin|Andrew:dev|repos:both access|settings:Scott only}
+
+📁READY_PROJECTS:
+▸Family{Zach+visualSchedule}|Coffee{blueberryCoffee}|Personal{multiple CITs}|Future{Budget+Action}
+▸AutoSplit{>70% knowledge→immediate|>3 CITs→recommend|personal→split|experimental>10→split}
+
+🤖AUTOMATION:
+Template{"🚨 SPLIT: [project]→[trigger]→Fork NeurOasis/[name]"+exact commands}
+Metrics{zero cognitive load|no path confusion|account clarity|error prevention}
+
+📊VALIDATION:
+▸OptionC hybrid{core lean|active dev in org|proper collab|scalable}✅
+▸Benefits{expense tracking|permissions|professional|$4/user scales}
+
+🔄NEXT:
+▸Immediate{document|fork next|validate template}
+▸Short{complete forks|update docs|automate}
+▸Medium{corporate entity|onboard team|advanced workflows}
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|✅=validated|🚀=workflow|🏢=organization
+📁=projects|🤖=automation|📊=metrics|🔄=roadmap|▸=component
+→=results_in|{=contains|}=separator|①②③=steps
