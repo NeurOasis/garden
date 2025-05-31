@@ -1,0 +1,58 @@
+@MOCI:2.0|CIT_FileAccess_Configuration_20250529|
+🎯:Eliminate manual artifact handling→direct file write access
+📅:20250529
+
+⚠️PROBLEM→SOLUTION:
+Traditional{artifact→save→commit→refresh}=70% overhead
+Revolutionary{Claude writes direct→commit when ready}=5x faster
+
+🛠️SETUP:
+①Move repos{backup→mv iCloud/GitHub→Desktop/GitHub}
+②Verify{cd→git status→git log}✅auto-preserved
+③Downloads{mkdir ClaudeDocs/{chat-exports|artifacts|staging}}
+
+✅UNLOCKED:
+▸Direct{read_file|write_file|create_directory}→any repo path
+▸Beyond limits{entire ecosystem|multi-repo|real-time|stale projects}
+▸Zero-friction{CIT→contexts|tool→toolshed|docs→README|cross-project}
+
+📊BENEFITS:
+▸Efficiency{5x faster|focus dev|real-time|complete context}
+▸CrossDevice{iPhone Files|iCloud✓|GDrive backup|universal}
+▸Collab{team access|live docs|visibility|no barriers}
+
+⚠️CONSIDERATIONS:
+▸Security{local access|git perms|multi-backup}
+▸Organization{desktop clean|naming|maintenance}
+▸Git{bundle commits|feature branches|team coord}
+
+📋CHECKLIST:
+Pre{backup|verify sync|review structure}
+Implement{move|verify git|test Claude|confirm sync|organize}
+Validate{read✓|write✓|git✓|cross-device✓|backups✓}
+Optimize{update CIT|doc workflow|commit strategy|browser config}
+
+🔄ROLLBACK:
+mv Desktop/GitHub→iCloud/GitHub OR restore backup
+
+📊METRICS:
+▸Efficiency{iterations/hr|context switch|collab velocity}
+▸Quality{doc currency|code quality|team coord}
+▸Satisfaction{friction↓|cognitive load↓|focus↑}
+
+🔄GIT_PUSH_PROTOCOL:
+▸Every 5 msgs→check local changes
+▸Before limit→mandatory sync
+▸After major ops→suggest checkpoint
+▸Format{"🔄 GIT SYNC: [changes]...commit+push?"}
+
+📝WRITE_PERMISSION:
+▸Request{file|action|changes|risk}→approve?
+▸Delta{section|adding|modifying|removing}→proceed?
+▸Risk{LOW=new/docs|MED=modify|HIGH=core}
+→Control+safety+efficiency
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|⚠️=problems|🛠️=setup|✅=success
+📊=metrics|📋=checklist|🔄=process|📝=protocol|▸=component
+→=results_in|{=contains|}=separator|①②③=steps|✓=validated
