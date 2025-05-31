@@ -1,0 +1,64 @@
+@MOCI:2.0|CIT_GARDEN_Uploader_SystemDesign_20250528|
+🎯:Smart file uploader MVP→solve workflow gaps{delayed deliveries|new user confusion|mid-convo artifacts}
+📅:20250528
+
+⚠️PROBLEMS:
+▸DelayedDelivery→files lost/misplaced from Dan/others
+▸NewUserConfusion→no clear contribute path for non-tech
+▸MidConvoArtifacts→CITs/tools lost to chat limits
+→Impact{lost work|duplicate effort|context loss|collab friction}
+
+🎯MVP:
+▸SmartPlacement{upload+desc→Claude analyzes→correct dir/naming/metadata→GitHub commit}
+▸3Journeys:
+  ①DanRecovery{upload→"what for?"→match context→suggest path→commit→notify}
+  ②NewUser{upload→no context→guide collection→analyze→create stub→file both}
+  ③ArtifactRescue{drag/upload→detect type→suggest name→commit→refresh}
+
+🏗️ARCHITECTURE:
+▸FileAnalyzer{detectType(CIT|tool|context|doc)|suggestPlacement|generateFilename}
+▸GitHubManager{OAuth|createCommit|createPR|notify}
+▸ContextMemory{storeRequest|matchUpload|suggestFromHistory}
+▸MobileHandler{parseWeirdFilename|stageFile}
+
+📊DATA:
+▸AnalysisResult{type|path|confidence|metadata|matchedRequest}
+▸UserContextStub{username|role|github|contextPath|permissions|created}
+
+🎨UI:
+▸MainUpload{drag&drop|description|analyze/quick}
+▸AnalysisResults{type|location|confidence|matched|required info|commit/edit}
+▸MobileStaging{original|detected|suggested|stage/process}
+
+🔄PHASES:
+▸P1:MVP{upload|typeDetect|placement|GitHub|staging|Vercel}✅
+▸P2:Smart{contextMemory|requestMatch|filename|userMgmt|conflict}
+▸P3:Auto{refreshClaude|mobileIntegration|notifications|analytics}
+
+🛠️TECH:
+▸GitHub{OAuth|permissions|commits|branches}
+▸Pipeline{upload→analyze→validate→commit→notify}
+▸Mobile{iOS shareSheet|staging|offline|progressive}
+▸Security{OAuth|validation|content check|rate limit}
+
+📊METRICS:
+▸Primary{0% artifact loss|<30s Dan upload|100% mobile stage|0% duplicate}
+▸UX{creation→commit time|steps by user|error rate|satisfaction}
+
+⚠️RISKS:
+▸Tech{API limits→cache|size limits→compress|auth fail→stage|network→queue}
+▸UX{wrong place→review|lost context→logs|permissions→clear errors}
+
+📋BACKLOG:
+▸Immediate{basic UI|type detect|GitHub|staging|Vercel}
+▸Short{enhanced detect|context memory|request match|user mgmt|mobile opt}
+▸Medium{AI analysis|team collab|analytics|integrations|API}
+
+🔗INTEGRATIONS:
+▸GARDEN{CIT detect|toolshed|personal contexts|archaeology|backlog}
+▸External{GitHub|Vercel|Claude refresh|mobile browsers}
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|⚠️=problems|🏗️=architecture|📊=data/metrics
+🎨=UI|🔄=phases|🛠️=technical|📋=backlog|🔗=integrations|▸=component
+→=results_in|{=contains|}=separator|①②③=numbered|✅=complete
