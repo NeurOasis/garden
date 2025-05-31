@@ -1,0 +1,12 @@
+# YouTube API Integration Requirements
+google-api-python-client==2.88.0
+google-auth==2.17.3
+google-auth-oauthlib==1.0.0
+google-auth-httplib2==0.1.0
+
+# Web Server Requirements
+flask==2.3.2
+flask-cors==4.0.0
+
+# Other Requirements
+requests==2.31.0

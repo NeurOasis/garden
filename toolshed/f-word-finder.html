@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F-Word Finder - Uncommon Words</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 { color: #333; }
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .word-card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .word-card:hover {
+            border-color: #4CAF50;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .word-card.eliminated {
+            background: #ffcccc;
+            border-color: #ff6666;
+            opacity: 0.5;
+        }
+        .word { font-weight: bold; font-size: 18px; }
+        .phrase { color: #666; font-size: 14px; margin-top: 5px; }
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover { background: #45a049; }
+        .stats {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 F-Word Finder - Uncommon Candidates</h1>
+    
+    <div class="stats">
+        <strong>Strategy:</strong> Find F-words that NO ONE has guessed yet!<br>
+        <strong>Rule:</strong> If it's in the comments, it's WRONG (NINYE would have taken the video down)<br>
+        <strong>Focus:</strong> Uncommon words that complete "F_____ is" naturally
+    </div>
+    
+    <div class="filters">
+        <h3>Eliminate Words from Comments:</h3>
+        <textarea id="eliminatedWords" rows="3" cols="50" placeholder="Paste words from YouTube comments (comma or space separated)"></textarea>
+        <button onclick="eliminateWords()">Eliminate These Words</button>
+        <button onclick="clearEliminated()">Clear Eliminated</button>
+    </div>
+    
+    <div class="filters">
+        <label>Letter Count: 
+            <select id="letterCount" onchange="filterWords()">
+                <option value="all">All</option>
+                <option value="5">5 letters</option>
+                <option value="6" selected>6 letters</option>
+                <option value="7">7 letters</option>
+            </select>
+        </label>
+        <label>Category:
+            <select id="category" onchange="filterWords()">
+                <option value="all">All Categories</option>
+                <option value="uncommon">Uncommon Words</option>
+                <option value="technical">Technical Terms</option>
+                <option value="philosophical">Philosophical</option>
+                <option value="archaic">Archaic/Old</option>
+            </select>
+        </label>
+    </div>
+    
+    <div id="wordGrid" class="word-grid"></div>
+    
+    <script>
+        // Comprehensive list of F-words with categories
+        const fWords = [
+            // Uncommon 6-letter words
+            { word: "FACADE", category: "uncommon", phrase: "Facade is deceptive" },
+            { word: "FACTOR", category: "uncommon", phrase: "Factor is important" },
+            { word: "FALCON", category: "uncommon", phrase: "Falcon is swift" },
+            { word: "FAMINE", category: "uncommon", phrase: "Famine is devastating" },
+            { word: "FATHOM", category: "uncommon", phrase: "Fathom is deep" },
+            { word: "FERVOR", category: "uncommon", phrase: "Fervor is passion" },
+            { word: "FIASCO", category: "uncommon", phrase: "Fiasco is disaster" },
+            { word: "FINITE", category: "philosophical", phrase: "Finite is limited" },
+            { word: "FLEECE", category: "uncommon", phrase: "Fleece is warm" },
+            { word: "FLORAL", category: "uncommon", phrase: "Floral is beautiful" },
+            { word: "FORAGE", category: "uncommon", phrase: "Forage is survival" },
+            { word: "FORBID", category: "uncommon", phrase: "Forbid is restriction" },
+            { word: "FOSSIL", category: "uncommon", phrase: "Fossil is ancient" },
+            { word: "FRENZY", category: "uncommon", phrase: "Frenzy is chaos" },
+            { word: "FRUGAL", category: "uncommon", phrase: "Frugal is wise" },
+            { word: "FUSION", category: "technical", phrase: "Fusion is energy" },
+            
+            // Technical/Scientific
+            { word: "FUNGUS", category: "technical", phrase: "Fungus is everywhere" },
+            { word: "FORMAL", category: "technical", phrase: "Formal is proper" },
+            { word: "FISCAL", category: "technical", phrase: "Fiscal is monetary" },
+            { word: "FERRIC", category: "technical", phrase: "Ferric is iron" },
+            
+            // Philosophical/Abstract
+            { word: "FICKLE", category: "philosophical", phrase: "Fickle is changeable" },
+            { word: "FEUDAL", category: "philosophical", phrase: "Feudal is hierarchical" },
+            { word: "FUTILE", category: "philosophical", phrase: "Futile is pointless" },
+            
+            // 5-letter options
+            { word: "FAUNA", category: "uncommon", phrase: "Fauna is wildlife" },
+            { word: "FJORD", category: "uncommon", phrase: "Fjord is majestic" },
+            { word: "FLORA", category: "uncommon", phrase: "Flora is plant life" },
+            { word: "FORTE", category: "uncommon", phrase: "Forte is strength" },
+            { word: "FORUM", category: "uncommon", phrase: "Forum is discussion" },
+            { word: "FRAIL", category: "uncommon", phrase: "Frail is weak" },
+            
+            // 7-letter options
+            { word: "FACTION", category: "uncommon", phrase: "Faction is divided" },
+            { word: "FALLACY", category: "philosophical", phrase: "Fallacy is false" },
+            { word: "FISSURE", category: "uncommon", phrase: "Fissure is crack" },
+            { word: "FOREIGN", category: "uncommon", phrase: "Foreign is different" },
+            { word: "FORMULA", category: "technical", phrase: "Formula is solution" },
+            { word: "FORTUNE", category: "uncommon", phrase: "Fortune is luck" },
+            { word: "FORWARD", category: "uncommon", phrase: "Forward is progress" },
+            
+            // Archaic/Old English
+            { word: "FEALTY", category: "archaic", phrase: "Fealty is loyalty" },
+            { word: "FALLOW", category: "archaic", phrase: "Fallow is unused" },
+            { word: "FINDER", category: "archaic", phrase: "Finder is keeper" },
+            
+            // Brand/Modern terms
+            { word: "FABRIC", category: "uncommon", phrase: "Fabric is material" },
+            { word: "FACIAL", category: "uncommon", phrase: "Facial is treatment" }
+        ];
+        
+        let eliminated = new Set();
+        
+        function renderWords() {
+            const grid = document.getElementById('wordGrid');
+            const letterCount = document.getElementById('letterCount').value;
+            const category = document.getElementById('category').value;
+            
+            const filtered = fWords.filter(item => {
+                if (eliminated.has(item.word)) return true; // Show eliminated too
+                if (letterCount !== 'all' && item.word.length !== parseInt(letterCount)) return false;
+                if (category !== 'all' && item.category !== category) return false;
+                return true;
+            });
+            
+            grid.innerHTML = filtered.map(item => `
+                <div class="word-card ${eliminated.has(item.word) ? 'eliminated' : ''}" 
+                     onclick="toggleWord('${item.word}')"
+                     title="${eliminated.has(item.word) ? 'Already tried - WRONG!' : 'Click to mark as tried'}">
+                    <div class="word">${item.word}</div>
+                    <div class="phrase">"${item.phrase}"</div>
+                </div>
+            `).join('');
+        }
+        
+        function eliminateWords() {
+            const input = document.getElementById('eliminatedWords').value;
+            const words = input.toUpperCase().split(/[\s,]+/).filter(w => w);
+            words.forEach(word => eliminated.add(word));
+            document.getElementById('eliminatedWords').value = '';
+            renderWords();
+            updateStats();
+        }
+        
+        function clearEliminated() {
+            eliminated.clear();
+            renderWords();
+            updateStats();
+        }
+        
+        function toggleWord(word) {
+            if (eliminated.has(word)) {
+                eliminated.delete(word);
+            } else {
+                eliminated.add(word);
+            }
+            renderWords();
+            updateStats();
+        }
+        
+        function filterWords() {
+            renderWords();
+        }
+        
+        function updateStats() {
+            const remaining = fWords.filter(item => !eliminated.has(item.word)).length;
+            const statsDiv = document.querySelector('.stats');
+            statsDiv.innerHTML = `
+                <strong>Strategy:</strong> Find F-words that NO ONE has guessed yet!<br>
+                <strong>Rule:</strong> If it's in the comments, it's WRONG (NINYE would have taken the video down)<br>
+                <strong>Focus:</strong> Uncommon words that complete "F_____ is" naturally<br>
+                <strong>Remaining Candidates:</strong> ${remaining} words (${eliminated.size} eliminated)
+            `;
+        }
+        
+        // Initialize
+        renderWords();
+    </script>
+</body>
+</html>

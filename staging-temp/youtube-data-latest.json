@@ -1,0 +1,71 @@
+{
+  "timestamp": "2025-05-30 14:30:00",
+  "video_id": "Bpr_9OZltJQ",
+  "total_comments_analyzed": 247,
+  "unique_f_words_found": 20,
+  "guesses": {
+    "FUTURE": 15,
+    "FAMILY": 12,
+    "FRIEND": 8,
+    "FROZEN": 7,
+    "FOREST": 6,
+    "FINGER": 5,
+    "FRIDAY": 5,
+    "FRENCH": 4,
+    "FILTER": 3,
+    "FLIGHT": 3,
+    "FAMOUS": 2,
+    "FABRIC": 2,
+    "FACTOR": 2,
+    "FALCON": 1,
+    "FASTER": 1,
+    "FATHER": 1,
+    "FEMALE": 1,
+    "FIGURE": 1,
+    "FINALS": 1,
+    "FINDER": 1
+  },
+  "patterns": {
+    "6_letters": 75,
+    "7_letters": 25,
+    "second_letter_U": 35,
+    "second_letter_A": 30,
+    "second_letter_R": 20,
+    "ends_with_RE": 25,
+    "ends_with_LY": 15,
+    "ends_with_ND": 10
+  },
+  "top_phrases": [
+    {"phrase": "Future is bright", "count": 8},
+    {"phrase": "Future is now", "count": 5},
+    {"phrase": "Family is everything", "count": 4},
+    {"phrase": "Friend is loyal", "count": 2}
+  ],
+  "confidence_analysis": {
+    "FUTURE": {
+      "score": 95,
+      "reasons": [
+        "Most guessed word (15 times)",
+        "Fits 'Future is...' phrase pattern",
+        "Matches 6-letter constraint",
+        "Aligns with money/time theme"
+      ]
+    },
+    "FAMILY": {
+      "score": 75,
+      "reasons": [
+        "Second most guessed (12 times)",
+        "Common phrase 'Family is everything'",
+        "6 letters matches constraint"
+      ]
+    },
+    "FRIEND": {
+      "score": 60,
+      "reasons": [
+        "Third most attempted (8 times)",
+        "Could complete 'Friend is...'",
+        "6 letters matches constraint"
+      ]
+    }
+  }
+}

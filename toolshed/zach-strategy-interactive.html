@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Zach's Ultimate Puzzle Strategy - 2 Million Failed!</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000;
+            color: #99ccff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        /* LCARS Theme */
+        :root {
+            --lcars-blue: #99ccff;
+            --lcars-purple: #cc99ff;
+            --lcars-pink: #ff99cc;
+            --lcars-orange: #ff9966;
+            --lcars-yellow: #ffcc66;
+            --lcars-green: #99ff99;
+        }
+        
+        .header {
+            background: var(--lcars-purple);
+            color: #000;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 0 0 30px 30px;
+        }
+        
+        .alert-box {
+            background: var(--lcars-orange);
+            color: #000;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .strategy-container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .strategy-section {
+            background: #111;
+            border: 3px solid var(--lcars-blue);
+            border-radius: 30px;
+            margin: 20px 0;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .strategy-section.pink { border-color: var(--lcars-pink); }
+        .strategy-section.green { border-color: var(--lcars-green); }
+        .strategy-section.yellow { border-color: var(--lcars-yellow); }
+        
+        .section-title {
+            background: var(--lcars-blue);
+            color: #000;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            margin: -30px auto 20px;
+            width: fit-content;
+            text-align: center;
+        }
+        
+        .strategy-section.pink .section-title { background: var(--lcars-pink); }
+        .strategy-section.green .section-title { background: var(--lcars-green); }
+        .strategy-section.yellow .section-title { background: var(--lcars-yellow); }
+        
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .checklist-item {
+            background: #222;
+            border: 2px solid var(--lcars-gray);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .checklist-item:active {
+            transform: scale(0.98);
+        }
+        
+        .checklist-item.checked {
+            border-color: var(--lcars-green);
+            background: rgba(153, 255, 153, 0.1);
+        }
+        
+        .checklist-item.found {
+            border-color: var(--lcars-orange);
+            background: rgba(255, 153, 102, 0.2);
+            animation: found-pulse 1s;
+        }
+        
+        @keyframes found-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .checkbox {
+            width: 30px;
+            height: 30px;
+            border: 3px solid var(--lcars-blue);
+            border-radius: 8px;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .checklist-item.checked .checkbox {
+            background: var(--lcars-green);
+            color: #000;
+        }
+        
+        .checklist-item.found .checkbox {
+            background: var(--lcars-orange);
+            color: #000;
+        }
+        
+        .clue-input {
+            background: #222;
+            border: 2px solid var(--lcars-purple);
+            border-radius: 15px;
+            padding: 15px;
+            color: var(--lcars-purple);
+            font-size: 16px;
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .word-tester {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .word-input {
+            flex: 1;
+            min-width: 200px;
+            background: #222;
+            border: 2px solid var(--lcars-blue);
+            border-radius: 15px;
+            padding: 15px;
+            color: var(--lcars-blue);
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+        
+        .test-button {
+            background: var(--lcars-purple);
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        
+        .test-button:active {
+            transform: scale(0.95);
+        }
+        
+        .phrase-preview {
+            background: #222;
+            border: 2px solid var(--lcars-yellow);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 10px 0;
+            font-size: 24px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+        
+        .found-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .found-word {
+            background: var(--lcars-orange);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 15px;
+            font-weight: bold;
+            animation: bounce-in 0.5s;
+        }
+        
+        @keyframes bounce-in {
+            0% { transform: scale(0); }
+            60% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .progress-tracker {
+            background: #111;
+            border: 3px solid var(--lcars-purple);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .progress-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--lcars-yellow);
+            margin: 10px 0;
+        }
+        
+        .help-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--lcars-pink);
+            color: #000;
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        
+        .help-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .help-content {
+            background: #111;
+            border: 3px solid var(--lcars-pink);
+            border-radius: 30px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .close-help {
+            background: var(--lcars-pink);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 15px;
+            float: right;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .word-tester {
+                flex-direction: column;
+            }
+            
+            .section-title {
+                font-size: 18px;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">2 MILLION FAILED STRATEGY</div>
+    
+    <div class="alert-box">
+        🚨 2,000,000+ people tried and FAILED! The answer is NOT normal! 🚨
+    </div>
+    
+    <div class="strategy-container">
+        <!-- Progress Tracker -->
+        <div class="progress-tracker">
+            <div>Clues Found:</div>
+            <div class="progress-number" id="clueCount">0</div>
+            <div>Keep investigating!</div>
+        </div>
+        
+        <!-- Video Investigation -->
+        <div class="strategy-section">
+            <div class="section-title">🔍 VIDEO DETECTIVE WORK</div>
+            <ul class="checklist" id="videoChecklist">
+                <li class="checklist-item" onclick="toggleCheck(this, 'video')">
+                    <div class="checkbox"></div>
+                    <div>
+                        <strong>Check NINYE's shirt</strong><br>
+                        <small>Any text, logos, or F-words?</small>
+                    </div>
+                </li>
+                <li class="checklist-item" onclick="toggleCheck(this, 'video')">
+                    <div class="checkbox"></div>
+                    <div>
+                        <strong>Scan the background</strong><br>
+                        <small>Posters, signs, anything with F?</small>
+                    </div>
+                </li>
+                <li class="checklist-item" onclick="toggleCheck(this, 'video')">
+                    <div class="checkbox"></div>
+                    <div>
+                        <strong>Count the blur exactly</strong><br>
+                        <small>Is it really 6? Or maybe 7? Or 5?</small>
+                    </div>
+                </li>
+                <li class="checklist-item" onclick="toggleCheck(this, 'video')">
+                    <div class="checkbox"></div>
+                    <div>
+                        <strong>Listen for emphasis</strong><br>
+                        <small>Does NINYE stress any words?</small>
+                    </div>
+                </li>
+                <li class="checklist-item" onclick="toggleCheck(this, 'video')">
+                    <div class="checkbox"></div>
+                    <div>
+                        <strong>Check video title/description</strong><br>
+                        <small>Hidden clues in the text?</small>
+                    </div>
+                </li>
+            </ul>
+            <input type="text" class="clue-input" placeholder="Found something? Type it here..." onchange="saveClue(this)">
+        </div>
+        
+        <!-- NINYE Investigation -->
+        <div class="strategy-section pink">
+            <div class="section-title">👤 NINYE RESEARCH</div>
+            <ul class="checklist" id="ninyeChecklist">
+                <li class="checklist-item" onclick="toggleCheck(this, 'ninye')">
+                    <div class="checkbox"></div>
+                    <div>
+                        <strong>Check his OTHER videos</strong><br>
+                        <small>Does he use specific F-words often?</small>
+                    </div>
+                </li>
+                <li class="checklist-item" onclick="toggleCheck(this, 'ninye')">
+                    <div class="checkbox"></div>
+                    <div>
+                        <strong>Read his channel About</strong><br>
+                        <small>Personal info, catchphrases?</small>
+                    </div>
+                </li>
+                <li class="checklist-item" onclick="toggleCheck(this, 'ninye')">
+                    <div class="checkbox"></div>
+                    <div>
+                        <strong>Check his social media</strong><br>
+                        <small>Twitter, Instagram for hints?</small>
+                    </div>
+                </li>
+                <li class="checklist-item" onclick="toggleCheck(this, 'ninye')">
+                    <div class="checkbox"></div>
+                    <div>
+                        <strong>Look at video patterns</strong><br>
+                        <small>Does he do puzzles often?</small>
+                    </div>
+                </li>
+            </ul>
+            <input type="text" class="clue-input" placeholder="NINYE clues..." onchange="saveClue(this)">
+        </div>
+        
+        <!-- Creative Thinking -->
+        <div class="strategy-section green">
+            <div class="section-title">🧠 THINK OUTSIDE THE BOX</div>
+            <ul class="checklist" id="creativeChecklist">
+                <li class="checklist-item" onclick="toggleCheck(this, 'creative')">
+                    <div class="checkbox"></div>
+                    <div>
+                        <strong>Try NON-ENGLISH words</strong><br>
+                        <small>FINITO, FINALE, FAVELA, FIESTA</small>
+                    </div>
+                </li>
+                <li class="checklist-item" onclick="toggleCheck(this, 'creative')">
+                    <div class="checkbox"></div>
+                    <div>
+                        <strong>Gaming/Tech terms</strong><br>
+                        <small>FIREFOX, FITBIT, FEDORA</small>
+                    </div>
+                </li>
+                <li class="checklist-item" onclick="toggleCheck(this, 'creative')">
+                    <div class="checkbox"></div>
+                    <div>
+                        <strong>Intentional misspellings</strong><br>
+                        <small>FUCHER, FAMLEE, FREND</small>
+                    </div>
+                </li>
+                <li class="checklist-item" onclick="toggleCheck(this, 'creative')">
+                    <div class="checkbox"></div>
+                    <div>
+                        <strong>Numbers in words</strong><br>
+                        <small>F1RST, FUT3R3, FAM1LY</small>
+                    </div>
+                </li>
+                <li class="checklist-item" onclick="toggleCheck(this, 'creative')">
+                    <div class="checkbox"></div>
+                    <div>
+                        <strong>Slang/Memes</strong><br>
+                        <small>FAKEST, FLEXIN, FANDOM</small>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Word Tester -->
+        <div class="strategy-section yellow">
+            <div class="section-title">🎯 TEST YOUR IDEAS</div>
+            <div class="word-tester">
+                <input type="text" class="word-input" id="testWord" placeholder="Type F-word here..." maxlength="8">
+                <button class="test-button" onclick="testWord()">TEST IT</button>
+            </div>
+            <div class="phrase-preview" id="phrasePreview">F_____ is</div>
+            <div class="found-words" id="foundWords"></div>
+        </div>
+    </div>
+    
+    <!-- Help Button -->
+    <div class="help-button" onclick="showHelp()">?</div>
+    
+    <!-- Help Modal -->
+    <div class="help-modal" id="helpModal" onclick="hideHelp(event)">
+        <div class="help-content">
+            <button class="close-help" onclick="hideHelp()">X</button>
+            <h2 style="color: var(--lcars-pink); margin-bottom: 20px;">How to Solve This!</h2>
+            <p style="margin-bottom: 15px;">With 2 MILLION failed attempts, the answer is NOT any normal word!</p>
+            
+            <h3 style="color: var(--lcars-blue); margin: 20px 0 10px;">Strategy:</h3>
+            <ol style="padding-left: 20px; line-height: 1.8;">
+                <li>Check everything in the video itself</li>
+                <li>Research NINYE's channel and style</li>
+                <li>Think of unusual words, misspellings, or tricks</li>
+                <li>Test your ideas in the phrase tester</li>
+                <li>Mark what you've checked to track progress</li>
+            </ol>
+            
+            <h3 style="color: var(--lcars-green); margin: 20px 0 10px;">Remember:</h3>
+            <p>The answer is probably:</p>
+            <ul style="padding-left: 20px; line-height: 1.6;">
+                <li>• Something personal to NINYE</li>
+                <li>• Hidden in the video</li>
+                <li>• Not a dictionary word</li>
+                <li>• A trick or joke</li>
+            </ul>
+            
+            <p style="margin-top: 20px; color: var(--lcars-yellow);">
+                <strong>You're looking for something 2 million people missed!</strong>
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Load saved progress
+        let progress = JSON.parse(localStorage.getItem('zachStrategy') || '{}');
+        let clues = progress.clues || [];
+        let foundWords = progress.foundWords || [];
+        let checkedItems = progress.checkedItems || {};
+        
+        // Initialize display
+        updateClueCount();
+        restoreProgress();
+        
+        function toggleCheck(element, category) {
+            const itemId = category + '_' + element.textContent.trim().substring(0, 20);
+            
+            if (element.classList.contains('checked')) {
+                element.classList.remove('checked');
+                element.querySelector('.checkbox').textContent = '';
+                delete checkedItems[itemId];
+            } else if (element.classList.contains('found')) {
+                // Already found, don't change
+                return;
+            } else {
+                element.classList.add('checked');
+                element.querySelector('.checkbox').textContent = '✓';
+                checkedItems[itemId] = true;
+            }
+            
+            saveProgress();
+            updateClueCount();
+        }
+        
+        function markAsFound(element) {
+            element.classList.remove('checked');
+            element.classList.add('found');
+            element.querySelector('.checkbox').textContent = '⭐';
+            updateClueCount();
+        }
+        
+        function saveClue(input) {
+            if (input.value.trim()) {
+                clues.push({
+                    text: input.value.trim(),
+                    timestamp: new Date().toISOString(),
+                    category: input.closest('.strategy-section').querySelector('.section-title').textContent
+                });
+                input.value = '';
+                
+                // Mark the section as having a clue found
+                const checklist = input.previousElementSibling;
+                if (checklist && checklist.querySelector('.checklist-item:not(.found)')) {
+                    const firstUnchecked = checklist.querySelector('.checklist-item:not(.found)');
+                    if (firstUnchecked) {
+                        markAsFound(firstUnchecked);
+                    }
+                }
+                
+                saveProgress();
+                updateClueCount();
+                
+                // Celebration animation
+                input.style.borderColor = 'var(--lcars-green)';
+                setTimeout(() => {
+                    input.style.borderColor = 'var(--lcars-purple)';
+                }, 1000);
+            }
+        }
+        
+        function testWord() {
+            const word = document.getElementById('testWord').value.toUpperCase();
+            if (word && word.startsWith('F')) {
+                // Update preview
+                document.getElementById('phrasePreview').textContent = `${word} is`;
+                
+                // Add to found words if new
+                if (!foundWords.includes(word)) {
+                    foundWords.push(word);
+                    saveProgress();
+                    displayFoundWords();
+                }
+                
+                // Clear input
+                document.getElementById('testWord').value = '';
+                
+                // Animation
+                document.getElementById('phrasePreview').style.color = 'var(--lcars-yellow)';
+                setTimeout(() => {
+                    document.getElementById('phrasePreview').style.color = '';
+                }, 500);
+            }
+        }
+        
+        function displayFoundWords() {
+            const container = document.getElementById('foundWords');
+            container.innerHTML = foundWords.map(word => 
+                `<div class="found-word">${word}</div>`
+            ).join('');
+        }
+        
+        function updateClueCount() {
+            const totalClues = clues.length + Object.keys(checkedItems).length;
+            document.getElementById('clueCount').textContent = totalClues;
+            
+            // Update color based on progress
+            const clueElement = document.getElementById('clueCount');
+            if (totalClues >= 10) {
+                clueElement.style.color = 'var(--lcars-green)';
+            } else if (totalClues >= 5) {
+                clueElement.style.color = 'var(--lcars-yellow)';
+            } else {
+                clueElement.style.color = 'var(--lcars-orange)';
+            }
+        }
+        
+        function saveProgress() {
+            progress = {
+                clues: clues,
+                foundWords: foundWords,
+                checkedItems: checkedItems,
+                lastUpdated: new Date().toISOString()
+            };
+            localStorage.setItem('zachStrategy', JSON.stringify(progress));
+        }
+        
+        function restoreProgress() {
+            // Restore checked items
+            Object.keys(checkedItems).forEach(itemId => {
+                const elements = document.querySelectorAll('.checklist-item');
+                elements.forEach(el => {
+                    const thisId = itemId.split('_')[0] + '_' + el.textContent.trim().substring(0, 20);
+                    if (thisId === itemId) {
+                        el.classList.add('checked');
+                        el.querySelector('.checkbox').textContent = '✓';
+                    }
+                });
+            });
+            
+            // Restore found words
+            displayFoundWords();
+        }
+        
+        function showHelp() {
+            document.getElementById('helpModal').style.display = 'block';
+        }
+        
+        function hideHelp(event) {
+            if (!event || event.target.id === 'helpModal' || event.target.classList.contains('close-help')) {
+                document.getElementById('helpModal').style.display = 'none';
+            }
+        }
+        
+        // Handle enter key in test input
+        document.getElementById('testWord').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                testWord();
+            }
+        });
+        
+        // Auto-uppercase the test input
+        document.getElementById('testWord').addEventListener('input', (e) => {
+            e.target.value = e.target.value.toUpperCase();
+        });
+    </script>
+</body>
+</html>
