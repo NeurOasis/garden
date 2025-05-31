@@ -1,0 +1,47 @@
+@MOCI:2.0|CIT_Simulation_Engine_Backlog|
+🎯:Efficiency simulation engine→prove GARDEN gains with data
+📅:BacklogItem
+
+🚀CONCEPT:
+Title:GARDEN Efficiency Simulation Engine|Priority:P0 Strategic
+Owner:Dan(tech)+Scott(validation)|Status:Validated via Brandy case
+
+📋VALUE:
+Market differentiator:first to prove gains|Sales:"400% for your team"
+Premium pricing:ROI justified|Competitive moat:pattern database
+
+🔧TECH:
+▸PatternRecog{comm style|constraint emergence|confusion ID|revision forecast}
+▸SimRunner{fresh vs GARDEN|variable inject|time estimate|success probability}
+▸Attribution{component measure|isolated test|ROI project|improvement track}
+
+📊DATA_MODEL:
+{userId|requestPattern{specificity|constraints|validation|domain}
+|simResults{baseline|withTools|withContext|fullGARDEN}
+|efficiency{toolsGain|contextGain|totalGain}}
+→Brandy:16→2 revisions=87.5% improvement
+
+🎨UX:
+Users{efficiency dashboard|pattern insights|progress tracking}
+Sales{ROI calculators|proof demos|guarantee data}
+Product{feature impact|user patterns|prioritization}
+
+📊METRICS:
+Predict revisions ±2 for 80%|10 persona ROI|50% sales cycle↓|20% QoQ improve
+
+🔄PHASES:
+P1:MVP 4wk{3 user types|scheduling domain|manual attribution}
+P2:ML 8wk{advanced patterns|multi-domain|auto attribution}
+P3:Prod 12wk{real-time API|sales tools|dashboards}
+
+✅VALIDATION:
+Brandy{baseline:16|GARDEN:2|efficiency:87.5%|time:2+hrs saved}
+Attribution{40% context|35% CITs|20% tools|5% prompt}
+
+🚨STRATEGIC:
+Not feature→killer advantage|Everyone claims→GARDEN proves with data
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|🚀=overview|📋=description|🔧=technical
+📊=data/metrics|🎨=UX|🔄=phases|✅=validation|🚨=importance
+→=results|{|}=breakdown

@@ -1,0 +1,46 @@
+@MOCI:2.0|CIT_Scheduling_Algorithms_20250530|
+🎯:Reusable scheduling patterns→prevent timing conflicts+recalculation
+📅:20250530
+
+🔢ALGORITHMS:
+▸EveryXHours{calculate next doses|handle day boundary|return times array}
+▸ConflictDetect{check spacing|find overlaps|return conflict pairs}
+
+📊CONSTRAINTS:
+▸MultiMed{sort by priority|find valid slots|place optimally}
+▸Optimize{most constrained first|check spacing|build schedule}
+
+🌙SLEEP-AWARE:
+▸NightDose{bedtime+wake params|adjust non-critical|preserve critical}
+▸SleepHours{calculate wrap|isDuringSleep check|wake-time move}
+
+🔄TRANSITIONS:
+▸MedChange{old→new on date|morning:old|afternoon:mixed|evening:new}
+▸Tomorrow{all new meds|clear transition}
+
+📐SPACING:
+Medical{antibiotics:6h|pain:4h|sedatives:6h}
+Food{with:0|empty:-1h|after:0.5h}
+Safety{similar:2h|interactions:4h}
+
+🎯PATTERNS:
+Identify{regular intervals|BID(2x12h)|TID(3x8h)|custom}
+Types{regular+interval|BID morning/evening|TID 8h spacing|custom list}
+
+🚨SAFETY:
+Validate{max daily doses|min spacing|warnings for edge}
+Overdose{check limits|interval validation|errors+warnings}
+
+📋TEMPLATES:
+TID{standard:7,15,23|meals:8,13,18|shifted:9,17,1}
+BID{standard:8,20|early:6,18|late:10,22}
+QID{standard:6,12,18,24|awake:8,14,20,26}
+
+🔧HELPERS:
+Normalize{"3:30 PM"→15.5|handle AM/PM|decimal hours}
+Format{15.5→"3:30 PM"|12hr format|pad minutes}
+
+◆PATTERN_LIB:
+@MOCI=format|🎯=goal|📅=date|🔢=algorithms|📊=constraints|🌙=sleep
+🔄=transitions|📐=spacing|🚨=safety|📋=templates|🔧=utilities
+h=hours|→=converts|{|}=options
