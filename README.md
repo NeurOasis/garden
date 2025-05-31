@@ -1,3 +1,14 @@
+## 🌱 New Home: NeurOasis/greenhouse
+
+Along with MOCI 2.0, we're excited to announce GARDEN's new organizational home:
+**NeurOasis/greenhouse** - where tools grow and flourish!
+
+- **greenhouse** - Stable, production-ready tools
+- **greenhouse-nursery** - Experimental features (coming soon)
+- **Community forks** - Your gardens built on our foundation
+
+
+
 # G.A.R.D.E.N. Core Repository
 
 **Graph Algorithms, Research, Development, Enhancement, and Novelties**
