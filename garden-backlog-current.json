@@ -824,5 +824,132 @@
       "Test with different authentication methods"
     ],
     "notes": "Good news: Claude IS trying to call APIs first (correct priority). Bad news: network layer failing."
+  },
+  {
+    "id": "55",
+    "title": "Validate GARDEN API Fix",
+    "description": "Test whether the CORS/fetch fix for BUG-001 resolves Claude's ability to call GARDEN APIs directly. Run same test queries to verify successful API integration.",
+    "project": "core",
+    "priority": "P0",
+    "status": "todo",
+    "created": "2025-06-01T01:00:00.000Z",
+    "dependencies": [
+      "BUG-001 fix deployed"
+    ],
+    "test_queries": [
+      "Tell me about NodePad",
+      "What patterns exist in GARDEN?",
+      "How do GARDEN tools connect?"
+    ],
+    "success_criteria": [
+      "No 'Failed to fetch' errors",
+      "API responses show in Claude's answer",
+      "No fallback to web search for GARDEN terms",
+      "Response time under 2 seconds"
+    ],
+    "validation_method": "Compare before/after responses for same queries",
+    "notes": "Scott has short window - need quick validation that API integration is working"
+  },
+  {
+    "id": "56",
+    "title": "Fix BUG-001: GARDEN API CORS/Fetch Error",
+    "description": "Resolve network layer issue preventing Claude from calling GARDEN APIs directly. APIs work via curl but fail from Claude environment.",
+    "project": "core",
+    "priority": "P0",
+    "status": "backlog",
+    "created": "2025-06-01T14:00:00.000Z",
+    "dependencies": [
+      "CORS configuration update deployed",
+      "Test environment ready"
+    ],
+    "implementation": "Update CORS headers in api/explorer.py and api/sunflower.py, test proxy approach if needed, validate with Claude integration tests",
+    "starting_points": [
+      "/garden-tools-service/api/explorer.py - Add CORS headers",
+      "/garden-tools-service/api/sunflower.py - Add CORS headers",
+      "/contexts/MANDATORY_GARDEN_API_CALLS.md - Integration logic",
+      "Test queries documented in item #55"
+    ],
+    "notes": "APIs are correctly prioritized by Claude but network layer failing"
+  },
+  {
+    "id": "57",
+    "title": "MOCI 1.0 Full Development",
+    "description": "Build complete MOCI encoder/decoder system achieving 80%+ compression while maintaining 100% information fidelity using binary/emoji/Esperanto/ASL encoding.",
+    "project": "core",
+    "priority": "P0",
+    "status": "backlog",
+    "created": "2025-06-01T14:00:00.000Z",
+    "dependencies": [
+      "MOCI proof of concept validated (77% achieved)",
+      "Sample CITs uploaded for testing"
+    ],
+    "implementation": "Build encoder/decoder functions, create pattern library, establish bidirectional translation, validate 80%+ compression across all CIT types",
+    "starting_points": [
+      "/contexts/moci/CIT_Claude_Tool_Integration.moci - Working example",
+      "/findings/moci-discovery-20250531.md - Research notes",
+      "5 sample CITs already uploaded for compression testing",
+      "LCARS proof: 2,847 → 487 tokens (83% reduction)"
+    ],
+    "phases": [
+      "Phase 1: Core encoder/decoder implementation",
+      "Phase 2: Pattern library development",
+      "Phase 3: Validation across all CIT types",
+      "Phase 4: Integration with GARDEN core"
+    ],
+    "notes": "Foundation for revolutionary context management - enables unlimited tool growth"
+  },
+  {
+    "id": "58",
+    "title": "Microservice Pattern Application",
+    "description": "Apply proven microservice extraction pattern to future heavy computational tools, establishing GARDEN as distributed tool ecosystem.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-06-01T14:00:00.000Z",
+    "dependencies": [
+      "Microservice pattern documented",
+      "Explorer/Sunflower APIs proven successful"
+    ],
+    "implementation": "Identify computational tools for extraction, create service templates, establish deployment pipeline, build tool marketplace concept",
+    "starting_points": [
+      "/patterns/microservice-extraction-pattern.md - Complete guide",
+      "/garden-tools-service/ - Reference implementation",
+      "Vercel deployment process documented",
+      "API key authentication pattern established"
+    ],
+    "future_candidates": [
+      "ML/AI analysis tools",
+      "Data visualization generators",
+      "External API wrappers",
+      "File format processors",
+      "Complex computational tools"
+    ],
+    "notes": "98% token reduction achieved with Explorer/Sunflower - pattern ready for scaling"
+  },
+  {
+    "id": "59",
+    "title": "Deep GARDEN Repository Cleanup",
+    "description": "Complete reorganization of GARDEN repository structure including Python tool archival, directory consolidation, and clear navigation.",
+    "project": "core",
+    "priority": "P0",
+    "status": "backlog",
+    "created": "2025-06-01T14:30:00.000Z",
+    "scope": [
+      "Archive all Python tools to archived-microservices/",
+      "Move sunflower Python files but keep directory for future HTML tool",
+      "Consolidate /generated/ and /module-generators/ purpose",
+      "Clean up /gateway/ directory",
+      "Remove old script files",
+      "Create clear navigation structure"
+    ],
+    "implementation": "Systematic directory-by-directory cleanup preserving valuable documentation while removing redundant code",
+    "goals": [
+      "Single source of truth for each tool",
+      "Clear separation of active vs archived",
+      "Intuitive navigation for new users",
+      "Reduced confusion about tool locations",
+      "Preserved history in archive"
+    ],
+    "notes": "Quick 5-minute cleanup completed basic organization, this completes the deep restructure"
   }
 ]

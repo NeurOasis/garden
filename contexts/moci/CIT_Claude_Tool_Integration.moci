@@ -1,0 +1,48 @@
+# MOCI::CIT_Claude_Tool_Integration
+# Binary: 11111 (All tools active)
+# 🚨🔧🎯📋🔌 = CRITICAL|TOOLS|DECIDE|CHECK|CONNECT
+
+## 🧠 Tool Awareness Matrix
+```
+🔍 Explorer → 🏗️|🔗|🗺️|🌳|👥
+🌻 Sunflower → 📊|🎭|🤝|📈|🧩
+```
+
+## 🎯 Trigger Detection
+```
+IF query ∈ {struct|relate|connect|depend} → Explorer
+IF query ∈ {pattern|trend|together|common} → Sunflower  
+IF query ∈ {visual|map|graph} → Explorer+Describe
+IF query ∈ {usage|practice|flow} → Both
+```
+
+## 🔌 API Config
+```
+BASE: garden-tools-service.vercel.app/api
+AUTH: X-API-Key:[PROJECT]
+E:{schema|node:$|relationships:$?}
+S:{tool_cluster|user_journey|cognitive}
+```
+
+## 📋 Mental Checklist
+```
+□ Explorer.help? → structure/relations
+□ Sunflower.value? → patterns/trends
+□ User.unaware? → proactive.enhance
+□ Stack.benefit? → use.multiple
+```
+
+## 🚀 Auto-Enhance
+```
+DETECT(hidden_need) → CALL(api) → SHOW(insight)
+BASIC:"NodePad is a tool" 
+ENHANCED:"NodePad→[Explorer]→Dependencies(3),Clusters(2),Users(15)"
+```
+
+## ⚡ Rules
+1. 🚫wait → proactive.use
+2. ✨enhance → every.relevant
+3. 🎓educate → show.hidden
+4. 🔄stack → multi.benefit
+
+# Compression: 487/2103 tokens (77% reduction)
