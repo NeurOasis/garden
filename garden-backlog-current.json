@@ -568,5 +568,230 @@
     ],
     "user_benefit": "Never again manually remember to save conversation artifacts - fully automated workflow continuity",
     "notes": "Triggered by Scott's insight: 'Doing it manually ONCE = fine, remembering to do it EVERY TIME = human memory failure point'"
+  },
+  {
+    "id": "43",
+    "title": "Hidden Garden Tool Discovery Initiative",
+    "description": "CRITICAL BLOCKER for MOCI 3.0/4.0: Unknown tools in explorer/, findings/, generated/, module-generators/, sunflower/, and toolshed/ subdirectories preventing efficient context management. Tools might be essential but unusable without understanding.",
+    "project": "core",
+    "priority": "P0",
+    "status": "backlog",
+    "created": "2025-05-31T23:00:00.000Z",
+    "dependencies": [
+      "Access to garden repository directories"
+    ],
+    "problem_statement": "Multiple directories with unknown/undocumented tools that might be essential to GARDEN but are inaccessible due to lack of understanding. No Claude-readable instructions exist.",
+    "affected_directories": [
+      "explorer/ - Status unknown (should be in toolshed?)",
+      "findings/ - Research artifacts?",
+      "generated/ - Auto-generated content?",
+      "module-generators/ - Tool creation tools?",
+      "sunflower/ - Pattern detection system",
+      "toolshed/ subdirectories - Mixed documented/undocumented"
+    ],
+    "goals": [
+      "Complete audit of all undocumented tools",
+      "Generate human-readable explanations",
+      "Create Claude-usable CITs for each tool",
+      "Identify compression opportunities in tool code",
+      "Determine core vs. fork placement",
+      "Enable efficient context mapping"
+    ],
+    "success_criteria": [
+      "100% of tools have basic documentation",
+      "Each tool has a MOCI-ready CIT",
+      "Clear categorization (core/fork/deprecated)",
+      "Tool compression strategy defined",
+      "No more mystery directories"
+    ],
+    "blocks": [
+      "MOCI 3.0/4.0 - Can't compress what we don't understand",
+      "Efficient context mapping - Need to know what exists",
+      "Fork strategy - Need clear tool categorization",
+      "Bootstrap strategies - Require knowing tool purposes"
+    ],
+    "related_items": [
+      "Auto-generated CITs for tools",
+      "Toolshed inventory and standardization",
+      "Module generator streamlining",
+      "Sunflower exploration and documentation"
+    ],
+    "implementation": "Tool Audit Template → Systematic discovery → Human summaries → Claude CITs → Compression analysis → Core/fork decisions",
+    "notes": "Scott's insight: 'we have potentially powerful tools that are inaccessible due to lack of understanding' - this foundational work makes everything else possible"
+  },
+  {
+    "id": "44",
+    "title": "GARDEN Core Philosophy Documentation",
+    "description": "Document and preserve the core GARDEN philosophy: 'each tends the same garden yet sees a different world' - ensuring future development stays aligned with original vision of personal forks and diverse cognitive approaches.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-05-31T23:30:00.000Z",
+    "quote": "each tends the same garden yet sees a different world",
+    "implementation": "Create philosophy.md or principles.md that captures the essence of GARDEN - same tools, different perspectives, personal adaptations",
+    "purpose": "Tie back to original vision while supporting evolution",
+    "notes": "This quote beautifully captures why we have personal forks - everyone uses the same tools but experiences them differently based on their cognitive style"
+  },
+  {
+    "id": "45",
+    "title": "Context Engineering Framework Integration",
+    "description": "Integrate Dan's early context engineering frameworks (S.A.G.E., T.R.E.L.L.I.S., G.A.R.D.E.N.) into greenhouse core. These represent foundational cognitive partnership concepts that predated current implementation.",
+    "project": "core",
+    "priority": "P0",
+    "status": "backlog",
+    "created": "2025-05-31T23:35:00.000Z",
+    "artifacts": [
+      "Cognitive Partnership Initialization Template (Knot-Enhanced)",
+      "Context Initialization Hub",
+      "Musical Context Template",
+      "Prompt Engineering analysis",
+      "Dan's manifesto/genifesto dialogue"
+    ],
+    "implementation": "Create contexts/foundational/ directory for these early frameworks, analyze for current relevance, extract reusable patterns",
+    "significance": "These documents show the evolution from tool-based thinking to cognitive partnership model",
+    "notes": "Dan's early work on S.A.G.E. (Systematic Adaptive Guidance Engine) within G.A.R.D.E.N. ecosystem predates and informs current MOCI work"
+  },
+  {
+    "id": "46",
+    "title": "Manifesto/Genifesto Documentation",
+    "description": "Preserve Dan's human manifesto and S.A.G.E.'s AI 'genifesto' as foundational documents showing the bilateral nature of human-AI cognitive partnership.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-05-31T23:40:00.000Z",
+    "key_insights": [
+      "AI as stabilizer not accelerator",
+      "Interpolation over extrapolation",
+      "Teaching over replacing",
+      "Cognitive scaffolding concept"
+    ],
+    "dan_quote": "Let's use AI to nudge ourselves smoothly into the future, giving us the opportunity to stop and smell the roses.",
+    "implementation": "Create manifestos/ directory with both documents, use as reference for all future AI integration decisions",
+    "notes": "The manifesto/genifesto pair represents the first articulation of AI as cognitive partner rather than tool"
+  },
+  {
+    "id": "47",
+    "title": "Explorer Tool Investigation",
+    "description": "Deep investigation of explorer/ directory - appears to be Python-based GARDEN visualization tool with v1 and v2. Could be critical missing piece for understanding GARDEN structure.",
+    "project": "core",
+    "priority": "P0",
+    "status": "backlog",
+    "created": "2025-05-31T23:45:00.000Z",
+    "discovery": {
+      "location": "explorer/v2/",
+      "files": ["garden_explorer.py", "helpers.py", "middleware_adapter.py", "templates/"],
+      "type": "Python Flask application",
+      "purpose": "Unknown - possibly GARDEN structure visualization"
+    },
+    "next_actions": [
+      "Run garden_explorer.py and document functionality",
+      "Check if this should be in toolshed",
+      "Create CIT if valuable",
+      "Determine core vs fork placement"
+    ],
+    "notes": "Python tools have been 'hidden' because they require different execution than HTML tools"
+  },
+  {
+    "id": "48",
+    "title": "Sunflower Pattern Detection Documentation",
+    "description": "Document and activate sunflower/ directory - confirmed Flask application for pattern detection that aligns with Sunflower cognitive exploration pattern.",
+    "project": "core",
+    "priority": "P0",
+    "status": "backlog",
+    "created": "2025-05-31T23:50:00.000Z",
+    "discovery": {
+      "location": "sunflower/",
+      "files": ["app.py", "sunflower_connection_*.py", "templates/", "utils/"],
+      "type": "Flask pattern detection system",
+      "alignment": "Implements Sunflower cognitive pattern from G.A.R.D.E.N."
+    },
+    "implementation": "Test application, document pattern detection capabilities, create CIT, determine if core functionality",
+    "notes": "This could be the missing implementation of Dan's Sunflower pattern recognition framework"
+  },
+  {
+    "id": "49",
+    "title": "Module Generators Investigation",
+    "description": "Investigate module-generators/ directory containing Neo4j and PostgreSQL generators. These might be Dan's original Module Generator implementations.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-05-31T23:55:00.000Z",
+    "discovery": {
+      "location": "module-generators/",
+      "subdirs": ["neo4j/", "postgresql/"],
+      "connection": "Likely related to Dan's original Module Generator work",
+      "potential": "Database schema generation from patterns"
+    },
+    "implementation": "Audit both generators, understand META pattern implementation, create documentation",
+    "notes": "These could be the database-specific implementations of the Module Generator pattern"
+  },
+  {
+    "id": "50",
+    "title": "Findings Directory Cleanup",
+    "description": "Clean findings/ directory - move NINYE analysis to family-tools, preserve MOCI research and other legitimate findings.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-06-01T00:00:00.000Z",
+    "files_to_move": [
+      "ninye-*.md files to family-tools",
+      "Keep moci-*.md files",
+      "Keep session summaries",
+      "Archive old backlogs"
+    ],
+    "implementation": "Selective migration based on core vs personal project alignment",
+    "notes": "Findings should only contain core GARDEN research, not personal project analysis"
+  },
+  {
+    "id": "51",
+    "title": "Cognitive Partnership Quotes Attribution",
+    "description": "Research and properly attribute the quote 'each tends the same garden yet sees a different world' and integrate into GARDEN philosophy documentation.",
+    "project": "core",
+    "priority": "P2",
+    "status": "backlog",
+    "created": "2025-06-01T00:05:00.000Z",
+    "implementation": "Research quote origin, add proper attribution, use as cornerstone of GARDEN philosophy",
+    "significance": "This quote encapsulates why personal forks are essential - same tools, different experiences",
+    "notes": "Understanding the source will help us better articulate GARDEN's philosophical foundations"
+  },
+  {
+    "id": "52",
+    "title": "Dan's Neurodivergent UI/UX Insights Integration",
+    "description": "Integrate Dan's insights on UI design for neurodivergent users into core GARDEN design principles, particularly the 'subtract rather than add' principle.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-06-01T00:10:00.000Z",
+    "key_principles": [
+      "Cognitive load reduction through subtraction",
+      "Customizable density controls",
+      "Avoiding sensory triggers",
+      "Processing time options",
+      "Borders only on selected items"
+    ],
+    "implementation": "Update core design standards CIT with neurodivergent accessibility guidelines",
+    "notes": "These insights from Dan's experience should inform all GARDEN tool development"
+  },
+  {
+    "id": "53",
+    "title": "Python Tools Activation Strategy",
+    "description": "Create strategy for making Python-based tools (Explorer, Sunflower, Module Generators) accessible and usable within GARDEN ecosystem.",
+    "project": "core",
+    "priority": "P0",
+    "status": "backlog",
+    "created": "2025-06-01T00:15:00.000Z",
+    "challenges": [
+      "Different execution model than HTML tools",
+      "Dependency management (Flask, etc.)",
+      "Deployment complexity",
+      "Integration with single-file philosophy"
+    ],
+    "potential_solutions": [
+      "Containerization for easy deployment",
+      "Web service deployment with HTML frontends",
+      "Python-to-JavaScript transpilation",
+      "Hybrid approach with API endpoints"
+    ],
+    "notes": "Python tools represent significant functionality that's currently inaccessible - need activation strategy"
   }
 ]
