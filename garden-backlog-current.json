@@ -793,5 +793,36 @@
       "Hybrid approach with API endpoints"
     ],
     "notes": "Python tools represent significant functionality that's currently inaccessible - need activation strategy"
+  },
+  {
+    "id": "54",
+    "title": "Fix GARDEN API CORS/Fetch Error (BUG-001)",
+    "description": "Claude gets 'Failed to fetch' when calling GARDEN APIs directly. API calls are attempted but fail at the network level, causing fallback to web search.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-06-01T00:20:00.000Z",
+    "bug_id": "BUG-001",
+    "type": "bug",
+    "symptoms": [
+      "Failed to fetch https://garden-tools-service.vercel.app/api/explorer",
+      "Failed to fetch https://garden-tools-service.vercel.app/api/sunflower",
+      "Claude correctly attempts API calls but network fails"
+    ],
+    "potential_causes": [
+      "CORS headers not properly configured",
+      "Claude environment may not support direct fetch",
+      "API key authentication format issue",
+      "Vercel function timeout or configuration"
+    ],
+    "validation": "API works via curl but not from Claude",
+    "impact": "Forces Claude to use slower web search instead of instant API data",
+    "next_actions": [
+      "Test API with enhanced CORS headers",
+      "Verify Vercel function configuration",
+      "Consider proxy approach if Claude can't fetch directly",
+      "Test with different authentication methods"
+    ],
+    "notes": "Good news: Claude IS trying to call APIs first (correct priority). Bad news: network layer failing."
   }
 ]
