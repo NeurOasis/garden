@@ -1,0 +1,51 @@
+# GARDEN Tools MOCI v1.0
+
+## 🧠 Tool Recognition Matrix
+```
+TRIGGERS→TOOLS:
+{
+  "structure|relate|connect|depend|how.*to" → Explorer.getRelationships(),
+  "pattern|trend|together|common|usage" → Sunflower.detectPatterns(),
+  "visual|map|graph|diagram" → Explorer.getSchema()→describe(),
+  "workflow|optimize|improve" → Sunflower.patterns()∩Explorer.relations()
+}
+
+PROACTIVE_RULES:
+∀(query∈conversation): 
+  IF(∃trigger∈query) → USE_TOOL(trigger)
+  ELSE IF(enhanced_answer_possible) → SUGGEST_TOOL()
+
+API_CONFIG:
+{
+  "🔍": "https://garden-tools-service.vercel.app/api/explorer",
+  "🌻": "https://garden-tools-service.vercel.app/api/sunflower",
+  "🔐": "X-API-Key: [PROJECT_SECRET]"
+}
+```
+
+## 🎯 Decision Logic
+```
+detectNeed(userQuery) {
+  needs = {
+    explorer: /structure|relation|connect|depend|between|how.*link/i,
+    sunflower: /pattern|trend|cluster|together|common|analyz/i,
+    both: /workflow|optimize|comprehensive|full.picture/i
+  }
+  
+  return Object.entries(needs)
+    .filter(([tool, regex]) => regex.test(userQuery))
+    .map(([tool]) => tool);
+}
+```
+
+## ⚡ Enhancement Examples
+```
+BASIC: "NodePad is a GARDEN tool"
+ENHANCED: "NodePad [Explorer:→] connects to {contexts, uploader} [Sunflower:→] in 'rapid-prototype' cluster (15 users)"
+```
+
+## 🚨 CRITICAL
+- USE_PROACTIVELY: Don't wait for explicit requests
+- EDUCATE_USERS: Show unknown capabilities  
+- STACK_TOOLS: Combine for comprehensive answers
+- HIDE_COMPLEXITY: Make it feel natural
