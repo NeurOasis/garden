@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garden Tricorder - Enhanced Neural Interface</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        :root {
+            --lcars-orange: #FF9900;
+            --lcars-blue: #0066CC;
+            --lcars-purple: #9966CC;
+            --lcars-red: #d32f2f;
+            --lcars-bg: #000011;
+            --lcars-panel: #001122;
+            --lcars-text: #FFFFFF;
+            --lcars-dim: #999999;
+            --lcars-border: #333355;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: var(--lcars-bg);
+            color: var(--lcars-text);
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .lcars-interface {
+            display: grid;
+            grid-template-areas: 
+                "header header header"
+                "left-panel main right-panel"
+                "footer footer footer";
+            grid-template-rows: 80px 1fr 60px;
+            grid-template-columns: 220px 1fr 200px;
+            height: 100vh;
+            gap: 2px;
+        }
+        
+        .header {
+            grid-area: header;
+            background: var(--lcars-orange);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .header h1 {
+            color: black;
+            font-weight: 900;
+            font-size: 24px;
+            letter-spacing: 2px;
+        }
+        
+        .stardate {
+            position: absolute;
+            right: 20px;
+            color: black;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        
+        .left-panel {
+            grid-area: left-panel;
+            background: var(--lcars-panel);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding: 10px;
+        }
+        
+        .panel-title {
+            background: var(--lcars-orange);
+            color: black;
+            padding: 8px 12px;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .space-block {
+            background: var(--lcars-blue);
+            color: black;
+            padding: 12px 10px;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 0 15px 15px 0;
+            margin-bottom: 2px;
+        }
+        
+        .space-block:hover {
+            background: var(--lcars-orange);
+        }
+        
+        .space-block.active {
+            background: var(--lcars-orange);
+        }
+        
+        .space-block.personal { background: var(--lcars-purple); }
+        .space-block.business { background: var(--lcars-blue); }
+        .space-block.garden { background: var(--lcars-red); }
+        
+        .category-section {
+            margin-top: 20px;
+        }
+        
+        .category-block {
+            background: var(--lcars-orange);
+            color: black;
+            padding: 8px 10px;
+            font-weight: 700;
+            font-size: 10px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 2px;
+        }
+        
+        .category-block:hover {
+            background: var(--lcars-red);
+        }
+        
+        .category-block.active {
+            background: var(--lcars-red);
+        }
+        
+        .main-content {
+            grid-area: main;
+            background: var(--lcars-panel);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        .content-header {
+            background: var(--lcars-blue);
+            color: black;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            border-radius: 20px 0 0 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 12px;
+        }
+        
+        .input-area {
+            background: rgba(0, 102, 204, 0.1);
+            border: 2px solid var(--lcars-blue);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            min-height: 120px;
+            font-family: 'Orbitron', monospace;
+            font-size: 13px;
+            color: var(--lcars-text);
+            resize: none;
+            outline: none;
+        }
+        
+        .input-area:focus {
+            border-color: var(--lcars-orange);
+            box-shadow: 0 0 15px rgba(255, 153, 0, 0.3);
+        }
+        
+        .input-area::placeholder {
+            color: var(--lcars-dim);
+            font-style: italic;
+        }
+        
+        .ideas-display {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .idea-entry {
+            background: rgba(0, 102, 204, 0.05);
+            border-left: 4px solid var(--lcars-blue);
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 0 10px 10px 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .idea-entry:hover {
+            background: rgba(0, 102, 204, 0.1);
+            transform: translateX(3px);
+        }
+        
+        .idea-entry.personal { border-left-color: var(--lcars-purple); }
+        .idea-entry.business { border-left-color: var(--lcars-blue); }
+        .idea-entry.garden { border-left-color: var(--lcars-red); }
+        
+        .idea-entry.collaboration { border-left-color: var(--lcars-purple); }
+        .idea-entry.features { border-left-color: var(--lcars-blue); }
+        .idea-entry.interface { border-left-color: var(--lcars-orange); }
+        .idea-entry.bugs { border-left-color: var(--lcars-red); }
+        
+        .idea-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            font-size: 10px;
+            color: var(--lcars-dim);
+        }
+        
+        .idea-category {
+            background: var(--lcars-blue);
+            color: black;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .idea-category.personal { background: var(--lcars-purple); }
+        .idea-category.business { background: var(--lcars-blue); }
+        .idea-category.garden { background: var(--lcars-red); }
+        
+        .idea-category.collaboration { background: var(--lcars-purple); }
+        .idea-category.features { background: var(--lcars-blue); }
+        .idea-category.interface { background: var(--lcars-orange); }
+        .idea-category.bugs { background: var(--lcars-red); }
+        
+        .idea-text {
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        .priority-indicator {
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 8px;
+        }
+        
+        .priority-high {
+            background: var(--lcars-red);
+            color: white;
+        }
+        
+        .priority-medium {
+            background: var(--lcars-orange);
+            color: black;
+        }
+        
+        .priority-low {
+            background: var(--lcars-blue);
+            color: white;
+        }
+        
+        .right-panel {
+            grid-area: right-panel;
+            background: var(--lcars-panel);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding: 10px;
+        }
+        
+        .status-block {
+            background: var(--lcars-orange);
+            color: black;
+            padding: 12px 8px;
+            font-weight: 700;
+            font-size: 10px;
+            text-align: center;
+            letter-spacing: 1px;
+            border-radius: 15px 0 0 15px;
+        }
+        
+        .action-block {
+            background: var(--lcars-purple);
+            color: black;
+            padding: 15px 8px;
+            font-weight: 700;
+            font-size: 9px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 15px 0 0 15px;
+            margin-bottom: 5px;
+        }
+        
+        .action-block:hover {
+            background: var(--lcars-orange);
+        }
+        
+        .footer {
+            grid-area: footer;
+            background: var(--lcars-orange);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .status-text {
+            color: black;
+            font-weight: 700;
+            font-size: 11px;
+        }
+        
+        .lcars-button {
+            background: var(--lcars-blue);
+            color: black;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 9px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .lcars-button:hover {
+            background: var(--lcars-red);
+            color: white;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--lcars-panel);
+            border: 2px solid var(--lcars-orange);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            background: var(--lcars-orange);
+            color: black;
+            padding: 10px 15px;
+            margin: -30px -30px 20px -30px;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            border-radius: 13px 13px 0 0;
+        }
+        
+        .import-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .import-option {
+            background: var(--lcars-blue);
+            color: black;
+            padding: 8px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 11px;
+            transition: all 0.2s;
+        }
+        
+        .import-option:hover, .import-option.active {
+            background: var(--lcars-orange);
+        }
+        
+        .import-textarea {
+            width: 100%;
+            height: 200px;
+            background: var(--lcars-bg);
+            border: 2px solid var(--lcars-blue);
+            border-radius: 10px;
+            padding: 15px;
+            color: var(--lcars-text);
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+        
+        .import-textarea:focus {
+            outline: none;
+            border-color: var(--lcars-orange);
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .btn-cancel {
+            background: var(--lcars-dim);
+            color: white;
+        }
+        
+        .btn-import {
+            background: var(--lcars-red);
+            color: white;
+        }
+        
+        .ideas-display::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .ideas-display::-webkit-scrollbar-track {
+            background: var(--lcars-panel);
+        }
+        
+        .ideas-display::-webkit-scrollbar-thumb {
+            background: var(--lcars-blue);
+            border-radius: 3px;
+        }
+        
+        .ideas-display::-webkit-scrollbar-thumb:hover {
+            background: var(--lcars-orange);
+        }
+        
+        @media (max-width: 768px) {
+            .lcars-interface {
+                grid-template-areas:
+                    "header"
+                    "main"
+                    "footer";
+                grid-template-columns: 1fr;
+                grid-template-rows: 60px 1fr 50px;
+            }
+            
+            .left-panel, .right-panel {
+                display: none;
+            }
+            
+            .header h1 {
+                font-size: 18px;
+            }
+            
+            .content-header {
+                text-align: center;
+                border-radius: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="lcars-interface">
+        <header class="header">
+            <h1>SCOTT'S GARDEN TRICORDER - ENHANCED NEURAL</h1>
+            <div class="stardate">STARDATE: <span id="stardate"></span></div>
+        </header>
+        
+        <aside class="left-panel">
+            <div class="panel-title">NEURAL SPACES</div>
+            <div class="space-block active" data-space="all">ALL SPACES</div>
+            <div class="space-block personal" data-space="personal">PERSONAL</div>
+            <div class="space-block business" data-space="business">BUSINESS</div>
+            <div class="space-block garden" data-space="garden">GARDEN</div>
+            
+            <div class="category-section">
+                <div class="panel-title">CATEGORIES</div>
+                <div class="category-block active" data-category="all">ALL</div>
+                <div class="category-block" data-category="collaboration">COLLAB</div>
+                <div class="category-block" data-category="features">FEATURES</div>
+                <div class="category-block" data-category="interface">INTERFACE</div>
+                <div class="category-block" data-category="bugs">BUGS</div>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <div class="content-header">NEURAL INTERFACE ACTIVE - ENHANCED TRICORDER</div>
+            
+            <textarea class="input-area" id="ideaInput" 
+                placeholder="Captain's neural interface active. Recording mental... Neural interface active. Recording"></textarea>
+            
+            <div class="ideas-display" id="ideasDisplay">
+                <!-- Ideas will be populated here -->
+            </div>
+        </main>
+        
+        <aside class="right-panel">
+            <div class="status-block">STATUS:<br>OPERATIONAL</div>
+            <div class="action-block" id="clusterAnalysis">CLUSTER<br>ANALYSIS</div>
+            <div class="action-block" id="importData">IMPORT<br>DATA LOGS</div>
+            <div class="action-block" id="exportGarden">EXPORT<br>GARDEN</div>
+        </aside>
+        
+        <footer class="footer">
+            <div class="status-text">NEURAL LINK: ACTIVE | AUTO-SAVE: ENABLED</div>
+            <button class="lcars-button" id="clearLog">CLEAR LOG</button>
+        </footer>
+    </div>
+
+    <!-- Import Modal -->
+    <div class="modal" id="importModal">
+        <div class="modal-content">
+            <div class="modal-header">IMPORT DATA LOGS - ENHANCED PARSER</div>
+            
+            <div class="import-options">
+                <div class="import-option active" data-format="auto">AUTO-DETECT</div>
+                <div class="import-option" data-format="nodepad">NODEPAD 4B</div>
+                <div class="import-option" data-format="markdown">MARKDOWN</div>
+                <div class="import-option" data-format="json">JSON</div>
+                <div class="import-option" data-format="text">PLAIN TEXT</div>
+            </div>
+            
+            <textarea class="import-textarea" id="importTextarea" 
+                placeholder="Paste your exported data here...
+
+GARDEN Ideas Export
+Generated: 5/30/2025, 12:24:16 PM
+Total Ideas: 8
+
+## Summary
+- features: 5
+- personal: 2
+- bugs: 1
+
+**[MEDIUM]** Fix cit standard naming
+- Tags: none
+- Created: 5/30/2025, 12:24:16 PM
+
+**[MEDIUM]** Link in here somewhere with the sailboat as an office, workplace accommodations, working outside
+- Tags: none  
+- Created: 5/2/2025, 9:31:55 PM"></textarea>
+            
+            <div class="modal-buttons">
+                <button class="lcars-button btn-cancel" id="cancelImport">CANCEL</button>
+                <button class="lcars-button btn-import" id="processImport">IMPORT DATA</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced Garden Tricorder v2.0
+        class EnhancedCaptainsLog {
+            constructor() {
+                this.ideas = JSON.parse(localStorage.getItem('gardenTricorder')) || [];
+                this.currentSpace = 'all';
+                this.currentCategory = 'all';
+                this.currentFormat = 'auto';
+                this.init();
+            }
+            
+            init() {
+                this.updateStardate();
+                this.setupEventListeners();
+                this.displayIdeas();
+                
+                // Update stardate every minute
+                setInterval(() => this.updateStardate(), 60000);
+                
+                // Auto-save every 5 seconds
+                setInterval(() => this.saveToStorage(), 5000);
+            }
+            
+            updateStardate() {
+                const now = new Date();
+                const year = now.getFullYear();
+                const dayOfYear = Math.floor((now - new Date(year, 0, 0)) / 86400000);
+                const stardate = `${year}.${dayOfYear.toString().padStart(3, '0')}`;
+                document.getElementById('stardate').textContent = stardate;
+            }
+            
+            setupEventListeners() {
+                // Input handling
+                const input = document.getElementById('ideaInput');
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                        this.addIdea();
+                    }
+                });
+                
+                // Space filtering
+                document.querySelectorAll('.space-block').forEach(block => {
+                    block.addEventListener('click', (e) => {
+                        this.setSpaceFilter(e.target.dataset.space);
+                    });
+                });
+                
+                // Category filtering
+                document.querySelectorAll('.category-block').forEach(block => {
+                    block.addEventListener('click', (e) => {
+                        this.setCategoryFilter(e.target.dataset.category);
+                    });
+                });
+                
+                // Action buttons
+                document.getElementById('importData').addEventListener('click', () => {
+                    this.showImportModal();
+                });
+                
+                document.getElementById('exportGarden').addEventListener('click', () => {
+                    this.exportToGarden();
+                });
+                
+                document.getElementById('clusterAnalysis').addEventListener('click', () => {
+                    this.performClusterAnalysis();
+                });
+                
+                document.getElementById('clearLog').addEventListener('click', () => {
+                    this.clearLog();
+                });
+                
+                // Import modal handling
+                this.setupImportModal();
+            }
+            
+            setupImportModal() {
+                const modal = document.getElementById('importModal');
+                
+                // Format selection
+                document.querySelectorAll('.import-option').forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        document.querySelectorAll('.import-option').forEach(o => o.classList.remove('active'));
+                        e.target.classList.add('active');
+                        this.currentFormat = e.target.dataset.format;
+                    });
+                });
+                
+                // Modal buttons
+                document.getElementById('cancelImport').addEventListener('click', () => {
+                    modal.style.display = 'none';
+                });
+                
+                document.getElementById('processImport').addEventListener('click', () => {
+                    this.processImport();
+                });
+                
+                // Close modal on background click
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            }
+            
+            showImportModal() {
+                document.getElementById('importModal').style.display = 'flex';
+                document.getElementById('importTextarea').focus();
+            }
+            
+            processImport() {
+                const textarea = document.getElementById('importTextarea');
+                const data = textarea.value.trim();
+                
+                if (!data) {
+                    this.showStatus('No data to import');
+                    return;
+                }
+                
+                let parsedIdeas = [];
+                
+                if (this.currentFormat === 'auto') {
+                    parsedIdeas = this.autoDetectAndParse(data);
+                } else {
+                    parsedIdeas = this.parseByFormat(data, this.currentFormat);
+                }
+                
+                if (parsedIdeas.length > 0) {
+                    this.ideas.push(...parsedIdeas);
+                    this.saveToStorage();
+                    this.displayIdeas();
+                    this.showStatus(`Imported ${parsedIdeas.length} ideas successfully`);
+                    document.getElementById('importModal').style.display = 'none';
+                    textarea.value = '';
+                } else {
+                    this.showStatus('No valid ideas found in import data');
+                }
+            }
+            
+            autoDetectAndParse(data) {
+                // Enhanced auto-detection logic
+                
+                // Check for GARDEN export format
+                if (data.includes('GARDEN Ideas Export') || data.includes('**[')) {
+                    return this.parseGardenExport(data);
+                }
+                
+                // Check for JSON format
+                try {
+                    const json = JSON.parse(data);
+                    if (Array.isArray(json)) {
+                        return this.parseJsonArray(json);
+                    }
+                } catch (e) {
+                    // Not JSON, continue
+                }
+                
+                // Check for markdown list format
+                if (data.includes('- **') || data.includes('## ')) {
+                    return this.parseMarkdownList(data);
+                }
+                
+                // Default to plain text parsing
+                return this.parsePlainText(data);
+            }
+            
+            parseGardenExport(data) {
+                const ideas = [];
+                
+                // Split by lines and look for idea patterns
+                const lines = data.split('\n');
+                let currentIdea = null;
+                
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    
+                    // Look for priority markers
+                    const priorityMatch = line.match(/^\*\*\[(HIGH|MEDIUM|LOW)\]\*\*\s+(.+)$/);
+                    if (priorityMatch) {
+                        // Save previous idea if exists
+                        if (currentIdea && currentIdea.text.trim()) {
+                            ideas.push(this.createIdeaObject(currentIdea.text, currentIdea.priority));
+                        }
+                        
+                        // Start new idea
+                        currentIdea = {
+                            text: priorityMatch[2],
+                            priority: priorityMatch[1].toLowerCase()
+                        };
+                        continue;
+                    }
+                    
+                    // Skip metadata lines
+                    if (line.startsWith('- Tags:') || line.startsWith('- Created:') || 
+                        line.startsWith('Generated:') || line.startsWith('Total Ideas:') ||
+                        line.startsWith('##') || line === '') {
+                        continue;
+                    }
+                    
+                    // Add content to current idea
+                    if (currentIdea && line && !line.startsWith('-')) {
+                        currentIdea.text += ' ' + line;
+                    }
+                }
+                
+                // Don't forget the last idea
+                if (currentIdea && currentIdea.text.trim()) {
+                    ideas.push(this.createIdeaObject(currentIdea.text, currentIdea.priority));
+                }
+                
+                return ideas;
+            }
+            
+            parseByFormat(data, format) {
+                switch (format) {
+                    case 'nodepad':
+                        return this.parseGardenExport(data);
+                    case 'markdown':
+                        return this.parseMarkdownList(data);
+                    case 'json':
+                        return this.parseJsonArray(JSON.parse(data));
+                    case 'text':
+                        return this.parsePlainText(data);
+                    default:
+                        return [];
+                }
+            }
+            
+            parseMarkdownList(data) {
+                const ideas = [];
+                const lines = data.split('\n');
+                
+                lines.forEach(line => {
+                    const trimmed = line.trim();
+                    if (trimmed.startsWith('- ') && trimmed.length > 3) {
+                        const text = trimmed.substring(2).trim();
+                        if (text && !text.startsWith('Tags:') && !text.startsWith('Created:')) {
+                            ideas.push(this.createIdeaObject(text));
+                        }
+                    }
+                });
+                
+                return ideas;
+            }
+            
+            parseJsonArray(jsonArray) {
+                const ideas = [];
+                
+                jsonArray.forEach(item => {
+                    if (item.text || item.title || item.description) {
+                        const text = item.text || item.title || item.description;
+                        const priority = item.priority || 'medium';
+                        ideas.push(this.createIdeaObject(text, priority));
+                    }
+                });
+                
+                return ideas;
+            }
+            
+            parsePlainText(data) {
+                const ideas = [];
+                const lines = data.split('\n');
+                
+                lines.forEach(line => {
+                    const trimmed = line.trim();
+                    if (trimmed.length > 10) { // Avoid very short fragments
+                        ideas.push(this.createIdeaObject(trimmed));
+                    }
+                });
+                
+                return ideas;
+            }
+            
+            createIdeaObject(text, priority = 'medium') {
+                return {
+                    id: Date.now() + Math.random(),
+                    text: text.trim(),
+                    space: this.categorizeSpace(text),
+                    category: this.categorizeType(text),
+                    priority: priority,
+                    timestamp: new Date().toISOString(),
+                    stardate: document.getElementById('stardate').textContent
+                };
+            }
+            
+            addIdea() {
+                const input = document.getElementById('ideaInput');
+                const text = input.value.trim();
+                
+                if (!text) return;
+                
+                const idea = this.createIdeaObject(text);
+                this.ideas.unshift(idea);
+                this.saveToStorage();
+                this.displayIdeas();
+                
+                // Clear input
+                input.value = '';
+                input.focus();
+                
+                // Flash status
+                this.showStatus('Idea logged to neural interface');
+            }
+            
+            categorizeSpace(text) {
+                const lower = text.toLowerCase();
+                
+                if (lower.includes('garden') || lower.includes('nodepad') || lower.includes('cit') || 
+                    lower.includes('github') || lower.includes('claude')) {
+                    return 'garden';
+                }
+                
+                if (lower.includes('business') || lower.includes('client') || lower.includes('meeting') ||
+                    lower.includes('revenue') || lower.includes('sales')) {
+                    return 'business';
+                }
+                
+                return 'personal';
+            }
+            
+            categorizeType(text) {
+                const lower = text.toLowerCase();
+                
+                if (lower.includes('collaborat') || lower.includes('team') || lower.includes('share')) {
+                    return 'collaboration';
+                }
+                
+                if (lower.includes('bug') || lower.includes('fix') || lower.includes('error')) {
+                    return 'bugs';
+                }
+                
+                if (lower.includes('ui') || lower.includes('interface') || lower.includes('design')) {
+                    return 'interface';
+                }
+                
+                return 'features';
+            }
+            
+            setSpaceFilter(space) {
+                this.currentSpace = space;
+                
+                // Update active state
+                document.querySelectorAll('.space-block').forEach(block => {
+                    block.classList.toggle('active', block.dataset.space === space);
+                });
+                
+                this.displayIdeas();
+            }
+            
+            setCategoryFilter(category) {
+                this.currentCategory = category;
+                
+                // Update active state
+                document.querySelectorAll('.category-block').forEach(block => {
+                    block.classList.toggle('active', block.dataset.category === category);
+                });
+                
+                this.displayIdeas();
+            }
+            
+            displayIdeas() {
+                const container = document.getElementById('ideasDisplay');
+                
+                let filteredIdeas = this.ideas;
+                
+                // Apply space filter
+                if (this.currentSpace !== 'all') {
+                    filteredIdeas = filteredIdeas.filter(idea => idea.space === this.currentSpace);
+                }
+                
+                // Apply category filter
+                if (this.currentCategory !== 'all') {
+                    filteredIdeas = filteredIdeas.filter(idea => idea.category === this.currentCategory);
+                }
+                
+                // Sort by timestamp (newest first)
+                filteredIdeas.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                
+                container.innerHTML = filteredIdeas.map(idea => `
+                    <div class="idea-entry ${idea.space} ${idea.category}">
+                        <div class="idea-meta">
+                            <span class="idea-category ${idea.space}">${idea.space.toUpperCase()}</span>
+                            <span class="idea-category ${idea.category}">${idea.category.toUpperCase()}</span>
+                            <span class="priority-indicator priority-${idea.priority}">${idea.priority.toUpperCase()}</span>
+                            <span>SD: ${idea.stardate}</span>
+                        </div>
+                        <div class="idea-text">${this.escapeHtml(idea.text)}</div>
+                    </div>
+                `).join('');
+            }
+            
+            performClusterAnalysis() {
+                // Simple clustering by finding related ideas
+                const clusters = {};
+                
+                this.ideas.forEach(idea => {
+                    const words = idea.text.toLowerCase().split(/\s+/);
+                    words.forEach(word => {
+                        if (word.length > 4) { // Ignore short words
+                            if (!clusters[word]) clusters[word] = [];
+                            clusters[word].push(idea);
+                        }
+                    });
+                });
+                
+                // Find significant clusters (2+ ideas)
+                const significantClusters = Object.entries(clusters)
+                    .filter(([word, ideas]) => ideas.length > 1)
+                    .sort(([,a], [,b]) => b.length - a.length)
+                    .slice(0, 5);
+                
+                let analysis = '🧠 CLUSTER ANALYSIS COMPLETE\n\n';
+                significantClusters.forEach(([word, ideas]) => {
+                    analysis += `📊 "${word.toUpperCase()}" cluster: ${ideas.length} related ideas\n`;
+                });
+                
+                this.showStatus(analysis);
+            }
+            
+            exportToGarden() {
+                const gardenIdeas = this.ideas.filter(idea => idea.space === 'garden');
+                
+                let markdown = `# GARDEN Tricorder Export\n`;
+                markdown += `Generated: ${new Date().toLocaleString()}\n`;
+                markdown += `Stardate: ${document.getElementById('stardate').textContent}\n`;
+                markdown += `Total Garden Ideas: ${gardenIdeas.length}\n\n`;
+                
+                const categories = ['collaboration', 'features', 'interface', 'bugs'];
+                
+                categories.forEach(category => {
+                    const categoryIdeas = gardenIdeas.filter(idea => idea.category === category);
+                    if (categoryIdeas.length > 0) {
+                        markdown += `## ${category.charAt(0).toUpperCase() + category.slice(1)}\n\n`;
+                        categoryIdeas.forEach(idea => {
+                            markdown += `- **[${idea.priority.toUpperCase()}]** ${idea.text}\n`;
+                            markdown += `  - Stardate: ${idea.stardate}\n`;
+                            markdown += `  - Created: ${new Date(idea.timestamp).toLocaleString()}\n\n`;
+                        });
+                    }
+                });
+                
+                // Download the file
+                const blob = new Blob([markdown], { type: 'text/markdown' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `garden-tricorder-export-${new Date().toISOString().split('T')[0]}.md`;
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                this.showStatus('GARDEN export complete');
+            }
+            
+            clearLog() {
+                if (confirm('Clear all neural interface logs? This action cannot be undone.')) {
+                    this.ideas = [];
+                    this.saveToStorage();
+                    this.displayIdeas();
+                    this.showStatus('Neural interface cleared');
+                }
+            }
+            
+            showStatus(message) {
+                const status = document.querySelector('.status-text');
+                const original = status.textContent;
+                status.textContent = message;
+                setTimeout(() => {
+                    status.textContent = original;
+                }, 3000);
+            }
+            
+            saveToStorage() {
+                localStorage.setItem('gardenTricorder', JSON.stringify(this.ideas));
+            }
+            
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        }
+        
+        // Initialize the Enhanced Captain's Log when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new EnhancedCaptainsLog();
+        });
+    </script>
+</body>
+</html>
