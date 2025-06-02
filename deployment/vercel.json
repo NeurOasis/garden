@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "name": "scott-enhanced-tricorder",
+  "builds": [
+    {
+      "src": "toolshed/scott-enhanced-tricorder.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/toolshed/scott-enhanced-tricorder.html"
+    },
+    {
+      "src": "/tricorder",
+      "dest": "/toolshed/scott-enhanced-tricorder.html"
+    },
+    {
+      "src": "/patterns/(.*)",
+      "dest": "/lcars-patterns/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "scott-enhanced-tricorder",
+  "version": "2.0.0",
+  "description": "Enhanced Garden Tricorder with LCARS aesthetic and advanced idea capture",
+  "main": "toolshed/scott-enhanced-tricorder.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static build - no build process needed'",
+    "deploy": "vercel --prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scottloeb/tricorder-dev.git"
+  },
+  "keywords": [
+    "lcars",
+    "star-trek",
+    "idea-capture",
+    "nodepad",
+    "garden",
+    "tricorder",
+    "greenhouse"
+  ],
+  "author": "Scott Loeb",
+  "license": "MIT"
+}

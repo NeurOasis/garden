@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captain's Log - LCARS Interface</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        :root {
+            --lcars-orange: #FF9900;
+            --lcars-blue: #9999FF;
+            --lcars-red: #CC6666;
+            --lcars-purple: #CC99CC;
+            --lcars-green: #99CC99;
+            --lcars-yellow: #FFCC99;
+            --lcars-bg: #000000;
+            --lcars-panel: #000000;
+            --lcars-text: #FF9900;
+            --lcars-dim: #666666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: var(--lcars-bg);
+            color: var(--lcars-text);
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        /* LCARS Frame Structure */
+        .lcars-interface {
+            display: grid;
+            grid-template-areas: 
+                "header header header"
+                "left-panel main right-panel"
+                "footer footer footer";
+            grid-template-rows: 80px 1fr 60px;
+            grid-template-columns: 200px 1fr 180px;
+            height: 100vh;
+            gap: 2px;
+        }
+        
+        /* Header */
+        .header {
+            grid-area: header;
+            background: var(--lcars-orange);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .header h1 {
+            color: black;
+            font-weight: 900;
+            font-size: 28px;
+            letter-spacing: 2px;
+        }
+        
+        .stardate {
+            position: absolute;
+            right: 20px;
+            color: black;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        
+        /* Left Panel */
+        .left-panel {
+            grid-area: left-panel;
+            background: var(--lcars-panel);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .category-block {
+            background: var(--lcars-blue);
+            color: black;
+            padding: 15px 10px;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 0 20px 20px 0;
+        }
+        
+        .category-block:hover {
+            background: var(--lcars-orange);
+        }
+        
+        .category-block.active {
+            background: var(--lcars-orange);
+        }
+        
+        .category-block.collaboration { background: var(--lcars-green); }
+        .category-block.features { background: var(--lcars-purple); }
+        .category-block.bugs { background: var(--lcars-red); }
+        .category-block.ui { background: var(--lcars-yellow); }
+        
+        /* Main Content Area */
+        .main-content {
+            grid-area: main;
+            background: var(--lcars-panel);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow: hidden;
+        }
+        
+        .content-header {
+            background: var(--lcars-blue);
+            color: black;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            border-radius: 20px 0 0 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .input-area {
+            background: rgba(153, 153, 255, 0.1);
+            border: 2px solid var(--lcars-blue);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            min-height: 150px;
+            font-family: 'Orbitron', monospace;
+            font-size: 14px;
+            color: var(--lcars-text);
+            resize: none;
+            outline: none;
+        }
+        
+        .input-area:focus {
+            border-color: var(--lcars-orange);
+            box-shadow: 0 0 15px rgba(255, 153, 0, 0.3);
+        }
+        
+        .input-area::placeholder {
+            color: var(--lcars-dim);
+            font-style: italic;
+        }
+        
+        .ideas-display {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .idea-entry {
+            background: rgba(153, 153, 255, 0.05);
+            border-left: 4px solid var(--lcars-blue);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 0 10px 10px 0;
+            position: relative;
+        }
+        
+        .idea-entry.collaboration { border-left-color: var(--lcars-green); }
+        .idea-entry.features { border-left-color: var(--lcars-purple); }
+        .idea-entry.bugs { border-left-color: var(--lcars-red); }
+        .idea-entry.ui { border-left-color: var(--lcars-yellow); }
+        
+        .idea-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 11px;
+            color: var(--lcars-dim);
+        }
+        
+        .idea-category {
+            background: var(--lcars-blue);
+            color: black;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 9px;
+            letter-spacing: 1px;
+        }
+        
+        .idea-category.collaboration { background: var(--lcars-green); }
+        .idea-category.features { background: var(--lcars-purple); }
+        .idea-category.bugs { background: var(--lcars-red); }
+        .idea-category.ui { background: var(--lcars-yellow); }
+        
+        .idea-text {
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        
+        /* Right Panel */
+        .right-panel {
+            grid-area: right-panel;
+            background: var(--lcars-panel);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .status-block {
+            background: var(--lcars-orange);
+            color: black;
+            padding: 15px 10px;
+            font-weight: 700;
+            font-size: 11px;
+            text-align: center;
+            letter-spacing: 1px;
+            border-radius: 20px 0 0 20px;
+        }
+        
+        .voice-block {
+            background: var(--lcars-red);
+            color: black;
+            padding: 20px 10px;
+            font-weight: 700;
+            font-size: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 20px 0 0 20px;
+        }
+        
+        .voice-block:hover {
+            background: var(--lcars-orange);
+        }
+        
+        .export-block {
+            background: var(--lcars-purple);
+            color: black;
+            padding: 15px 10px;
+            font-weight: 700;
+            font-size: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 20px 0 0 20px;
+        }
+        
+        .export-block:hover {
+            background: var(--lcars-orange);
+        }
+        
+        /* Footer */
+        .footer {
+            grid-area: footer;
+            background: var(--lcars-orange);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .status-text {
+            color: black;
+            font-weight: 700;
+            font-size: 12px;
+        }
+        
+        .lcars-button {
+            background: var(--lcars-blue);
+            color: black;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 15px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 10px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .lcars-button:hover {
+            background: var(--lcars-yellow);
+        }
+        
+        /* Scrollbar Styling */
+        .ideas-display::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .ideas-display::-webkit-scrollbar-track {
+            background: var(--lcars-panel);
+        }
+        
+        .ideas-display::-webkit-scrollbar-thumb {
+            background: var(--lcars-blue);
+            border-radius: 4px;
+        }
+        
+        .ideas-display::-webkit-scrollbar-thumb:hover {
+            background: var(--lcars-orange);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .lcars-interface {
+                grid-template-areas:
+                    "header"
+                    "main"
+                    "footer";
+                grid-template-columns: 1fr;
+                grid-template-rows: 60px 1fr 50px;
+            }
+            
+            .left-panel, .right-panel {
+                display: none;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .content-header {
+                text-align: center;
+                border-radius: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+    LCARS REFERENCE IMPLEMENTATION
+    Source: Dan's Captain's Log (stealth-mode-lcars)
+    Status: Reference pattern for voice integration and simplified layout
+    Features: Voice recording placeholders, classic LCARS colors
+    -->
+    <div class="lcars-interface">
+        <header class="header">
+            <h1>CAPTAIN'S LOG</h1>
+            <div class="stardate">STARDATE: <span id="stardate"></span></div>
+        </header>
+        
+        <aside class="left-panel">
+            <div class="category-block active" data-category="all">ALL ENTRIES</div>
+            <div class="category-block collaboration" data-category="collaboration">COLLABORATION</div>
+            <div class="category-block features" data-category="features">FEATURES</div>
+            <div class="category-block ui" data-category="ui">INTERFACE</div>
+            <div class="category-block bugs" data-category="bugs">BUGS</div>
+        </aside>
+        
+        <main class="main-content">
+            <div class="content-header">THOUGHT RECORDER - NEURAL INTERFACE ACTIVE</div>
+            
+            <textarea class="input-area" id="ideaInput" 
+                placeholder="Captain's thoughts... Voice recognition offline. Manual input required."></textarea>
+            
+            <div class="ideas-display" id="ideasDisplay">
+                <!-- Ideas will be populated here -->
+            </div>
+        </main>
+        
+        <aside class="right-panel">
+            <div class="status-block">STATUS:<br>OPERATIONAL</div>
+            <div class="voice-block" id="voiceRecord">VOICE<br>RECORD<br>[OFFLINE]</div>
+            <div class="export-block" id="exportData">EXPORT<br>DATA<br>LOGS</div>
+        </aside>
+        
+        <footer class="footer">
+            <div class="status-text">NEURAL LINK: ACTIVE | AUTO-SAVE: ENABLED</div>
+            <button class="lcars-button" id="clearLog">CLEAR LOG</button>
+        </footer>
+    </div>
+
+    <script>
+        // LCARS Captain's Log Implementation
+        class CaptainsLog {
+            constructor() {
+                this.ideas = JSON.parse(localStorage.getItem('captainsLog')) || [];
+                this.currentFilter = 'all';
+                this.init();
+            }
+            
+            init() {
+                this.updateStardate();
+                this.setupEventListeners();
+                this.displayIdeas();
+                
+                // Update stardate every minute
+                setInterval(() => this.updateStardate(), 60000);
+            }
+            
+            updateStardate() {
+                const now = new Date();
+                const year = now.getFullYear();
+                const dayOfYear = Math.floor((now - new Date(year, 0, 0)) / 86400000);
+                const stardate = `${year}.${dayOfYear.toString().padStart(3, '0')}`;
+                document.getElementById('stardate').textContent = stardate;
+            }
+            
+            setupEventListeners() {
+                // Input handling
+                const input = document.getElementById('ideaInput');
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                        this.addIdea();
+                    }
+                });
+                
+                // Category filtering
+                document.querySelectorAll('.category-block').forEach(block => {
+                    block.addEventListener('click', (e) => {
+                        this.setFilter(e.target.dataset.category);
+                    });
+                });
+                
+                // Voice recording (placeholder)
+                document.getElementById('voiceRecord').addEventListener('click', () => {
+                    this.showVoiceMessage();
+                });
+                
+                // Export functionality
+                document.getElementById('exportData').addEventListener('click', () => {
+                    this.exportLog();
+                });
+                
+                // Clear log
+                document.getElementById('clearLog').addEventListener('click', () => {
+                    this.clearLog();
+                });
+            }
+            
+            addIdea() {
+                const input = document.getElementById('ideaInput');
+                const text = input.value.trim();
+                
+                if (!text) return;
+                
+                const idea = {
+                    id: Date.now(),
+                    text: text,
+                    category: this.categorizeIdea(text),
+                    timestamp: new Date().toISOString(),
+                    stardate: document.getElementById('stardate').textContent
+                };
+                
+                this.ideas.unshift(idea);
+                this.saveToStorage();
+                this.displayIdeas();
+                
+                // Clear input
+                input.value = '';
+                input.focus();
+                
+                // Flash status
+                this.flashStatus();
+            }
+            
+            categorizeIdea(text) {
+                const lowerText = text.toLowerCase();
+                
+                if (lowerText.includes('collab') || lowerText.includes('team') || 
+                    lowerText.includes('scott') || lowerText.includes('dan') || 
+                    lowerText.includes('work together')) {
+                    return 'collaboration';
+                }
+                
+                if (lowerText.includes('bug') || lowerText.includes('error') || 
+                    lowerText.includes('fix') || lowerText.includes('broken')) {
+                    return 'bugs';
+                }
+                
+                if (lowerText.includes('ui') || lowerText.includes('interface') || 
+                    lowerText.includes('design') || lowerText.includes('lcars') ||
+                    lowerText.includes('star trek')) {
+                    return 'ui';
+                }
+                
+                return 'features';
+            }
+            
+            setFilter(category) {
+                this.currentFilter = category;
+                
+                // Update active state
+                document.querySelectorAll('.category-block').forEach(block => {
+                    block.classList.toggle('active', block.dataset.category === category);
+                });
+                
+                this.displayIdeas();
+            }
+            
+            displayIdeas() {
+                const container = document.getElementById('ideasDisplay');
+                const filteredIdeas = this.currentFilter === 'all' 
+                    ? this.ideas 
+                    : this.ideas.filter(idea => idea.category === this.currentFilter);
+                
+                container.innerHTML = filteredIdeas.map(idea => `
+                    <div class="idea-entry ${idea.category}">
+                        <div class="idea-meta">
+                            <span class="idea-category ${idea.category}">${idea.category.toUpperCase()}</span>
+                            <span>SD: ${idea.stardate}</span>
+                        </div>
+                        <div class="idea-text">${this.escapeHtml(idea.text)}</div>
+                    </div>
+                `).join('');
+            }
+            
+            showVoiceMessage() {
+                const voiceBlock = document.getElementById('voiceRecord');
+                const original = voiceBlock.innerHTML;
+                voiceBlock.innerHTML = 'VOICE<br>SYS<br>[FUTURE]';
+                voiceBlock.style.background = 'var(--lcars-yellow)';
+                
+                setTimeout(() => {
+                    voiceBlock.innerHTML = original;
+                    voiceBlock.style.background = 'var(--lcars-red)';
+                }, 2000);
+            }
+            
+            exportLog() {
+                const exportData = {
+                    timestamp: new Date().toISOString(),
+                    stardate: document.getElementById('stardate').textContent,
+                    totalEntries: this.ideas.length,
+                    ideas: this.ideas
+                };
+                
+                const markdown = this.generateMarkdown(exportData);
+                
+                // Create download
+                const blob = new Blob([markdown], { type: 'text/markdown' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `captains-log-${exportData.stardate.replace(/\./g, '-')}.md`;
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                this.flashExport();
+            }
+            
+            generateMarkdown(data) {
+                let markdown = `# Captain's Log - Stardate ${data.stardate}\n\n`;
+                markdown += `**Export Timestamp:** ${new Date(data.timestamp).toLocaleString()}\n`;
+                markdown += `**Total Entries:** ${data.totalEntries}\n\n`;
+                
+                const categories = ['collaboration', 'features', 'ui', 'bugs'];
+                
+                categories.forEach(category => {
+                    const categoryIdeas = data.ideas.filter(idea => idea.category === category);
+                    if (categoryIdeas.length > 0) {
+                        markdown += `## ${category.charAt(0).toUpperCase() + category.slice(1)}\n\n`;
+                        categoryIdeas.forEach(idea => {
+                            markdown += `- **SD ${idea.stardate}:** ${idea.text}\n`;
+                        });
+                        markdown += '\n';
+                    }
+                });
+                
+                return markdown;
+            }
+            
+            clearLog() {
+                if (confirm('Clear all log entries? This action cannot be undone.')) {
+                    this.ideas = [];
+                    this.saveToStorage();
+                    this.displayIdeas();
+                    
+                    // Flash clear confirmation
+                    const status = document.querySelector('.status-text');
+                    const original = status.textContent;
+                    status.textContent = 'LOG CLEARED | NEURAL LINK: ACTIVE';
+                    setTimeout(() => {
+                        status.textContent = original;
+                    }, 3000);
+                }
+            }
+            
+            flashStatus() {
+                const status = document.querySelector('.status-text');
+                const original = status.textContent;
+                status.textContent = 'ENTRY LOGGED | AUTO-SAVE: COMPLETE';
+                setTimeout(() => {
+                    status.textContent = original;
+                }, 2000);
+            }
+            
+            flashExport() {
+                const exportBlock = document.getElementById('exportData');
+                const original = exportBlock.innerHTML;
+                exportBlock.innerHTML = 'EXPORT<br>COMPLETE';
+                exportBlock.style.background = 'var(--lcars-green)';
+                
+                setTimeout(() => {
+                    exportBlock.innerHTML = original;
+                    exportBlock.style.background = 'var(--lcars-purple)';
+                }, 3000);
+            }
+            
+            saveToStorage() {
+                localStorage.setItem('captainsLog', JSON.stringify(this.ideas));
+            }
+            
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        }
+        
+        // Initialize the Captain's Log when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new CaptainsLog();
+        });
+        
+        // Add some sample data if empty (for demo purposes)
+        window.addEventListener('load', () => {
+            const stored = localStorage.getItem('captainsLog');
+            if (!stored || JSON.parse(stored).length === 0) {
+                const sampleIdeas = [
+                    {
+                        id: Date.now() - 3000,
+                        text: "LCARS interface transformation successful. Dan will be surprised by the Captain's Log upgrade.",
+                        category: "ui",
+                        timestamp: new Date(Date.now() - 3000).toISOString(),
+                        stardate: "2025.149"
+                    },
+                    {
+                        id: Date.now() - 2000,
+                        text: "Voice recording system needs implementation. Consider WebRTC audio capture for voice logs.",
+                        category: "features",
+                        timestamp: new Date(Date.now() - 2000).toISOString(),
+                        stardate: "2025.149"
+                    },
+                    {
+                        id: Date.now() - 1000,
+                        text: "Collaborative features planned: real-time sync between Scott and Dan's idea capture sessions.",
+                        category: "collaboration",
+                        timestamp: new Date(Date.now() - 1000).toISOString(),
+                        stardate: "2025.149"
+                    }
+                ];
+                localStorage.setItem('captainsLog', JSON.stringify(sampleIdeas));
+                location.reload();
+            }
+        });
+    </script>
+</body>
+</html>
