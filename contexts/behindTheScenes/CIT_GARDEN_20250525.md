@@ -34,7 +34,7 @@ Use automation to accelerate building and deploying data exploration tools.
 
 *Implementation Examples:*
 - Module Generator creating type-safe Python interfaces automatically
-- NodePad 4.0.0 framework enabling same-day deployment
+- NodePad framework enabling same-day deployment
 - GitHub CLI integration for instant repository creation
 - Vercel deployment reducing production deployment to single command
 
@@ -56,41 +56,50 @@ Support different cognitive approaches to exploring the same data.
 - Sunflower: Pattern-first analysis for structural insights
 - Multiple UI themes (Standard, Star Trek) for different user mental models
 
+**6. MECE Structure (Mutually Exclusive, Collectively Exhaustive)**
+Ensure clear boundaries and complete coverage across all GARDEN components.
+
+*Implementation Examples:*
+- CITs are independent: No dependencies between context files
+- Projects don't overlap: Clear boundaries between all initiatives
+- Tools don't overlap: Each tool has distinct purpose and scope
+- Documentation structure: Complete coverage without redundancy
+
 ### Technical Architecture and Implementation
 
-#### **NodePad 4.0.0 Framework**
-*Single-page, no-dependency applications following Dan Hales' accessibility vision*
+## NodePad Framework (Living Standard)
 
-**Core Characteristics:**
-- **Single HTML File:** Complete application in one file with embedded CSS and JavaScript
-- **Zero External Dependencies:** No frameworks, CDNs, or external services required
-- **Local Storage Persistence:** Data saved directly in user's browser
-- **Progressive Enhancement:** Works with JavaScript disabled for basic functionality
-- **Mobile-Responsive Design:** Adapts to all screen sizes without media queries frameworks
-- **Print-Friendly Outputs:** CSS optimized for physical printing needs
+**Current Implementation:** NodePad 5.1.0+ with modular architecture  
+**Philosophy:** Single-file applications with sophisticated internal capabilities  
+**Key Innovation:** Graph visualization with narrative path extraction  
+**Version Tracking:** Regular assessment of latest framework capabilities  
+**Stability Priority:** Use proven stable versions for production deployments  
 
-**Benefits:**
-- **Deployment Simplicity:** Single file can be hosted anywhere
-- **User Ownership:** No vendor lock-in or service dependencies
-- **Performance:** Fast loading with no external resource fetching
-- **Accessibility:** Works in any environment with basic web browser
-- **Maintenance:** No dependency updates or version conflicts
+### Core Characteristics:
+- **Single HTML File:** Complete modular plugin architecture with embedded CSS and JavaScript
+- **Zero External Dependencies:** No frameworks or CDNs required, rich internal functionality only
+- **Progressive Enhancement:** Works with JavaScript disabled, enhanced with visual graph editing
+- **Local Storage Persistence:** Data saved directly in browser with cross-device export capabilities
+- **Mobile-Responsive Design:** Adapts to all screen sizes with geometric utilities and touch interaction
+- **Advanced Features:** Multi-path narrative highlighting, drag-and-drop editing, print-friendly outputs
 
-#### **Module Generator System**
-*Automated creation of type-safe Python interfaces for Neo4j databases*
+### Framework Evolution:
+- **4.0.0:** Basic single-file concept (archived)
+- **5.1.0:** Modular graph visualization (current stable)
+- **5.x+:** Track latest developments through monthly version audits
 
-**ModuleGenerator v1 Components:**
+## Module Generator System
+
+**Automated creation of type-safe Python interfaces for Neo4j databases**
+
+### ModuleGenerator_Gen1 (Production Ready)
+
+**Core Components:**
 - Prerequisites documentation and environment setup
 - Graph database connection and schema introspection
 - Type mapping and validation for Python-Neo4j interface
 - Code generation with error handling and exception management
 - Testing frameworks for generated modules
-
-**ModuleGenerator v2 Enhancements:**
-- Autonomous knowledge synthesis engine
-- Meta-pattern discovery for automatic relationship detection
-- Enhanced Neo4j integration with advanced querying
-- Predictive relationship inference for data exploration
 
 **Value Proposition:**
 - Transform weeks of manual database interface development into automated generation
@@ -98,25 +107,80 @@ Support different cognitive approaches to exploring the same data.
 - Enable rapid prototyping of graph data applications
 - Reduce barrier to entry for graph database utilization
 
-#### **Application Architecture Patterns**
+**Status:** Stable, production-ready, actively maintained
 
-**Grassroots Pattern (Metadata-First)**
+### Next Generation Development: GraphSynth 2.0
+
+**Revolutionary Approach:** Intelligent graph database middleware (not just code generation)
+
+**Capabilities in Development:**
+- **Pattern Discovery Engine:** Automatically identifies hidden relationships
+- **Cross-Domain Synthesis:** Transfers knowledge between different domains  
+- **Intelligent Inference:** Predicts missing relationships with confidence scores
+- **Natural Language Explanations:** Human-readable insights from graph analysis
+- **Asynchronous Architecture:** Non-blocking operations for scalability
+
+**Evolution Path:** From code generation → intelligent knowledge synthesis  
+**Timeline:** Preview releases in development, full release TBD  
+**Relationship to Gen1:** Complementary rather than replacement
+
+### Usage Guidance:
+- **For Production Code Generation:** Use ModuleGenerator_Gen1
+- **For Knowledge Discovery:** Wait for GraphSynth 2.0 preview
+- **For Hybrid Approach:** Deploy both for complementary capabilities
+
+## Application Architecture Patterns
+
+### Validated Core Patterns:
+
+**Grassroots (Metadata-First):**
 - Begin with schema understanding before data exploration
 - Ideal for users familiar with business domain but not specific data instances
 - Hyperlink-based navigation without complex visualizations
 - Progressive revelation of data matching schema patterns
 
-**Grasshopper Pattern (Entity-First)**
+**Grasshopper (Entity-First):**
 - Start with curated high-value entities and navigate through connections
 - Wikipedia-like browsing experience through graph relationships
 - Contextual understanding through relationship exploration
 - Serendipitous discovery through graph traversal
 
-**Sunflower Pattern (Pattern-First)**
+**Sunflower (Pattern-First):**
 - Automatic identification of recurring structural patterns
 - Categorized browsing of relationship types (cycles, stars, chains)
 - Business rule discovery through pattern analysis
 - Hidden opportunity identification through structural insights
+
+### Pattern Discovery Research (Future Initiative)
+
+**Opportunity Identified:** The current three patterns serve well but may not cover all cognitive approaches to complex data.
+
+**Potential Research Areas:**
+- How do users in different domains (medical, legal, creative, engineering) naturally approach complex information?
+- What cognitive patterns emerge when current approaches don't match user mental models?
+- Are there temporal, spatial, or narrative-based approaches that would benefit specific use cases?
+
+**Status:** Research framework and execution plan not yet developed  
+**Priority:** Important for GARDEN evolution, timing to be determined based on resources and user feedback  
+**Approach:** When undertaken, will be user-centered and evidence-based rather than theoretical
+
+**Current Focus:** Optimize and validate existing three patterns through production usage before expanding scope
+
+## Implementation Notes
+
+### Version Management Strategy:
+- Use monthly version audit script to track framework evolution
+- Maintain compatibility matrices for NodePad versions
+- Document migration paths for framework upgrades
+- Archive superseded approaches in garden-archive repository
+
+### Development Priorities:
+1. **Stability First:** Proven approaches for production use
+2. **Innovation Tracking:** Monitor cutting-edge developments  
+3. **User Validation:** Real usage patterns guide development decisions
+4. **Documentation Currency:** Keep technical details synchronized with actual capabilities
+
+This living technical architecture evolves with actual GARDEN capabilities while maintaining stability for production deployments.
 
 ### Production Deployments and Validation
 
@@ -236,27 +300,6 @@ Support different cognitive approaches to exploring the same data.
 - Branch management from conversation contexts
 - Pull request creation from collaborative artifacts
 
-#### **Star Trek UI Enhancement Framework**
-**Inspiration:** Dan's "Captain's Log" usage pattern for Idea Capture
-
-**Design Research:**
-- LCARS (Library Computer Access/Retrieval System) aesthetic analysis
-- Curved rectangular blocks with rounded corners
-- Modular grid layouts with varied panel sizes
-- Distinctive typography and color coding
-- Status indicators and numerical readouts
-
-**Accessibility Integration:**
-- Grayscale toggle for color sensitivity (Dan's preference)
-- ADA compliant version alongside enhanced aesthetic
-- Multiple theme options matching different user mental models
-- Customizable visual elements without functionality loss
-
-**Implementation Plan:**
-- CSS framework supporting multiple visual themes
-- Theme selector with persistent user preference
-- Accessibility audit ensuring compliance across themes
-- User testing with different cognitive preferences
 
 ### Advanced Research Concepts
 

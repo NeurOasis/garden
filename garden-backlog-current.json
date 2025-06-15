@@ -951,5 +951,119 @@
       "Preserved history in archive"
     ],
     "notes": "Quick 5-minute cleanup completed basic organization, this completes the deep restructure"
+  },
+  {
+    "id": "60",
+    "title": "Define CIT Scope Matrix: Users, Roles, and Arenas",
+    "description": "Create matrix framework for defining scope across users (Scott, Dan, external), roles (developer, user, admin), and arenas (core, projects, tools, documentation). Enables MECE-compliant scope definitions in CIT headers.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-06-15T20:00:00.000Z",
+    "dependencies": [
+      "CIT_VersionControl.md implementation"
+    ],
+    "implementation": "Research framework for scope boundaries, create matrix template, validate with existing CITs, integrate into version control standard",
+    "purpose": "Enable precise scope definitions without dependencies between CITs",
+    "notes": "Triggered by discussion of what 'Scope' means in CIT headers - need systematic framework for boundaries"
+  },
+  {
+    "id": "61",
+    "title": "GARDEN Tree Visualization - Living Website Front Page",
+    "description": "Create NodePad-based tree visualization that connects GARDEN core to its branches (forks) and plots (projects). Visual front-page for website showing living ecosystem of tools and relationships.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-06-15T21:30:00.000Z",
+    "dependencies": [
+      "NodePad framework stable",
+      "Fork ecosystem established"
+    ],
+    "implementation": "Build interactive tree using NodePad 5.1.0+ with modular architecture. Root = GARDEN core, branches = user forks, leaves = specific projects/tools. Include hover details, navigation links.",
+    "features": [
+      "Interactive tree visualization",
+      "Real-time updates as ecosystem grows",
+      "Click-through navigation to forks/projects", 
+      "Visual health indicators for active vs inactive",
+      "Mobile-responsive design",
+      "Single HTML file deployment"
+    ],
+    "user_value": "Immediately understand GARDEN ecosystem structure and find relevant projects",
+    "notes": "Scott's vision: living visual front-page that grows with the GARDEN ecosystem, showing connections between core and all forks/projects"
+  },
+  {
+    "id": "62",
+    "title": "Corporate Front-End Visualization Dashboard",
+    "description": "Single-page starting point linking corporate strategy, backlog items, active projects, and tools. Unified dashboard for business operations and strategic planning.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-06-15T21:35:00.000Z",
+    "dependencies": [
+      "Corporate strategy CIT established",
+      "Real-time backlog platform",
+      "Project tracking system"
+    ],
+    "implementation": "Build comprehensive dashboard connecting strategy docs, backlog management, project status, and tool ecosystem. Easy navigation between planning and execution.",
+    "features": [
+      "Strategy-to-execution visualization",
+      "Real-time backlog integration",
+      "Active project status dashboard",
+      "Tool ecosystem overview",
+      "Quick navigation to work areas",
+      "Progress tracking and metrics",
+      "Role-based access (internal team focus)"
+    ],
+    "sections": [
+      "Corporate Strategy Overview",
+      "Active Backlog Items (by priority)",
+      "Current Projects (with status)",
+      "Tool Ecosystem Map",
+      "Quick Actions (GitHub, Claude, Deploy)",
+      "Success Metrics Dashboard"
+    ],
+    "user_value": "Single starting point for all business operations - strategy, planning, and execution in one view",
+    "notes": "Scott's need: unified dashboard that connects high-level strategy with day-to-day execution, making it easy to work from planning to implementation"
+  },
+  {
+    "id": "63",
+    "title": "CIT_ToolStrategies.md Creation",
+    "description": "Extracted tool-specific version strategies from complex version control CIT into focused document covering NodePad framework evolution, ModuleGenerator naming conventions, and tool-specific version management.",
+    "project": "core",
+    "priority": "P0",
+    "status": "done",
+    "created": "2025-06-15T22:00:00.000Z",
+    "implementation": "Created contexts/CIT_ToolStrategies.md with NodePad living standard approach, ModuleGenerator generation-based naming (Gen1 vs V1/V2), and tool-specific archive processes",
+    "scope": "Tool version strategies and evolution tracking for GARDEN toolshed components",
+    "notes": "Successful extraction following MECE principle - tool strategies now have dedicated CIT separate from general version control methodology"
+  },
+  {
+    "id": "64",
+    "title": "Synchronize Archive Structure with Garden Structure Changes",
+    "description": "Recursively update garden-archive repository structure to mirror any changes made to main garden repository structure. Maintain 1:1 directory mapping between garden and garden-archive for intuitive navigation.",
+    "project": "core",
+    "priority": "P2",
+    "status": "backlog",
+    "created": "2025-06-15T22:10:00.000Z",
+    "dependencies": [
+      "Deep GARDEN Repository Cleanup completion",
+      "Garden structure simplification"
+    ],
+    "implementation": "Monitor garden structure changes, create corresponding directories in garden-archive, move archived content to new mirror locations, update archive documentation",
+    "triggers": [
+      "Garden directory structure changes",
+      "Tool organization changes", 
+      "Context organization updates",
+      "Repository simplification efforts"
+    ],
+    "process": [
+      "Detect garden structure changes",
+      "Create corresponding archive directories",
+      "Move existing archived content to new locations",
+      "Update archive README and documentation",
+      "Validate archive navigation remains intuitive"
+    ],
+    "goal": "Keep archive structure perfectly mirrored to main garden for intuitive historical content discovery",
+    "notes": "Triggered by recognition that archive must stay synchronized as we simplify garden structure - recursive dependency that needs ongoing management"
   }
 ]

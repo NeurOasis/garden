@@ -92,10 +92,7 @@
    - Project sharing URLs with edit permissions
    - Multi-conversation context preservation
 
-3. **Star Trek UI Enhancement**
-   - LCARS-style interface for Idea Capture
-   - Captain's Log theme matching Dan's usage patterns
-   - Grayscale accessibility toggle
+
 
 #### **🔮 STRATEGIC DEVELOPMENTS (Next Quarter)**
 1. **Advanced Templates Integration**

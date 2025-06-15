@@ -110,3 +110,65 @@ const patterns = await fetch('https://garden-tools-service.vercel.app/api/sunflo
 
 ## 🔥 CRITICAL REMINDER:
 **The APIs are LIVE and WORKING. Use them! Don't search for information about them - CALL them directly and use the real data they return!**
+
+## 📝 MANDATORY: GARDEN BACKLOG MANAGEMENT
+
+**When Scott mentions "backlog" or "add to backlog":**
+
+✅ **REQUIRED ACTIONS:**
+1. **Create backlog item artifact** with proper JSON structure
+2. **Use next available ID number** (check garden-backlog-current.json for highest ID)
+3. **Include all required fields:** id, title, description, project, priority, status, created
+4. **Save as:** `backlog-item-[ID].json` in contexts/ directory
+5. **Tell Scott:** "Created backlog item #[ID] - ready to add to garden-backlog-current.json"
+
+**Required JSON Structure:**
+```json
+{
+  "id": "[next_number]",
+  "title": "[descriptive title]",
+  "description": "[detailed description from conversation]",
+  "project": "core",
+  "priority": "P0/P1/P2",
+  "status": "backlog",
+  "created": "[current_ISO_timestamp]",
+  "dependencies": ["[if_applicable]"],
+  "implementation": "[if_discussed]",
+  "notes": "[context from conversation]"
+}
+```
+
+**Priority Guidelines:**
+- **P0:** Critical/blocking issues
+- **P1:** Important features or improvements  
+- **P2:** Nice-to-have or future enhancements
+
+**❌ NEVER:**
+- Ignore backlog mentions
+- Create incomplete backlog items
+- Skip the artifact creation
+- Forget to tell Scott the item was created
+- Leave temporary backlog artifacts in contexts/ after adding to main backlog
+
+## 🗂️ MANDATORY: FILE PROLIFERATION PREVENTION
+
+**When creating any artifacts:**
+
+✅ **REQUIRED ACTIONS:**
+1. **Use stable filenames** - No dates unless absolutely necessary
+2. **Clean up temporary files** - Remove artifacts after integration
+3. **Archive old versions** - Move superseded content to garden-archive/
+4. **Single source of truth** - Only one current version in main contexts/
+5. **Check for proliferation** - Look for multiple similar files before creating new ones
+
+**Before creating new files:**
+- Search for existing similar files
+- Use stable naming: `CIT_ComponentName.md` not `CIT_ComponentName_20250615.md`
+- Archive old versions instead of keeping multiple
+- Clean up temporary artifacts immediately after use
+
+**❌ NEVER CREATE:**
+- Multiple dated versions of same content
+- Temporary files that stay permanent
+- Similar files with slightly different names
+- Development artifacts that aren't cleaned up
