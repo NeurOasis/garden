@@ -87,7 +87,16 @@ class VersionAuditor {
         
         for (const item of items) {
             const fullPath = path.join(dirPath, item);
-            const stat = fs.statSync(fullPath);
+            
+            // Handle broken symlinks and missing files gracefully
+            let stat;
+            try {
+                stat = fs.statSync(fullPath);
+            } catch (error) {
+                // Skip broken symlinks and inaccessible files
+                console.warn(`⚠️  Skipping inaccessible path: ${fullPath}`);
+                continue;
+            }
             
             if (stat.isDirectory()) {
                 // Skip certain directories
@@ -396,6 +405,9 @@ class VersionAuditor {
      * Save detailed JSON report for further analysis
      */
     saveDetailedReport() {
+        const today = new Date();
+        const dateStr = today.toISOString().split('T')[0].replace(/-/g, '');
+        
         const reportData = {
             timestamp: new Date().toISOString(),
             repoPath: this.repoPath,
@@ -419,13 +431,17 @@ class VersionAuditor {
             actionItems: this.generateActionItems()
         };
         
-        const reportPath = path.join(this.repoPath, 'version-audit-report.json');
-        fs.writeFileSync(reportPath, JSON.stringify(reportData, null, 2));
+        // Save to findings directory with date stamp
+        const findingsDir = path.join(this.repoPath, 'findings');
+        const jsonPath = path.join(findingsDir, `version-audit-report_${dateStr}.json`);
+        const markdownPath = path.join(findingsDir, `version-audit-report_${dateStr}.md`);
         
-        console.log(`\n💾 Detailed report saved to: ${reportPath}`);
+        fs.writeFileSync(jsonPath, JSON.stringify(reportData, null, 2));
+        
+        console.log(`\n💾 Detailed report saved to: ${jsonPath}`);
         
         // Also create a markdown summary
-        this.generateMarkdownReport(reportData);
+        this.generateMarkdownReport(reportData, markdownPath);
     }
     
     /**
@@ -459,7 +475,7 @@ class VersionAuditor {
     /**
      * Generate markdown report for documentation
      */
-    generateMarkdownReport(data) {
+    generateMarkdownReport(data, markdownPath) {
         let markdown = `# GARDEN Version Audit Report\n\n`;
         markdown += `**Generated:** ${new Date(data.timestamp).toLocaleString()}\n`;
         markdown += `**Repository:** ${data.repoPath}\n\n`;
@@ -491,7 +507,6 @@ class VersionAuditor {
             });
         }
         
-        const markdownPath = path.join(this.repoPath, 'version-audit-report.md');
         fs.writeFileSync(markdownPath, markdown);
         
         console.log(`📄 Markdown report saved to: ${markdownPath}`);

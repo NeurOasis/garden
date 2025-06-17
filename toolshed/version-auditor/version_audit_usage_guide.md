@@ -2,26 +2,30 @@
 
 ## Quick Start
 
-1. **Save the script** as `version-audit.js` in your GARDEN repo root
+1. **Navigate to the version auditor directory:**
+   ```bash
+   cd ~/Desktop/GitHub/neuroasis/garden/toolshed/version-auditor
+   ```
 2. **Run monthly audit:**
    ```bash
-   node version-audit.js
+   node universal-version-audit.js --repo-path ../../
    ```
 3. **Check generated reports:**
-   - `version-audit-report.json` (detailed data)
-   - `version-audit-report.md` (readable summary)
+   - `findings/version-audit-report_YYYYMMDD.json` (detailed data)
+   - `findings/version-audit-report_YYYYMMDD.md` (readable summary)
 
 ## Command Line Options
 
 ```bash
-# Scan current directory
-node version-audit.js
+# From the version-auditor directory (recommended)
+cd ~/Desktop/GitHub/neuroasis/garden/toolshed/version-auditor
+node universal-version-audit.js --repo-path ../../
 
 # Scan specific repository path
-node version-audit.js --repo-path ~/Desktop/GitHub/neuroasis/garden
+node universal-version-audit.js --repo-path ~/Desktop/GitHub/neuroasis/garden
 
-# Run from anywhere
-node /path/to/version-audit.js --repo-path /path/to/garden
+# Run from anywhere with full paths
+node ~/Desktop/GitHub/neuroasis/garden/toolshed/version-auditor/universal-version-audit.js --repo-path ~/Desktop/GitHub/neuroasis/garden
 ```
 
 ## What It Finds
@@ -91,14 +95,14 @@ node /path/to/version-audit.js --repo-path /path/to/garden
 
 ### 1. Run the Audit
 ```bash
-cd ~/Desktop/GitHub/neuroasis/garden
-node version-audit.js
+cd ~/Desktop/GitHub/neuroasis/garden/toolshed/version-auditor
+node universal-version-audit.js --repo-path ../../
 ```
 
 ### 2. Review the Reports
 - Check console output for immediate issues
-- Review `version-audit-report.md` for detailed findings
-- Examine `version-audit-report.json` for programmatic processing
+- Review `findings/version-audit-report_YYYYMMDD.md` for detailed findings
+- Examine `findings/version-audit-report_YYYYMMDD.json` for programmatic processing
 
 ### 3. Update Outdated References
 For each action item:
@@ -127,16 +131,19 @@ Edit the `versionPatterns` array in the script to add specific patterns for your
 Create a monthly cron job:
 ```bash
 # Add to crontab (runs 1st of each month at 9 AM)
-0 9 1 * * cd ~/Desktop/GitHub/neuroasis/garden && node version-audit.js
+0 9 1 * * cd ~/Desktop/GitHub/neuroasis/garden/toolshed/version-auditor && node universal-version-audit.js --repo-path ../../
 ```
 
 ### Integration with Git
 ```bash
-# Create version audit branch
+# Create version audit branch (from repo root)
+cd ~/Desktop/GitHub/neuroasis/garden
 git checkout -b version-audit-$(date +%Y%m%d)
-node version-audit.js
-# Review and commit changes
-git add version-audit-report.*
+cd toolshed/version-auditor
+node universal-version-audit.js --repo-path ../../
+# Review and commit changes (from repo root)
+cd ../../
+git add findings/version-audit-report_*
 git commit -m "Monthly version audit - $(date +%Y-%m-%d)"
 ```
 
@@ -170,7 +177,7 @@ When updating versions, also check if:
 node --version
 
 # Make script executable (if needed)
-chmod +x version-audit.js
+chmod +x universal-version-audit.js
 ```
 
 ### No Results Found:

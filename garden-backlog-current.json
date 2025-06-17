@@ -1065,5 +1065,74 @@
     ],
     "goal": "Keep archive structure perfectly mirrored to main garden for intuitive historical content discovery",
     "notes": "Triggered by recognition that archive must stay synchronized as we simplify garden structure - recursive dependency that needs ongoing management"
+  },
+  {
+    "id": "65",
+    "title": "Garden Labs Workflow Development",
+    "description": "Design comprehensive workflow for how development moves between Garden Labs (testing/experiments) and Garden core (stable). Define contributor workflow, admin review process, and core promotion criteria.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-06-15T22:30:00.000Z",
+    "dependencies": [
+      "Garden Labs repository established",
+      "4-tier ecosystem documentation complete"
+    ],
+    "implementation": "Document contributor workflows, admin processes, promotion criteria, testing requirements, and integration patterns for Labs→Core development pipeline",
+    "scope": [
+      "How users contribute to Labs from their Plots",
+      "How Labs tests and refines contributions", 
+      "Admin review and approval processes",
+      "Criteria for promoting Labs content to Core",
+      "Integration with existing version control",
+      "Corporate strategy development in Labs"
+    ],
+    "integration_points": [
+      "README.md - User contribution guidance",
+      "CONTRIBUTING.md - Detailed workflow documentation",
+      "Version control - Labs-specific processes",
+      "Git workflow - Multi-repository coordination"
+    ],
+    "user_journeys": [
+      "Personal Plot → Labs contribution → Core promotion",
+      "Labs experiments → Testing → Core integration",
+      "Corporate strategy → Labs development → Production"
+    ],
+    "urgency": "Big topic that affects how the entire 4-tier ecosystem operates",
+    "notes": "Added to backlog as requested - this is foundational for how GARDEN ecosystem development actually works day-to-day"
+  },
+  {
+    "id": "66",
+    "title": "Garden Labs Workflow Development",
+    "description": "ADDED FROM CONVERSATION: Design comprehensive workflow for how development moves between Garden Labs (testing/experiments) and Garden core (stable). Define contributor workflow, admin review process, and core promotion criteria for the 4-tier ecosystem.",
+    "project": "core",
+    "priority": "P1",
+    "status": "backlog",
+    "created": "2025-06-15T22:45:00.000Z",
+    "dependencies": [
+      "Garden Labs repository established",
+      "4-tier ecosystem documentation complete"
+    ],
+    "implementation": "Document contributor workflows, admin processes, promotion criteria, testing requirements, and integration patterns for Labs→Core development pipeline",
+    "scope": [
+      "How users contribute to Labs from their garden-plot-[username] repos",
+      "How Labs tests and refines contributions", 
+      "Admin review and approval processes",
+      "Criteria for promoting Labs content to Core",
+      "Integration with existing version control",
+      "Corporate strategy development in Labs"
+    ],
+    "integration_points": [
+      "README.md - User contribution guidance",
+      "CONTRIBUTING.md - Detailed workflow documentation", 
+      "Version control - Labs-specific processes",
+      "Git workflow - Multi-repository coordination"
+    ],
+    "user_journeys": [
+      "Personal garden-plot-[username] → Labs contribution → Core promotion",
+      "Labs experiments → Testing → Core integration",
+      "Corporate strategy → Labs development → Production"
+    ],
+    "notes": "This is foundational for how the entire 4-tier ecosystem (Core/Labs/Archive/Plots) operates day-to-day"
   }
 ]

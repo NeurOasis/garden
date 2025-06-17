@@ -5,13 +5,19 @@
 ### /contexts/
 Context Initialization Templates (CITs) - the heart of GARDEN
 - Human-readable documentation
-- `/moci/` - Machine-optimized compressed versions
+
+### /moci/
+Machine-Optimized Context Instructions
+- Compressed versions of context files
+- MOCI documentation and tools
 
 ### /toolshed/
 Single-file HTML tools ready for immediate use
 - No dependencies, no build process
 - Direct browser execution
 - Mobile-friendly designs
+- `/explorer/` - Graph navigation tools (moved from microservice)
+- `/sunflower/` - Pattern detection tools (moved from microservice)
 
 ### /patterns/
 Discovered patterns and best practices
@@ -27,9 +33,6 @@ Research and discovery documentation
 
 ## 🔧 Development Directories
 
-### /gateway/
-Entry point tools and interfaces
-
 ### /generated/
 Auto-generated content and artifacts
 
@@ -38,39 +41,40 @@ Database connection generators
 - Neo4j connectors
 - PostgreSQL utilities
 
+### /to-labs-or-personal/
+Temporary organization for cleanup
+- Files being sorted for labs vs personal projects
+
 ## 📚 Documentation
 
-### /docs/
-All documentation organized by topic
-- `/moci/` - MOCI-related guides and templates
-
 ### Root Files
-- **README.md** - Main GARDEN overview
 - **CONTRIBUTING.md** - How to contribute
 - **garden-backlog-current.json** - Active project backlog
+- **STRUCTURE.md** - This navigation guide
 
 ## 🗄️ Archives
 
 ### /archived-microservices/
-Python tools that have been moved to web services
-- Explorer (now at garden-tools-service.vercel.app/api/explorer)
-- Sunflower (now at garden-tools-service.vercel.app/api/sunflower)
+Historical microservice versions
+- `/v1/` and `/v2/` - Previous microservice implementations
 
 ## 💡 Quick Tips
 
 1. **Looking for a tool?** Check `/toolshed/`
 2. **Need context docs?** Look in `/contexts/`
 3. **Want to understand patterns?** See `/patterns/`
-4. **Python tools?** They're now microservices - check `/toolshed/tools-manifest.md`
+4. **MOCI files?** Check `/moci/` directory
+5. **Former Python tools?** Explorer and Sunflower are in `/toolshed/` subdirectories
 
 ## 🚀 What's Where
 
 - **Single-file tools**: `/toolshed/*.html`
-- **User contexts**: `/contexts/CIT_Personal_*.md`
-- **Core standards**: `/contexts/CIT_CoreStandards_*.md`
+- **Tool subdirectories**: `/toolshed/explorer/`, `/toolshed/sunflower/`
+- **Context files**: `/contexts/CIT_*.md`
 - **Research notes**: `/findings/`
 - **Active tasks**: `garden-backlog-current.json`
+- **MOCI documentation**: `/moci/`
 
 ---
 
-*Last updated: 2025-06-01 after microservice migration*
+*Last updated: 2025-12-19 after repository cleanup and reorganization*

@@ -1,0 +1,2897 @@
+{
+  "timestamp": "2025-06-16T13:18:22.750Z",
+  "repoPath": "../../",
+  "summary": {
+    "filesScanned": 77,
+    "componentsFound": 7,
+    "inconsistencies": 5
+  },
+  "components": {
+    "NodePad": {
+      "latest": "5.1.1",
+      "versions": {
+        "20250523": [
+          {
+            "file": "contexts/CIT_BudgetNodePad_20250523.md",
+            "line": 1,
+            "match": "CIT_BudgetNodePad_20250523"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+            "line": 147,
+            "match": "CIT_BudgetNodePad_20250523"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 20,
+            "match": "CIT_BudgetNodePad_20250523"
+          },
+          {
+            "file": "contexts/moci/MOCI_BudgetNodePad_20250523.txt",
+            "line": 1,
+            "match": "CIT_BudgetNodePad_20250523"
+          },
+          {
+            "file": "findings/moci-phase4-deployment-20250531.md",
+            "line": 50,
+            "match": "MOCI_BudgetNodePad_20250523"
+          }
+        ],
+        "5.1.1": [
+          {
+            "file": "README.md",
+            "line": 57,
+            "match": "NodePad 5.1.1"
+          },
+          {
+            "file": "README.md",
+            "line": 57,
+            "match": "NodePad 5.1.1"
+          },
+          {
+            "file": "toolshed/nodepad-5.1.1.html",
+            "line": 5,
+            "match": "NodePad 5.1.1"
+          },
+          {
+            "file": "toolshed/nodepad-5.1.1.html",
+            "line": 12,
+            "match": "NodePad 5.1.1"
+          },
+          {
+            "file": "toolshed/nodepad-5.1.1.html",
+            "line": 53,
+            "match": "NodePad 5.1.1"
+          },
+          {
+            "file": "toolshed/nodepad-5.1.1.html",
+            "line": 5,
+            "match": "NodePad 5.1.1"
+          },
+          {
+            "file": "toolshed/nodepad-5.1.1.html",
+            "line": 12,
+            "match": "NodePad 5.1.1"
+          },
+          {
+            "file": "toolshed/nodepad-5.1.1.html",
+            "line": 53,
+            "match": "NodePad 5.1.1"
+          }
+        ],
+        "4.0.0": [
+          {
+            "file": "contexts/CIT_BudgetNodePad_20250523.md",
+            "line": 9,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_BudgetNodePad_20250523.md",
+            "line": 9,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_Comprehensive_Audit_Plan_20250526.md",
+            "line": 71,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_Comprehensive_Audit_Plan_20250526.md",
+            "line": 71,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_CoreVsFork_Detection_20250526.md",
+            "line": 19,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_CoreVsFork_Detection_20250526.md",
+            "line": 19,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+            "line": 49,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+            "line": 49,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Archaeology_Methodology_20250526.md",
+            "line": 33,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Archaeology_Methodology_20250526.md",
+            "line": 33,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_ProjectManagement.md",
+            "line": 38,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_ProjectManagement.md",
+            "line": 38,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_Personal_Scott_20250529.md",
+            "line": 84,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_Personal_Scott_20250529.md",
+            "line": 84,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_Project_Deployment_Manager_20250525.md",
+            "line": 64,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/CIT_Project_Deployment_Manager_20250525.md",
+            "line": 64,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/Version_Control_Quick_Start.md",
+            "line": 52,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "contexts/Version_Control_Quick_Start.md",
+            "line": 52,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "garden_version_history_data.json",
+            "line": 235,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "garden_version_history_data.json",
+            "line": 235,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "toolshed/garden_version_history-1.0.html",
+            "line": 599,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "toolshed/garden_version_history-1.0.html",
+            "line": 599,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "toolshed/nodepad-4.0.0.html",
+            "line": 5,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "toolshed/nodepad-4.0.0.html",
+            "line": 12,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "toolshed/nodepad-4.0.0.html",
+            "line": 25,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "toolshed/nodepad-4.0.0.html",
+            "line": 5,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "toolshed/nodepad-4.0.0.html",
+            "line": 12,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "toolshed/nodepad-4.0.0.html",
+            "line": 25,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 34,
+            "match": "NodePad v4.0.0"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 81,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 82,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 81,
+            "match": "NodePad 4.0.0"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 82,
+            "match": "NodePad 4.0.0"
+          }
+        ],
+        "5.1.0": [
+          {
+            "file": "contexts/CIT_ToolStrategies.md",
+            "line": 12,
+            "match": "NodePad 5.1.0"
+          },
+          {
+            "file": "contexts/CIT_ToolStrategies.md",
+            "line": 25,
+            "match": "NodePad 5.1.0"
+          },
+          {
+            "file": "contexts/CIT_ToolStrategies.md",
+            "line": 12,
+            "match": "NodePad 5.1.0"
+          },
+          {
+            "file": "contexts/CIT_ToolStrategies.md",
+            "line": 25,
+            "match": "NodePad 5.1.0"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_GARDEN_20250525.md",
+            "line": 72,
+            "match": "NodePad 5.1.0"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_GARDEN_20250525.md",
+            "line": 72,
+            "match": "NodePad 5.1.0"
+          },
+          {
+            "file": "garden-backlog-current.json",
+            "line": 982,
+            "match": "NodePad 5.1.0"
+          },
+          {
+            "file": "garden-backlog-current.json",
+            "line": 982,
+            "match": "NodePad 5.1.0"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 34,
+            "match": "NodePad 5.1.0"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 34,
+            "match": "NodePad 5.1.0"
+          }
+        ]
+      },
+      "files": [
+        "README.md",
+        "contexts/CIT_BudgetNodePad_20250523.md",
+        "contexts/CIT_Comprehensive_Audit_Plan_20250526.md",
+        "contexts/CIT_CoreVsFork_Detection_20250526.md",
+        "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+        "contexts/CIT_GARDEN_Archaeology_Methodology_20250526.md",
+        "contexts/CIT_GARDEN_ProjectManagement.md",
+        "contexts/CIT_Personal_Scott_20250529.md",
+        "contexts/CIT_Project_Deployment_Manager_20250525.md",
+        "contexts/CIT_ToolStrategies.md",
+        "contexts/GARDEN_Migration_Status.md",
+        "contexts/Version_Control_Quick_Start.md",
+        "contexts/behindTheScenes/CIT_GARDEN_20250525.md",
+        "contexts/moci/MOCI_BudgetNodePad_20250523.txt",
+        "findings/moci-phase4-deployment-20250531.md",
+        "garden-backlog-current.json",
+        "garden_version_history_data.json",
+        "toolshed/garden_version_history-1.0.html",
+        "toolshed/nodepad-4.0.0.html",
+        "toolshed/nodepad-5.1.1.html",
+        "toolshed/version-auditor/version_audit_usage_guide.md"
+      ],
+      "outdated": [
+        "5.1.0",
+        "4.0.0"
+      ]
+    },
+    "Unknown": {
+      "latest": "5.28.1",
+      "versions": {
+        "1.0": [
+          {
+            "file": "archived-microservices/v1/garden_explorer.py",
+            "line": 16,
+            "match": "Version: 1.0"
+          },
+          {
+            "file": "findings/uploader_test_cit.md",
+            "line": 7,
+            "match": "Version: v1.0"
+          },
+          {
+            "file": "findings/uploader_test_cit.md",
+            "line": 7,
+            "match": "Current Version: v1.0"
+          }
+        ],
+        "4.4.0": [
+          {
+            "file": "archived-microservices/v1/newgraph.py",
+            "line": 9,
+            "match": "version: 4.4.0"
+          },
+          {
+            "file": "module-generators/neo4j/newgraph.py",
+            "line": 4,
+            "match": "version 4.4.0"
+          }
+        ],
+        "0.1.0": [
+          {
+            "file": "archived-microservices/v1/newgraph.py",
+            "line": 8,
+            "match": "version 0.1.0"
+          },
+          {
+            "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+            "line": 381,
+            "match": "v0.1.0"
+          }
+        ],
+        "3.5": [
+          {
+            "file": "archived-microservices/v2/docs/notebook-0-introduction.md",
+            "line": 478,
+            "match": "version 3.5"
+          },
+          {
+            "file": "explorer/README.md",
+            "line": 45,
+            "match": "version 3.5"
+          }
+        ],
+        "1.1": [
+          {
+            "file": "contexts/moci/MOCI_Comprehensive_Audit_Plan_20250526.txt",
+            "line": 46,
+            "match": "Version 1.1"
+          }
+        ],
+        "2.1": [
+          {
+            "file": "docs/moci/README_MOCI.md",
+            "line": 207,
+            "match": "Version 2.1"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 40,
+            "match": "version 2.1"
+          }
+        ],
+        "3.0": [
+          {
+            "file": "docs/moci/README_MOCI.md",
+            "line": 213,
+            "match": "Version 3.0"
+          }
+        ],
+        "4.0.0": [
+          {
+            "file": "garden_version_history_data.json",
+            "line": 230,
+            "match": "v4.0.0"
+          },
+          {
+            "file": "toolshed/garden_version_history-1.0.html",
+            "line": 594,
+            "match": "v4.0.0"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 34,
+            "match": "v4.0.0"
+          }
+        ],
+        "5.28.1": [
+          {
+            "file": "sunflower/sunflower_connection_1graph.py",
+            "line": 4,
+            "match": "version 5.28.1"
+          },
+          {
+            "file": "sunflower/sunflower_connection_bolt_localhost_7687graph.py",
+            "line": 4,
+            "match": "version 5.28.1"
+          }
+        ],
+        "1.0.0": [
+          {
+            "file": "toolshed/bug-tracker.md",
+            "line": 51,
+            "match": "Version: 1.0.0"
+          },
+          {
+            "file": "toolshed/garden_version_history-1.0.html",
+            "line": 326,
+            "match": "v1.0.0"
+          }
+        ],
+        "0.3.0": [
+          {
+            "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+            "line": 372,
+            "match": "v0.3.0"
+          },
+          {
+            "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+            "line": 387,
+            "match": "v0.3.0"
+          }
+        ],
+        "0.1.1": [
+          {
+            "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+            "line": 382,
+            "match": "v0.1.1"
+          }
+        ],
+        "0.1.2": [
+          {
+            "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+            "line": 383,
+            "match": "v0.1.2"
+          }
+        ],
+        "0.1.3": [
+          {
+            "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+            "line": 384,
+            "match": "v0.1.3"
+          }
+        ],
+        "0.2.0": [
+          {
+            "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+            "line": 385,
+            "match": "v0.2.0"
+          }
+        ],
+        "0.2.1": [
+          {
+            "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+            "line": 386,
+            "match": "v0.2.1"
+          }
+        ],
+        "2.3.1": [
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 36,
+            "match": "Version: 2.3.1"
+          }
+        ],
+        "1.2.3": [
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 40,
+            "match": "v1.2.3"
+          }
+        ]
+      },
+      "files": [
+        "archived-microservices/v1/garden_explorer.py",
+        "archived-microservices/v1/newgraph.py",
+        "archived-microservices/v2/docs/notebook-0-introduction.md",
+        "contexts/moci/MOCI_Comprehensive_Audit_Plan_20250526.txt",
+        "docs/moci/README_MOCI.md",
+        "explorer/README.md",
+        "findings/uploader_test_cit.md",
+        "garden_version_history_data.json",
+        "module-generators/neo4j/newgraph.py",
+        "sunflower/sunflower_connection_1graph.py",
+        "sunflower/sunflower_connection_bolt_localhost_7687graph.py",
+        "toolshed/bug-tracker.md",
+        "toolshed/data-trellis/docs/beginners/beginners1.html",
+        "toolshed/garden_version_history-1.0.html",
+        "toolshed/version-auditor/version_audit_usage_guide.md"
+      ],
+      "outdated": [
+        "4.4.0",
+        "4.0.0",
+        "3.5",
+        "3.0",
+        "2.3.1",
+        "2.1",
+        "1.2.3",
+        "1.1",
+        "1.0.0",
+        "1.0",
+        "0.3.0",
+        "0.2.1",
+        "0.2.0",
+        "0.1.3",
+        "0.1.2",
+        "0.1.1",
+        "0.1.0"
+      ]
+    },
+    "ModuleGenerator": {
+      "latest": null,
+      "versions": {
+        "1": [
+          {
+            "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+            "line": 107,
+            "match": "ModuleGenerator v1"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+            "line": 107,
+            "match": "ModuleGenerator v1"
+          },
+          {
+            "file": "contexts/CIT_ToolStrategies.md",
+            "line": 46,
+            "match": "ModuleGenerator V1"
+          },
+          {
+            "file": "contexts/CIT_ToolStrategies.md",
+            "line": 48,
+            "match": "ModuleGenerator v1"
+          },
+          {
+            "file": "contexts/CIT_ToolStrategies.md",
+            "line": 46,
+            "match": "ModuleGenerator V1"
+          },
+          {
+            "file": "contexts/CIT_ToolStrategies.md",
+            "line": 48,
+            "match": "ModuleGenerator v1"
+          },
+          {
+            "file": "contexts/Version_Control_Quick_Start.md",
+            "line": 60,
+            "match": "ModuleGenerator V1"
+          },
+          {
+            "file": "contexts/Version_Control_Quick_Start.md",
+            "line": 60,
+            "match": "ModuleGenerator V1"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 35,
+            "match": "Module Generator v1"
+          }
+        ],
+        "2": [
+          {
+            "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+            "line": 117,
+            "match": "ModuleGenerator v2"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+            "line": 117,
+            "match": "ModuleGenerator v2"
+          },
+          {
+            "file": "contexts/CIT_ToolStrategies.md",
+            "line": 47,
+            "match": "ModuleGenerator V2"
+          },
+          {
+            "file": "contexts/CIT_ToolStrategies.md",
+            "line": 47,
+            "match": "ModuleGenerator V2"
+          },
+          {
+            "file": "generated/modulegenerator_gen1/notebook-1-graph-databases.md",
+            "line": 667,
+            "match": "Module Generator\n\n2"
+          },
+          {
+            "file": "generated/modulegenerator_gen1/notebook-2-module-generator-architecture.md",
+            "line": 6,
+            "match": "Module Generator\n2"
+          },
+          {
+            "file": "generated/modulegenerator_gen1/notebook-6-value-returning-functions-modules.md",
+            "line": 6,
+            "match": "Module Generator\n2"
+          },
+          {
+            "file": "generated/modulegenerator_gen1/notebook-9-more-about-strings.md",
+            "line": 6,
+            "match": "Module Generator\n2"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 35,
+            "match": "ModuleGenerator v2"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 35,
+            "match": "ModuleGenerator v2"
+          }
+        ],
+        "3": [
+          {
+            "file": "archived-microservices/v2/docs/notebook-7-troubleshooting.md",
+            "line": 320,
+            "match": "Module Generator\n3"
+          }
+        ],
+        "4": [
+          {
+            "file": "archived-microservices/v2/docs/notebook-1-environment.md",
+            "line": 8,
+            "match": "Module Generator\n4"
+          },
+          {
+            "file": "archived-microservices/v2/docs/notebook-1-environment.md",
+            "line": 521,
+            "match": "Module Generator\n4"
+          },
+          {
+            "file": "archived-microservices/v2/docs/notebook-8-reference.md",
+            "line": 1700,
+            "match": "Module Generator\n4"
+          }
+        ]
+      },
+      "files": [
+        "archived-microservices/v2/docs/notebook-1-environment.md",
+        "archived-microservices/v2/docs/notebook-7-troubleshooting.md",
+        "archived-microservices/v2/docs/notebook-8-reference.md",
+        "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+        "contexts/CIT_ToolStrategies.md",
+        "contexts/Version_Control_Quick_Start.md",
+        "generated/modulegenerator_gen1/notebook-1-graph-databases.md",
+        "generated/modulegenerator_gen1/notebook-2-module-generator-architecture.md",
+        "generated/modulegenerator_gen1/notebook-6-value-returning-functions-modules.md",
+        "generated/modulegenerator_gen1/notebook-9-more-about-strings.md",
+        "toolshed/version-auditor/version_audit_usage_guide.md"
+      ],
+      "outdated": [
+        "4",
+        "3",
+        "1",
+        "2"
+      ]
+    },
+    "CIT": {
+      "latest": "2.2",
+      "versions": {
+        "20250510": [
+          {
+            "file": "contexts/behindTheScenes/CIT_CoreStandards_20250526.md",
+            "line": 117,
+            "match": "CIT_ADAcompliance_20250510"
+          }
+        ],
+        "20250511": [
+          {
+            "file": "contexts/CIT_ActionOrganizer_20250511.md",
+            "line": 1,
+            "match": "CIT_ActionOrganizer_20250511"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+            "line": 146,
+            "match": "CIT_ActionOrganizer_20250511"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+            "line": 148,
+            "match": "CIT_SailPlan_20250511"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 19,
+            "match": "CIT_ActionOrganizer_20250511"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_CoreStandards_20250526.md",
+            "line": 116,
+            "match": "CIT_Brand_Style_Guide_20250511"
+          },
+          {
+            "file": "contexts/moci/MOCI_ActionOrganizer_20250511.txt",
+            "line": 1,
+            "match": "CIT_ActionOrganizer_20250511"
+          }
+        ],
+        "20250515": [
+          {
+            "file": "contexts/behindTheScenes/CIT_NeuroOasis_Forking_Workflow_20250526.md",
+            "line": 121,
+            "match": "CIT_zVisualSchedule-Z_20250515"
+          }
+        ],
+        "20250517": [
+          {
+            "file": "contexts/behindTheScenes/CIT_NeuroOasis_Forking_Workflow_20250526.md",
+            "line": 122,
+            "match": "CIT_blueberryCoffee_20250517"
+          }
+        ],
+        "20250518": [
+          {
+            "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+            "line": 144,
+            "match": "CIT_GARDEN_20250518"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+            "line": 145,
+            "match": "CIT_Personal_20250518"
+          }
+        ],
+        "20250519": [
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 40,
+            "match": "CIT_meta-cit-framework_20250519"
+          }
+        ],
+        "20250523": [
+          {
+            "file": "contexts/behindTheScenes/CIT_NeuroOasis_Forking_Workflow_20250526.md",
+            "line": 121,
+            "match": "CIT_Zach_20250523"
+          },
+          {
+            "file": "findings/moci-discovery-20250531.md",
+            "line": 28,
+            "match": "CIT_Zach_20250523"
+          },
+          {
+            "file": "findings/moci-discovery-20250531.md",
+            "line": 107,
+            "match": "CIT_Zach_20250523"
+          }
+        ],
+        "20250525": [
+          {
+            "file": "contexts/ARCHIVE_STRUCTURE_CORRECTED.md",
+            "line": 12,
+            "match": "CIT_GARDEN_20250525"
+          },
+          {
+            "file": "contexts/ARCHIVE_STRUCTURE_CORRECTED.md",
+            "line": 45,
+            "match": "CIT_GARDEN_20250525"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+            "line": 1,
+            "match": "CIT_GARDEN_Accomplishments_20250525"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_ProjectManagement.md",
+            "line": 1,
+            "match": "CIT_GARDEN_ProjectManagement_20250525"
+          },
+          {
+            "file": "contexts/CIT_Project_Deployment_Manager_20250525.md",
+            "line": 1,
+            "match": "CIT_Project_Deployment_Manager_20250525"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 15,
+            "match": "CIT_GARDEN_20250525"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 25,
+            "match": "CIT_GARDEN_Accomplishments_20250525"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 29,
+            "match": "CIT_Project_Deployment_Manager_20250525"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 37,
+            "match": "CIT_GARDEN_20250525"
+          },
+          {
+            "file": "contexts/Version_Control_Quick_Start.md",
+            "line": 118,
+            "match": "CIT_GARDEN_20250525"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_GARDEN_20250525.md",
+            "line": 1,
+            "match": "CIT_GARDEN_20250525"
+          },
+          {
+            "file": "contexts/moci/MOCI_GARDEN_20250525.txt",
+            "line": 1,
+            "match": "CIT_GARDEN_20250525"
+          },
+          {
+            "file": "contexts/moci/MOCI_GARDEN_Accomplishments_20250525.txt",
+            "line": 1,
+            "match": "CIT_GARDEN_Accomplishments_20250525"
+          },
+          {
+            "file": "contexts/moci/MOCI_Personal_Scott_20250525.txt",
+            "line": 1,
+            "match": "CIT_Personal_Scott_20250525"
+          },
+          {
+            "file": "contexts/moci/MOCI_Project_Deployment_Manager_20250525.txt",
+            "line": 1,
+            "match": "CIT_Project_Deployment_Manager_20250525"
+          },
+          {
+            "file": "findings/clean_backlog_no_secrets.json",
+            "line": 117,
+            "match": "CIT_Personal_20250525"
+          },
+          {
+            "file": "findings/clean_backlog_no_secrets.json",
+            "line": 117,
+            "match": "CIT_Personal_Scott_20250525"
+          },
+          {
+            "file": "findings/moci-phase3-validation-20250531.md",
+            "line": 14,
+            "match": "CIT_GARDEN_20250525"
+          },
+          {
+            "file": "garden-backlog-current.json",
+            "line": 117,
+            "match": "CIT_Personal_20250525"
+          },
+          {
+            "file": "garden-backlog-current.json",
+            "line": 117,
+            "match": "CIT_Personal_Scott_20250525"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 37,
+            "match": "CIT_ProjectName_20250525"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 81,
+            "match": "CIT_GARDEN_20250525"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 90,
+            "match": "CIT_GARDEN_20250525"
+          }
+        ],
+        "20250526": [
+          {
+            "file": "contexts/CIT_Comprehensive_Audit_Plan_20250526.md",
+            "line": 1,
+            "match": "CIT_Comprehensive_Audit_Plan_20250526"
+          },
+          {
+            "file": "contexts/CIT_CoreVsFork_Detection_20250526.md",
+            "line": 1,
+            "match": "CIT_CoreVsFork_Detection_20250526"
+          },
+          {
+            "file": "contexts/CIT_Documentation_Workflow_20250526.md",
+            "line": 1,
+            "match": "CIT_Documentation_Workflow_20250526"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Archaeology_Methodology_20250526.md",
+            "line": 1,
+            "match": "CIT_GARDEN_Archaeology_Methodology_20250526"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Archaeology_Methodology_20250526.md",
+            "line": 169,
+            "match": "CIT_GARDEN_Archaeology_Methodology_20250526"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 21,
+            "match": "CIT_Comprehensive_Audit_Plan_20250526"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 22,
+            "match": "CIT_CoreVsFork_Detection_20250526"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 24,
+            "match": "CIT_Documentation_Workflow_20250526"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 26,
+            "match": "CIT_GARDEN_Archaeology_Methodology_20250526"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 35,
+            "match": "CIT_CoreStandards_20250526"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 39,
+            "match": "CIT_NeuroOasis_Forking_Workflow_20250526"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_CoreStandards_20250526.md",
+            "line": 1,
+            "match": "CIT_CoreStandards_20250526"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_NeuroOasis_Forking_Workflow_20250526.md",
+            "line": 1,
+            "match": "CIT_NeuroOasis_Forking_Workflow_20250526"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_NeuroOasis_Forking_Workflow_20250526.md",
+            "line": 66,
+            "match": "CIT_CoreStandards_20250526"
+          },
+          {
+            "file": "contexts/moci/MOCI_Comprehensive_Audit_Plan_20250526.txt",
+            "line": 1,
+            "match": "CIT_Comprehensive_Audit_Plan_20250526"
+          },
+          {
+            "file": "contexts/moci/MOCI_CoreStandards_20250526.txt",
+            "line": 1,
+            "match": "CIT_CoreStandards_20250526"
+          },
+          {
+            "file": "contexts/moci/MOCI_CoreVsFork_Detection_20250526.txt",
+            "line": 1,
+            "match": "CIT_CoreVsFork_Detection_20250526"
+          },
+          {
+            "file": "contexts/moci/MOCI_Documentation_Workflow_20250526.txt",
+            "line": 1,
+            "match": "CIT_Documentation_Workflow_20250526"
+          },
+          {
+            "file": "contexts/moci/MOCI_GARDEN_Archaeology_Methodology_20250526.txt",
+            "line": 1,
+            "match": "CIT_GARDEN_Archaeology_Methodology_20250526"
+          },
+          {
+            "file": "contexts/moci/MOCI_NeuroOasis_Forking_Workflow_20250526.txt",
+            "line": 1,
+            "match": "CIT_NeuroOasis_Forking_Workflow_20250526"
+          },
+          {
+            "file": "findings/clean_backlog_no_secrets.json",
+            "line": 112,
+            "match": "CIT_CoreVsFork_Detection_20250526"
+          },
+          {
+            "file": "findings/clean_backlog_no_secrets.json",
+            "line": 186,
+            "match": "CIT_Documentation_Workflow_20250526"
+          },
+          {
+            "file": "findings/clean_enhanced_backlog 2.json",
+            "line": 24,
+            "match": "CIT_NeuroOasis_Forking_Workflow_20250526"
+          },
+          {
+            "file": "findings/clean_enhanced_backlog.json",
+            "line": 24,
+            "match": "CIT_NeuroOasis_Forking_Workflow_20250526"
+          },
+          {
+            "file": "findings/moci-discovery-20250531.md",
+            "line": 108,
+            "match": "CIT_CoreStandards_20250526"
+          },
+          {
+            "file": "garden-backlog-current.json",
+            "line": 112,
+            "match": "CIT_CoreVsFork_Detection_20250526"
+          },
+          {
+            "file": "garden-backlog-current.json",
+            "line": 186,
+            "match": "CIT_Documentation_Workflow_20250526"
+          }
+        ],
+        "20250528": [
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 38,
+            "match": "CIT_GARDEN_Uploader_SystemDesign_20250528"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_GARDEN_Uploader_SystemDesign_20250528.md",
+            "line": 1,
+            "match": "CIT_GARDEN_Uploader_SystemDesign_20250528"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_GARDEN_Uploader_SystemDesign_20250528.md",
+            "line": 48,
+            "match": "CIT_Dan_Personal_20250528"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_GARDEN_Uploader_SystemDesign_20250528.md",
+            "line": 163,
+            "match": "CIT_ProjectName_20250528"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_GARDEN_Uploader_SystemDesign_20250528.md",
+            "line": 180,
+            "match": "CIT_Personal_Dan_20250528"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_GARDEN_Uploader_SystemDesign_20250528.md",
+            "line": 213,
+            "match": "CIT_Personal_Dan_20250528"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_GARDEN_Uploader_SystemDesign_20250528.md",
+            "line": 237,
+            "match": "CIT_Personal_User_20250528"
+          },
+          {
+            "file": "contexts/moci/MOCI_GARDEN_Uploader_SystemDesign_20250528.txt",
+            "line": 1,
+            "match": "CIT_GARDEN_Uploader_SystemDesign_20250528"
+          }
+        ],
+        "20250529": [
+          {
+            "file": "contexts/CIT_Personal_Scott_20250529.md",
+            "line": 1,
+            "match": "CIT_Personal_Scott_20250529"
+          },
+          {
+            "file": "contexts/CIT_Testing_Comparison_20250529.md",
+            "line": 1,
+            "match": "CIT_Testing_Comparison_20250529"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 27,
+            "match": "CIT_Personal_Scott_20250529"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 31,
+            "match": "CIT_Testing_Comparison_20250529"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 36,
+            "match": "CIT_FileAccess_Configuration_20250529"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_FileAccess_Configuration_20250529.md",
+            "line": 1,
+            "match": "CIT_FileAccess_Configuration_20250529"
+          },
+          {
+            "file": "contexts/moci/MOCI_FileAccess_Configuration_20250529.txt",
+            "line": 1,
+            "match": "CIT_FileAccess_Configuration_20250529"
+          },
+          {
+            "file": "contexts/moci/MOCI_Personal_Scott_20250529.txt",
+            "line": 1,
+            "match": "CIT_Personal_Scott_20250529"
+          },
+          {
+            "file": "contexts/moci/MOCI_Testing_Comparison_20250529.txt",
+            "line": 1,
+            "match": "CIT_Testing_Comparison_20250529"
+          },
+          {
+            "file": "findings/uploader_test_cit.md",
+            "line": 1,
+            "match": "CIT_Testing_Uploader_Workflow_20250529"
+          }
+        ],
+        "20250530": [
+          {
+            "file": "contexts/CIT_Printable_Artifact_Standards_20250530.md",
+            "line": 1,
+            "match": "CIT_Printable_Artifact_Standards_20250530"
+          },
+          {
+            "file": "contexts/CIT_Scheduling_Algorithms_20250530.md",
+            "line": 1,
+            "match": "CIT_Scheduling_Algorithms_20250530"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 28,
+            "match": "CIT_Printable_Artifact_Standards_20250530"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 30,
+            "match": "CIT_Scheduling_Algorithms_20250530"
+          },
+          {
+            "file": "contexts/moci/MOCI_Printable_Artifact_Standards_20250530.txt",
+            "line": 1,
+            "match": "CIT_Printable_Artifact_Standards_20250530"
+          },
+          {
+            "file": "contexts/moci/MOCI_Scheduling_Algorithms_20250530.txt",
+            "line": 1,
+            "match": "CIT_Scheduling_Algorithms_20250530"
+          }
+        ],
+        "20250531": [
+          {
+            "file": "docs/moci/QUICK_START_MOCI.md",
+            "line": 47,
+            "match": "CIT_Personal_Zach_20250531"
+          }
+        ],
+        "20250601": [
+          {
+            "file": "contexts/CIT_Distributed_Service_Sync_20250601.md",
+            "line": 1,
+            "match": "CIT_Distributed_Service_Sync_20250601"
+          },
+          {
+            "file": "contexts/CIT_Tool_Awareness_Sync_20250601.md",
+            "line": 1,
+            "match": "CIT_Tool_Awareness_Sync_20250601"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 23,
+            "match": "CIT_Distributed_Service_Sync_20250601"
+          },
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 32,
+            "match": "CIT_Tool_Awareness_Sync_20250601"
+          }
+        ],
+        "20250615": [
+          {
+            "file": "contexts/GARDEN_Migration_Status.md",
+            "line": 43,
+            "match": "CIT_Corporate_Strategy_20250615"
+          },
+          {
+            "file": "contexts/MANDATORY_GARDEN_API_CALLS.md",
+            "line": 166,
+            "match": "CIT_ComponentName.md` not `CIT_ComponentName_20250615"
+          },
+          {
+            "file": "contexts/Version_Control_Quick_Start.md",
+            "line": 6,
+            "match": "CIT_Version_Control_GARDEN_20250615"
+          },
+          {
+            "file": "contexts/Version_Control_Quick_Start.md",
+            "line": 115,
+            "match": "CIT_Version_Control_GARDEN_20250615"
+          }
+        ],
+        "1.3": [
+          {
+            "file": "contexts/CIT_ActionOrganizer_20250511.md",
+            "line": 7,
+            "match": "Version: v1.3"
+          },
+          {
+            "file": "contexts/CIT_ActionOrganizer_20250511.md",
+            "line": 7,
+            "match": "Current Version: v1.3"
+          }
+        ],
+        "2.1": [
+          {
+            "file": "contexts/CIT_BudgetNodePad_20250523.md",
+            "line": 7,
+            "match": "Version: v2.1"
+          },
+          {
+            "file": "contexts/CIT_BudgetNodePad_20250523.md",
+            "line": 7,
+            "match": "Current Version: v2.1"
+          },
+          {
+            "file": "contexts/moci/MOCI_meta-cit-framework_20250519.txt",
+            "line": 1,
+            "match": "CIT_Framework_Generation_v2.1"
+          }
+        ],
+        "2.0": [
+          {
+            "file": "contexts/CIT_Comprehensive_Audit_Plan_20250526.md",
+            "line": 7,
+            "match": "Version: v2.0"
+          },
+          {
+            "file": "contexts/CIT_Comprehensive_Audit_Plan_20250526.md",
+            "line": 7,
+            "match": "Current Version: v2.0"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_CoreStandards_20250526.md",
+            "line": 7,
+            "match": "Version: v2.0"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_CoreStandards_20250526.md",
+            "line": 7,
+            "match": "Current Version: v2.0"
+          }
+        ],
+        "1.2": [
+          {
+            "file": "contexts/CIT_CoreVsFork_Detection_20250526.md",
+            "line": 7,
+            "match": "Version: v1.2"
+          },
+          {
+            "file": "contexts/CIT_CoreVsFork_Detection_20250526.md",
+            "line": 7,
+            "match": "Current Version: v1.2"
+          },
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 36,
+            "match": "CIT_Something_v1.2"
+          }
+        ],
+        "2.0.0": [
+          {
+            "file": "contexts/CIT_Distributed_Service_Sync_20250601.md",
+            "line": 86,
+            "match": "version: 2.0.0"
+          }
+        ],
+        "1.0": [
+          {
+            "file": "contexts/CIT_Documentation_Workflow_20250526.md",
+            "line": 7,
+            "match": "Version: v1.0"
+          },
+          {
+            "file": "contexts/CIT_Documentation_Workflow_20250526.md",
+            "line": 7,
+            "match": "Current Version: v1.0"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Archaeology_Methodology_20250526.md",
+            "line": 7,
+            "match": "Version: v1.0"
+          },
+          {
+            "file": "contexts/CIT_GARDEN_Archaeology_Methodology_20250526.md",
+            "line": 7,
+            "match": "Current Version: v1.0"
+          },
+          {
+            "file": "contexts/CIT_Printable_Artifact_Standards_20250530.md",
+            "line": 7,
+            "match": "Version: v1.0"
+          },
+          {
+            "file": "contexts/CIT_Printable_Artifact_Standards_20250530.md",
+            "line": 7,
+            "match": "Current Version: v1.0"
+          },
+          {
+            "file": "contexts/CIT_Scheduling_Algorithms_20250530.md",
+            "line": 7,
+            "match": "Version: v1.0"
+          },
+          {
+            "file": "contexts/CIT_Scheduling_Algorithms_20250530.md",
+            "line": 7,
+            "match": "Current Version: v1.0"
+          },
+          {
+            "file": "contexts/CIT_Testing_Comparison_20250529.md",
+            "line": 7,
+            "match": "Version: v1.0"
+          },
+          {
+            "file": "contexts/CIT_Testing_Comparison_20250529.md",
+            "line": 7,
+            "match": "Current Version: v1.0"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_FileAccess_Configuration_20250529.md",
+            "line": 7,
+            "match": "Version: v1.0"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_GARDEN_Uploader_SystemDesign_20250528.md",
+            "line": 7,
+            "match": "Version: v1.0"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_GARDEN_Uploader_SystemDesign_20250528.md",
+            "line": 7,
+            "match": "Current Version: v1.0"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_NeuroOasis_Forking_Workflow_20250526.md",
+            "line": 7,
+            "match": "Version: v1.0"
+          },
+          {
+            "file": "contexts/behindTheScenes/CIT_NeuroOasis_Forking_Workflow_20250526.md",
+            "line": 7,
+            "match": "Current Version: v1.0"
+          }
+        ],
+        "2.2": [
+          {
+            "file": "contexts/CIT_Project_Deployment_Manager_20250525.md",
+            "line": 7,
+            "match": "Version: v2.2"
+          },
+          {
+            "file": "contexts/CIT_Project_Deployment_Manager_20250525.md",
+            "line": 7,
+            "match": "Current Version: v2.2"
+          }
+        ],
+        "1.0.0": [
+          {
+            "file": "contexts/CIT_ToolStrategies.md",
+            "line": 4,
+            "match": "v1.0.0"
+          },
+          {
+            "file": "contexts/CIT_ToolStrategies.md",
+            "line": 113,
+            "match": "v1.0.0"
+          },
+          {
+            "file": "contexts/CIT_VersionControl.md",
+            "line": 4,
+            "match": "v1.0.0"
+          },
+          {
+            "file": "contexts/CIT_VersionControl.md",
+            "line": 109,
+            "match": "v1.0.0"
+          },
+          {
+            "file": "contexts/CIT_VersionControl.md",
+            "line": 113,
+            "match": "v1.0.0"
+          },
+          {
+            "file": "contexts/CIT_VersionControl.md",
+            "line": 146,
+            "match": "v1.0.0"
+          },
+          {
+            "file": "contexts/CIT_VersionControl.md",
+            "line": 163,
+            "match": "v1.0.0"
+          }
+        ],
+        "1.2.0": [
+          {
+            "file": "contexts/CIT_VersionControl.md",
+            "line": 48,
+            "match": "v1.2.0"
+          },
+          {
+            "file": "contexts/CIT_VersionControl.md",
+            "line": 60,
+            "match": "v1.2.0"
+          }
+        ],
+        "1.1.0": [
+          {
+            "file": "contexts/CIT_VersionControl.md",
+            "line": 67,
+            "match": "v1.1.0"
+          },
+          {
+            "file": "contexts/CIT_VersionControl.md",
+            "line": 110,
+            "match": "v1.1.0"
+          }
+        ]
+      },
+      "files": [
+        "contexts/ARCHIVE_STRUCTURE_CORRECTED.md",
+        "contexts/CIT_ActionOrganizer_20250511.md",
+        "contexts/CIT_BudgetNodePad_20250523.md",
+        "contexts/CIT_Comprehensive_Audit_Plan_20250526.md",
+        "contexts/CIT_CoreVsFork_Detection_20250526.md",
+        "contexts/CIT_Distributed_Service_Sync_20250601.md",
+        "contexts/CIT_Documentation_Workflow_20250526.md",
+        "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+        "contexts/CIT_GARDEN_Archaeology_Methodology_20250526.md",
+        "contexts/CIT_GARDEN_ProjectManagement.md",
+        "contexts/CIT_Personal_Scott_20250529.md",
+        "contexts/CIT_Printable_Artifact_Standards_20250530.md",
+        "contexts/CIT_Project_Deployment_Manager_20250525.md",
+        "contexts/CIT_Scheduling_Algorithms_20250530.md",
+        "contexts/CIT_Testing_Comparison_20250529.md",
+        "contexts/CIT_ToolStrategies.md",
+        "contexts/CIT_Tool_Awareness_Sync_20250601.md",
+        "contexts/CIT_VersionControl.md",
+        "contexts/GARDEN_Migration_Status.md",
+        "contexts/MANDATORY_GARDEN_API_CALLS.md",
+        "contexts/Version_Control_Quick_Start.md",
+        "contexts/behindTheScenes/CIT_CoreStandards_20250526.md",
+        "contexts/behindTheScenes/CIT_FileAccess_Configuration_20250529.md",
+        "contexts/behindTheScenes/CIT_GARDEN_20250525.md",
+        "contexts/behindTheScenes/CIT_GARDEN_Uploader_SystemDesign_20250528.md",
+        "contexts/behindTheScenes/CIT_NeuroOasis_Forking_Workflow_20250526.md",
+        "contexts/moci/MOCI_ActionOrganizer_20250511.txt",
+        "contexts/moci/MOCI_Comprehensive_Audit_Plan_20250526.txt",
+        "contexts/moci/MOCI_CoreStandards_20250526.txt",
+        "contexts/moci/MOCI_CoreVsFork_Detection_20250526.txt",
+        "contexts/moci/MOCI_Documentation_Workflow_20250526.txt",
+        "contexts/moci/MOCI_FileAccess_Configuration_20250529.txt",
+        "contexts/moci/MOCI_GARDEN_20250525.txt",
+        "contexts/moci/MOCI_GARDEN_Accomplishments_20250525.txt",
+        "contexts/moci/MOCI_GARDEN_Archaeology_Methodology_20250526.txt",
+        "contexts/moci/MOCI_GARDEN_Uploader_SystemDesign_20250528.txt",
+        "contexts/moci/MOCI_NeuroOasis_Forking_Workflow_20250526.txt",
+        "contexts/moci/MOCI_Personal_Scott_20250525.txt",
+        "contexts/moci/MOCI_Personal_Scott_20250529.txt",
+        "contexts/moci/MOCI_Printable_Artifact_Standards_20250530.txt",
+        "contexts/moci/MOCI_Project_Deployment_Manager_20250525.txt",
+        "contexts/moci/MOCI_Scheduling_Algorithms_20250530.txt",
+        "contexts/moci/MOCI_Testing_Comparison_20250529.txt",
+        "contexts/moci/MOCI_meta-cit-framework_20250519.txt",
+        "docs/moci/QUICK_START_MOCI.md",
+        "findings/clean_backlog_no_secrets.json",
+        "findings/clean_enhanced_backlog 2.json",
+        "findings/clean_enhanced_backlog.json",
+        "findings/moci-discovery-20250531.md",
+        "findings/moci-phase3-validation-20250531.md",
+        "findings/uploader_test_cit.md",
+        "garden-backlog-current.json",
+        "toolshed/version-auditor/version_audit_usage_guide.md"
+      ],
+      "outdated": [
+        "2.1",
+        "2.0.0",
+        "2.0",
+        "1.3",
+        "1.2.0",
+        "1.2",
+        "1.1.0",
+        "1.0.0",
+        "1.0"
+      ]
+    },
+    "CIT-Date": {
+      "latest": "20250529",
+      "versions": {
+        "20250525": [
+          {
+            "file": "docs/moci/README_MOCI.md",
+            "line": 101,
+            "match": "MOCI_GARDEN_20250525"
+          },
+          {
+            "file": "findings/moci-phase3-validation-20250531.md",
+            "line": 22,
+            "match": "MOCI_GARDEN_20250525"
+          },
+          {
+            "file": "findings/moci-phase4-deployment-20250531.md",
+            "line": 48,
+            "match": "MOCI_GARDEN_20250525"
+          }
+        ],
+        "20250529": [
+          {
+            "file": "docs/moci/README_MOCI.md",
+            "line": 103,
+            "match": "MOCI_Personal_Scott_20250529"
+          },
+          {
+            "file": "findings/moci-phase4-deployment-20250531.md",
+            "line": 49,
+            "match": "MOCI_Personal_Scott_20250529"
+          }
+        ]
+      },
+      "files": [
+        "docs/moci/README_MOCI.md",
+        "findings/moci-phase3-validation-20250531.md",
+        "findings/moci-phase4-deployment-20250531.md"
+      ],
+      "outdated": [
+        "20250525"
+      ]
+    },
+    "Framework": {
+      "latest": "3.1",
+      "versions": {
+        "3.1": [
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 38,
+            "match": "Framework v3.1"
+          }
+        ]
+      },
+      "files": [
+        "toolshed/version-auditor/version_audit_usage_guide.md"
+      ],
+      "outdated": []
+    },
+    "API": {
+      "latest": "2.1",
+      "versions": {
+        "2.1": [
+          {
+            "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+            "line": 39,
+            "match": "API v2.1"
+          }
+        ]
+      },
+      "files": [
+        "toolshed/version-auditor/version_audit_usage_guide.md"
+      ],
+      "outdated": []
+    }
+  },
+  "inconsistencies": [
+    {
+      "component": "NodePad",
+      "versions": [
+        "5.1.1",
+        "4.0.0",
+        "20250523",
+        "5.1.0"
+      ],
+      "latest": "5.1.1",
+      "fileCount": 21
+    },
+    {
+      "component": "Unknown",
+      "versions": [
+        "1.0",
+        "4.4.0",
+        "0.1.0",
+        "3.5",
+        "1.1",
+        "2.1",
+        "3.0",
+        "4.0.0",
+        "5.28.1",
+        "1.0.0",
+        "0.3.0",
+        "0.1.1",
+        "0.1.2",
+        "0.1.3",
+        "0.2.0",
+        "0.2.1",
+        "2.3.1",
+        "1.2.3"
+      ],
+      "latest": "5.28.1",
+      "fileCount": 15
+    },
+    {
+      "component": "ModuleGenerator",
+      "versions": [
+        "4",
+        "3",
+        "1",
+        "2"
+      ],
+      "latest": null,
+      "fileCount": 11
+    },
+    {
+      "component": "CIT",
+      "versions": [
+        "20250525",
+        "1.3",
+        "20250511",
+        "2.1",
+        "2.0",
+        "20250526",
+        "1.2",
+        "2.0.0",
+        "20250601",
+        "1.0",
+        "20250518",
+        "20250529",
+        "20250530",
+        "2.2",
+        "1.0.0",
+        "1.2.0",
+        "1.1.0",
+        "20250528",
+        "20250519",
+        "20250615",
+        "20250510",
+        "20250523",
+        "20250515",
+        "20250517",
+        "20250531"
+      ],
+      "latest": "2.2",
+      "fileCount": 53
+    },
+    {
+      "component": "CIT-Date",
+      "versions": [
+        "20250525",
+        "20250529"
+      ],
+      "latest": "20250529",
+      "fileCount": 3
+    }
+  ],
+  "actionItems": [
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_ToolStrategies.md",
+      "line": 12,
+      "currentVersion": "5.1.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 5.1.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_ToolStrategies.md",
+      "line": 25,
+      "currentVersion": "5.1.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 5.1.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_ToolStrategies.md",
+      "line": 12,
+      "currentVersion": "5.1.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 5.1.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_ToolStrategies.md",
+      "line": 25,
+      "currentVersion": "5.1.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 5.1.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/behindTheScenes/CIT_GARDEN_20250525.md",
+      "line": 72,
+      "currentVersion": "5.1.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 5.1.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/behindTheScenes/CIT_GARDEN_20250525.md",
+      "line": 72,
+      "currentVersion": "5.1.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 5.1.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "garden-backlog-current.json",
+      "line": 982,
+      "currentVersion": "5.1.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 5.1.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "garden-backlog-current.json",
+      "line": 982,
+      "currentVersion": "5.1.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 5.1.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 34,
+      "currentVersion": "5.1.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 5.1.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 34,
+      "currentVersion": "5.1.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 5.1.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_BudgetNodePad_20250523.md",
+      "line": 9,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_BudgetNodePad_20250523.md",
+      "line": 9,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_Comprehensive_Audit_Plan_20250526.md",
+      "line": 71,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_Comprehensive_Audit_Plan_20250526.md",
+      "line": 71,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_CoreVsFork_Detection_20250526.md",
+      "line": 19,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_CoreVsFork_Detection_20250526.md",
+      "line": 19,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+      "line": 49,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+      "line": 49,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_GARDEN_Archaeology_Methodology_20250526.md",
+      "line": 33,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_GARDEN_Archaeology_Methodology_20250526.md",
+      "line": 33,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_GARDEN_ProjectManagement.md",
+      "line": 38,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_GARDEN_ProjectManagement.md",
+      "line": 38,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_Personal_Scott_20250529.md",
+      "line": 84,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_Personal_Scott_20250529.md",
+      "line": 84,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_Project_Deployment_Manager_20250525.md",
+      "line": 64,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/CIT_Project_Deployment_Manager_20250525.md",
+      "line": 64,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/Version_Control_Quick_Start.md",
+      "line": 52,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "contexts/Version_Control_Quick_Start.md",
+      "line": 52,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "garden_version_history_data.json",
+      "line": 235,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "garden_version_history_data.json",
+      "line": 235,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/garden_version_history-1.0.html",
+      "line": 599,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/garden_version_history-1.0.html",
+      "line": 599,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/nodepad-4.0.0.html",
+      "line": 5,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/nodepad-4.0.0.html",
+      "line": 12,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/nodepad-4.0.0.html",
+      "line": 25,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/nodepad-4.0.0.html",
+      "line": 5,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/nodepad-4.0.0.html",
+      "line": 12,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/nodepad-4.0.0.html",
+      "line": 25,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 34,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad v4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 81,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 82,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 81,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "NodePad",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 82,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.1.1",
+      "originalMatch": "NodePad 4.0.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "archived-microservices/v1/newgraph.py",
+      "line": 9,
+      "currentVersion": "4.4.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "version: 4.4.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "module-generators/neo4j/newgraph.py",
+      "line": 4,
+      "currentVersion": "4.4.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "version 4.4.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "garden_version_history_data.json",
+      "line": 230,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "v4.0.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/garden_version_history-1.0.html",
+      "line": 594,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "v4.0.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 34,
+      "currentVersion": "4.0.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "v4.0.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "archived-microservices/v2/docs/notebook-0-introduction.md",
+      "line": 478,
+      "currentVersion": "3.5",
+      "targetVersion": "5.28.1",
+      "originalMatch": "version 3.5"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "explorer/README.md",
+      "line": 45,
+      "currentVersion": "3.5",
+      "targetVersion": "5.28.1",
+      "originalMatch": "version 3.5"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "docs/moci/README_MOCI.md",
+      "line": 213,
+      "currentVersion": "3.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "Version 3.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 36,
+      "currentVersion": "2.3.1",
+      "targetVersion": "5.28.1",
+      "originalMatch": "Version: 2.3.1"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "docs/moci/README_MOCI.md",
+      "line": 207,
+      "currentVersion": "2.1",
+      "targetVersion": "5.28.1",
+      "originalMatch": "Version 2.1"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 40,
+      "currentVersion": "2.1",
+      "targetVersion": "5.28.1",
+      "originalMatch": "version 2.1"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 40,
+      "currentVersion": "1.2.3",
+      "targetVersion": "5.28.1",
+      "originalMatch": "v1.2.3"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "contexts/moci/MOCI_Comprehensive_Audit_Plan_20250526.txt",
+      "line": 46,
+      "currentVersion": "1.1",
+      "targetVersion": "5.28.1",
+      "originalMatch": "Version 1.1"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/bug-tracker.md",
+      "line": 51,
+      "currentVersion": "1.0.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "Version: 1.0.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/garden_version_history-1.0.html",
+      "line": 326,
+      "currentVersion": "1.0.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "v1.0.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "archived-microservices/v1/garden_explorer.py",
+      "line": 16,
+      "currentVersion": "1.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "Version: 1.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "findings/uploader_test_cit.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "Version: v1.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "findings/uploader_test_cit.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "Current Version: v1.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+      "line": 372,
+      "currentVersion": "0.3.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "v0.3.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+      "line": 387,
+      "currentVersion": "0.3.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "v0.3.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+      "line": 386,
+      "currentVersion": "0.2.1",
+      "targetVersion": "5.28.1",
+      "originalMatch": "v0.2.1"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+      "line": 385,
+      "currentVersion": "0.2.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "v0.2.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+      "line": 384,
+      "currentVersion": "0.1.3",
+      "targetVersion": "5.28.1",
+      "originalMatch": "v0.1.3"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+      "line": 383,
+      "currentVersion": "0.1.2",
+      "targetVersion": "5.28.1",
+      "originalMatch": "v0.1.2"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+      "line": 382,
+      "currentVersion": "0.1.1",
+      "targetVersion": "5.28.1",
+      "originalMatch": "v0.1.1"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "archived-microservices/v1/newgraph.py",
+      "line": 8,
+      "currentVersion": "0.1.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "version 0.1.0"
+    },
+    {
+      "component": "Unknown",
+      "action": "update_version",
+      "file": "toolshed/data-trellis/docs/beginners/beginners1.html",
+      "line": 381,
+      "currentVersion": "0.1.0",
+      "targetVersion": "5.28.1",
+      "originalMatch": "v0.1.0"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "archived-microservices/v2/docs/notebook-1-environment.md",
+      "line": 8,
+      "currentVersion": "4",
+      "targetVersion": null,
+      "originalMatch": "Module Generator\n4"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "archived-microservices/v2/docs/notebook-1-environment.md",
+      "line": 521,
+      "currentVersion": "4",
+      "targetVersion": null,
+      "originalMatch": "Module Generator\n4"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "archived-microservices/v2/docs/notebook-8-reference.md",
+      "line": 1700,
+      "currentVersion": "4",
+      "targetVersion": null,
+      "originalMatch": "Module Generator\n4"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "archived-microservices/v2/docs/notebook-7-troubleshooting.md",
+      "line": 320,
+      "currentVersion": "3",
+      "targetVersion": null,
+      "originalMatch": "Module Generator\n3"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+      "line": 107,
+      "currentVersion": "1",
+      "targetVersion": null,
+      "originalMatch": "ModuleGenerator v1"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+      "line": 107,
+      "currentVersion": "1",
+      "targetVersion": null,
+      "originalMatch": "ModuleGenerator v1"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "contexts/CIT_ToolStrategies.md",
+      "line": 46,
+      "currentVersion": "1",
+      "targetVersion": null,
+      "originalMatch": "ModuleGenerator V1"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "contexts/CIT_ToolStrategies.md",
+      "line": 48,
+      "currentVersion": "1",
+      "targetVersion": null,
+      "originalMatch": "ModuleGenerator v1"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "contexts/CIT_ToolStrategies.md",
+      "line": 46,
+      "currentVersion": "1",
+      "targetVersion": null,
+      "originalMatch": "ModuleGenerator V1"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "contexts/CIT_ToolStrategies.md",
+      "line": 48,
+      "currentVersion": "1",
+      "targetVersion": null,
+      "originalMatch": "ModuleGenerator v1"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "contexts/Version_Control_Quick_Start.md",
+      "line": 60,
+      "currentVersion": "1",
+      "targetVersion": null,
+      "originalMatch": "ModuleGenerator V1"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "contexts/Version_Control_Quick_Start.md",
+      "line": 60,
+      "currentVersion": "1",
+      "targetVersion": null,
+      "originalMatch": "ModuleGenerator V1"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 35,
+      "currentVersion": "1",
+      "targetVersion": null,
+      "originalMatch": "Module Generator v1"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+      "line": 117,
+      "currentVersion": "2",
+      "targetVersion": null,
+      "originalMatch": "ModuleGenerator v2"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "contexts/CIT_GARDEN_Accomplishments_20250525.md",
+      "line": 117,
+      "currentVersion": "2",
+      "targetVersion": null,
+      "originalMatch": "ModuleGenerator v2"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "contexts/CIT_ToolStrategies.md",
+      "line": 47,
+      "currentVersion": "2",
+      "targetVersion": null,
+      "originalMatch": "ModuleGenerator V2"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "contexts/CIT_ToolStrategies.md",
+      "line": 47,
+      "currentVersion": "2",
+      "targetVersion": null,
+      "originalMatch": "ModuleGenerator V2"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "generated/modulegenerator_gen1/notebook-1-graph-databases.md",
+      "line": 667,
+      "currentVersion": "2",
+      "targetVersion": null,
+      "originalMatch": "Module Generator\n\n2"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "generated/modulegenerator_gen1/notebook-2-module-generator-architecture.md",
+      "line": 6,
+      "currentVersion": "2",
+      "targetVersion": null,
+      "originalMatch": "Module Generator\n2"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "generated/modulegenerator_gen1/notebook-6-value-returning-functions-modules.md",
+      "line": 6,
+      "currentVersion": "2",
+      "targetVersion": null,
+      "originalMatch": "Module Generator\n2"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "generated/modulegenerator_gen1/notebook-9-more-about-strings.md",
+      "line": 6,
+      "currentVersion": "2",
+      "targetVersion": null,
+      "originalMatch": "Module Generator\n2"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 35,
+      "currentVersion": "2",
+      "targetVersion": null,
+      "originalMatch": "ModuleGenerator v2"
+    },
+    {
+      "component": "ModuleGenerator",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 35,
+      "currentVersion": "2",
+      "targetVersion": null,
+      "originalMatch": "ModuleGenerator v2"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_BudgetNodePad_20250523.md",
+      "line": 7,
+      "currentVersion": "2.1",
+      "targetVersion": "2.2",
+      "originalMatch": "Version: v2.1"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_BudgetNodePad_20250523.md",
+      "line": 7,
+      "currentVersion": "2.1",
+      "targetVersion": "2.2",
+      "originalMatch": "Current Version: v2.1"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/moci/MOCI_meta-cit-framework_20250519.txt",
+      "line": 1,
+      "currentVersion": "2.1",
+      "targetVersion": "2.2",
+      "originalMatch": "CIT_Framework_Generation_v2.1"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_Distributed_Service_Sync_20250601.md",
+      "line": 86,
+      "currentVersion": "2.0.0",
+      "targetVersion": "2.2",
+      "originalMatch": "version: 2.0.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_Comprehensive_Audit_Plan_20250526.md",
+      "line": 7,
+      "currentVersion": "2.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Version: v2.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_Comprehensive_Audit_Plan_20250526.md",
+      "line": 7,
+      "currentVersion": "2.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Current Version: v2.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/behindTheScenes/CIT_CoreStandards_20250526.md",
+      "line": 7,
+      "currentVersion": "2.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Version: v2.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/behindTheScenes/CIT_CoreStandards_20250526.md",
+      "line": 7,
+      "currentVersion": "2.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Current Version: v2.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_ActionOrganizer_20250511.md",
+      "line": 7,
+      "currentVersion": "1.3",
+      "targetVersion": "2.2",
+      "originalMatch": "Version: v1.3"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_ActionOrganizer_20250511.md",
+      "line": 7,
+      "currentVersion": "1.3",
+      "targetVersion": "2.2",
+      "originalMatch": "Current Version: v1.3"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_VersionControl.md",
+      "line": 48,
+      "currentVersion": "1.2.0",
+      "targetVersion": "2.2",
+      "originalMatch": "v1.2.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_VersionControl.md",
+      "line": 60,
+      "currentVersion": "1.2.0",
+      "targetVersion": "2.2",
+      "originalMatch": "v1.2.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_CoreVsFork_Detection_20250526.md",
+      "line": 7,
+      "currentVersion": "1.2",
+      "targetVersion": "2.2",
+      "originalMatch": "Version: v1.2"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_CoreVsFork_Detection_20250526.md",
+      "line": 7,
+      "currentVersion": "1.2",
+      "targetVersion": "2.2",
+      "originalMatch": "Current Version: v1.2"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "toolshed/version-auditor/version_audit_usage_guide.md",
+      "line": 36,
+      "currentVersion": "1.2",
+      "targetVersion": "2.2",
+      "originalMatch": "CIT_Something_v1.2"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_VersionControl.md",
+      "line": 67,
+      "currentVersion": "1.1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "v1.1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_VersionControl.md",
+      "line": 110,
+      "currentVersion": "1.1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "v1.1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_ToolStrategies.md",
+      "line": 4,
+      "currentVersion": "1.0.0",
+      "targetVersion": "2.2",
+      "originalMatch": "v1.0.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_ToolStrategies.md",
+      "line": 113,
+      "currentVersion": "1.0.0",
+      "targetVersion": "2.2",
+      "originalMatch": "v1.0.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_VersionControl.md",
+      "line": 4,
+      "currentVersion": "1.0.0",
+      "targetVersion": "2.2",
+      "originalMatch": "v1.0.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_VersionControl.md",
+      "line": 109,
+      "currentVersion": "1.0.0",
+      "targetVersion": "2.2",
+      "originalMatch": "v1.0.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_VersionControl.md",
+      "line": 113,
+      "currentVersion": "1.0.0",
+      "targetVersion": "2.2",
+      "originalMatch": "v1.0.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_VersionControl.md",
+      "line": 146,
+      "currentVersion": "1.0.0",
+      "targetVersion": "2.2",
+      "originalMatch": "v1.0.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_VersionControl.md",
+      "line": 163,
+      "currentVersion": "1.0.0",
+      "targetVersion": "2.2",
+      "originalMatch": "v1.0.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_Documentation_Workflow_20250526.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Version: v1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_Documentation_Workflow_20250526.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Current Version: v1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_GARDEN_Archaeology_Methodology_20250526.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Version: v1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_GARDEN_Archaeology_Methodology_20250526.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Current Version: v1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_Printable_Artifact_Standards_20250530.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Version: v1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_Printable_Artifact_Standards_20250530.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Current Version: v1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_Scheduling_Algorithms_20250530.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Version: v1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_Scheduling_Algorithms_20250530.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Current Version: v1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_Testing_Comparison_20250529.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Version: v1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/CIT_Testing_Comparison_20250529.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Current Version: v1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/behindTheScenes/CIT_FileAccess_Configuration_20250529.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Version: v1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/behindTheScenes/CIT_GARDEN_Uploader_SystemDesign_20250528.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Version: v1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/behindTheScenes/CIT_GARDEN_Uploader_SystemDesign_20250528.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Current Version: v1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/behindTheScenes/CIT_NeuroOasis_Forking_Workflow_20250526.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Version: v1.0"
+    },
+    {
+      "component": "CIT",
+      "action": "update_version",
+      "file": "contexts/behindTheScenes/CIT_NeuroOasis_Forking_Workflow_20250526.md",
+      "line": 7,
+      "currentVersion": "1.0",
+      "targetVersion": "2.2",
+      "originalMatch": "Current Version: v1.0"
+    },
+    {
+      "component": "CIT-Date",
+      "action": "update_version",
+      "file": "docs/moci/README_MOCI.md",
+      "line": 101,
+      "currentVersion": "20250525",
+      "targetVersion": "20250529",
+      "originalMatch": "MOCI_GARDEN_20250525"
+    },
+    {
+      "component": "CIT-Date",
+      "action": "update_version",
+      "file": "findings/moci-phase3-validation-20250531.md",
+      "line": 22,
+      "currentVersion": "20250525",
+      "targetVersion": "20250529",
+      "originalMatch": "MOCI_GARDEN_20250525"
+    },
+    {
+      "component": "CIT-Date",
+      "action": "update_version",
+      "file": "findings/moci-phase4-deployment-20250531.md",
+      "line": 48,
+      "currentVersion": "20250525",
+      "targetVersion": "20250529",
+      "originalMatch": "MOCI_GARDEN_20250525"
+    }
+  ]
+}
