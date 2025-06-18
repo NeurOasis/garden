@@ -1,0 +1,17 @@
+{
+  "functions": {
+    "sunflower.py": {
+      "runtime": "python3.9"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/sunflower"
+    },
+    {
+      "source": "/api/sunflower",
+      "destination": "/sunflower"
+    }
+  ]
+}

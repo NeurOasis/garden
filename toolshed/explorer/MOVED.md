@@ -1,15 +1,21 @@
-# Explorer Tool - Moved to Microservice
+# Explorer Tool - Independent API Service
 
-**Current Status**: Explorer is now deployed as a microservice!
+**Current Status**: Explorer is now its own independent API service!
 
-**Access**: https://garden-tools-service.vercel.app/api/explorer
+**Deploy Location**: This folder can be deployed separately to Vercel
+**Access**: https://explorer-api.vercel.app (when deployed)
 
-**Documentation**: See README.md in this directory for the original Explorer documentation.
+**Local Files**:
+- `explorer.py` - API service code
+- `vercel.json` - Deployment configuration
+- `test_explorer_api.sh` - API testing script
+- `authentication.md` - Security setup guide
 
-**Why moved?**: 
-- 98% token reduction (100KB → 2KB)
-- Always available (24/7)
-- No Python dependencies needed
-- Better performance
+**Benefits**: 
+- Independent fault tolerance
+- 98% token reduction vs full Python app
+- Always available (24/7) when deployed
+- No dependencies for API consumers
 
+**Deployment**: Run `vercel --prod` from this directory
 **Integration**: Use the Explorer API with the manifest in `/toolshed/tools-manifest.md`
